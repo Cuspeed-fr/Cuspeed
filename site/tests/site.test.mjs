@@ -117,3 +117,89 @@ test("le contrôle de construction repère une fiche non validée et une note in
 
   rmSync(dist, { recursive: true, force: true });
 });
+
+// --- Cas relevés par la relecture de la pull request n°1 ---
+
+/** Lance le contrôle de construction sur un dossier dist/ et un jeu de données donnés. */
+function controler(dist, donnees) {
+  const script = join(ICI, "..", "scripts", "controler_construction.mjs");
+  return spawnSync(process.execPath, [script, dist], {
+    env: { ...process.env, CUSPEED_DATA: donnees, CUSPEED_DATA_CONTROLE: "" },
+    encoding: "utf8",
+  });
+}
+const pageTest = (corps, titre = "Page", description = "Une description suffisamment longue pour le test.") =>
+  `<!doctype html><html lang="fr"><head><title>${titre}</title>` +
+  `<meta name="description" content="${description}"/>` +
+  `<link rel="canonical" href="https://cuspeed.fr/"/></head><body>${corps}</body></html>`;
+
+test("une note interne échappée en HTML ou en JSON est quand même repérée", () => {
+  const donnees = copieDuJeu();
+  const chemin = join(donnees, "formations", "F9001-du-essai.yaml");
+  writeFileSync(
+    chemin,
+    readFileSync(chemin, "utf8").replace(/^notes:.*$/m, `notes: "L'organisme <hésite> & \\"revoit\\" le tarif"`),
+  );
+  const dist = mkdtempSync(join(tmpdir(), "cuspeed-dist-"));
+  writeFileSync(join(dist, "index.html"), pageTest("L&#39;organisme &lt;hésite&gt; &amp; &quot;revoit&quot; le tarif"));
+  let r = controler(dist, donnees);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /note interne de F9001/);
+
+  writeFileSync(join(dist, "index.html"), pageTest(`<script type="application/ld+json">{"d":"L'organisme \\u003chésite> & \\"revoit\\" le tarif"}</script>`));
+  r = controler(dist, donnees);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /note interne de F9001/);
+  rmSync(dist, { recursive: true, force: true });
+  rmSync(donnees, { recursive: true, force: true });
+});
+
+test("une note qui n'est pas du texte est aussi recherchée", () => {
+  const donnees = copieDuJeu();
+  const chemin = join(donnees, "formations", "F9001-du-essai.yaml");
+  writeFileSync(chemin, readFileSync(chemin, "utf8").replace(/^notes:.*$/m, "notes: 123456789"));
+  const dist = mkdtempSync(join(tmpdir(), "cuspeed-dist-"));
+  writeFileSync(join(dist, "index.html"), pageTest("Référence 123456789"));
+  const r = controler(dist, donnees);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /note interne de F9001/);
+  rmSync(dist, { recursive: true, force: true });
+  rmSync(donnees, { recursive: true, force: true });
+});
+
+test("une fiche non validée est repérée aussi dans le plan du site XML", () => {
+  const dist = mkdtempSync(join(tmpdir(), "cuspeed-dist-"));
+  writeFileSync(join(dist, "index.html"), pageTest("Accueil"));
+  writeFileSync(join(dist, "sitemap-0.xml"), "<urlset><url><loc>https://cuspeed.fr/formations/f9002-cursus/</loc></url></urlset>");
+  const r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /sitemap-0\.xml : mentionne la fiche non validée F9002/);
+  rmSync(dist, { recursive: true, force: true });
+});
+
+test("deux pages avec la même description sont refusées", () => {
+  const dist = mkdtempSync(join(tmpdir(), "cuspeed-dist-"));
+  writeFileSync(join(dist, "index.html"), pageTest("Un", "Page un"));
+  mkdirSync(join(dist, "deux"));
+  writeFileSync(join(dist, "deux", "index.html"), pageTest("Deux", "Page deux"));
+  const r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /Description en double/);
+  rmSync(dist, { recursive: true, force: true });
+});
+
+test("deux fiches validées avec le même identifiant arrêtent la construction", () => {
+  const dossier = copieDuJeu();
+  cpSync(join(dossier, "formations", "F9001-du-essai.yaml"), join(dossier, "formations", "F9001-doublon.yaml"));
+  assert.throws(() => chargerDonnees(dossier), /F9001 : identifiant en double/);
+  rmSync(dossier, { recursive: true, force: true });
+});
+
+test("un lien d'organisme qui n'est pas en http(s) n'est pas publié", () => {
+  const dossier = copieDuJeu();
+  const chemin = join(dossier, "organismes.yaml");
+  writeFileSync(chemin, readFileSync(chemin, "utf8").replace("site_web: https://exemple.invalid/", "site_web: javascript:alert(1)"));
+  const d = chargerDonnees(dossier);
+  assert.equal(d.organisme("O001").site_web, null);
+  rmSync(dossier, { recursive: true, force: true });
+});

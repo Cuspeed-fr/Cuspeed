@@ -49,6 +49,7 @@ const organisation = {
       {lienOfficiel && <> <a href={lienOfficiel} rel="noopener external">Site officiel ↗</a></>}
     </p>
   </header>
+  <h2 class="invisible">Formations de cet organisme</h2>
   <ul class="liste">
     {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
   </ul>

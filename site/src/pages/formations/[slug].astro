@@ -23,9 +23,10 @@ const lienFiche = new URL(`/formations/${f.slug}/`, Astro.site).href;
 
 // Titre et description uniques pour les moteurs de recherche.
 const titre = villes.length ? `${f.intitule} – ${villes.join(", ")}` : f.intitule;
+// L'intitulé et la ville rendent chaque description unique (comme le titre).
 const morceaux = [
-  `${typeNom}${disciplines.length ? " en " + disciplines.join(", ").toLowerCase() : ""}`,
-  organisme ? `proposé par ${organisme.nom}` : null,
+  `${titre} : ${typeNom}${disciplines.length ? " en " + disciplines.join(", ").toLowerCase() : ""}`,
+  organisme ? `Organisme : ${organisme.nom}` : null,
   f.duree ? `Durée : ${f.duree}` : null,
   tarif ? `Tarif : ${tarif}` : null,
 ];

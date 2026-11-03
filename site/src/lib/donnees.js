@@ -68,6 +68,11 @@ function formationPublique(f) {
   };
 }
 
+/** Garde un lien seulement s'il est en http(s) (jamais « javascript: » ou autre). */
+function lienSur(url) {
+  return typeof url === "string" && /^https?:\/\//i.test(url.trim()) ? url.trim() : null;
+}
+
 function organismePublic(o) {
   return {
     id: o.id,
@@ -75,8 +80,8 @@ function organismePublic(o) {
     nom: o.nom,
     type: o.type,
     ville: o.ville ?? null,
-    site_web: o.site_web ?? null,
-    page_catalogue: o.page_catalogue ?? null,
+    site_web: lienSur(o.site_web),
+    page_catalogue: lienSur(o.page_catalogue),
   };
 }
 
@@ -125,7 +130,10 @@ function lireDonnees(dossier) {
   const lieuxParId = new Map(tousLieux.map((l) => [l.id, lieuPublic(l)]));
 
   const erreurs = [];
+  const vus = new Set();
   for (const f of formations) {
+    if (vus.has(f.id)) erreurs.push(`${f.id} : identifiant en double`);
+    vus.add(f.id);
     if (!/^https?:\/\//.test(f.url_officielle ?? "")) erreurs.push(`${f.id} : source officielle absente`);
     if (!organismesParId.has(f.organisme)) erreurs.push(`${f.id} : organisme inconnu ${f.organisme}`);
     if (!referentiels.types?.[f.type]) erreurs.push(`${f.id} : type inconnu ${f.type}`);

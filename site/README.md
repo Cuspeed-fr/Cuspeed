@@ -23,7 +23,13 @@ Le site lit un dossier au format du miroir `data/` (voir `docs/modele-de-donnees
 Deux protections indépendantes :
 
 1. `src/lib/donnees.js` ne garde que les fiches au statut `validee` et ne recopie que les champs publics, un par un. Les notes internes, les pistes et les sources surveillées ne sont jamais lues. Une fiche validée incohérente (organisme inconnu, pas de source officielle) arrête la construction.
-2. `scripts/controler_construction.mjs` relit le site construit et échoue s'il y trouve une fiche non validée, une note interne, un motif de secret, une ressource chargée depuis un autre site, ou une page sans titre, description ou adresse canonique. Avec `CUSPEED_PUBLICATION=1`, il refuse aussi les champs « [à compléter] » (mentions légales).
+2. `scripts/controler_construction.mjs` relit le site construit et échoue s'il y trouve une fiche non validée, une note interne, un motif de secret, une ressource chargée depuis un autre site, ou une page sans titre, description ou adresse canonique, ou un titre ou une description en double. Avec `CUSPEED_PUBLICATION=1`, il refuse aussi les champs « [à compléter] » (mentions légales).
+
+**Pour la mise en ligne**, le site est construit sur l'export des seules fiches validées : ce dossier ne contient ni fiche non validée ni note à rechercher. Il faut donc lancer la construction avec `CUSPEED_DATA_CONTROLE` pointant vers le miroir complet (`data/` de la branche `sauvegarde`), et `CUSPEED_PUBLICATION=1` :
+
+```bash
+CUSPEED_DATA=/chemin/export-validees CUSPEED_DATA_CONTROLE=/chemin/miroir-complet CUSPEED_PUBLICATION=1 npm run build
+```
 
 ## Organisation
 

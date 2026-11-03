@@ -72,7 +72,9 @@ const page = {
               aria-label={`${p.nom} : ${p.n} formation${p.n > 1 ? "s" : ""}`}
               transform={`translate(${p.x} ${p.y})`}
             >
-              <circle r={rayon(p.n)} />
+              {/* Zone tactile invisible d'au moins 44 px une fois la carte réduite sur téléphone */}
+              <circle class="zone" r={Math.max(rayon(p.n), 22)} />
+              <circle class="disque" r={rayon(p.n)} />
               <text class="nombre" text-anchor="middle" dy="0.35em">{p.n}</text>
               <text
                 class="nom"
@@ -128,6 +130,7 @@ const page = {
         <button type="reset" class="effacer">Effacer les filtres</button>
       </form>
 
+      <h2 class="invisible">Liste des formations</h2>
       <p class="resultat" id="resultat" aria-live="polite">
         {formations.length} formations
       </p>
@@ -199,7 +202,11 @@ const page = {
   .point {
     cursor: pointer;
   }
-  .point circle {
+  .point .zone {
+    fill: transparent;
+    stroke: none;
+  }
+  .point .disque {
     fill: var(--accent);
     stroke: var(--surface);
     stroke-width: 2;
@@ -216,20 +223,20 @@ const page = {
     stroke: var(--terre);
     stroke-width: 3px;
   }
-  .point.vide circle {
+  .point.vide .disque {
     fill: var(--point-vide);
   }
   .point.vide .nom {
     fill: var(--discret);
   }
-  .point[aria-pressed="true"] circle {
+  .point[aria-pressed="true"] .disque {
     stroke: var(--encre);
     stroke-width: 3;
   }
   .point:focus-visible {
     outline: none;
   }
-  .point:focus-visible circle {
+  .point:focus-visible .disque {
     stroke: var(--encre);
     stroke-width: 3;
   }

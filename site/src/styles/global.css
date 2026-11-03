@@ -109,6 +109,16 @@ main.cadre {
   min-height: 60vh;
 }
 
+/* Texte lu par les lecteurs d'écran mais non affiché */
+.invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 .evitement {
   position: absolute;
   left: -999px;

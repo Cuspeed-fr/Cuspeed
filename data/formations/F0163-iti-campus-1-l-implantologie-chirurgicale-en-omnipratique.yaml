@@ -1,0 +1,27 @@
+id: F0163
+intitule: 'ITI Campus 1 : l''implantologie chirurgicale en omnipratique'
+organisme: O018
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+- chir
+format: null
+duree: 8 jours (4 × 2 j) · sept. 2026 à mars 2027
+volume_horaire_h: null
+tarif:
+  texte: 5 590 € (5 290 € membres)
+  euros: 5590
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.straumann.com/group/br/pt/home/enfoque/campus/cursos-locais-e-internacionais.detail.course.28215.html
+sessions:
+- lieu: L-ARRAS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

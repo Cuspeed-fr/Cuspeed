@@ -1,0 +1,27 @@
+id: F0162
+intitule: DU Microchirurgie endodontique
+organisme: O004
+secteur: universitaire
+type: du
+disciplines:
+- endo
+- chir
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://sfc.unistra.fr/pdf/1819_diplome-universitaire-de-microchirurgie-endodontique_FRUAI0673036LPR5969
+sessions:
+- lieu: L-STRASBOURG
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

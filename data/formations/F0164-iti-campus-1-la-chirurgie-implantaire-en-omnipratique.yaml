@@ -1,0 +1,27 @@
+id: F0164
+intitule: 'ITI Campus 1 : la chirurgie implantaire en omnipratique'
+organisme: O018
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+- chir
+format: null
+duree: 2026-2027
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.straumann.com/au/en/dental-professionals/training-and-education/local-and-international-courses.detail.course.27375.html
+sessions:
+- lieu: L-NICE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

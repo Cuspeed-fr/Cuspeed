@@ -1,0 +1,27 @@
+id: F0069
+intitule: DU Orthodontie et chirurgie
+organisme: O006
+secteur: universitaire
+type: du
+disciplines:
+- ortho
+- chir
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://fc.sorbonne-universite.fr/nos-offres/du-orthodontie-et-chirurgie
+sessions:
+- lieu: L-SORBONNE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

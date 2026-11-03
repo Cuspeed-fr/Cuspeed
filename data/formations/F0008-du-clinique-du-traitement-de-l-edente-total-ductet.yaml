@@ -1,0 +1,26 @@
+id: F0008
+intitule: DU Clinique du traitement de l'édenté total (DUCTET)
+organisme: O002
+secteur: universitaire
+type: du
+disciplines:
+- proth
+format: null
+duree: 255 h · janv. à oct.
+volume_horaire_h: 255
+tarif:
+  texte: 1 200 € (2020-21)
+  euros: 1200
+  annee: 2020-21
+prerequis: null
+financement: []
+url_officielle: https://www.univ-reims.fr/media-files/31529/ductet-odontologie.pdf
+sessions:
+- lieu: L-REIMS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

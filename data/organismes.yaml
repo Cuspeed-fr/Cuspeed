@@ -1,0 +1,259 @@
+- id: O001
+  nom: Université de Lille – UFR3S Odontologie
+  type: universite
+  ville: Lille
+  site_web: null
+  page_catalogue: https://ufr3s.univ-lille.fr/formation-continue/formation-continue-ufr3s
+  fiche_revendiquee: false
+- id: O002
+  nom: Université de Reims Champagne-Ardenne
+  type: universite
+  ville: Reims
+  site_web: null
+  page_catalogue: https://www.univ-reims.fr/cursus-informations-par-annee/formation-en-vue-du-diplome-de-docteur-en-chirurgie-dentaire,23627,39171.html
+  fiche_revendiquee: false
+- id: O003
+  nom: Université de Lorraine
+  type: universite
+  ville: Nancy
+  site_web: null
+  page_catalogue: https://odonto.univ-lorraine.fr/?p=1818
+  fiche_revendiquee: false
+- id: O004
+  nom: Université de Strasbourg
+  type: universite
+  ville: Strasbourg
+  site_web: null
+  page_catalogue: https://chirurgie-dentaire.unistra.fr/
+  fiche_revendiquee: false
+- id: O005
+  nom: Université Paris Cité
+  type: universite
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+  fiche_revendiquee: false
+- id: O006
+  nom: Sorbonne Université – Faculté de santé
+  type: universite
+  ville: Paris (Sorbonne)
+  site_web: null
+  page_catalogue: https://fc.sorbonne-universite.fr/
+  fiche_revendiquee: false
+- id: O007
+  nom: Université d'Évry
+  type: universite
+  ville: Évry
+  site_web: null
+  page_catalogue: https://formations.univ-evry.fr/
+  fiche_revendiquee: false
+- id: O008
+  nom: Université de Rennes
+  type: universite
+  ville: Rennes
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O009
+  nom: Université de Bretagne Occidentale
+  type: universite
+  ville: Brest
+  site_web: null
+  page_catalogue: https://formations.univ-brest.fr
+  fiche_revendiquee: false
+- id: O010
+  nom: Nantes Université
+  type: universite
+  ville: Nantes
+  site_web: null
+  page_catalogue: https://www.odontologie.univ-nantes.fr/
+  fiche_revendiquee: false
+- id: O011
+  nom: Université de Bordeaux
+  type: universite
+  ville: Bordeaux
+  site_web: null
+  page_catalogue: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+  fiche_revendiquee: false
+- id: O012
+  nom: Université de Toulouse
+  type: universite
+  ville: Toulouse
+  site_web: null
+  page_catalogue: https://www.univ-tlse3.fr/du-parodontologie
+  fiche_revendiquee: false
+- id: O013
+  nom: Université de Montpellier
+  type: universite
+  ville: Montpellier
+  site_web: null
+  page_catalogue: https://www.umontpellier.fr/wp-content/uploads/2025/12/Livret-ODONTOLOGIE-2026-2027.pdf
+  fiche_revendiquee: false
+- id: O014
+  nom: Aix-Marseille Université
+  type: universite
+  ville: Marseille
+  site_web: null
+  page_catalogue: https://smpm.univ-amu.fr/
+  fiche_revendiquee: false
+- id: O015
+  nom: Université Côte d'Azur
+  type: universite
+  ville: Nice
+  site_web: null
+  page_catalogue: https://univ-cotedazur.fr/formation/offre-de-formation
+  fiche_revendiquee: false
+- id: O016
+  nom: Université Claude Bernard Lyon 1
+  type: universite
+  ville: Lyon
+  site_web: null
+  page_catalogue: https://odontologie.univ-lyon1.fr/formation/formation-continue-du-aeu-et-formations-courtes/post-university-courses-university-diplomas-d-u
+  fiche_revendiquee: false
+- id: O017
+  nom: Université Clermont Auvergne
+  type: universite
+  ville: Clermont-Ferrand
+  site_web: null
+  page_catalogue: https://www.uca.fr/
+  fiche_revendiquee: false
+- id: O018
+  nom: ITI Section France
+  type: societe-savante
+  ville: Arras
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O019
+  nom: SFPIO
+  type: societe-savante
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O020
+  nom: SOP – Société odontologique de Paris
+  type: societe-savante
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O021
+  nom: Straumann Académie
+  type: industriel
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O022
+  nom: Neodent
+  type: industriel
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O023
+  nom: Campus Anthogyr
+  type: industriel
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O024
+  nom: Ivoclar Academy
+  type: industriel
+  ville: Annecy
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O025
+  nom: Académie du Sourire
+  type: organisme-prive
+  ville: Aix-en-Provence
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O026
+  nom: Dentego (Boulogne-Billancourt)
+  type: organisme-prive
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O027
+  nom: Smile Concept
+  type: organisme-prive
+  ville: Marseille
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O028
+  nom: Académie Kairos & Athéna
+  type: organisme-prive
+  ville: Rennes
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O029
+  nom: ACTIS
+  type: organisme-prive
+  ville: Clermont-Ferrand
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O030
+  nom: AFOPI
+  type: organisme-prive
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O031
+  nom: ARSO Formations
+  type: organisme-prive
+  ville: Montpellier
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O032
+  nom: Clinicall
+  type: organisme-prive
+  ville: Lyon
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O033
+  nom: Practis Dental
+  type: organisme-prive
+  ville: Lyon
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O034
+  nom: Madeos Formation
+  type: organisme-prive
+  ville: Cholet
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O035
+  nom: Oroface
+  type: organisme-prive
+  ville: Marseille
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O036
+  nom: Tunneling Academy
+  type: organisme-prive
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O037
+  nom: SAPO Implant
+  type: organisme-prive
+  ville: Paris / IDF
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false

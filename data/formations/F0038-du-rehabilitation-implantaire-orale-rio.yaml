@@ -1,0 +1,27 @@
+id: F0038
+intitule: DU Réhabilitation implantaire orale (RIO)
+organisme: O005
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+- proth
+format: null
+duree: 72 h/an · 2 ans
+volume_horaire_h: 72
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-rehabilitation-implantaire-orale-rio-L5SG386G.html
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

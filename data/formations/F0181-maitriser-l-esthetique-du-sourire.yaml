@@ -1,0 +1,26 @@
+id: F0181
+intitule: Maîtriser l'esthétique du sourire
+organisme: O025
+secteur: prive
+type: cursus
+disciplines:
+- resto
+format: null
+duree: 80 h
+volume_horaire_h: 80
+tarif:
+  texte: 8 500 €
+  euros: 8500
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.information-dentaire.fr/wp-content/uploads/gravity_forms/5-cefcae719f056cb0bfe0e6cb6701424a/2025/05/Cursus-Progressif-Academie-du-Sourire-2026.pdf
+sessions:
+- lieu: L-AIX
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

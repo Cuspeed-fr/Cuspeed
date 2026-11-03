@@ -1,0 +1,26 @@
+id: F0165
+intitule: Cycle de formation continue en parodontologie (3 niveaux)
+organisme: O019
+secteur: prive
+type: cursus
+disciplines:
+- paro
+format: null
+duree: 7 jours · 45 h
+volume_horaire_h: 45
+tarif:
+  texte: 3 450 € (2022-23)
+  euros: 3450
+  annee: 2022-23
+prerequis: null
+financement: []
+url_officielle: https://www.efp.org/fileadmin/uploads/efp/Documents/Other_publications/SFPIO_Formation_continue_May_2023.pdf
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

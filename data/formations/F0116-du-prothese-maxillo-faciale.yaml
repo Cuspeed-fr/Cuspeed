@@ -1,0 +1,26 @@
+id: F0116
+intitule: DU Prothèse maxillo-faciale
+organisme: O012
+secteur: universitaire
+type: du
+disciplines:
+- proth
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.univ-tlse3.fr/decouvrir-nos-diplomes/du-prothese-maxillo-faciale
+sessions:
+- lieu: L-TOULOUSE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

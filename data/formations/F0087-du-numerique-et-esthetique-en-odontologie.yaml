@@ -1,0 +1,27 @@
+id: F0087
+intitule: DU Numérique et esthétique en odontologie
+organisme: O009
+secteur: universitaire
+type: du
+disciplines:
+- num
+- resto
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.univ-brest.fr/formation-continue-alternance/sites/formation-continue-alternance.www.univ-brest.fr/files/2026-04/DU-Numerique-et-esthetique-en-odontologie-UBO-SUFCA-avril-2026.pdf
+sessions:
+- lieu: L-BREST
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

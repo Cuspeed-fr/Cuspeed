@@ -1,0 +1,26 @@
+id: F0179
+intitule: Extraction, implantation et temporisation immédiates en secteur antérieur
+organisme: O023
+secteur: prive
+type: journee
+disciplines:
+- implanto
+format: null
+duree: 8 h
+volume_horaire_h: 8
+tarif:
+  texte: 850 € (2025)
+  euros: 850
+  annee: '2025'
+prerequis: null
+financement: []
+url_officielle: https://straumann.com/content/dam/sites/anthogyr/fr/formation/Catalogue-Campus-Anthogyr_2025.pdf
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,26 @@
+id: F0095
+intitule: AEU Implantologie orale
+organisme: O011
+secteur: universitaire
+type: aeu
+disciplines:
+- implanto
+format: null
+duree: 6 mois · nov. à mai
+volume_horaire_h: null
+tarif:
+  texte: 2 000 €
+  euros: 2000
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/AUI-ImplanOrale.pdf
+sessions:
+- lieu: L-BORDEAUX
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

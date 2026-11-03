@@ -1,0 +1,26 @@
+id: F0006
+intitule: DU Parodontologie clinique
+organisme: O002
+secteur: universitaire
+type: du
+disciplines:
+- paro
+format: null
+duree: 2 ans
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.univ-reims.fr/media-files/21437/20190903-dupcinfosite-1-.pdf
+sessions:
+- lieu: L-REIMS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,26 @@
+id: F0186
+intitule: Initiation à l'implantologie
+organisme: O028
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+format: null
+duree: 4 modules de 2 jours · Rennes et Mont-Saint-Michel
+volume_horaire_h: null
+tarif:
+  texte: 4 900 € (2025)
+  euros: 4900
+  annee: '2025'
+prerequis: null
+financement: []
+url_officielle: https://straumann.com/content/dam/sites/anthogyr/fr/formation/Catalogue-Campus-Anthogyr_2025.pdf
+sessions:
+- lieu: L-RENNES
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

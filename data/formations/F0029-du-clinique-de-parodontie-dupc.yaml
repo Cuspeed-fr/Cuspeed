@@ -1,0 +1,26 @@
+id: F0029
+intitule: DU Clinique de Parodontie (DUPC)
+organisme: O005
+secteur: universitaire
+type: du
+disciplines:
+- paro
+format: null
+duree: 2 ans · programme accrédité EFP
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-parodontologie-dupc-KFGRBM1T.html
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

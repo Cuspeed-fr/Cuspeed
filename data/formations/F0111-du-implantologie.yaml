@@ -1,0 +1,26 @@
+id: F0111
+intitule: DU Implantologie
+organisme: O012
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+format: null
+duree: Clinique le lundi
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.univ-tlse3.fr/decouvrir-nos-diplomes/du-implantologie
+sessions:
+- lieu: L-TOULOUSE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

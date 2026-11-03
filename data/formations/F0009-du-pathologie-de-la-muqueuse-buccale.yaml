@@ -1,0 +1,26 @@
+id: F0009
+intitule: DU Pathologie de la muqueuse buccale
+organisme: O002
+secteur: universitaire
+type: du
+disciplines:
+- mbd
+format: null
+duree: 2 ans · 51 h + 34 h cliniques
+volume_horaire_h: 51
+tarif:
+  texte: 1 000 € (2024-25)
+  euros: 1000
+  annee: 2024-25
+prerequis: null
+financement: []
+url_officielle: https://www.univ-reims.fr/media-files/57896/2024-25_plaquette-du-pmb-.pdf
+sessions:
+- lieu: L-REIMS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

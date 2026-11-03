@@ -1,0 +1,26 @@
+id: F0074
+intitule: DU Implantologie
+organisme: O007
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+format: null
+duree: 10 mois
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://formations.univ-evry.fr/plugins/evry/odf/_content/program-du-d-implantologie-2-2-2-2-2-2.pdf
+sessions:
+- lieu: L-EVRY
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

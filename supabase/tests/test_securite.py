@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""Teste les règles de sécurité de la base : ce que chaque rôle peut et ne peut pas faire.
+
+    DATABASE_URL=postgresql://... python3 supabase/tests/test_securite.py
+
+À lancer sur une base de TEST uniquement (migrations et seed appliqués), jamais sur la base de production.
+Chaque essai est annulé (rollback) : la base n'est pas modifiée.
+"""
+import os
+import sys
+
+import psycopg
+
+URL = os.environ.get("DATABASE_URL")
+if not URL:
+    sys.exit("DATABASE_URL manquant (base de test uniquement)")
+if "supabase.co" in URL or "supabase.com" in URL:
+    sys.exit("Refus : ce test ne se lance jamais sur Supabase.")
+
+echecs = []
+conn = psycopg.connect(URL, autocommit=False)
+
+
+def essai(nom, role, sql, attendu, params=None):
+    """attendu : 'erreur', ou un entier = nombre de lignes retournées / touchées."""
+    motif = ""
+    with conn.cursor() as cur:
+        try:
+            cur.execute(f"set local role {role}") if role else None
+            cur.execute(sql, params)
+            n = cur.rowcount if cur.description is None else len(cur.fetchall())
+            resultat = n
+        except psycopg.Error as e:
+            resultat = "erreur"
+            motif = str(e).splitlines()[0][:90]
+        finally:
+            conn.rollback()
+    ok = resultat == attendu
+    print(("  ok   " if ok else "  ECHEC"), f"{nom} (attendu {attendu}, obtenu {resultat})" + (f" [{motif}]" if motif else ""))
+    if not ok:
+        echecs.append(nom)
+
+
+NOUVELLE = ("insert into formations (intitule, organisme_id, secteur, type, url_officielle, statut) "
+            "values ('Test', 'O001', 'prive', 'du', 'https://exemple.fr/x', %s)")
+
+print("Public (le site)")
+essai("voit uniquement les fiches validées", "anon", "select id from formations where statut <> 'validee'", 0)
+essai("voit les fiches validées", "anon", "select id from formations", 160)
+essai("ne lit pas les notes internes", "anon", "select notes from formations", "erreur")
+essai("ne lit pas les pistes", "anon", "select * from pistes", "erreur")
+essai("ne lit pas le journal", "anon", "select * from journal", "erreur")
+essai("n'écrit pas", "anon", NOUVELLE.replace("%s", "'a-verifier'"), "erreur")
+essai("ne voit pas les sessions d'une fiche non validée", "anon",
+      "select s.id from sessions s join formations f on f.id = s.formation_id where f.statut <> 'validee'", 0)
+
+print("Agent extracteur")
+essai("crée une fiche à vérifier", "agent_extracteur", NOUVELLE.replace("%s", "'a-verifier'"), 1)
+essai("ne peut pas créer une fiche validée", "agent_extracteur", NOUVELLE.replace("%s", "'validee'"), "erreur")
+essai("ne modifie pas une fiche validée", "agent_extracteur",
+      "update formations set intitule = 'piraté' where statut = 'validee'", 0)
+essai("ne valide pas une fiche", "agent_extracteur",
+      "update formations set statut = 'validee' where statut = 'a-verifier'", "erreur")
+essai("ne supprime rien", "agent_extracteur", "delete from formations", "erreur")
+essai("ne supprime aucune session d'une fiche validée", "agent_extracteur",
+      "delete from sessions where formation_id in (select id from formations where statut = 'validee')", 0)
+essai("retire seulement les sessions d'une fiche à vérifier", "agent_extracteur", "delete from sessions", 35)
+essai("ne change pas les disciplines d'une fiche validée", "agent_extracteur",
+      "delete from formation_disciplines where formation_id in (select id from formations where statut = 'validee')", 0)
+essai("n'accède pas au service de l'API en tant que service_role", "anon", "select appliquer_proposition(1)", "erreur")
+essai("un utilisateur connecté n'accepte pas de proposition", "authenticated", "select appliquer_proposition(1)", "erreur")
+essai("un utilisateur connecté n'écrit pas", "authenticated", "update formations set intitule = 'x'", "erreur")
+essai("lit les notes internes", "agent_extracteur", "select notes from formations limit 1", 1)
+essai("ne lit pas le journal", "agent_extracteur", "select * from journal", "erreur")
+essai("dépose une proposition", "agent_extracteur",
+      "insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
+      "values ('F0001', 'duree', '10 h', 'https://exemple.fr')", 1)
+essai("ne s'accepte pas sa proposition", "agent_extracteur", "select appliquer_proposition(1)", "erreur")
+essai("ne crée pas une proposition déjà acceptée", "agent_extracteur",
+      "insert into propositions (formation_id, champ, nouvelle_valeur, source_url, statut) "
+      "values ('F0001', 'duree', '10 h', 'https://exemple.fr', 'acceptee')", "erreur")
+essai("ne modifie pas un organisme", "agent_extracteur", "update organismes set nom = 'x'", "erreur")
+
+print("Agent vérificateur")
+essai("dépose un avis", "agent_verificateur",
+      "insert into verifications (formation_id, avis) values ('F0001', 'conforme')", 1)
+essai("ne modifie aucune fiche", "agent_verificateur", "update formations set intitule = 'x'", "erreur")
+essai("ne crée aucune fiche", "agent_verificateur", NOUVELLE.replace("%s", "'a-verifier'"), "erreur")
+
+print("Copie nocturne")
+essai("lit le journal", "lecteur_sauvegarde", "select * from journal limit 1", 1)
+essai("n'écrit pas", "lecteur_sauvegarde", "update formations set intitule = 'x'", "erreur")
+
+print("Contraintes de qualité (propriétaire de la base)")
+for nom, sql in [
+    ("prix négatif refusé", "update formations set tarif_euros = -5 where id = 'F0001'"),
+    ("source non web refusée", "update formations set url_officielle = 'ftp://x' where id = 'F0001'"),
+    ("statut inconnu refusé", "update formations set statut = 'publie' where id = 'F0001'"),
+    ("organisme inexistant refusé", "update formations set organisme_id = 'O999' where id = 'F0001'"),
+    ("discipline inconnue refusée", "insert into formation_disciplines values ('F0001', 'magie')"),
+    ("identifiant mal formé refusé", "insert into organismes (id, nom, type) values ('X1', 'x', 'universite')"),
+    ("session qui finit avant de commencer refusée",
+     "insert into sessions (formation_id, debut, fin) values ('F0001', '2027-02-01', '2027-01-01')"),
+]:
+    essai(nom, None, sql, "erreur")
+
+print("Proposition et journal (propriétaire)")
+with conn.cursor() as cur:
+    cur.execute("insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
+                "values ('F0001', 'volume_horaire_h', '42', 'https://exemple.fr') returning id")
+    pid = cur.fetchone()[0]
+    cur.execute("select appliquer_proposition(%s)", (pid,))
+    cur.execute("select volume_horaire_h from formations where id = 'F0001'")
+    v = cur.fetchone()[0]
+    cur.execute("select count(*) from journal where table_nom = 'formations' and ligne_id = 'F0001' and action = 'UPDATE'")
+    nj = cur.fetchone()[0]
+    cur.execute("select statut from propositions where id = %s", (pid,))
+    st = cur.fetchone()[0]
+conn.rollback()
+for nom, ok in [("accepter une proposition modifie la fiche", float(v) == 42.0),
+                ("la modification est inscrite au journal", nj >= 1),
+                ("la proposition est marquée acceptée", st == "acceptee")]:
+    print(("  ok   " if ok else "  ECHEC"), nom)
+    if not ok:
+        echecs.append(nom)
+
+print()
+if echecs:
+    sys.exit(f"{len(echecs)} test(s) en échec : " + "; ".join(echecs))
+print("Tous les tests de sécurité passent.")

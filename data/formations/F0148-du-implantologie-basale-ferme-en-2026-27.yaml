@@ -1,0 +1,26 @@
+id: F0148
+intitule: DU Implantologie basale (fermé en 2026-27)
+organisme: O015
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+format: null
+duree: 2 ans · Faculté de médecine
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/diplome-universitaire-implantologie-basale
+sessions:
+- lieu: L-NICE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

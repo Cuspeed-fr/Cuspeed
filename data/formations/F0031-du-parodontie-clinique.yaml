@@ -1,0 +1,26 @@
+id: F0031
+intitule: DU Parodontie clinique
+organisme: O005
+secteur: universitaire
+type: du
+disciplines:
+- paro
+format: null
+duree: 127 h
+volume_horaire_h: 127
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-parodontie-clinique-DU04_971.html
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

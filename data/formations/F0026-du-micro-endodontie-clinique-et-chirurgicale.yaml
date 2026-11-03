@@ -1,0 +1,26 @@
+id: F0026
+intitule: DU Micro-endodontie clinique et chirurgicale
+organisme: O004
+secteur: universitaire
+type: du
+disciplines:
+- endo
+format: null
+duree: 200 h · 5 sessions
+volume_horaire_h: 200
+tarif:
+  texte: 11 150 €
+  euros: 11150
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://export-odf-api.app.unistra.fr/ametys/pdf/FRUAI0673021VPRFH242/FRUAI0673021VPRPR1566
+sessions:
+- lieu: L-STRASBOURG
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

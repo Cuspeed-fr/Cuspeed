@@ -1,0 +1,26 @@
+id: F0144
+intitule: DU Esthétique buccale
+organisme: O015
+secteur: universitaire
+type: du
+disciplines:
+- resto
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/d-u-esthetique-buccale
+sessions:
+- lieu: L-NICE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

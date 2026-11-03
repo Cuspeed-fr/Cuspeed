@@ -1,0 +1,27 @@
+id: F0120
+intitule: DU Clinique d'implantologie et de parodontologie (DUCIP)
+organisme: O013
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+- paro
+format: null
+duree: 2 ans, après le DUIP
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.umontpellier.fr/wp-content/uploads/2025/12/Livret-ODONTOLOGIE-2026-2027.pdf
+sessions:
+- lieu: L-MONTPELLIER
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

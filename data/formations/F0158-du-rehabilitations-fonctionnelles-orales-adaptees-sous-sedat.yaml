@@ -1,0 +1,27 @@
+id: F0158
+intitule: DU Réhabilitations fonctionnelles orales adaptées sous sédation et anesthésie générale
+organisme: O017
+secteur: universitaire
+type: du
+disciplines:
+- sedation
+- geria
+format: null
+duree: Renouvelé en 2026
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.uca.fr/medias/fichier/delib-cfvu-20260324-24-du-rfoa-sedag-odonto_1782135743801-pdf
+sessions:
+- lieu: L-CLERMONT
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

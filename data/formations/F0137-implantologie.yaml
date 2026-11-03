@@ -1,0 +1,26 @@
+id: F0137
+intitule: Implantologie
+organisme: O014
+secteur: universitaire
+type: desu
+disciplines:
+- implanto
+format: null
+duree: 6 séminaires
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://smpm.univ-amu.fr/en/training/continuing-education/implantology
+sessions:
+- lieu: L-MARSEILLE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

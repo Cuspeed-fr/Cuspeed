@@ -1,0 +1,26 @@
+id: F0086
+intitule: DU Endodontie
+organisme: O009
+secteur: universitaire
+type: du
+disciplines:
+- endo
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://nouveau.univ-brest.fr/formation-continue-alternance/sites/formation-continue-alternance.www.univ-brest.fr/files/2026-04/DU-endodontie.pdf
+sessions:
+- lieu: L-BREST
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

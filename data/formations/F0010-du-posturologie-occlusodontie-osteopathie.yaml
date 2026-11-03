@@ -1,0 +1,26 @@
+id: F0010
+intitule: DU Posturologie, occlusodontie, ostéopathie
+organisme: O002
+secteur: universitaire
+type: du
+disciplines:
+- occlu
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.univ-reims.fr/cursus-informations-par-annee/formation-en-vue-du-diplome-de-docteur-en-chirurgie-dentaire,23627,39171.html
+sessions:
+- lieu: L-REIMS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,26 @@
+id: F0025
+intitule: DU Implantologie orale appliquée
+organisme: O004
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+format: null
+duree: Clinique, après le DU fondamental
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://export-odf-api.app.unistra.fr/ametys/pdf/FRUAI0673021VPRFH242/FRUAI0673021VPRPR1945
+sessions:
+- lieu: L-STRASBOURG
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

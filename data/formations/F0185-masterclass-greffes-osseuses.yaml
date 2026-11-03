@@ -1,0 +1,27 @@
+id: F0185
+intitule: MasterClass greffes osseuses
+organisme: O027
+secteur: prive
+type: masterclass
+disciplines:
+- implanto
+- chir
+format: null
+duree: 2 jours
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://straumann.com/content/dam/sites/anthogyr/fr/formation/Catalogue-Campus-Anthogyr_2025.pdf
+sessions:
+- lieu: L-MARSEILLE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

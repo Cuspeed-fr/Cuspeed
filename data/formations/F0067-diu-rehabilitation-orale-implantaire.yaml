@@ -1,0 +1,27 @@
+id: F0067
+intitule: DIU Réhabilitation orale implantaire
+organisme: O006
+secteur: universitaire
+type: diu
+disciplines:
+- implanto
+- proth
+format: null
+duree: Avec Université Paris Cité
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://fc.sorbonne-universite.fr/nos-offres/diu-rehabilitation-orale-implantaire/
+sessions:
+- lieu: L-SORBONNE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

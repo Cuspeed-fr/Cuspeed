@@ -1,0 +1,26 @@
+id: F0152
+intitule: DU Odontologie pédiatrique
+organisme: O016
+secteur: universitaire
+type: du
+disciplines:
+- pedo
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://odontologie.univ-lyon1.fr/formation/formation-continue-du-aeu-et-formations-courtes/post-university-courses-university-diplomas-d-u
+sessions:
+- lieu: L-LYON
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

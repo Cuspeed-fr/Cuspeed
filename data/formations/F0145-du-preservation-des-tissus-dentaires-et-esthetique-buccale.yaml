@@ -1,0 +1,26 @@
+id: F0145
+intitule: DU Préservation des tissus dentaires et esthétique buccale
+organisme: O015
+secteur: universitaire
+type: du
+disciplines:
+- resto
+format: en-ligne
+duree: 100 % e-learning
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/d-u-preservation-tissus-dentaires-esthetique-buccale
+sessions:
+- lieu: L-NICE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,27 @@
+id: F0030
+intitule: DU Approfondi de parodontie et implantologie clinique (DUAPIC)
+organisme: O005
+secteur: universitaire
+type: du
+disciplines:
+- paro
+- implanto
+format: null
+duree: 1 an, après le DUPC
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-approfondi-de-parodontie-et-implantologie-clinique-duapic-KFGRVOWI.html
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

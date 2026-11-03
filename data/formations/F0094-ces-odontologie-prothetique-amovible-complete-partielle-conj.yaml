@@ -1,0 +1,26 @@
+id: F0094
+intitule: CES Odontologie prothétique (amovible complète, partielle, conjointe, maxillo-faciale)
+organisme: O010
+secteur: universitaire
+type: ces
+disciplines:
+- proth
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.odontologie.univ-nantes.fr/
+sessions:
+- lieu: L-NANTES
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,63 @@
+disciplines:
+  paro: Parodontologie
+  implanto: Implantologie
+  ortho: Orthodontie
+  proth: Prothèse & réhabilitation
+  resto: Restauratrice & esthétique
+  endo: Endodontie
+  chir: Chirurgie orale
+  pedo: Odontologie pédiatrique
+  occlu: Occlusodontie & ATM
+  sommeil: Médecine du sommeil
+  mbd: Pathologie & médecine orale
+  sedation: Sédation & hypnose
+  laser: Laser
+  num: Numérique
+  geria: Gériatrie & handicap
+  legal: Odontologie légale & expertise
+  bio: Biologie & biomatériaux
+  omni: Omnipratique & remise à niveau
+  sp: Santé publique & qualité
+types:
+  du: DU
+  diu: DIU
+  desu: DESU
+  ces: CES
+  auec: AUEC
+  aeu: AEU
+  cursus: Cursus
+  masterclass: Masterclass
+  journee: Journée
+  catalogue: Catalogue de formations
+types_universitaires:
+- du
+- diu
+- desu
+- ces
+- auec
+- aeu
+secteurs:
+  universitaire: Universitaire
+  prive: Privé
+formats:
+  presentiel: Présentiel
+  hybride: Hybride
+  en-ligne: En ligne
+statuts:
+  validee: Validée
+  a-verifier: À vérifier
+  archivee: Archivée
+inscriptions:
+  a-renseigner: À renseigner
+  ouvertes: Ouvertes
+  complet: Complet
+  fermees: Fermées
+  annoncee: Prochaine session annoncée
+financements:
+  dpc: DPC
+  fifpl: FIFPL
+types_organisme:
+  universite: Université
+  societe-savante: Société savante
+  industriel: Industriel
+  organisme-prive: Organisme privé

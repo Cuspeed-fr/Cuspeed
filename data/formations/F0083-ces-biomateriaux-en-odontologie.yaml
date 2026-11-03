@@ -1,0 +1,26 @@
+id: F0083
+intitule: CES Biomatériaux en odontologie
+organisme: O008
+secteur: universitaire
+type: ces
+disciplines:
+- bio
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://s3.eu-west-1.amazonaws.com/abcdent/events/2879/attachments/16784/original.pdf?1576241980
+sessions:
+- lieu: L-RENNES
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

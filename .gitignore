@@ -1,0 +1,15 @@
+# Secrets : jamais dans le dépôt
+.env
+.env.*
+*.pem
+*.key
+
+# Fichiers générés
+node_modules/
+dist/
+.astro/
+__pycache__/
+
+# Fichiers de travail
+*.xlsx
+.DS_Store

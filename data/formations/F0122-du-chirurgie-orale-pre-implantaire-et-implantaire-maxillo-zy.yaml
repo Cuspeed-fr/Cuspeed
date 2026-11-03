@@ -1,0 +1,27 @@
+id: F0122
+intitule: DU Chirurgie orale pré-implantaire et implantaire maxillo-zygomatique
+organisme: O013
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+- chir
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.umontpellier.fr/wp-content/uploads/2025/12/Livret-ODONTOLOGIE-2026-2027.pdf
+sessions:
+- lieu: L-MONTPELLIER
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,26 @@
+id: F0182
+intitule: 'MasterClass : poser des minivis orthodontiques'
+organisme: O025
+secteur: prive
+type: masterclass
+disciplines:
+- ortho
+format: null
+duree: 1 jour · 19 janv. 2026
+volume_horaire_h: null
+tarif:
+  texte: 750 €
+  euros: 750
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://information-dentaire.fr/wp-content/uploads/gravity_forms/5-cefcae719f056cb0bfe0e6cb6701424a/2025/01/MC-Minivis-202601.pdf
+sessions:
+- lieu: L-AIX
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

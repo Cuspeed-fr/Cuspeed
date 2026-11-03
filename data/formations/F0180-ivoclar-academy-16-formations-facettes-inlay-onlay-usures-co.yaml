@@ -1,0 +1,28 @@
+id: F0180
+intitule: 'Ivoclar Academy : 16 formations (facettes, inlay-onlay, usures, composites, CFAO)'
+organisme: O024
+secteur: prive
+type: catalogue
+disciplines:
+- resto
+- proth
+- num
+format: null
+duree: 1 à 3 jours chacune
+volume_horaire_h: null
+tarif:
+  texte: ≈ 500 € indicatif
+  euros: 500
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.ivoclar.com/fr_FR/CMS/IV%20Academy/Brochure%20Ivoclar%20Academy%202026_Chirurgiens-dentistes_version%20complete.pdf
+sessions:
+- lieu: L-ANNECY
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

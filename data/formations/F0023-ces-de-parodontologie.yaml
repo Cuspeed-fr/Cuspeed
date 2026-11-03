@@ -1,0 +1,26 @@
+id: F0023
+intitule: CES de Parodontologie
+organisme: O004
+secteur: universitaire
+type: ces
+disciplines:
+- paro
+format: en-ligne
+duree: Théorique, en ligne
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.unistra.fr/fileadmin/upload/unistra/universite/fonctionnement/actes_reglementaires/deliberations_du_CA/seance_du_11_juillet_2023/Point_3.17.12.12_-_Creations_-_DU_Parodontologie.pdf
+sessions:
+- lieu: L-STRASBOURG
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

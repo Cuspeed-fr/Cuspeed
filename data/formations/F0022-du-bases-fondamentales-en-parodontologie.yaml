@@ -1,0 +1,26 @@
+id: F0022
+intitule: DU Bases fondamentales en parodontologie
+organisme: O004
+secteur: universitaire
+type: du
+disciplines:
+- paro
+format: null
+duree: 102 h · 7 séminaires
+volume_horaire_h: 102
+tarif:
+  texte: 3 500 € (2023-24)
+  euros: 3500
+  annee: 2023-24
+prerequis: null
+financement: []
+url_officielle: https://export-odf-api.app.unistra.fr/ametys/pdf/FRUAI0673021VPRFH242/FRUAI0673021VPRPR1888
+sessions:
+- lieu: L-STRASBOURG
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

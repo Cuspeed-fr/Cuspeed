@@ -1,0 +1,27 @@
+id: F0114
+intitule: DIU Odontologie pédiatrique clinique et sédation
+organisme: O012
+secteur: universitaire
+type: diu
+disciplines:
+- pedo
+- sedation
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.univ-tlse3.fr/decouvrir-nos-diplomes/diu-odontologie-pediatrique-clinique-et-sedation
+sessions:
+- lieu: L-TOULOUSE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

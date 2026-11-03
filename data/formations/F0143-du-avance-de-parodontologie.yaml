@@ -1,0 +1,26 @@
+id: F0143
+intitule: DU Avancé de parodontologie
+organisme: O015
+secteur: universitaire
+type: du
+disciplines:
+- paro
+format: hybride
+duree: 100 % e-learning ou mixte
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/d-u-parodontologie-avance
+sessions:
+- lieu: L-NICE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

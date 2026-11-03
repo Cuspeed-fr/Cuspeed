@@ -1,0 +1,58 @@
+# Copie nocturne de la base Supabase vers la branche « sauvegarde » (fichiers lisibles, historique conservé).
+# Secret à créer dans GitHub (Settings > Secrets and variables > Actions) : CUSPEED_SAUVEGARDE_DB_URL,
+# adresse de connexion du rôle lecteur_sauvegarde (lecture seule). Ne jamais la mettre ailleurs.
+name: Sauvegarde nocturne
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sauvegarde:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml==6.0.2 "psycopg[binary]==3.2.3"
+      - name: Se placer sur la branche sauvegarde
+        run: |
+          if git ls-remote --exit-code --heads origin sauvegarde >/dev/null; then
+            git checkout -B sauvegarde origin/sauvegarde
+          else
+            git checkout -B sauvegarde
+          fi
+      - name: Exporter la base
+        env:
+          CUSPEED_DB_URL: ${{ secrets.CUSPEED_SAUVEGARDE_DB_URL }}
+        run: python3 scripts/sauvegarder_vers_yaml.py
+      - name: "Contrôler la copie (erreurs de données, baisse anormale du nombre de fiches)"
+        id: controle
+        continue-on-error: true
+        run: |
+          if git rev-parse --verify origin/sauvegarde >/dev/null 2>&1; then
+            python3 scripts/verifier_donnees.py --reference origin/sauvegarde
+          else
+            python3 scripts/verifier_donnees.py
+          fi
+      - name: "Enregistrer la copie, même en cas d'alerte (l'historique garde l'état précédent)"
+        run: |
+          git config user.name "Sauvegarde Cuspeed"
+          git config user.email "contact@cuspeed.fr"
+          git add data
+          if git diff --cached --quiet; then echo "Aucun changement."; else
+            git commit -m "Sauvegarde nocturne $(date -u +%F)"
+            git push origin sauvegarde
+          fi
+      - name: Alerter si le contrôle a échoué
+        if: steps.controle.outcome == 'failure'
+        run: |
+          echo "Le contrôle de la copie a signalé une alerte : voir l'étape précédente." >&2
+          exit 1

@@ -1,0 +1,26 @@
+id: F0072
+intitule: DU Pathologie de la muqueuse buccale en pratique clinique
+organisme: O006
+secteur: universitaire
+type: du
+disciplines:
+- mbd
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://fc.sorbonne-universite.fr/nos-offres/du-pathologie-de-la-muqueuse-buccale-en-pratique-clinique
+sessions:
+- lieu: L-SORBONNE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

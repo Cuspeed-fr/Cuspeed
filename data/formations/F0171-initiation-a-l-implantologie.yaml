@@ -1,0 +1,26 @@
+id: F0171
+intitule: Initiation à l'implantologie
+organisme: O022
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+format: null
+duree: 2 jours
+volume_horaire_h: null
+tarif:
+  texte: 1 200 €
+  euros: 1200
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.straumann.com/content/dam/sites/neodent/fr/lp/lp-brochure/FORMATIONS-NEODENT-2026.pdf
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

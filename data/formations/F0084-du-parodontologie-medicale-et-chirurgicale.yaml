@@ -1,0 +1,26 @@
+id: F0084
+intitule: DU Parodontologie médicale et chirurgicale
+organisme: O009
+secteur: universitaire
+type: du
+disciplines:
+- paro
+format: hybride
+duree: 141 h · sept. à mai · hybride
+volume_horaire_h: 141
+tarif:
+  texte: 3 200 € (2026-27)
+  euros: 3200
+  annee: 2026-27
+prerequis: null
+financement: []
+url_officielle: https://www.univ-brest.fr/formation-continue-alternance/sites/formation-continue-alternance.www.univ-brest.fr/files/2026-04/DU-Parondontologie-me%CC%81dicale-et-chirurgicale-avril-2026.pdf
+sessions:
+- lieu: L-BREST
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

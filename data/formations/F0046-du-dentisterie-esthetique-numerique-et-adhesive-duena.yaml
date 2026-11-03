@@ -1,0 +1,27 @@
+id: F0046
+intitule: DU Dentisterie esthétique, numérique et adhésive (DUENA)
+organisme: O005
+secteur: universitaire
+type: du
+disciplines:
+- resto
+- num
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,27 @@
+id: F0187
+intitule: Implantologie numérique ; implantologie au quotidien
+organisme: O029
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+- num
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.straumann.com/content/dam/sites/straumann/fr/landing-page/lp-brochure/LES-PARTENAIRES-STRAUMANN.pdf
+sessions:
+- lieu: L-CLERMONT
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

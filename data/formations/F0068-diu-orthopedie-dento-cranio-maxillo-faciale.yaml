@@ -1,0 +1,26 @@
+id: F0068
+intitule: DIU Orthopédie dento-cranio-maxillo-faciale
+organisme: O006
+secteur: universitaire
+type: diu
+disciplines:
+- ortho
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://fc.sorbonne-universite.fr/nos-offres/diu-orthopedie-dento-cranio-maxillo-faciale/
+sessions:
+- lieu: L-SORBONNE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,26 @@
+id: F0157
+intitule: DU Implantologie basale
+organisme: O017
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.uca.fr/medias/fichier/delib-cfvu-20250527-05-du-implantologie-basale-odonto_1748938600306-pdf
+sessions:
+- lieu: L-CLERMONT
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

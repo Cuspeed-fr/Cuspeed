@@ -1,0 +1,27 @@
+id: F0066
+intitule: DU Chirurgie reconstructrice pré et péri-implantaire orale
+organisme: O006
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+- chir
+format: null
+duree: 64 h de théorie
+volume_horaire_h: 64
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://fc.sorbonne-universite.fr/nos-offres/du-chirurgie-reconstructrice-pre-et-peri-implantaire-orale/
+sessions:
+- lieu: L-SORBONNE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

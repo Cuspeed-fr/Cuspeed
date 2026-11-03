@@ -1,0 +1,27 @@
+id: F0169
+intitule: Empreinte optique et prothèse numérique (3Shape Trios)
+organisme: O021
+secteur: prive
+type: journee
+disciplines:
+- num
+- proth
+format: null
+duree: 1 jour · Lyon, Rennes, Marseille, Paris, Bordeaux
+volume_horaire_h: null
+tarif:
+  texte: 800 € (assistantes 200 €)
+  euros: 800
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.straumann.com/content/dam/sites/straumann/fr/landing-page/lp-brochure/FORMATION-STRAUMANN-academie-2026.pdf
+sessions:
+- lieu: L-MULTI
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,26 @@
+id: F0183
+intitule: Bien maîtriser les traitements non chirurgicaux en parodontologie
+organisme: O026
+secteur: prive
+type: journee
+disciplines:
+- paro
+format: null
+duree: 8 h · 3 sessions en 2026
+volume_horaire_h: 8
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://dentego.fr/app/uploads/2026/01/programme-parodontologie.pdf
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

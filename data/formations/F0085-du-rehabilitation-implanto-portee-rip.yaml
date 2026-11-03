@@ -1,0 +1,27 @@
+id: F0085
+intitule: DU Réhabilitation implanto-portée (RIP)
+organisme: O009
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+- proth
+format: null
+duree: 3 ans dont 1 de pratique encadrée
+volume_horaire_h: null
+tarif:
+  texte: 2 800 €/an (2025-26)
+  euros: 2800
+  annee: 2025-26
+prerequis: null
+financement: []
+url_officielle: https://nouveau.univ-brest.fr/formation-continue-alternance/sites/formation-continue-alternance.www.univ-brest.fr/files/2025-07/DU-Rehabilitation-implanto-portee-%28RIP%29-UBO-SUFCA-Juillet-2025.pdf
+sessions:
+- lieu: L-BREST
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

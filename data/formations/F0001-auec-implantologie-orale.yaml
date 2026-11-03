@@ -1,0 +1,26 @@
+id: F0001
+intitule: AUEC Implantologie orale
+organisme: O001
+secteur: universitaire
+type: auec
+disciplines:
+- implanto
+format: null
+duree: Prérequis du DU clinique
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://ufr3s.univ-lille.fr/formation-continue/odontologie/auec-implantologie-orale
+sessions:
+- lieu: L-LILLE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

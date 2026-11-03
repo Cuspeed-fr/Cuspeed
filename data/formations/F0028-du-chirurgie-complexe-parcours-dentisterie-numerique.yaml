@@ -1,0 +1,27 @@
+id: F0028
+intitule: DU Chirurgie complexe, parcours dentisterie numérique
+organisme: O004
+secteur: universitaire
+type: du
+disciplines:
+- num
+- chir
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://chirurgie-dentaire.unistra.fr/formation/du/cours-chirurgie-complexe-LRZASW37-9659-LRZ76V0O
+sessions:
+- lieu: L-STRASBOURG
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

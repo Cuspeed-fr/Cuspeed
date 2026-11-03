@@ -1,0 +1,26 @@
+id: F0109
+intitule: DU Réactualisation des compétences en odontologie
+organisme: O011
+secteur: universitaire
+type: du
+disciplines:
+- omni
+format: null
+duree: 10 modules de 2 jours
+volume_horaire_h: null
+tarif:
+  texte: 4 500 €
+  euros: 4500
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/DU-ReactualisationOdonto.pdf
+sessions:
+- lieu: L-BORDEAUX
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

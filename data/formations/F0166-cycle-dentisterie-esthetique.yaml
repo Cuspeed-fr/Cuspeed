@@ -1,0 +1,26 @@
+id: F0166
+intitule: Cycle dentisterie esthétique
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- resto
+format: null
+duree: 2024-2025
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://information-dentaire.fr/wp-content/uploads/gravity_forms/5-7f4c2376995d6911d98cbf4212a74301/2023/10/Fiche.formation.DENTISTERIE.ESTHETIQUE.2024-2025-SOP.pdf
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

@@ -1,0 +1,26 @@
+id: F0141
+intitule: DESU Omnipratique
+organisme: O014
+secteur: universitaire
+type: desu
+disciplines:
+- omni
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.univ-amu.fr/system/files/2019-02/SFPC%20ODONTO_DESU_Omnipratique_0.pdf
+sessions:
+- lieu: L-MARSEILLE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

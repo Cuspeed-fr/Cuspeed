@@ -1,0 +1,26 @@
+id: F0156
+intitule: DU Implantologie orale (DUIO)
+organisme: O017
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+format: null
+duree: 2 ans · renouvelé en 2026
+volume_horaire_h: null
+tarif:
+  texte: 5 000 €/an
+  euros: 5000
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.uca.fr/medias/fichier/delib-cfvu-20260324-23-du-implantologie-orale-odonto_1782135726444-pdf
+sessions:
+- lieu: L-CLERMONT
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

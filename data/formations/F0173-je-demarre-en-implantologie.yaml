@@ -1,0 +1,26 @@
+id: F0173
+intitule: Je démarre en implantologie
+organisme: O023
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+format: null
+duree: 42 h · mars à juin
+volume_horaire_h: 42
+tarif:
+  texte: 4 200 € (2025)
+  euros: 4200
+  annee: '2025'
+prerequis: null
+financement: []
+url_officielle: https://straumann.com/content/dam/sites/anthogyr/fr/formation/Catalogue-Campus-Anthogyr_2025.pdf
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-02'
+notes: null

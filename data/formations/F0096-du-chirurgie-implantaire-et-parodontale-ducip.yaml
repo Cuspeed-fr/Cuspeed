@@ -1,0 +1,28 @@
+id: F0096
+intitule: DU Chirurgie implantaire et parodontale (DUCIP)
+organisme: O011
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+- paro
+- chir
+format: null
+duree: Séminaires à Bordeaux et Tanger
+volume_horaire_h: null
+tarif:
+  texte: 2 900 €/an
+  euros: 2900
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+sessions:
+- lieu: L-BORDEAUX
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-02'
+notes: null

@@ -13,3 +13,4 @@ __pycache__/
 # Fichiers de travail
 *.xlsx
 .DS_Store
+*.whl

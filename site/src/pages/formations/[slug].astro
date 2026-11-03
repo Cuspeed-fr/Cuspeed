@@ -1,0 +1,237 @@
+---
+// Fiche d'une formation : une page par formation publiée.
+import Base from "../../layouts/Base.astro";
+import { chargerDonnees, tarifLisible, dateLisible, villesDe } from "../../lib/donnees.js";
+
+export function getStaticPaths() {
+  const donnees = chargerDonnees();
+  return donnees.formations.map((formation) => ({
+    params: { slug: formation.slug },
+    props: { formation },
+  }));
+}
+
+const { formation: f } = Astro.props;
+const donnees = chargerDonnees();
+const ref = donnees.referentiels;
+const organisme = donnees.organisme(f.organisme);
+const villes = villesDe(f, donnees);
+const tarif = tarifLisible(f.tarif);
+const typeNom = ref.types[f.type] ?? f.type;
+const disciplines = f.disciplines.map((d) => ref.disciplines[d] ?? d);
+const lienFiche = new URL(`/formations/${f.slug}/`, Astro.site).href;
+
+// Titre et description uniques pour les moteurs de recherche.
+const titre = villes.length ? `${f.intitule} – ${villes.join(", ")}` : f.intitule;
+const morceaux = [
+  `${typeNom}${disciplines.length ? " en " + disciplines.join(", ").toLowerCase() : ""}`,
+  organisme ? `proposé par ${organisme.nom}` : null,
+  f.duree ? `Durée : ${f.duree}` : null,
+  tarif ? `Tarif : ${tarif}` : null,
+];
+const description = morceaux.filter(Boolean).join(". ") + ". Fiche relevée sur la source officielle.";
+
+// Données structurées schema.org (Course). Seules les informations connues sont écrites.
+const instances = f.sessions
+  .map((s) => {
+    const lieu = s.lieu ? donnees.lieu(s.lieu) : null;
+    const instance = { "@type": "CourseInstance" };
+    if (f.format === "en-ligne") instance.courseMode = "online";
+    else if (f.format === "hybride") instance.courseMode = "blended";
+    else if (f.format === "presentiel") instance.courseMode = "onsite";
+    if (s.debut) instance.startDate = s.debut;
+    if (s.fin) instance.endDate = s.fin;
+    if (lieu?.latitude != null) {
+      instance.location = { "@type": "Place", name: lieu.nom, address: { "@type": "PostalAddress", addressLocality: lieu.nom, addressCountry: "FR" } };
+    }
+    return Object.keys(instance).length > 1 ? instance : null;
+  })
+  .filter(Boolean);
+
+const cours = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  name: f.intitule,
+  description,
+  url: lienFiche,
+  sameAs: f.url_officielle,
+  inLanguage: "fr",
+  educationalCredentialAwarded: ref.types_universitaires.includes(f.type) ? typeNom : undefined,
+  provider: organisme ? { "@type": "Organization", name: organisme.nom, sameAs: organisme.site_web ?? organisme.page_catalogue ?? undefined } : undefined,
+  about: disciplines.length ? disciplines : undefined,
+  hasCourseInstance: instances.length ? instances : undefined,
+  offers: f.tarif.euros != null ? { "@type": "Offer", category: "Paid", price: f.tarif.euros, priceCurrency: "EUR" } : undefined,
+};
+
+const fil = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Formations", item: new URL("/", Astro.site).href },
+    organisme && { "@type": "ListItem", position: 2, name: organisme.nom, item: new URL(`/organismes/${organisme.slug}/`, Astro.site).href },
+    { "@type": "ListItem", position: organisme ? 3 : 2, name: f.intitule, item: lienFiche },
+  ].filter(Boolean),
+};
+---
+<Base titre={titre} description={description} donneesStructurees={[cours, fil]}>
+  <nav class="fil" aria-label="Fil d'Ariane">
+    <ol>
+      <li><a href="/">Formations</a></li>
+      {organisme && <li><a href={`/organismes/${organisme.slug}/`}>{organisme.nom}</a></li>}
+      <li aria-current="page">{f.intitule}</li>
+    </ol>
+  </nav>
+
+  <article class="fiche">
+    <header class="fiche-entete">
+      <ul class="etiquettes" aria-label="Type, secteur et disciplines">
+        <li class="etiquette forte">{typeNom}</li>
+        <li class="etiquette">{ref.secteurs[f.secteur] ?? f.secteur}</li>
+        {disciplines.map((d) => <li class="etiquette">{d}</li>)}
+      </ul>
+      <h1>{f.intitule}</h1>
+      {organisme && (
+        <p class="organisme">
+          <a href={`/organismes/${organisme.slug}/`}>{organisme.nom}</a>
+          {villes.length > 0 && <span class="discret"> · {villes.join(", ")}</span>}
+        </p>
+      )}
+    </header>
+
+    <div class="fiche-corps">
+      <section class="carte-bloc" aria-labelledby="infos-titre">
+        <h2 id="infos-titre">En bref</h2>
+        <dl class="infos">
+          <dt>Format</dt>
+          <dd>{f.format ? ref.formats[f.format] ?? f.format : <span class="discret">Non précisé par la source</span>}</dd>
+          <dt>Durée</dt>
+          <dd>{f.duree ?? <span class="discret">Non précisée par la source</span>}</dd>
+          {f.volume_horaire_h != null && (
+            <>
+              <dt>Volume horaire</dt>
+              <dd class="chiffres">{f.volume_horaire_h} h</dd>
+            </>
+          )}
+          <dt>Tarif</dt>
+          <dd>
+            {tarif ? (
+              <span class="chiffres">{tarif}</span>
+            ) : (
+              <span class="discret">Non communiqué : à demander à l'organisme</span>
+            )}
+            {f.secteur === "universitaire" && tarif && <span class="discret"> · formation continue</span>}
+          </dd>
+          {f.prerequis && (
+            <>
+              <dt>Prérequis</dt>
+              <dd>{f.prerequis}</dd>
+            </>
+          )}
+          {f.financement.length > 0 && (
+            <>
+              <dt>Financement</dt>
+              <dd>{f.financement.map((c) => ref.financements[c] ?? c).join(", ")} (selon la source)</dd>
+            </>
+          )}
+        </dl>
+      </section>
+
+      <section class="carte-bloc" aria-labelledby="sessions-titre">
+        <h2 id="sessions-titre">Sessions</h2>
+        {f.sessions.length === 0 ? (
+          <p class="discret">Aucune session annoncée pour le moment.</p>
+        ) : (
+          <ul class="sessions">
+            {f.sessions.map((s) => {
+              const lieu = s.lieu ? donnees.lieu(s.lieu) : null;
+              const debut = dateLisible(s.debut);
+              const fin = dateLisible(s.fin);
+              return (
+                <li>
+                  <strong>{lieu?.nom ?? "Lieu non précisé"}</strong>
+                  <span>
+                    {debut && fin ? `du ${debut} au ${fin}` : debut ? `à partir du ${debut}` : "Dates non publiées"}
+                  </span>
+                  {s.inscriptions && <span class="etiquette">Inscriptions : {(ref.inscriptions[s.inscriptions] ?? s.inscriptions).toLowerCase()}</span>}
+                  {s.places != null && <span class="discret">{s.places} places</span>}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </section>
+
+      <section class="carte-bloc source" aria-labelledby="source-titre">
+        <h2 id="source-titre">Source officielle</h2>
+        <p>
+          Les informations de cette fiche viennent de la page officielle de l'organisme.
+          {f.derniere_verification && <> Dernière vérification : <strong>{dateLisible(f.derniere_verification)}</strong>.</>}
+        </p>
+        <p><a class="bouton" href={f.url_officielle} rel="noopener external">Voir la page officielle ↗</a></p>
+        <p class="discret petit">
+          Une information erronée ou périmée ? Écrivez à <span class="adresse">contact@cuspeed.fr</span> en indiquant
+          la référence <span class="chiffres">{f.id}</span>.
+        </p>
+      </section>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .fiche-entete {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .fiche-entete h1 {
+    margin: 0;
+  }
+  .organisme {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+  .fiche-corps {
+    display: grid;
+    gap: 16px;
+  }
+  @media (min-width: 920px) {
+    .fiche-corps {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      align-items: start;
+    }
+    .fiche-corps > :first-child {
+      grid-row: span 2;
+    }
+  }
+  .carte-bloc h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+  }
+  .sessions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .sessions li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--trait);
+  }
+  .sessions li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .petit {
+    font-size: 0.88rem;
+  }
+  .adresse {
+    user-select: all;
+    font-weight: 600;
+    color: var(--encre);
+  }
+</style>

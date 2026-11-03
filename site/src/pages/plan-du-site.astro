@@ -1,0 +1,42 @@
+---
+// Plan du site lisible par un humain : toutes les fiches, par discipline principale.
+import Base from "../layouts/Base.astro";
+import { chargerDonnees } from "../lib/donnees.js";
+
+const donnees = chargerDonnees();
+const ref = donnees.referentiels;
+const groupes = Object.entries(ref.disciplines)
+  .map(([code, nom]) => ({
+    nom,
+    formations: donnees.formations
+      .filter((f) => f.disciplines[0] === code)
+      .sort((a, b) => a.intitule.localeCompare(b.intitule, "fr")),
+  }))
+  .filter((g) => g.formations.length);
+const sansDiscipline = donnees.formations.filter((f) => f.disciplines.length === 0);
+if (sansDiscipline.length) groupes.push({ nom: "Autres", formations: sansDiscipline });
+---
+<Base titre="Plan du site" description="Toutes les fiches formation de Cuspeed, classées par discipline principale.">
+  <h1>Plan du site</h1>
+  <p><a href="/">Accueil</a> · <a href="/organismes/">Organismes</a> · <a href="/a-propos/">À propos</a> · <a href="/mentions-legales/">Mentions légales</a></p>
+  {groupes.map((g) => (
+    <section>
+      <h2>{g.nom}</h2>
+      <ul class="plan">
+        {g.formations.map((f) => <li><a href={`/formations/${f.slug}/`}>{f.intitule}</a></li>)}
+      </ul>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .plan {
+    columns: 2 22rem;
+    column-gap: 2rem;
+    padding-left: 1.1rem;
+  }
+  .plan li {
+    break-inside: avoid;
+    margin-bottom: 4px;
+  }
+</style>

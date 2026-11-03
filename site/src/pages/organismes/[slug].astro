@@ -1,0 +1,67 @@
+---
+// Page d'un organisme : ses formations publiées.
+import Base from "../../layouts/Base.astro";
+import ResumeFormation from "../../components/ResumeFormation.astro";
+import { chargerDonnees } from "../../lib/donnees.js";
+
+export function getStaticPaths() {
+  const donnees = chargerDonnees();
+  return donnees.organismes.map((organisme) => ({
+    params: { slug: organisme.slug },
+    props: { organisme },
+  }));
+}
+
+const { organisme: o } = Astro.props;
+const donnees = chargerDonnees();
+const ref = donnees.referentiels;
+const formations = donnees.formations
+  .filter((f) => f.organisme === o.id)
+  .sort((a, b) => a.intitule.localeCompare(b.intitule, "fr"));
+const typeNom = ref.types_organisme[o.type] ?? o.type;
+const lienOfficiel = o.site_web ?? o.page_catalogue;
+
+const description =
+  `${formations.length} formation${formations.length > 1 ? "s" : ""} pour chirurgiens-dentistes proposée${formations.length > 1 ? "s" : ""} par ${o.nom}` +
+  (o.ville ? ` (${o.ville})` : "") + " : intitulés, durées, tarifs et liens vers les pages officielles.";
+
+const organisation = {
+  "@context": "https://schema.org",
+  "@type": o.type === "universite" ? "CollegeOrUniversity" : "Organization",
+  name: o.nom,
+  url: new URL(`/organismes/${o.slug}/`, Astro.site).href,
+  sameAs: lienOfficiel ?? undefined,
+  address: o.ville ? { "@type": "PostalAddress", addressLocality: o.ville, addressCountry: "FR" } : undefined,
+};
+---
+<Base titre={`Formations dentaires – ${o.nom}`} description={description} donneesStructurees={[organisation]}>
+  <nav class="fil" aria-label="Fil d'Ariane">
+    <ol>
+      <li><a href="/organismes/">Organismes</a></li>
+      <li aria-current="page">{o.nom}</li>
+    </ol>
+  </nav>
+  <header class="entete-organisme">
+    <ul class="etiquettes"><li class="etiquette forte">{typeNom}</li>{o.ville && <li class="etiquette">{o.ville}</li>}</ul>
+    <h1>{o.nom}</h1>
+    <p class="discret">
+      {formations.length} formation{formations.length > 1 ? "s" : ""} publiée{formations.length > 1 ? "s" : ""} sur Cuspeed.
+      {lienOfficiel && <> <a href={lienOfficiel} rel="noopener external">Site officiel ↗</a></>}
+    </p>
+  </header>
+  <ul class="liste">
+    {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
+  </ul>
+</Base>
+
+<style>
+  .entete-organisme {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .entete-organisme h1,
+  .entete-organisme p {
+    margin: 0;
+  }
+</style>

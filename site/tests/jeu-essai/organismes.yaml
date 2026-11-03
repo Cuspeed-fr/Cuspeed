@@ -1,0 +1,14 @@
+- id: O001
+  nom: Université d'Essai
+  type: universite
+  ville: Lille
+  site_web: https://exemple.invalid/
+  page_catalogue: null
+  fiche_revendiquee: false
+- id: O002
+  nom: Organisme Sans Fiche Publiée
+  type: organisme-prive
+  ville: Paris
+  site_web: null
+  page_catalogue: null
+  fiche_revendiquee: false

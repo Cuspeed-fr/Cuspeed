@@ -1,0 +1,21 @@
+# Jeu d'essai minimal pour les tests du site (données inventées, jamais publiées).
+disciplines:
+  paro: Parodontologie
+  implanto: Implantologie
+types:
+  du: DU
+  cursus: Cursus
+types_universitaires:
+- du
+secteurs:
+  universitaire: Universitaire
+  prive: Privé
+formats:
+  presentiel: Présentiel
+inscriptions:
+  ouvertes: Ouvertes
+financements:
+  dpc: DPC
+types_organisme:
+  universite: Université
+  organisme-prive: Organisme privé

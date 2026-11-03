@@ -1,0 +1,70 @@
+---
+// Liste des organismes qui ont au moins une formation publiée, regroupés par catégorie.
+import Base from "../../layouts/Base.astro";
+import { chargerDonnees } from "../../lib/donnees.js";
+
+const donnees = chargerDonnees();
+const ref = donnees.referentiels;
+const nombre = new Map();
+for (const f of donnees.formations) nombre.set(f.organisme, (nombre.get(f.organisme) ?? 0) + 1);
+
+const groupes = Object.entries(ref.types_organisme)
+  .map(([code, nom]) => ({
+    nom,
+    organismes: donnees.organismes
+      .filter((o) => o.type === code)
+      .sort((a, b) => a.nom.localeCompare(b.nom, "fr")),
+  }))
+  .filter((g) => g.organismes.length);
+
+const description =
+  `Les ${donnees.organismes.length} universités, sociétés savantes et organismes privés qui proposent ` +
+  "des formations post-universitaires et continues aux chirurgiens-dentistes en France.";
+---
+<Base titre="Organismes de formation dentaire" description={description}>
+  <h1>Organismes de formation</h1>
+  <p class="discret">{description}</p>
+  {groupes.map((g) => (
+    <section>
+      <h2>{g.nom}</h2>
+      <ul class="organismes">
+        {g.organismes.map((o) => (
+          <li>
+            <a href={`/organismes/${o.slug}/`}>{o.nom}</a>
+            <span class="discret">
+              {o.ville && `${o.ville} · `}
+              {nombre.get(o.id)} formation{nombre.get(o.id) > 1 ? "s" : ""}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .organismes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--trait);
+    border-radius: 12px;
+  }
+  .organismes li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 12px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--trait);
+  }
+  .organismes li:first-child {
+    border-top: 0;
+  }
+  .organismes a {
+    font-weight: 600;
+  }
+</style>

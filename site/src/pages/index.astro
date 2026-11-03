@@ -1,0 +1,347 @@
+---
+// Accueil : carte de France, filtres et liste de toutes les formations publiées.
+// La liste complète est écrite dans la page (lisible sans JavaScript et par les moteurs
+// de recherche) ; le petit script en bas ne fait que masquer ce qui ne correspond pas aux filtres.
+import Base from "../layouts/Base.astro";
+import ResumeFormation from "../components/ResumeFormation.astro";
+import { chargerDonnees, regroupementsDe } from "../lib/donnees.js";
+import { pointsCarte, placerEtiquettes, LARGEUR_CARTE, HAUTEUR_CARTE } from "../lib/carte.js";
+import { CONTOUR_FRANCE } from "../lib/contour-france.js";
+
+const donnees = chargerDonnees();
+const ref = donnees.referentiels;
+const formations = [...donnees.formations].sort((a, b) => a.intitule.localeCompare(b.intitule, "fr"));
+
+// Nombre de formations par point de la carte.
+const compte = new Map();
+for (const f of formations) {
+  for (const r of regroupementsDe(f, donnees)) compte.set(r, (compte.get(r) ?? 0) + 1);
+}
+const rayon = (n) => Math.round((7 + Math.sqrt(n) * 2.2) * 10) / 10;
+const points = placerEtiquettes(
+  pointsCarte(donnees.lieux).map((p) => ({ ...p, n: compte.get(p.nom) ?? 0 })),
+  rayon,
+);
+
+// Valeurs proposées dans les filtres : seulement celles qui existent dans les fiches publiées.
+const disciplinesPresentes = Object.entries(ref.disciplines).filter(([code]) =>
+  formations.some((f) => f.disciplines.includes(code)),
+);
+const typesPresents = Object.entries(ref.types).filter(([code]) => formations.some((f) => f.type === code));
+const villesPresentes = [...compte.keys()].sort((a, b) => a.localeCompare(b, "fr"));
+
+const description =
+  `${formations.length} formations post-universitaires et continues pour chirurgiens-dentistes en France : ` +
+  "DU, DIU, CES, AUEC et formations privées, par discipline et par ville, avec la source officielle.";
+
+const page = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Formations post-universitaires et continues en odontologie",
+  description,
+  inLanguage: "fr-FR",
+  numberOfItems: formations.length,
+};
+---
+<Base titre="Formations dentaires post-universitaires et continues en France" description={description} donneesStructurees={[page]}>
+  <section class="intro">
+    <h1>Toutes les formations dentaires post-universitaires, en un clic</h1>
+    <p>
+      Diplômes d'université, certificats et formations privées pour chirurgiens-dentistes en France,
+      relevés sur les sites officiels des facultés et des organismes. Chaque fiche renvoie à sa source.
+    </p>
+    <p class="chiffres-cles chiffres">
+      <span><b>{formations.length}</b> formations</span>
+      <span><b>{donnees.organismes.length}</b> organismes</span>
+      <span><b>{villesPresentes.length}</b> villes</span>
+    </p>
+  </section>
+
+  <div class="disposition">
+    <div class="colonne-carte">
+      <figure class="carte-bloc carte">
+        <svg viewBox={`0 0 ${LARGEUR_CARTE} ${HAUTEUR_CARTE}`} role="group" aria-label="Carte de France : choisir une ville">
+          <path class="terre" d={CONTOUR_FRANCE} />
+          {points.map((p) => (
+            <g
+              class="point"
+              data-ville={p.nom}
+              role="button"
+              tabindex="0"
+              aria-pressed="false"
+              aria-label={`${p.nom} : ${p.n} formation${p.n > 1 ? "s" : ""}`}
+              transform={`translate(${p.x} ${p.y})`}
+            >
+              <circle r={rayon(p.n)} />
+              <text class="nombre" text-anchor="middle" dy="0.35em">{p.n}</text>
+              <text
+                class="nom"
+                x={Math.round((p.etiquette.x - p.x) * 10) / 10}
+                y={Math.round((p.etiquette.y - p.y) * 10) / 10}
+                text-anchor={p.etiquette.ancre}
+                dy="0.35em"
+              >{p.nom}</text>
+            </g>
+          ))}
+        </svg>
+        <figcaption class="discret">
+          Touchez une ville pour n'afficher que ses formations. Les formations à distance ou dans
+          plusieurs villes figurent dans la liste.
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="colonne-liste">
+      <form class="filtres carte-bloc" id="filtres" role="search" hidden>
+        <label class="champ champ-large">
+          <span>Rechercher</span>
+          <input type="search" name="q" placeholder="Intitulé, ville, faculté…" autocomplete="off" />
+        </label>
+        <label class="champ">
+          <span>Discipline</span>
+          <select name="discipline">
+            <option value="">Toutes</option>
+            {disciplinesPresentes.map(([code, nom]) => <option value={code}>{nom}</option>)}
+          </select>
+        </label>
+        <label class="champ">
+          <span>Type</span>
+          <select name="type">
+            <option value="">Tous</option>
+            {typesPresents.map(([code, nom]) => <option value={code}>{nom}</option>)}
+          </select>
+        </label>
+        <label class="champ">
+          <span>Secteur</span>
+          <select name="secteur">
+            <option value="">Tous</option>
+            {Object.entries(ref.secteurs).map(([code, nom]) => <option value={code}>{nom}</option>)}
+          </select>
+        </label>
+        <label class="champ">
+          <span>Ville</span>
+          <select name="ville">
+            <option value="">Toutes</option>
+            {villesPresentes.map((v) => <option value={v}>{v}</option>)}
+          </select>
+        </label>
+        <button type="reset" class="effacer">Effacer les filtres</button>
+      </form>
+
+      <p class="resultat" id="resultat" aria-live="polite">
+        {formations.length} formations
+      </p>
+
+      <ul class="liste" id="liste">
+        {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
+      </ul>
+      <p class="aucun discret" id="aucun" hidden>
+        Aucune formation ne correspond à ces critères. Essayez d'effacer un filtre.
+      </p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .intro {
+    margin-bottom: 20px;
+  }
+  .chiffres-cles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    color: var(--discret);
+    font-size: 0.95rem;
+  }
+  .chiffres-cles b {
+    color: var(--encre);
+    font-weight: 600;
+  }
+  .disposition {
+    display: grid;
+    gap: 20px;
+  }
+  .colonne-liste {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+    min-width: 0;
+  }
+  @media (min-width: 920px) {
+    .disposition {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      align-items: start;
+    }
+    .colonne-carte {
+      position: sticky;
+      top: 16px;
+    }
+  }
+  .carte {
+    margin: 0;
+    padding: 10px;
+  }
+  .carte svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .carte figcaption {
+    font-size: 0.85rem;
+    padding: 4px 6px 2px;
+  }
+  .terre {
+    fill: var(--terre);
+    stroke: var(--terre-bord);
+    stroke-width: 1;
+    stroke-linejoin: round;
+  }
+  .point {
+    cursor: pointer;
+  }
+  .point circle {
+    fill: var(--accent);
+    stroke: var(--surface);
+    stroke-width: 2;
+    transition: opacity 0.15s;
+  }
+  .point .nombre {
+    fill: var(--accent-texte);
+    font: 600 10px var(--chiffres);
+  }
+  .point .nom {
+    fill: var(--encre);
+    font: 600 11px var(--texte);
+    paint-order: stroke;
+    stroke: var(--terre);
+    stroke-width: 3px;
+  }
+  .point.vide circle {
+    fill: var(--point-vide);
+  }
+  .point.vide .nom {
+    fill: var(--discret);
+  }
+  .point[aria-pressed="true"] circle {
+    stroke: var(--encre);
+    stroke-width: 3;
+  }
+  .point:focus-visible {
+    outline: none;
+  }
+  .point:focus-visible circle {
+    stroke: var(--encre);
+    stroke-width: 3;
+  }
+  .filtres {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px 12px;
+    align-items: end;
+  }
+  .champ {
+    display: grid;
+    gap: 4px;
+    font-size: 0.85rem;
+    color: var(--discret);
+    min-width: 0;
+  }
+  .champ-large {
+    grid-column: 1 / -1;
+  }
+  .champ input,
+  .champ select {
+    font: inherit;
+    font-size: 1rem;
+    color: var(--encre);
+    background: var(--fond);
+    border: 1px solid var(--trait);
+    border-radius: 8px;
+    padding: 9px 10px;
+    width: 100%;
+    min-width: 0;
+  }
+  .effacer {
+    font: inherit;
+    font-size: 0.9rem;
+    color: var(--accent);
+    background: none;
+    border: 1px solid var(--trait);
+    border-radius: 8px;
+    padding: 9px 10px;
+    cursor: pointer;
+  }
+  .resultat {
+    margin: 4px 2px 0;
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  // Filtrage côté navigateur. Aucune donnée n'est envoyée nulle part.
+  const formulaire = document.getElementById("filtres") as HTMLFormElement;
+  const elements = [...document.querySelectorAll<HTMLElement>("#liste > li")];
+  const points = [...document.querySelectorAll<SVGGElement>(".point")];
+  const resultat = document.getElementById("resultat")!;
+  const aucun = document.getElementById("aucun")!;
+  formulaire.hidden = false;
+
+  const normaliser = (s: string) =>
+    s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+  function correspond(li: HTMLElement, f: Record<string, string>, ignorerVille = false) {
+    const d = li.dataset;
+    if (f.discipline && !(d.disciplines ?? "").split(" ").includes(f.discipline)) return false;
+    if (f.type && d.type !== f.type) return false;
+    if (f.secteur && d.secteur !== f.secteur) return false;
+    if (!ignorerVille && f.ville && !(d.villes ?? "").split("|").includes(f.ville)) return false;
+    if (f.q) {
+      const texte = d.texte ?? "";
+      if (!normaliser(f.q).split(" ").every((mot) => texte.includes(mot))) return false;
+    }
+    return true;
+  }
+
+  function appliquer() {
+    const f = Object.fromEntries(new FormData(formulaire)) as Record<string, string>;
+    let visibles = 0;
+    for (const li of elements) {
+      const ok = correspond(li, f);
+      li.hidden = !ok;
+      if (ok) visibles++;
+    }
+    resultat.textContent = `${visibles} formation${visibles > 1 ? "s" : ""}`;
+    aucun.hidden = visibles > 0;
+
+    // Les nombres de la carte suivent les autres filtres, pas celui de la ville.
+    for (const p of points) {
+      const ville = p.dataset.ville!;
+      const n = elements.filter((li) => correspond(li, f, true) && (li.dataset.villes ?? "").split("|").includes(ville)).length;
+      p.querySelector(".nombre")!.textContent = String(n);
+      p.classList.toggle("vide", n === 0);
+      p.setAttribute("aria-pressed", String(f.ville === ville));
+      p.setAttribute("aria-label", `${ville} : ${n} formation${n > 1 ? "s" : ""}`);
+    }
+  }
+
+  function choisirVille(ville: string) {
+    const champ = formulaire.elements.namedItem("ville") as HTMLSelectElement;
+    champ.value = champ.value === ville ? "" : ville;
+    appliquer();
+    document.getElementById("resultat")!.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  for (const p of points) {
+    p.addEventListener("click", () => choisirVille(p.dataset.ville!));
+    p.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        choisirVille(p.dataset.ville!);
+      }
+    });
+  }
+  formulaire.addEventListener("input", appliquer);
+  formulaire.addEventListener("submit", (e) => e.preventDefault());
+  formulaire.addEventListener("reset", () => setTimeout(appliquer, 0));
+  appliquer();
+</script>

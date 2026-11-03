@@ -1,0 +1,21 @@
+id: F9003
+intitule: DU archivé
+organisme: O001
+secteur: universitaire
+type: du
+disciplines:
+- paro
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://exemple.invalid/ancien
+sessions: []
+statut: archivee
+derniere_verification: null
+notes: null

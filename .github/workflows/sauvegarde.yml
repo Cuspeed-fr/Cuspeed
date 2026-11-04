@@ -1,6 +1,7 @@
 # Copie nocturne de la base Supabase vers la branche « sauvegarde » (fichiers lisibles, historique conservé).
-# Secret à créer dans GitHub (Settings > Secrets and variables > Actions) : CUSPEED_SAUVEGARDE_DB_URL,
-# adresse de connexion du rôle lecteur_sauvegarde (lecture seule). Ne jamais la mettre ailleurs.
+# Secret : CUSPEED_SAUVEGARDE_DB_URL, adresse de connexion du rôle lecteur_sauvegarde (lecture seule),
+# rangé dans l'environnement GitHub « sauvegarde » (Settings > Environments), limité à la branche main.
+# Jamais en secret de dépôt : une branche modifiée ne doit pas pouvoir le lire.
 name: Sauvegarde nocturne
 
 on:
@@ -14,6 +15,8 @@ permissions:
 jobs:
   sauvegarde:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment: sauvegarde
     steps:
       - uses: actions/checkout@v4
         with:

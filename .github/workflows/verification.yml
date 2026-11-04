@@ -77,7 +77,7 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
       - name: Installer exactement les versions verrouillées
-        run: npm ci
+        run: npm ci --ignore-scripts
       - name: Tests (aucune fiche non validée ni note interne publiée)
         run: npm test
       - name: Construire le site et contrôler le résultat

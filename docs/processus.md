@@ -33,7 +33,7 @@ Deux principes :
 2. **Extraction** : l'agent `extracteur` crée les nouvelles fiches (`python3 scripts/bdd.py creer fiche.json`, statut `a-verifier`) et, pour une fiche déjà publiée, dépose une proposition de changement (`bdd.py proposer`) avec la source.
 3. **Vérification** : l'agent `verificateur` recoupe chaque fiche et chaque proposition avec sa source officielle et dépose son avis (`bdd.py avis`) : `conforme`, `a-corriger` ou `source-introuvable`.
 4. **Validation** : Chris ouvre la table `formations` filtrée sur `a-verifier`, lit l'avis du vérificateur (table `verifications`), ouvre la source si besoin, puis passe le statut à `validee`. Pour une proposition, il la fait appliquer (`select appliquer_proposition(N);` dans l'éditeur SQL) ou la refuse (`select refuser_proposition(N);`).
-5. **Publication** : avant chaque mise en ligne, un script exporte les seules fiches `validee`, `verifier_donnees.py` les contrôle, puis le site est reconstruit. Si une étape échoue, l'ancienne version reste en ligne.
+5. **Publication** (`scripts/publier.sh`, lancé par Chris depuis l'onglet Actions > Publication) : export des seules fiches `validee` (sans note, sans piste), contrôle par `verifier_donnees.py`, tests du site, construction, puis contrôle du site construit contre la base complète (aucune fiche non validée, aucune note). Si une étape échoue, rien n'est envoyé et l'ancienne version reste en ligne. Option « essai » : adresse de test, pages non référencées. Les nouvelles fiches reçoivent une adresse ; `npm run figer-adresses` l'inscrit dans `site/adresses.json` par pull request.
 6. **Copie nocturne** : chaque nuit, la base entière est exportée vers la branche `sauvegarde` et contrôlée. Une alerte est envoyée par GitHub si une erreur apparaît ou si le nombre de fiches baisse de plus de 5 %.
 
 ## 4. Circuit du code et de la structure de la base (à la demande)
@@ -56,7 +56,10 @@ Deux principes :
 GitHub :
 - Organisation `cuspeed-fr`, dépôt privé `cuspeed`, double authentification.
 - Protection de `main` : pull request obligatoire, contrôles « Vérifications » obligatoires, pas de poussée directe ni forcée.
-- Secret `CUSPEED_SAUVEGARDE_DB_URL` (voir la mise en place Supabase) pour la copie nocturne.
+- Deux environnements (Settings → Environments), chacun avec « Deployment branches » limité à `main` :
+  - `sauvegarde` (copie nocturne), sans approbation ;
+  - `publication` (mise en ligne), avec « Required reviewers » = Chris : chaque publication attend son feu vert.
+- Le secret `CUSPEED_SAUVEGARDE_DB_URL` (voir la mise en place Supabase) est rangé dans **ces deux environnements**, jamais en secret de dépôt.
 
 Supabase : voir `docs/mise-en-place-supabase.md`.
 

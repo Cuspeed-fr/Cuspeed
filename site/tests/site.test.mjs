@@ -261,6 +261,17 @@ test("les descriptions sont coupées proprement", () => {
   assert.ok(c.endsWith("mot…"));
 });
 
+test("sur une adresse de test, robots.txt interdit tout aux moteurs", async () => {
+  const { GET } = await import("../src/pages/robots.txt.js");
+  const site = new URL("https://cuspeed.fr");
+  process.env.CUSPEED_ESSAI = "1";
+  assert.match(await GET({ site }).text(), /Disallow: \//);
+  delete process.env.CUSPEED_ESSAI;
+  const normal = await GET({ site }).text();
+  assert.match(normal, /Allow: \//);
+  assert.match(normal, /Sitemap: https:\/\/cuspeed\.fr\/sitemap-index\.xml/);
+});
+
 // --- Garde-fous complémentaires (relecture de la pull request n°2) ---
 
 test("deux organismes ne peuvent pas partager une adresse figée", () => {

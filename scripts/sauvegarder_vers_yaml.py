@@ -105,9 +105,20 @@ def main():
                 "tarif": {"texte": f["tarif_texte"], "euros": valeur(f["tarif_euros"]), "annee": f["tarif_annee"]},
                 "prerequis": f["prerequis"], "financement": f["financement"], "url_officielle": f["url_officielle"],
                 "sessions": sessions, "statut": f["statut"], "derniere_verification": valeur(f["derniere_verification"]),
-                "notes": f["notes"],
+                # L'export de publication ne contient aucune note interne.
+                "notes": None if args.seulement_validees else f["notes"],
             }
             ecrire_yaml(dossier / f"{f['id']}-{slug(f['intitule'])}.yaml", fiche)
+
+        # L'export de publication ne contient ni sources surveillées ni pistes (données internes) :
+        # fichiers vides, pour garder le même format.
+        if args.seulement_validees:
+            ecrire_yaml(sortie / "surveillance.yaml", [])
+            with open(sortie / "pistes.csv", "w", encoding="utf-8", newline="") as f:
+                csv.writer(f).writerow(["id", "intitule", "organisme", "ville", "categorie", "url_piste",
+                                        "url_officielle", "repere_sur", "statut", "notes"])
+            print(f"{sortie} : {len(formations)} formations validées, {len(organismes)} organismes exportés.")
+            return
 
         cur.execute("select url, organisme_id, type, derniere_verification, empreinte, fiabilite from surveillance order by id")
         ecrire_yaml(sortie / "surveillance.yaml",

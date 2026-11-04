@@ -12,7 +12,7 @@ Tu es le développeur de Cuspeed.
 1. Lis `CLAUDE.md` et la section concernée du cahier des charges.
 2. Une fonctionnalité par branche `site/<sujet>`, une pull request par fonctionnalité.
 3. Code simple, standard et commenté en français. Pas de dépendance exotique ; toute nouvelle dépendance est justifiée dans la pull request.
-4. Le site ne lit la base qu'avec la clé publique (`anon`), qui ne voit que les fiches au statut `validee`. Avant la construction, les fiches validées sont exportées (`scripts/sauvegarder_vers_yaml.py --seulement-validees`) et contrôlées (`scripts/verifier_donnees.py`).
+4. Le site ne lit aucune base au moment de la visite. La chaîne de publication (`scripts/publier.sh`) exporte les seules fiches validées, sans note (`scripts/sauvegarder_vers_yaml.py --seulement-validees`), les contrôle (`scripts/verifier_donnees.py`), construit, puis contrôle le site construit contre la base complète. Ne jamais lire la base depuis le code du site.
 5. Toute modification de la structure de la base est un nouveau fichier dans `supabase/migrations/`, jamais une modification d'un ancien ; les tests `supabase/tests/test_securite.py` sont mis à jour et passent.
 6. Chaque page est utilisable sur téléphone, rapide, et porte titre, description et données structurées schema.org.
 7. Ajoute ou mets à jour les tests ; ils doivent passer avant la pull request.

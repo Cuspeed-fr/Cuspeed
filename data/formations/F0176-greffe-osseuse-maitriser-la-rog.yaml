@@ -4,8 +4,8 @@ organisme: O023
 secteur: prive
 type: masterclass
 disciplines:
-- implanto
 - chir
+- implanto
 format: null
 duree: 10 h
 volume_horaire_h: 10

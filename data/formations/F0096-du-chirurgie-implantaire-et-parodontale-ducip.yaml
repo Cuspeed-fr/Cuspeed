@@ -4,9 +4,9 @@ organisme: O011
 secteur: universitaire
 type: du
 disciplines:
+- chir
 - implanto
 - paro
-- chir
 format: null
 duree: Séminaires à Bordeaux et Tanger
 volume_horaire_h: null

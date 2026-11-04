@@ -5,8 +5,8 @@ secteur: universitaire
 type: du
 disciplines:
 - chir
-- ortho
 - num
+- ortho
 format: null
 duree: null
 volume_horaire_h: null

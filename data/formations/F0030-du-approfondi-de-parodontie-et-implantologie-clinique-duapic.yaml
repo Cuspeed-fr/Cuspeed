@@ -4,8 +4,8 @@ organisme: O005
 secteur: universitaire
 type: du
 disciplines:
-- paro
 - implanto
+- paro
 format: null
 duree: 1 an, après le DUPC
 volume_horaire_h: null

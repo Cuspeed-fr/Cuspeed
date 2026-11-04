@@ -4,8 +4,8 @@ organisme: O005
 secteur: universitaire
 type: du
 disciplines:
-- resto
 - num
+- resto
 format: null
 duree: null
 volume_horaire_h: null

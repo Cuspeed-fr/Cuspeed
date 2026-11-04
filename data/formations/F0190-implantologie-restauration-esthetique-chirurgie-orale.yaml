@@ -4,9 +4,9 @@ organisme: O032
 secteur: prive
 type: cursus
 disciplines:
+- chir
 - implanto
 - resto
-- chir
 format: null
 duree: null
 volume_horaire_h: null

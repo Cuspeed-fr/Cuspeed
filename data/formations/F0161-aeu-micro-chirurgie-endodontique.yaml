@@ -4,8 +4,8 @@ organisme: O012
 secteur: universitaire
 type: aeu
 disciplines:
-- endo
 - chir
+- endo
 format: null
 duree: null
 volume_horaire_h: null

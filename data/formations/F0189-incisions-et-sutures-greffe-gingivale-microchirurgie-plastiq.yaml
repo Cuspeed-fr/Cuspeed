@@ -4,8 +4,8 @@ organisme: O031
 secteur: prive
 type: cursus
 disciplines:
-- paro
 - chir
+- paro
 format: null
 duree: null
 volume_horaire_h: null

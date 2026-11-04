@@ -4,8 +4,8 @@ organisme: O004
 secteur: universitaire
 type: du
 disciplines:
-- num
 - chir
+- num
 format: null
 duree: null
 volume_horaire_h: null

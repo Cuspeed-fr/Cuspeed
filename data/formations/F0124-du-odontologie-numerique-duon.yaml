@@ -4,9 +4,9 @@ organisme: O013
 secteur: universitaire
 type: du
 disciplines:
+- implanto
 - num
 - proth
-- implanto
 format: null
 duree: '3 certificats : prothèse fixée, amovible, implantologie'
 volume_horaire_h: null

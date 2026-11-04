@@ -4,8 +4,8 @@ organisme: O006
 secteur: universitaire
 type: du
 disciplines:
-- ortho
 - chir
+- ortho
 format: null
 duree: null
 volume_horaire_h: null

@@ -4,8 +4,8 @@ organisme: O034
 secteur: prive
 type: cursus
 disciplines:
-- implanto
 - chir
+- implanto
 format: null
 duree: null
 volume_horaire_h: null

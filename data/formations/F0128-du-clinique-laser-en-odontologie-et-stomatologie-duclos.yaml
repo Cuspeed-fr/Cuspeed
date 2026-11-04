@@ -4,10 +4,10 @@ organisme: O013
 secteur: universitaire
 type: du
 disciplines:
-- laser
-- paro
 - chir
 - endo
+- laser
+- paro
 format: null
 duree: '4 certificats : paro, chirurgie-implanto, endo-restauratrice, clinique'
 volume_horaire_h: null

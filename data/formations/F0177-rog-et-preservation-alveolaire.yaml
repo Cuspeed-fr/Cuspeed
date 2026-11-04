@@ -4,8 +4,8 @@ organisme: O023
 secteur: prive
 type: journee
 disciplines:
-- implanto
 - chir
+- implanto
 format: null
 duree: 7,5 h
 volume_horaire_h: 7.5

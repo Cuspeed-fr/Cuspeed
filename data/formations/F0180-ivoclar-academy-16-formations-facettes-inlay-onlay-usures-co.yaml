@@ -4,9 +4,9 @@ organisme: O024
 secteur: prive
 type: catalogue
 disciplines:
-- resto
-- proth
 - num
+- proth
+- resto
 format: null
 duree: 1 à 3 jours chacune
 volume_horaire_h: null

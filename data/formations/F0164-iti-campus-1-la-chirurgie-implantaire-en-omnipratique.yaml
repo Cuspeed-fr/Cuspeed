@@ -4,8 +4,8 @@ organisme: O018
 secteur: prive
 type: cursus
 disciplines:
-- implanto
 - chir
+- implanto
 format: null
 duree: 2026-2027
 volume_horaire_h: null

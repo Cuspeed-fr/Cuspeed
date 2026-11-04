@@ -4,8 +4,8 @@ organisme: O003
 secteur: universitaire
 type: du
 disciplines:
-- ortho
 - num
+- ortho
 format: null
 duree: null
 volume_horaire_h: null

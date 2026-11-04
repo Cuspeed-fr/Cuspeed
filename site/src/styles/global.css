@@ -51,6 +51,8 @@
   --alerte: #8a5410;
   --ok: #2e7d55;
   --point-vide: #aeb9cb;
+  --point-vide-texte: var(--encre-marine);
+  --bord-champ: #7f8ca3; /* 3,1:1 sur Ice Grey, 3,4:1 sur blanc (seuil 3:1 des champs) */
   --logo-triangle: var(--bleu-profond);
   --logo-pointe: var(--bleu);
   --logo-nom: var(--bleu);
@@ -85,6 +87,8 @@
     --alerte: #e0a24a;
     --ok: #5ec48f;
     --point-vide: #3d4c66;
+    --point-vide-texte: #f2f5f9;
+    --bord-champ: #6a7c9c;
     /* Variante du logo sur fond sombre (proposition, à valider) */
     --logo-triangle: #f2f5f9;
     --logo-pointe: var(--lime);
@@ -218,12 +222,13 @@ main.cadre {
 }
 .marque {
   display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-size: clamp(1.4rem, 2.4vw, 1.65rem);
   text-decoration: none;
-  padding-block: 4px;
 }
 .entete .bouton {
-  min-height: 40px;
+  min-height: 44px;
   padding: 8px 16px;
   font-size: 0.95rem;
 }
@@ -239,10 +244,21 @@ main.cadre {
   gap: 4px 22px;
 }
 .entete nav a:not(.bouton) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--encre);
   text-decoration: none;
   font-weight: 500;
-  padding: 8px 0;
+}
+/* Sur téléphone, le bouton laisse place à un simple lien « Formations » */
+.entete .lien-mobile {
+  display: none !important;
+}
+@media (max-width: 560px) {
+  .entete .lien-mobile {
+    display: inline-flex !important;
+  }
 }
 .entete nav a:not(.bouton):hover,
 .entete nav a[aria-current="page"] {
@@ -295,11 +311,19 @@ main.cadre {
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 6px;
 }
 .pied a {
   color: #ffffff;
   text-decoration: none;
+}
+.pied li a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+/* Contour de focus lisible sur le fond marine du pied de page */
+.pied :focus-visible {
+  outline-color: #ffffff;
 }
 .pied a:hover {
   color: var(--lime);

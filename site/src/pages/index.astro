@@ -105,7 +105,8 @@ const page = {
                   aria-label={`${p.nom} : ${p.n} formation${p.n > 1 ? "s" : ""}`}
                   transform={`translate(${p.x} ${p.y})`}
                 >
-                  {/* Zone tactile invisible d'au moins 44 px une fois la carte réduite sur téléphone */}
+                  {/* Zone tactile invisible élargie autour du point (environ 27 px sur un téléphone de 360 px :
+                      la carte reste un raccourci, le filtre « Ville » fait la même chose) */}
                   <circle class="zone" r={Math.max(rayon(p.n), 22)} />
                   <circle class="disque" r={rayon(p.n)} />
                   <text class="nombre" text-anchor="middle" dy="0.35em">{p.n}</text>
@@ -455,6 +456,9 @@ const page = {
   .point.vide .disque {
     fill: var(--point-vide);
   }
+  .point.vide .nombre {
+    fill: var(--point-vide-texte);
+  }
   .point.vide .nom {
     fill: var(--discret);
   }
@@ -493,7 +497,7 @@ const page = {
     font-size: 1rem;
     color: var(--encre);
     background: var(--fond);
-    border: 1px solid var(--trait);
+    border: 1px solid var(--bord-champ);
     border-radius: var(--rayon-petit);
     padding: 10px 12px;
     min-height: 46px;
@@ -621,6 +625,7 @@ const page = {
   const pastilles = [...document.querySelectorAll<HTMLAnchorElement>(".pastille")];
   const CHAMPS = ["q", "discipline", "type", "secteur", "ville"];
   formulaire.hidden = false;
+  const doux: ScrollBehavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 
   // Filtres repris de l'adresse (?discipline=paro…) : liens partageables et pastilles des disciplines.
   // Une valeur absente des listes est ignorée par le navigateur (le champ reste sur « Toutes »).
@@ -683,7 +688,7 @@ const page = {
     const champ = formulaire.elements.namedItem("ville") as HTMLSelectElement;
     champ.value = champ.value === ville ? "" : ville;
     appliquer();
-    document.getElementById("resultat")!.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("resultat")!.scrollIntoView({ behavior: doux, block: "start" });
   }
 
   for (const p of points) {
@@ -701,7 +706,7 @@ const page = {
       const champ = formulaire.elements.namedItem("discipline") as HTMLSelectElement;
       champ.value = champ.value === a.dataset.discipline ? "" : a.dataset.discipline!;
       appliquer();
-      document.getElementById("recherche")!.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById("recherche")!.scrollIntoView({ behavior: doux, block: "start" });
     });
   }
   formulaire.addEventListener("input", appliquer);

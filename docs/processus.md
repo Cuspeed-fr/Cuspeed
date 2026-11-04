@@ -56,7 +56,10 @@ Deux principes :
 GitHub :
 - Organisation `cuspeed-fr`, dépôt privé `cuspeed`, double authentification.
 - Protection de `main` : pull request obligatoire, contrôles « Vérifications » obligatoires, pas de poussée directe ni forcée.
-- Secret `CUSPEED_SAUVEGARDE_DB_URL` (voir la mise en place Supabase) pour la copie nocturne.
+- Deux environnements (Settings → Environments), chacun avec « Deployment branches » limité à `main` :
+  - `sauvegarde` (copie nocturne), sans approbation ;
+  - `publication` (mise en ligne), avec « Required reviewers » = Chris : chaque publication attend son feu vert.
+- Le secret `CUSPEED_SAUVEGARDE_DB_URL` (voir la mise en place Supabase) est rangé dans **ces deux environnements**, jamais en secret de dépôt.
 
 Supabase : voir `docs/mise-en-place-supabase.md`.
 

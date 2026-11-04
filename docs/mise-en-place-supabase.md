@@ -30,7 +30,7 @@ alter role lecteur_sauvegarde with login password '...';
 ```
 
 Chaque rôle se connecte ensuite avec l'adresse de connexion « Session pooler » du projet (Project Settings > Database), dont le nom d'utilisateur est `<rôle>.<identifiant du projet>`. Cette adresse complète est un secret :
-- `lecteur_sauvegarde` : secret GitHub `CUSPEED_SAUVEGARDE_DB_URL` ;
+- `lecteur_sauvegarde` : secret `CUSPEED_SAUVEGARDE_DB_URL`, rangé dans les environnements GitHub `sauvegarde` et `publication` (Settings → Environments, limités à `main`), jamais en secret de dépôt ;
 - `agent_extracteur` et `agent_verificateur` : variable d'environnement `CUSPEED_DB_URL` de la session de chaque agent.
 
 ## 4. Vérifier que les droits tiennent

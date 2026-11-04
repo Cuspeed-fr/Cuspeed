@@ -3,9 +3,10 @@
 # comme fichier téléchargeable. L'envoi chez l'hébergeur sera ajouté quand l'hébergeur
 # sera choisi : tant qu'une étape échoue, rien n'est envoyé et la version en ligne reste en place.
 #
-# Secret utilisé : CUSPEED_SAUVEGARDE_DB_URL (rôle lecteur_sauvegarde, lecture seule), rangé dans
-# l'environnement GitHub « publication » (Settings > Environments), limité à la branche main et
-# soumis à l'approbation de Chris. Une branche modifiée ne peut donc pas le lire.
+# Secret utilisé : CUSPEED_SAUVEGARDE_DB_URL (rôle lecteur_sauvegarde, lecture seule), rangé
+# uniquement dans les environnements GitHub « publication » (approbation de Chris) et « sauvegarde »,
+# tous deux limités à la branche main, jamais en secret de dépôt. Une branche modifiée ne peut
+# donc pas le lire, ni par ce workflow ni par la copie nocturne.
 name: Publication
 
 on:

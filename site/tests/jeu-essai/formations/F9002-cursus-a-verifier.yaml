@@ -1,0 +1,26 @@
+id: F9002
+intitule: Cursus implantologie à vérifier
+organisme: O002
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://exemple.invalid/cursus
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: null
+  places: null
+statut: a-verifier
+derniere_verification: null
+notes: NOTE-INTERNE-F9002 en attente

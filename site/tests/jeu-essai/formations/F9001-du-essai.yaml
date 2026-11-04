@@ -1,0 +1,27 @@
+id: F9001
+intitule: DU Parodontologie d'essai
+organisme: O001
+secteur: universitaire
+type: du
+disciplines:
+- paro
+format: presentiel
+duree: 120 h
+volume_horaire_h: 120
+tarif:
+  texte: null
+  euros: 3200
+  annee: 2026-27
+prerequis: null
+financement:
+- dpc
+url_officielle: https://exemple.invalid/du-paro
+sessions:
+- lieu: L-ARRAS
+  debut: '2026-09-01'
+  fin: '2027-06-30'
+  inscriptions: ouvertes
+  places: 20
+statut: validee
+derniere_verification: '2026-11-02'
+notes: NOTE-INTERNE-SECRETE-F9001 ne doit jamais sortir

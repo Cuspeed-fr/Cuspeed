@@ -1,0 +1,86 @@
+---
+// Gabarit commun à toutes les pages : en-tête, pied de page, balises de référencement.
+import "../styles/global.css";
+
+interface Props {
+  titre: string; // Titre unique de la page (sans « | Cuspeed », ajouté ici)
+  description: string; // Description unique, 150 caractères environ
+  donneesStructurees?: object[]; // Blocs schema.org propres à la page
+  indexer?: boolean; // false pour les pages à ne pas référencer (404)
+}
+
+const { titre, description, donneesStructurees = [], indexer = true } = Astro.props;
+const titreComplet = titre === "Cuspeed" ? titre : `${titre} | Cuspeed`;
+const canonique = new URL(Astro.url.pathname, Astro.site).href;
+
+// Bloc commun : le site lui-même.
+const site = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Cuspeed",
+  url: Astro.site?.href,
+  inLanguage: "fr-FR",
+};
+const blocs = [site, ...donneesStructurees];
+// Échappe « < » pour qu'aucun contenu ne puisse fermer la balise <script>.
+const json = (o: object) => JSON.stringify(o).replace(/</g, "\\u003c");
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titreComplet}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonique} />
+    {!indexer && <meta name="robots" content="noindex" />}
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f5f6f4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121614" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Cuspeed" />
+    <meta property="og:title" content={titreComplet} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonique} />
+    {blocs.map((b) => <script type="application/ld+json" set:html={json(b)} />)}
+  </head>
+  <body>
+    <a class="evitement" href="#contenu">Aller au contenu</a>
+    <header class="entete">
+      <div class="cadre entete-cadre">
+        <a class="marque" href="/" aria-label="Cuspeed, accueil">
+          <svg class="marque-icone" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M6 26 C6 14 10 6 16 6 C22 6 26 14 26 26 L21 26 C21 19 19 14 16 14 C13 14 11 19 11 26 Z" />
+          </svg>
+          <span>Cuspeed</span>
+        </a>
+        <nav aria-label="Navigation principale">
+          <a href="/">Formations</a>
+          <a href="/organismes/">Organismes</a>
+          <a href="/a-propos/">À propos</a>
+        </nav>
+      </div>
+    </header>
+    <main id="contenu" class="cadre">
+      <slot />
+    </main>
+    <footer class="pied">
+      <div class="cadre pied-cadre">
+        <p>
+          <strong>Cuspeed</strong> recense les formations post-universitaires et continues des
+          chirurgiens-dentistes en France. Site gratuit, neutre et indépendant des organismes cités.
+          Les informations sont relevées sur les sources officielles : confirmez-les auprès de
+          l'organisme avant de vous inscrire.
+        </p>
+        <nav aria-label="Liens de pied de page">
+          <a href="/a-propos/">À propos et méthode</a>
+          <a href="/mentions-legales/">Mentions légales</a>
+          <a href="/plan-du-site/">Plan du site</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -18,10 +18,11 @@ python3 scripts/verifier_donnees.py        # contrôle de la copie lisible des d
 - `docs/modele-de-donnees.md` : chaque champ expliqué
 - `supabase/` : structure de la base (migrations), chargement initial, tests de sécurité
 - `docs/mise-en-place-supabase.md` : réglages à faire une fois
+- `site/` : le site Astro (voir `site/README.md`)
 - `data/` : copie lisible de la base (lecture seule, réécrite chaque nuit)
 - `.claude/agents/` : fiches de poste des agents (extracteur, vérificateur, développeur, relecteur)
 - `scripts/` : outil des agents (`bdd.py`), contrôle des données, copie nocturne, import initial
 
 ## État au 3 novembre 2026
 
-Base Supabase (Paris) en place : structure, droits (39 tests) et chargement initial vérifié, soit 195 formations (160 validées, 35 à vérifier), 37 organismes, 472 pistes. Reste à construire le site Astro et à brancher la publication.
+Base Supabase (Paris) en place : structure, droits (39 tests) et chargement initial vérifié, soit 195 formations (160 validées, 35 à vérifier), 37 organismes, 472 pistes. Squelette du site Astro proposé (branche `site/squelette`). Reste à brancher la publication chez Clever Cloud.

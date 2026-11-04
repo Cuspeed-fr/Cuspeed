@@ -1,6 +1,6 @@
 # Contrôles automatiques de chaque pull request et de chaque fusion dans main.
 # Une pull request dont un contrôle échoue ne peut pas être fusionnée
-# (à activer dans Settings > Branches > règle de protection de main).
+# (règle « main » dans Settings > Rules ; contrôles obligatoires : les deux premiers ci-dessous).
 name: Vérifications
 
 on:
@@ -59,3 +59,28 @@ jobs:
           psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -q -f supabase/seed.sql
       - name: Tester ce que chaque rôle peut et ne peut pas faire
         run: python3 supabase/tests/test_securite.py
+
+  site:
+    name: Site (tests et construction)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    env:
+      # Pas d'envoi de statistiques d'usage à l'éditeur d'Astro
+      ASTRO_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Installer exactement les versions verrouillées
+        run: npm ci
+      - name: Tests (aucune fiche non validée ni note interne publiée)
+        run: npm test
+      - name: Construire le site et contrôler le résultat
+        # Construit à partir du miroir data/, qui contient aussi des fiches non validées :
+        # le contrôle vérifie justement qu'aucune ne se retrouve dans le site.
+        run: npm run build

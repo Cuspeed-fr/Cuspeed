@@ -1,0 +1,326 @@
+/*
+  Styles communs de Cuspeed.
+  Polices du système (aucune police téléchargée chez un tiers), couleurs en variables,
+  thème clair et sombre suivant le réglage de l'appareil.
+*/
+:root {
+  --fond: #f5f6f4;
+  --surface: #ffffff;
+  --encre: #1d2421;
+  --discret: #59655f;
+  --trait: #dde2df;
+  --terre: #e6ebe8;
+  --terre-bord: #b9c4bf;
+  --accent: #1f6f6a;
+  --accent-doux: #e3efed;
+  --accent-texte: #ffffff;
+  --puce: #eef1ef;
+  --alerte: #8a5410;
+  --ok: #2e7d55;
+  --point-vide: #aab4b0;
+  --titre: "Avenir Next", "Segoe UI", "Helvetica Neue", system-ui, sans-serif;
+  --texte: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --chiffres: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond: #121614;
+    --surface: #1a201d;
+    --encre: #e8ecea;
+    --discret: #9aa6a1;
+    --trait: #2b3330;
+    --terre: #232b28;
+    --terre-bord: #45524d;
+    --accent: #5cbcb2;
+    --accent-doux: #1d3331;
+    --accent-texte: #0d1312;
+    --puce: #222a27;
+    --alerte: #e0a24a;
+    --ok: #5ec48f;
+    --point-vide: #3a4642;
+    color-scheme: dark;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+[hidden] {
+  display: none !important;
+}
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--encre);
+  font-family: var(--texte);
+  font-size: 16px;
+  line-height: 1.55;
+}
+img,
+svg {
+  max-width: 100%;
+}
+a {
+  color: var(--accent);
+  text-underline-offset: 2px;
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+h1,
+h2,
+h3 {
+  font-family: var(--titre);
+  line-height: 1.15;
+  text-wrap: balance;
+  letter-spacing: -0.01em;
+}
+h1 {
+  font-size: clamp(1.75rem, 5vw, 2.6rem);
+  margin: 0 0 0.5rem;
+}
+h2 {
+  font-size: 1.35rem;
+  margin: 2rem 0 0.75rem;
+}
+p {
+  max-width: 68ch;
+}
+
+.cadre {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main.cadre {
+  padding-block: 24px 56px;
+  min-height: 60vh;
+}
+
+/* Texte lu par les lecteurs d'écran mais non affiché */
+.invisible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.evitement {
+  position: absolute;
+  left: -999px;
+  top: 0;
+}
+.evitement:focus {
+  left: 16px;
+  z-index: 10;
+  background: var(--surface);
+  padding: 8px 12px;
+}
+
+/* En-tête */
+.entete {
+  background: var(--surface);
+  border-bottom: 1px solid var(--trait);
+}
+.entete-cadre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block: 12px;
+}
+.marque {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--titre);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--encre);
+  text-decoration: none;
+}
+.marque-icone {
+  width: 28px;
+  height: 28px;
+  fill: var(--accent);
+}
+.entete nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+}
+.entete nav a {
+  color: var(--encre);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 0;
+}
+.entete nav a:hover {
+  color: var(--accent);
+}
+
+/* Pied de page */
+.pied {
+  border-top: 1px solid var(--trait);
+  background: var(--surface);
+  color: var(--discret);
+  font-size: 0.9rem;
+}
+.pied-cadre {
+  padding-block: 24px 32px;
+  display: grid;
+  gap: 12px;
+}
+.pied nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+
+/* Éléments communs */
+.etiquettes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.etiquette {
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--puce);
+  color: var(--encre);
+  white-space: nowrap;
+}
+.etiquette.forte {
+  background: var(--accent-doux);
+  color: var(--accent);
+  font-weight: 600;
+}
+.discret {
+  color: var(--discret);
+}
+.chiffres {
+  font-family: var(--chiffres);
+  font-variant-numeric: tabular-nums;
+}
+.fil {
+  font-size: 0.9rem;
+  color: var(--discret);
+  margin-bottom: 12px;
+}
+.fil ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.fil li + li::before {
+  content: "›";
+  margin-right: 4px;
+}
+.carte-bloc {
+  background: var(--surface);
+  border: 1px solid var(--trait);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+/* Liste de formations (accueil, organisme) */
+.liste {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.fiche-resume {
+  background: var(--surface);
+  border: 1px solid var(--trait);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.fiche-resume h3 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+.fiche-resume h3 a {
+  color: var(--encre);
+  text-decoration: none;
+}
+.fiche-resume h3 a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.fiche-resume .meta {
+  font-size: 0.9rem;
+  color: var(--discret);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 14px;
+}
+
+/* Tableau d'informations (fiche) */
+.infos {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+  gap: 0;
+  margin: 0;
+}
+.infos dt,
+.infos dd {
+  padding: 10px 0;
+  border-top: 1px solid var(--trait);
+  margin: 0;
+}
+.infos dt {
+  color: var(--discret);
+  padding-right: 12px;
+}
+@media (max-width: 520px) {
+  .infos {
+    grid-template-columns: 1fr;
+  }
+  .infos dd {
+    border-top: 0;
+    padding-top: 0;
+  }
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: var(--accent-texte);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+}
+.bouton:hover {
+  filter: brightness(1.08);
+}

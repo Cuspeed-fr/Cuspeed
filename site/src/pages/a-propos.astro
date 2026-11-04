@@ -1,0 +1,55 @@
+---
+import Base from "../layouts/Base.astro";
+const description =
+  "Cuspeed recense gratuitement les formations post-universitaires et continues des chirurgiens-dentistes en France, à partir des sources officielles.";
+---
+<Base titre="À propos et méthode" description={description}>
+  <div class="texte">
+    <h1>À propos de Cuspeed</h1>
+    <p>
+      Cuspeed recense les formations post-universitaires et continues destinées aux
+      chirurgiens-dentistes en France : diplômes d'université (DU, DIU, DESU), certificats
+      (CES, AUEC, AEU) et formations proposées par des organismes privés, des sociétés savantes
+      et des industriels.
+    </p>
+    <p>Le site est gratuit et informatif. Il ne vend aucune formation et ne perçoit aucune commission.</p>
+
+    <h2>Comment les fiches sont établies</h2>
+    <ol>
+      <li>Chaque fiche est relevée sur la page officielle de l'université ou de l'organisme, citée en bas de fiche.</li>
+      <li>Une seconde relecture compare chaque information à cette source.</li>
+      <li>La fiche n'est publiée qu'après validation par l'équipe éditoriale.</li>
+      <li>Les pages officielles sont relues régulièrement ; la date de dernière vérification figure sur chaque fiche.</li>
+    </ol>
+    <p>
+      Une information inconnue est laissée vide plutôt que devinée. Les tarifs universitaires
+      indiqués sont ceux de la formation continue, pour l'année citée.
+    </p>
+
+    <h2>Neutralité</h2>
+    <p>
+      Les formations sont présentées dans l'ordre alphabétique, sans classement payant ni mise en
+      avant. Cuspeed n'a pas de lien avec les organismes cités.
+    </p>
+
+    <h2>Signaler une erreur</h2>
+    <p>
+      Organisme ou praticien, vous constatez une erreur ou une formation manquante ? Écrivez à
+      <span class="adresse">contact@cuspeed.fr</span> avec la référence de la fiche (par exemple F0084)
+      et le lien vers la page officielle.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .texte {
+    max-width: 72ch;
+  }
+  .texte li {
+    margin-bottom: 6px;
+  }
+  .adresse {
+    user-select: all;
+    font-weight: 600;
+  }
+</style>

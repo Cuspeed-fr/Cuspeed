@@ -1,0 +1,52 @@
+---
+// Mentions légales (loi pour la confiance dans l'économie numérique, art. 6).
+// Les champs [à compléter] doivent être remplis par Chris avant la mise en ligne :
+// le contrôle de construction refuse de publier tant qu'il en reste (CUSPEED_PUBLICATION=1).
+import Base from "../layouts/Base.astro";
+const description = "Mentions légales du site Cuspeed : éditeur, hébergeur, données personnelles.";
+---
+<Base titre="Mentions légales" description={description}>
+  <div class="texte">
+    <h1>Mentions légales</h1>
+
+    <h2>Éditeur</h2>
+    <p>
+      Cuspeed (cuspeed.fr) est édité par [à compléter : nom ou raison sociale, adresse,
+      numéro d'immatriculation le cas échéant].<br />
+      Contact : <span class="adresse">contact@cuspeed.fr</span>
+    </p>
+    <p>Directeur de la publication : Dr Christopher Huon.</p>
+
+    <h2>Hébergement</h2>
+    <p>Site hébergé en France par [à compléter : nom, adresse et téléphone de l'hébergeur].</p>
+    <p>Données des formations hébergées en France par [à compléter : nom et adresse du fournisseur de la base de données].</p>
+
+    <h2>Données personnelles et cookies</h2>
+    <p>
+      Ce site ne demande aucune information personnelle, ne dépose aucun cookie et n'utilise aucun
+      outil de mesure d'audience ni aucun service tiers (police, carte ou script externe).
+    </p>
+    <p>
+      Si vous nous écrivez, votre message n'est utilisé que pour vous répondre et corriger les
+      fiches. Vous pouvez demander à tout moment l'accès à vos données ou leur effacement à
+      <span class="adresse">contact@cuspeed.fr</span>.
+    </p>
+
+    <h2>Contenu</h2>
+    <p>
+      Les informations sur les formations sont relevées sur les sources officielles des organismes,
+      citées sur chaque fiche. Elles sont données à titre indicatif : seul l'organisme fait foi.
+      Les noms et marques cités appartiennent à leurs titulaires.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .texte {
+    max-width: 72ch;
+  }
+  .adresse {
+    user-select: all;
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,36 @@
+---
+// Pages de redirection vers l'adresse actuelle d'une fiche :
+//   - adresse courte et permanente : /formations/f0084/
+//   - anciennes adresses listées dans site/adresses.json (intitulé modifié).
+// Le site étant statique, la redirection est une page HTML à rafraîchissement immédiat :
+// Google la traite comme une redirection permanente et transmet l'historique de la page.
+import { chargerDonnees } from "../../lib/donnees.js";
+
+export function getStaticPaths() {
+  return chargerDonnees().redirections.map(({ de, vers }) => ({
+    params: { redirection: de },
+    props: { vers: { slug: vers.slug, intitule: vers.intitule } },
+  }));
+}
+
+const { vers } = Astro.props;
+// Chemin relatif pour la redirection (fonctionne aussi sur une adresse de test),
+// adresse complète pour la balise canonique.
+const chemin = `/formations/${vers.slug}/`;
+const cible = new URL(chemin, Astro.site).href;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0; url=${chemin}`} />
+    <link rel="canonical" href={cible} />
+    <meta name="robots" content="noindex" />
+    <title>{`Redirection : ${vers.intitule}`}</title>
+    <meta name="description" content={`Cette adresse renvoie vers la fiche « ${vers.intitule} » sur Cuspeed.`} />
+  </head>
+  <body>
+    <p>Cette page a changé d'adresse : <a href={chemin}>{vers.intitule}</a>.</p>
+  </body>
+</html>

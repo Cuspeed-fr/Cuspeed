@@ -10,7 +10,8 @@
     "dev": "astro dev",
     "build": "astro build && node scripts/controler_construction.mjs",
     "preview": "astro preview",
-    "test": "node --test tests/site.test.mjs"
+    "test": "node --test tests/site.test.mjs",
+    "figer-adresses": "node scripts/figer_adresses.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.4",

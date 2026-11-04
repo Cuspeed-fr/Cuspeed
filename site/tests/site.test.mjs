@@ -203,3 +203,59 @@ test("un lien d'organisme qui n'est pas en http(s) n'est pas publié", () => {
   assert.equal(d.organisme("O001").site_web, null);
   rmSync(dossier, { recursive: true, force: true });
 });
+
+// --- Adresses stables (registre site/adresses.json) ---
+
+import { couper, lireRegistre } from "../src/lib/donnees.js";
+
+test("une adresse figée ne change pas quand l'intitulé change", () => {
+  const dossier = copieDuJeu();
+  const chemin = join(dossier, "formations", "F9001-du-essai.yaml");
+  writeFileSync(chemin, readFileSync(chemin, "utf8").replace("intitule: DU Parodontologie d'essai", "intitule: DU Parodontie renommé"));
+  const registre = { formations: { F9001: "f9001-du-parodontologie-d-essai" }, organismes: {}, anciennes: {} };
+  const d = chargerDonnees(dossier, registre);
+  assert.equal(d.formations[0].slug, "f9001-du-parodontologie-d-essai");
+  assert.equal(d.formations[0].intitule, "DU Parodontie renommé");
+  rmSync(dossier, { recursive: true, force: true });
+});
+
+test("adresse courte et anciennes adresses redirigent vers l'adresse actuelle", () => {
+  const registre = {
+    formations: { F9001: "f9001-nouvelle" },
+    organismes: {},
+    anciennes: { "f9001-ancienne": "F9001", "f9002-cursus-a-verifier": "F9002" },
+  };
+  const d = chargerDonnees(JEU, registre);
+  const r = Object.fromEntries(d.redirections.map((x) => [x.de, x.vers.slug]));
+  assert.deepEqual(r, { f9001: "f9001-nouvelle", "f9001-ancienne": "f9001-nouvelle" });
+  // F9002 n'est pas validée : aucune redirection ne la mentionne.
+  assert.ok(!JSON.stringify(d.redirections).includes("F9002"));
+});
+
+test("une ancienne adresse encore utilisée arrête la construction", () => {
+  const registre = { formations: {}, organismes: {}, anciennes: { "f9001-du-parodontologie-d-essai": "F9001" } };
+  assert.throws(() => chargerDonnees(JEU, registre), /encore utilisée/);
+});
+
+test("deux fiches ne peuvent pas partager une adresse figée", () => {
+  const dossier = copieDuJeu();
+  const chemin = join(dossier, "formations", "F9003-archivee.yaml");
+  writeFileSync(chemin, readFileSync(chemin, "utf8").replace("statut: archivee", "statut: validee"));
+  const registre = { formations: { F9001: "meme-adresse", F9003: "meme-adresse" }, organismes: {}, anciennes: {} };
+  assert.throws(() => chargerDonnees(dossier, registre), /déjà prise/);
+  rmSync(dossier, { recursive: true, force: true });
+});
+
+test("le registre du dépôt couvre toutes les fiches validées du miroir", () => {
+  const registre = lireRegistre(join(ICI, "..", "adresses.json"));
+  const d = chargerDonnees(join(ICI, "..", "..", "data"), registre);
+  assert.deepEqual(d.nonFigees, [], "lancer « npm run figer-adresses » et proposer le registre par pull request");
+});
+
+test("les descriptions sont coupées proprement", () => {
+  assert.equal(couper("court", 160), "court");
+  const long = "mot ".repeat(60).trim();
+  const c = couper(long, 160);
+  assert.ok(c.length <= 160);
+  assert.ok(c.endsWith("mot…"));
+});

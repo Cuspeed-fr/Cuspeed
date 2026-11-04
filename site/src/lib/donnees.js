@@ -146,12 +146,15 @@ function lireDonnees(dossier, registre) {
     throw new Error(`Dossier introuvable : ${dossierFormations}`);
   }
 
-  const formations = readdirSync(dossierFormations)
+  const fiches = readdirSync(dossierFormations)
     .filter((nom) => nom.endsWith(".yaml"))
     .sort()
     .map((nom) => lireYaml(join(dossierFormations, nom)))
-    .filter((f) => f && f.statut === "validee")
-    .map((f) => formationPublique(f, registre));
+    .filter(Boolean);
+  // Identifiants de toutes les fiches, quel que soit leur statut : sert seulement à repérer
+  // une ancienne adresse qui renverrait à un identifiant qui n'existe pas.
+  const tousIds = new Set(fiches.map((f) => f.id));
+  const formations = fiches.filter((f) => f.statut === "validee").map((f) => formationPublique(f, registre));
 
   const organismesParId = new Map(tousOrganismes.map((o) => [o.id, organismePublic(o, registre)]));
   const lieuxParId = new Map(tousLieux.map((l) => [l.id, lieuPublic(l)]));
@@ -178,8 +181,19 @@ function lireDonnees(dossier, registre) {
     if (adresses.has(f.slug)) erreurs.push(`${f.id} : adresse ${f.slug} déjà prise par ${adresses.get(f.slug)}`);
     adresses.set(f.slug, f.id);
   }
+  const adressesOrganismes = new Map();
+  for (const o of organismesParId.values()) {
+    if (adressesOrganismes.has(o.slug)) erreurs.push(`${o.id} : adresse ${o.slug} déjà prise par ${adressesOrganismes.get(o.slug)}`);
+    adressesOrganismes.set(o.slug, o.id);
+  }
   for (const [ancienne, id] of Object.entries(registre.anciennes)) {
     if (adresses.has(ancienne)) erreurs.push(`ancienne adresse ${ancienne} (${id}) encore utilisée par ${adresses.get(ancienne)}`);
+    // Une ancienne adresse ne peut pas prendre la forme d'une adresse courte (« f0084 »).
+    if (/^f\d+$/.test(ancienne)) erreurs.push(`ancienne adresse ${ancienne} (${id}) : forme réservée aux adresses courtes`);
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(ancienne)) erreurs.push(`ancienne adresse ${ancienne} (${id}) : caractères non permis`);
+    // L'export de publication ne contient que les fiches validées : un identifiant absent
+    // peut être une fiche archivée. Simple avertissement, pas d'arrêt.
+    if (!tousIds.has(id)) console.warn(`Ancienne adresse ${ancienne} : identifiant ${id} absent des données, ignorée.`);
   }
   if (erreurs.length) {
     throw new Error("Données incohérentes, construction arrêtée :\n" + erreurs.join("\n"));

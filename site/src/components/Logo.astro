@@ -1,0 +1,67 @@
+---
+// Logo Cuspeed : symbole + nom en capitales (League Spartan 800), slogan facultatif.
+// Proportions reprises de la planche fournie par Chris : symbole ≈ 1,5 fois la hauteur
+// des capitales, espace ≈ un tiers de cette hauteur, slogan centré sous l'ensemble,
+// à la moitié de la taille du nom, lettres espacées.
+import { LOGO_VUE, LOGO_TRIANGLE, LOGO_POINTE } from "../lib/logo.js";
+
+interface Props {
+  slogan?: boolean;
+  classe?: string;
+}
+const { slogan = false, classe = "" } = Astro.props;
+---
+<span class:list={["logo", classe, { "avec-slogan": slogan }]}>
+  <span class="logo-ligne">
+    <svg class="logo-symbole" viewBox={LOGO_VUE} aria-hidden="true" focusable="false">
+      <path class="logo-triangle" d={LOGO_TRIANGLE} />
+      <path class="logo-pointe" d={LOGO_POINTE} />
+    </svg>
+    <span class="logo-nom">Cuspeed</span>
+  </span>
+  {slogan && <span class="logo-slogan">Restez à la pointe.</span>}
+</span>
+
+<style>
+  .logo {
+    display: inline-grid;
+    justify-items: center;
+    gap: 0.35em;
+    color: var(--logo-nom, var(--accent));
+    line-height: 1;
+  }
+  .logo-ligne {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 0.24em;
+  }
+  .logo-symbole {
+    /* 1,5 × la hauteur des capitales (≈ 0,7 em en League Spartan) */
+    height: 1.06em;
+    width: auto;
+    flex: none;
+    /* le symbole descend légèrement sous la ligne de base, comme sur la planche */
+    margin-bottom: -0.05em;
+  }
+  .logo-triangle {
+    fill: var(--logo-triangle, var(--bleu-profond));
+  }
+  .logo-pointe {
+    fill: var(--logo-pointe, var(--bleu));
+  }
+  .logo-nom {
+    font-family: var(--titre);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    /* League Spartan : la hauteur visible des capitales est décalée vers le bas, on recentre */
+    transform: translateY(0.08em);
+  }
+  .logo-slogan {
+    font-family: var(--texte);
+    font-weight: 400;
+    font-size: 0.5em;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+</style>

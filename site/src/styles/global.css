@@ -1,44 +1,98 @@
 /*
-  Styles communs de Cuspeed.
-  Polices du système (aucune police téléchargée chez un tiers), couleurs en variables,
-  thème clair et sombre suivant le réglage de l'appareil.
+  Styles communs de Cuspeed : identité visuelle (charte de novembre 2026).
+
+  Polices : League Spartan (logo, grands titres, 700-800) et DM Sans (texte 400,
+  sous-titres 500-600, boutons 600). Les fichiers sont hébergés sur le site lui-même
+  (paquets @fontsource importés dans Base.astro) : aucune requête vers Google ni
+  vers un autre tiers, donc aucune adresse IP de visiteur transmise.
+
+  Palette officielle :
+    Electric Blue #315FEF  couleur principale (liens, boutons, points de la carte)
+    Deep Blue     #173B8E  contraste (bandeaux, survols, étiquettes fortes)
+    Electric Lime #C5E85A  accent, avec parcimonie, jamais en texte sur fond clair
+    Ink Navy      #17243B  textes courants
+    Ice Grey      #F2F5F9  fonds
+    White         #FFFFFF  fonds
+  Aplats uniquement, pas de dégradé.
+
+  Contrastes vérifiés (WCAG 2.1, texte courant ≥ 4,5:1) :
+    Ink Navy sur blanc 15,5 ; sur Ice Grey 14,2
+    Electric Blue sur blanc 5,2 ; sur Ice Grey 4,8 ; blanc sur Electric Blue 5,2
+    Deep Blue sur blanc 10,2 ; blanc sur Deep Blue 10,2
+    Ink Navy sur Lime 11,1 ; Lime sur blanc 1,4 (interdit pour du texte)
+    texte discret #4F5E78 sur blanc 6,6 ; sur Ice Grey 6,0
 */
 :root {
-  --fond: #f5f6f4;
-  --surface: #ffffff;
-  --encre: #1d2421;
-  --discret: #59655f;
-  --trait: #dde2df;
-  --terre: #e6ebe8;
-  --terre-bord: #b9c4bf;
-  --accent: #1f6f6a;
-  --accent-doux: #e3efed;
-  --accent-texte: #ffffff;
-  --puce: #eef1ef;
+  /* Palette */
+  --bleu: #315fef;
+  --bleu-profond: #173b8e;
+  --lime: #c5e85a;
+  --encre-marine: #17243b;
+  --glace: #f2f5f9;
+  --blanc: #ffffff;
+
+  /* Rôles (les pages n'utilisent que ces noms) */
+  --fond: var(--glace);
+  --surface: var(--blanc);
+  --encre: var(--encre-marine);
+  --discret: #4f5e78;
+  --trait: #dde3ec;
+  --terre: #e3e9f2;
+  --terre-bord: #c3cede;
+  --accent: var(--bleu);
+  --accent-fort: var(--bleu-profond);
+  --accent-doux: #e8eefd;
+  --accent-texte: var(--blanc);
+  --puce: var(--glace);
+  --bandeau: var(--bleu-profond);
+  --bandeau-texte: var(--blanc);
+  --pied: var(--encre-marine);
+  --pied-texte: #d5ddea;
   --alerte: #8a5410;
   --ok: #2e7d55;
-  --point-vide: #aab4b0;
-  --titre: "Avenir Next", "Segoe UI", "Helvetica Neue", system-ui, sans-serif;
-  --texte: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --chiffres: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --point-vide: #aeb9cb;
+  --point-vide-texte: var(--encre-marine);
+  --bord-champ: #7f8ca3; /* 3,1:1 sur Ice Grey, 3,4:1 sur blanc (seuil 3:1 des champs) */
+  --logo-triangle: var(--bleu-profond);
+  --logo-pointe: var(--bleu);
+  --logo-nom: var(--bleu);
+
+  --titre: "League Spartan", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --texte: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Chiffres : même police que le texte, en chasse fixe pour l'alignement */
+  --chiffres: var(--texte);
+
+  --rayon: 14px;
+  --rayon-petit: 10px;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --fond: #121614;
-    --surface: #1a201d;
-    --encre: #e8ecea;
-    --discret: #9aa6a1;
-    --trait: #2b3330;
-    --terre: #232b28;
-    --terre-bord: #45524d;
-    --accent: #5cbcb2;
-    --accent-doux: #1d3331;
-    --accent-texte: #0d1312;
-    --puce: #222a27;
+    --fond: #0e1728;
+    --surface: #17243b;
+    --encre: #f2f5f9;
+    --discret: #a9b6cc;
+    --trait: #283853;
+    --terre: #1e2b44;
+    --terre-bord: #3a4d6f;
+    --accent: #8aa6ff;
+    --accent-fort: #b5c7ff;
+    --accent-doux: #1e3260;
+    --accent-texte: #0e1728;
+    --puce: #1e2b44;
+    --bandeau: #173b8e;
+    --bandeau-texte: #ffffff;
+    --pied: #0a1120;
+    --pied-texte: #c3cde0;
     --alerte: #e0a24a;
     --ok: #5ec48f;
-    --point-vide: #3a4642;
+    --point-vide: #3d4c66;
+    --point-vide-texte: #f2f5f9;
+    --bord-champ: #6a7c9c;
+    /* Variante du logo sur fond sombre (validée par Chris le 4 novembre 2026) */
+    --logo-triangle: #f2f5f9;
+    --logo-pointe: var(--lime);
+    --logo-nom: #f2f5f9;
     color-scheme: dark;
   }
 }
@@ -59,8 +113,10 @@ body {
   background: var(--fond);
   color: var(--encre);
   font-family: var(--texte);
+  font-weight: 400;
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 img,
 svg {
@@ -68,9 +124,10 @@ svg {
 }
 a {
   color: var(--accent);
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
 }
 a:hover {
+  color: var(--accent-fort);
   text-decoration-thickness: 2px;
 }
 :focus-visible {
@@ -82,17 +139,25 @@ h1,
 h2,
 h3 {
   font-family: var(--titre);
-  line-height: 1.15;
+  font-weight: 700;
+  line-height: 1.08;
   text-wrap: balance;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 h1 {
-  font-size: clamp(1.75rem, 5vw, 2.6rem);
-  margin: 0 0 0.5rem;
+  font-weight: 800;
+  font-size: clamp(2rem, 5.5vw, 3.4rem);
+  margin: 0 0 0.6rem;
 }
 h2 {
-  font-size: 1.35rem;
+  font-size: clamp(1.45rem, 3vw, 2rem);
   margin: 2rem 0 0.75rem;
+}
+h3 {
+  font-family: var(--texte);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.3;
 }
 p {
   max-width: 68ch;
@@ -105,7 +170,7 @@ p {
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
 main.cadre {
-  padding-block: 24px 56px;
+  padding-block: 28px 64px;
   min-height: 60vh;
 }
 
@@ -131,6 +196,17 @@ main.cadre {
   padding: 8px 12px;
 }
 
+/* Accueil : bandes pleine largeur */
+.bande {
+  padding-block: clamp(40px, 7vw, 88px);
+}
+.bande.blanche {
+  background: var(--surface);
+}
+.bande.glace {
+  background: var(--fond);
+}
+
 /* En-tête */
 .entete {
   background: var(--surface);
@@ -142,54 +218,124 @@ main.cadre {
   align-items: center;
   justify-content: space-between;
   gap: 8px 24px;
-  padding-block: 12px;
+  padding-block: 14px;
 }
 .marque {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--titre);
-  font-weight: 700;
-  font-size: 1.3rem;
-  color: var(--encre);
+  min-height: 44px;
+  font-size: clamp(1.4rem, 2.4vw, 1.65rem);
   text-decoration: none;
 }
-.marque-icone {
-  width: 28px;
-  height: 28px;
-  fill: var(--accent);
+.entete .bouton {
+  min-height: 44px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+}
+@media (max-width: 560px) {
+  .entete .bouton {
+    display: none;
+  }
 }
 .entete nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
+  align-items: center;
+  gap: 4px 22px;
 }
-.entete nav a {
+.entete nav a:not(.bouton) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--encre);
   text-decoration: none;
   font-weight: 500;
-  padding: 6px 0;
 }
-.entete nav a:hover {
+/* Sur téléphone, le bouton laisse place à un simple lien « Formations » */
+.entete .lien-mobile {
+  display: none !important;
+}
+@media (max-width: 560px) {
+  .entete .lien-mobile {
+    display: inline-flex !important;
+  }
+}
+.entete nav a:not(.bouton):hover,
+.entete nav a[aria-current="page"] {
   color: var(--accent);
 }
 
 /* Pied de page */
 .pied {
-  border-top: 1px solid var(--trait);
-  background: var(--surface);
-  color: var(--discret);
-  font-size: 0.9rem;
+  background: var(--pied);
+  color: var(--pied-texte);
+  font-size: 0.92rem;
 }
 .pied-cadre {
-  padding-block: 24px 32px;
+  padding-block: 40px 32px;
   display: grid;
-  gap: 12px;
+  gap: 28px;
 }
-.pied nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 20px;
+@media (min-width: 760px) {
+  .pied-cadre {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+.pied .marque {
+  font-size: 1.6rem;
+  --logo-triangle: #f2f5f9;
+  --logo-pointe: var(--lime);
+  --logo-nom: #ffffff;
+  justify-self: start;
+}
+.pied-marque {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+.pied-marque p {
+  margin: 0;
+  max-width: 46ch;
+}
+.pied h2 {
+  font-family: var(--texte);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  margin: 0 0 10px;
+}
+.pied ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+}
+.pied a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.pied li a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+/* Contour de focus lisible sur le fond marine du pied de page */
+.pied :focus-visible {
+  outline-color: #ffffff;
+}
+.pied a:hover {
+  color: var(--lime);
+  text-decoration: underline;
+}
+.pied-legal {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgb(255 255 255 / 0.14);
+  padding-top: 18px;
+  font-size: 0.85rem;
+  margin: 0;
+  max-width: none;
 }
 
 /* Éléments communs */
@@ -204,7 +350,8 @@ main.cadre {
 .etiquette {
   display: inline-block;
   font-size: 0.8rem;
-  padding: 2px 9px;
+  font-weight: 500;
+  padding: 3px 10px;
   border-radius: 999px;
   background: var(--puce);
   color: var(--encre);
@@ -212,8 +359,26 @@ main.cadre {
 }
 .etiquette.forte {
   background: var(--accent-doux);
-  color: var(--accent);
+  color: var(--accent-fort);
   font-weight: 600;
+}
+.surtitre {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  color: var(--accent-fort);
+  margin: 0 0 14px;
+}
+.surtitre::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: var(--lime);
+  border-radius: 2px;
+  flex: none;
 }
 .discret {
   color: var(--discret);
@@ -225,7 +390,7 @@ main.cadre {
 .fil {
   font-size: 0.9rem;
   color: var(--discret);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .fil ol {
   display: flex;
@@ -242,8 +407,8 @@ main.cadre {
 .carte-bloc {
   background: var(--surface);
   border: 1px solid var(--trait);
-  border-radius: 14px;
-  padding: 16px;
+  border-radius: var(--rayon);
+  padding: 20px;
 }
 
 /* Liste de formations (accueil, organisme) */
@@ -255,25 +420,48 @@ main.cadre {
   gap: 10px;
 }
 .fiche-resume {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--trait);
-  border-radius: 12px;
-  padding: 14px 16px;
+  border-radius: var(--rayon);
+  padding: 16px 18px;
   display: grid;
-  gap: 6px;
+  gap: 8px;
   min-width: 0;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.fiche-resume:hover {
+  border-color: var(--accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .fiche-resume:hover {
+    transform: translateY(-1px);
+  }
 }
 .fiche-resume h3 {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
   margin: 0;
 }
 .fiche-resume h3 a {
   color: var(--encre);
   text-decoration: none;
 }
+/* Toute la carte est cliquable, le lien reste le titre (une seule cible pour les lecteurs d'écran) */
+.fiche-resume h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
 .fiche-resume h3 a:hover {
   color: var(--accent);
-  text-decoration: underline;
+}
+.fiche-resume h3 a:focus-visible {
+  outline: none;
+}
+.fiche-resume:has(h3 a:focus-visible) {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
 }
 .fiche-resume .meta {
   font-size: 0.9rem;
@@ -292,17 +480,21 @@ main.cadre {
 }
 .infos dt,
 .infos dd {
-  padding: 10px 0;
+  padding: 11px 0;
   border-top: 1px solid var(--trait);
   margin: 0;
 }
 .infos dt {
   color: var(--discret);
+  font-weight: 500;
   padding-right: 12px;
 }
 @media (max-width: 520px) {
   .infos {
     grid-template-columns: 1fr;
+  }
+  .infos dt {
+    padding-bottom: 2px;
   }
   .infos dd {
     border-top: 0;
@@ -310,17 +502,45 @@ main.cadre {
   }
 }
 
+/* Boutons : DM Sans 600, aplats */
 .bouton {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
   background: var(--accent);
   color: var(--accent-texte);
+  font-family: var(--texte);
   font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
   text-decoration: none;
-  padding: 10px 16px;
-  border-radius: 10px;
+  padding: 12px 20px;
+  border: 2px solid transparent;
+  border-radius: var(--rayon-petit);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
 .bouton:hover {
-  filter: brightness(1.08);
+  background: var(--accent-fort);
+  color: var(--accent-texte);
+  text-decoration: none;
+}
+.bouton.secondaire {
+  background: transparent;
+  color: var(--accent-fort);
+  border-color: var(--trait);
+}
+.bouton.secondaire:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.bouton.accent {
+  background: var(--lime);
+  color: var(--encre-marine);
+}
+.bouton.accent:hover {
+  background: #ffffff;
+  color: var(--encre-marine);
 }

@@ -1,15 +1,26 @@
 ---
 // Gabarit commun à toutes les pages : en-tête, pied de page, balises de référencement.
+// Polices hébergées sur le site (aucune requête vers Google Fonts) : seulement les graisses
+// utilisées et le sous-ensemble latin (accents, €, guillemets français compris).
+import "@fontsource/league-spartan/latin-700.css";
+import "@fontsource/league-spartan/latin-800.css";
+import "@fontsource/dm-sans/latin-400.css";
+import "@fontsource/dm-sans/latin-500.css";
+import "@fontsource/dm-sans/latin-600.css";
 import "../styles/global.css";
+import Logo from "../components/Logo.astro";
 
 interface Props {
   titre: string; // Titre unique de la page (sans « | Cuspeed », ajouté ici)
   description: string; // Description unique, 150 caractères environ
   donneesStructurees?: object[]; // Blocs schema.org propres à la page
   indexer?: boolean; // false pour les pages à ne pas référencer (404)
+  pleineLargeur?: boolean; // true : la page gère elle-même ses bandes et ses marges (accueil)
 }
 
-const { titre, description, donneesStructurees = [], indexer = true } = Astro.props;
+const { titre, description, donneesStructurees = [], indexer = true, pleineLargeur = false } = Astro.props;
+const chemin = Astro.url.pathname;
+const actif = (debut: string) => (chemin === debut || (debut !== "/" && chemin.startsWith(debut)) ? "page" : undefined);
 // Construction pour une adresse de test (CUSPEED_ESSAI=1) : aucune page n'est référencée.
 const essai = process.env.CUSPEED_ESSAI === "1";
 const titreComplet = titre === "Cuspeed" ? titre : `${titre} | Cuspeed`;
@@ -37,8 +48,8 @@ const json = (o: object) => JSON.stringify(o).replace(/</g, "\\u003c");
     <link rel="canonical" href={canonique} />
     {(!indexer || essai) && <meta name="robots" content="noindex" />}
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#f5f6f4" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#121614" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#17243b" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content="website" />
@@ -53,35 +64,43 @@ const json = (o: object) => JSON.stringify(o).replace(/</g, "\\u003c");
     <a class="evitement" href="#contenu">Aller au contenu</a>
     <header class="entete">
       <div class="cadre entete-cadre">
-        <a class="marque" href="/" aria-label="Cuspeed, accueil">
-          <svg class="marque-icone" viewBox="0 0 32 32" aria-hidden="true">
-            <path d="M6 26 C6 14 10 6 16 6 C22 6 26 14 26 26 L21 26 C21 19 19 14 16 14 C13 14 11 19 11 26 Z" />
-          </svg>
-          <span>Cuspeed</span>
-        </a>
+        <a class="marque" href="/" aria-label="Cuspeed, accueil"><Logo /></a>
         <nav aria-label="Navigation principale">
-          <a href="/">Formations</a>
-          <a href="/organismes/">Organismes</a>
-          <a href="/a-propos/">À propos</a>
+          <a class="lien-mobile" href="/#recherche">Formations</a>
+          <a href="/organismes/" aria-current={actif("/organismes/")}>Organismes</a>
+          <a class="bouton" href="/#recherche">Trouver une formation</a>
         </nav>
       </div>
     </header>
-    <main id="contenu" class="cadre">
+    <main id="contenu" class:list={[{ cadre: !pleineLargeur }]}>
       <slot />
     </main>
     <footer class="pied">
       <div class="cadre pied-cadre">
-        <p>
-          <strong>Cuspeed</strong> recense les formations post-universitaires et continues des
-          chirurgiens-dentistes en France. Site gratuit, neutre et indépendant des organismes cités.
-          Les informations sont relevées sur les sources officielles : confirmez-les auprès de
-          l'organisme avant de vous inscrire.
-        </p>
-        <nav aria-label="Liens de pied de page">
-          <a href="/a-propos/">À propos et méthode</a>
-          <a href="/mentions-legales/">Mentions légales</a>
-          <a href="/plan-du-site/">Plan du site</a>
+        <div class="pied-marque">
+          <a class="marque" href="/" aria-label="Cuspeed, accueil"><Logo slogan /></a>
+          <p>
+            Cuspeed recense les formations post-universitaires et continues des chirurgiens-dentistes
+            en France. Site gratuit, neutre et indépendant des organismes cités. Les informations sont
+            relevées sur les sources officielles : confirmez-les auprès de l'organisme avant de vous inscrire.
+          </p>
+        </div>
+        <nav aria-labelledby="pied-explorer">
+          <h2 id="pied-explorer">Explorer</h2>
+          <ul>
+            <li><a href="/#recherche">Toutes les formations</a></li>
+            <li><a href="/organismes/">Organismes</a></li>
+            <li><a href="/plan-du-site/">Plan du site</a></li>
+          </ul>
         </nav>
+        <nav aria-labelledby="pied-cuspeed">
+          <h2 id="pied-cuspeed">Cuspeed</h2>
+          <ul>
+            <li><a href="/a-propos/">À propos et méthode</a></li>
+            <li><a href="/mentions-legales/">Mentions légales</a></li>
+          </ul>
+        </nav>
+        <p class="pied-legal">Sans cookie, sans publicité, sans mesure d'audience. Une erreur sur une fiche ? contact@cuspeed.fr</p>
       </div>
     </footer>
   </body>

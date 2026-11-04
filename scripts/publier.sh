@@ -29,11 +29,15 @@ fi
 
 RACINE="$(cd "$(dirname "$0")/.." && pwd)"
 TRAVAIL="$(mktemp -d)"
-trap 'rm -rf "$TRAVAIL"' EXIT
+# En cas d'échec, on supprime aussi le site à moitié construit : rien ne peut partir par erreur.
+trap 'code=$?; rm -rf "$TRAVAIL"; if [ $code -ne 0 ]; then rm -rf "$RACINE/site/dist"; fi' EXIT
 
 echo "== 1. Export de la base"
 python3 "$RACINE/scripts/sauvegarder_vers_yaml.py" --seulement-validees --sortie "$TRAVAIL/validees"
 python3 "$RACINE/scripts/sauvegarder_vers_yaml.py" --sortie "$TRAVAIL/complet"
+
+# Le secret n'est plus utile : on le retire avant d'exécuter le moindre code de dépendance.
+unset CUSPEED_DB_URL
 
 echo "== 2. Contrôle des données exportées"
 CUSPEED_DATA="$TRAVAIL/validees" python3 "$RACINE/scripts/verifier_donnees.py"
@@ -55,7 +59,9 @@ PY
 echo "== 3. Tests et construction du site"
 cd "$RACINE/site"
 export ASTRO_TELEMETRY_DISABLED=1
-npm ci --no-audit --no-fund
+rm -rf dist
+# --ignore-scripts : aucun script d'installation de dépendance n'est exécuté.
+npm ci --no-audit --no-fund --ignore-scripts
 npm test
 if [ "$ESSAI" = "1" ]; then
   CUSPEED_DATA="$TRAVAIL/validees" CUSPEED_DATA_CONTROLE="$TRAVAIL/complet" CUSPEED_ESSAI=1 npm run build

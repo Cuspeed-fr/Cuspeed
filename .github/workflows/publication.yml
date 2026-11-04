@@ -3,7 +3,9 @@
 # comme fichier téléchargeable. L'envoi chez l'hébergeur sera ajouté quand l'hébergeur
 # sera choisi : tant qu'une étape échoue, rien n'est envoyé et la version en ligne reste en place.
 #
-# Secret utilisé : CUSPEED_SAUVEGARDE_DB_URL (rôle lecteur_sauvegarde, lecture seule).
+# Secret utilisé : CUSPEED_SAUVEGARDE_DB_URL (rôle lecteur_sauvegarde, lecture seule), rangé dans
+# l'environnement GitHub « publication » (Settings > Environments), limité à la branche main et
+# soumis à l'approbation de Chris. Une branche modifiée ne peut donc pas le lire.
 name: Publication
 
 on:
@@ -20,6 +22,9 @@ permissions:
 jobs:
   publication:
     runs-on: ubuntu-latest
+    # Jamais depuis une autre branche que main, même lancé à la main.
+    if: github.ref == 'refs/heads/main'
+    environment: publication
     # Une seule publication à la fois.
     concurrency: publication
     steps:

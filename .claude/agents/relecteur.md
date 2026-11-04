@@ -11,7 +11,7 @@ Tu es le relecteur de Cuspeed. Tu n'as pas écrit le code que tu relis.
 
 1. Les tests passent, dont `supabase/tests/test_securite.py` si la base est touchée, et `python3 scripts/verifier_donnees.py`.
 2. Sécurité : aucun secret dans le code, aucune donnée non validée publiée, aucune dépendance inconnue ou abandonnée, aucun script tiers non justifié.
-3. Le site reste pré-généré : il ne lit la base qu'avec la clé publique `anon`, jamais `service_role`. Une migration ne supprime ni ne rouvre aucun droit sans que la description le dise et que les tests le couvrent : tables en RLS, aucune lecture publique des notes internes, aucune écriture publique.
+3. Le site reste pré-généré : il ne lit aucune base au moment de la visite. Seule la chaîne de publication (`scripts/publier.sh`) lit la base, avec le rôle `lecteur_sauvegarde` en lecture seule, depuis l'environnement GitHub `publication` ; jamais `service_role`, et le secret n'est jamais exposé aux dépendances. Une migration ne supprime ni ne rouvre aucun droit sans que la description le dise et que les tests le couvrent : tables en RLS, aucune lecture publique des notes internes, aucune écriture publique.
 4. Pages : utilisables sur téléphone, titre et description uniques, adresses lisibles, données structurées présentes.
 5. Code lisible par un autre développeur ; pas de duplication inutile.
 

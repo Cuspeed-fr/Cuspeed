@@ -259,3 +259,42 @@ test("les descriptions sont coupées proprement", () => {
   assert.ok(c.length <= 160);
   assert.ok(c.endsWith("mot…"));
 });
+
+// --- Garde-fous complémentaires (relecture de la pull request n°2) ---
+
+test("deux organismes ne peuvent pas partager une adresse figée", () => {
+  const registre = { formations: {}, organismes: { O001: "meme", O002: "meme" }, anciennes: {} };
+  assert.throws(() => chargerDonnees(JEU, registre), /O002 : adresse meme déjà prise par O001/);
+});
+
+test("une ancienne adresse ne peut pas imiter une adresse courte ni contenir n'importe quoi", () => {
+  assert.throws(
+    () => chargerDonnees(JEU, { formations: {}, organismes: {}, anciennes: { f9001: "F9001" } }),
+    /forme réservée aux adresses courtes/,
+  );
+  assert.throws(
+    () => chargerDonnees(JEU, { formations: {}, organismes: {}, anciennes: { "../a": "F9001" } }),
+    /caractères non permis/,
+  );
+});
+
+test("le contrôle refuse une redirection vers une page absente et une redirection dans le plan du site", () => {
+  const dist = mkdtempSync(join(tmpdir(), "cuspeed-dist-"));
+  writeFileSync(join(dist, "index.html"), pageTest("Accueil"));
+  mkdirSync(join(dist, "formations", "f9001"), { recursive: true });
+  const redirection = (vers) =>
+    `<!doctype html><html lang="fr"><head><meta http-equiv="refresh" content="0; url=${vers}">` +
+    `<link rel="canonical" href="https://cuspeed.fr${vers}"><title>Redirection</title>` +
+    `<meta name="description" content="Cette adresse renvoie vers une autre fiche du site."></head><body></body></html>`;
+  writeFileSync(join(dist, "formations", "f9001", "index.html"), redirection("/formations/absente/"));
+  let r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /redirige vers \/formations\/absente\/, page absente/);
+
+  writeFileSync(join(dist, "formations", "f9001", "index.html"), redirection("/"));
+  writeFileSync(join(dist, "sitemap-0.xml"), "<urlset><url><loc>https://cuspeed.fr/formations/f9001/</loc></url></urlset>");
+  r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /\/formations\/f9001\/ est une redirection/);
+  rmSync(dist, { recursive: true, force: true });
+});

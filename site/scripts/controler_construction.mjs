@@ -134,6 +134,24 @@ for (const chemin of pages) {
   }
 }
 
+// Redirections : chaque page de redirection mène à une page qui existe, et le plan du site
+// ne liste que des pages de contenu existantes (ni redirection, ni page absente).
+const existe = (chemin) => existsSync(join(DIST, chemin.replace(/^\//, ""), "index.html"));
+for (const chemin of pages.filter((p) => p.endsWith(".html"))) {
+  const contenu = readFileSync(chemin, "utf8");
+  const cible = contenu.match(/<meta http-equiv="refresh" content="0; url=([^"]+)"/)?.[1];
+  if (cible && !existe(cible)) erreurs.push(`${relative(DIST, chemin)} : redirige vers ${cible}, page absente`);
+}
+for (const plan of pages.filter((p) => /sitemap-\d+\.xml$/.test(p))) {
+  for (const [, url] of readFileSync(plan, "utf8").matchAll(/<loc>([^<]+)<\/loc>/g)) {
+    const chemin = new URL(url).pathname;
+    if (!existe(chemin)) erreurs.push(`${relative(DIST, plan)} : ${chemin} absente du site`);
+    else if (/<meta http-equiv="refresh"/.test(readFileSync(join(DIST, chemin, "index.html"), "utf8"))) {
+      erreurs.push(`${relative(DIST, plan)} : ${chemin} est une redirection`);
+    }
+  }
+}
+
 for (const [titre, noms] of titres) {
   if (noms.length > 1) erreurs.push(`Titre en double « ${titre} » : ${noms.join(", ")}`);
 }

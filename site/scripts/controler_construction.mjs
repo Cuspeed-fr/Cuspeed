@@ -137,16 +137,30 @@ for (const chemin of pages) {
 // Redirections : chaque page de redirection mène à une page qui existe, et le plan du site
 // ne liste que des pages de contenu existantes (ni redirection, ni page absente).
 const existe = (chemin) => existsSync(join(DIST, chemin.replace(/^\//, ""), "index.html"));
+const estRedirection = (contenu) => /<meta\s+http-equiv=["']?refresh/i.test(contenu);
 for (const chemin of pages.filter((p) => p.endsWith(".html"))) {
   const contenu = readFileSync(chemin, "utf8");
-  const cible = contenu.match(/<meta http-equiv="refresh" content="0; url=([^"]+)"/)?.[1];
-  if (cible && !existe(cible)) erreurs.push(`${relative(DIST, chemin)} : redirige vers ${cible}, page absente`);
+  if (!estRedirection(contenu)) continue;
+  const nom = relative(DIST, chemin);
+  // Lecture tolérante : « 0; url=… », « 0;url=… », guillemets simples ou doubles.
+  const cible = contenu.match(/<meta\s+http-equiv=["']?refresh["']?\s+content=["']\s*\d+\s*;\s*url=([^"']+)["']/i)?.[1];
+  if (!cible) {
+    erreurs.push(`${nom} : redirection illisible`);
+  } else if (!existe(cible)) {
+    erreurs.push(`${nom} : redirige vers ${cible}, page absente`);
+  } else if (estRedirection(readFileSync(join(DIST, cible.replace(/^\//, ""), "index.html"), "utf8"))) {
+    erreurs.push(`${nom} : redirige vers ${cible}, qui est elle-même une redirection`);
+  }
 }
-for (const plan of pages.filter((p) => /sitemap-\d+\.xml$/.test(p))) {
+const plans = pages.filter((p) => /sitemap-\d+\.xml$/.test(p));
+if (!plans.length || !plans.some((p) => /<loc>/.test(readFileSync(p, "utf8")))) {
+  erreurs.push("plan du site absent ou vide (sitemap-N.xml)");
+}
+for (const plan of plans) {
   for (const [, url] of readFileSync(plan, "utf8").matchAll(/<loc>([^<]+)<\/loc>/g)) {
     const chemin = new URL(url).pathname;
     if (!existe(chemin)) erreurs.push(`${relative(DIST, plan)} : ${chemin} absente du site`);
-    else if (/<meta http-equiv="refresh"/.test(readFileSync(join(DIST, chemin, "index.html"), "utf8"))) {
+    else if (estRedirection(readFileSync(join(DIST, chemin, "index.html"), "utf8"))) {
       erreurs.push(`${relative(DIST, plan)} : ${chemin} est une redirection`);
     }
   }

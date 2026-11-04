@@ -89,7 +89,7 @@
     --point-vide: #3d4c66;
     --point-vide-texte: #f2f5f9;
     --bord-champ: #6a7c9c;
-    /* Variante du logo sur fond sombre (proposition, à valider) */
+    /* Variante du logo sur fond sombre (validée par Chris le 4 novembre 2026) */
     --logo-triangle: #f2f5f9;
     --logo-pointe: var(--lime);
     --logo-nom: #f2f5f9;

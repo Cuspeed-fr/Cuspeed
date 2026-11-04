@@ -93,6 +93,7 @@ test("le contrôle de construction repère une fiche non validée et une note in
     `<meta name="description" content="Une description suffisamment longue pour le test."/>` +
     `<link rel="canonical" href="https://cuspeed.fr/"/></head><body>${corps}</body></html>`;
   writeFileSync(join(dist, "index.html"), page("Tout va bien", "Accueil"));
+  writeFileSync(join(dist, "sitemap-0.xml"), "<urlset><url><loc>https://cuspeed.fr/</loc></url></urlset>");
   const script = join(ICI, "..", "scripts", "controler_construction.mjs");
   const lancer = () =>
     spawnSync(process.execPath, [script, dist], { env: { ...process.env, CUSPEED_DATA: JEU }, encoding: "utf8" });
@@ -269,4 +270,74 @@ test("sur une adresse de test, robots.txt interdit tout aux moteurs", async () =
   const normal = await GET({ site }).text();
   assert.match(normal, /Allow: \//);
   assert.match(normal, /Sitemap: https:\/\/cuspeed\.fr\/sitemap-index\.xml/);
+});
+
+// --- Garde-fous complémentaires (relecture de la pull request n°2) ---
+
+test("deux organismes ne peuvent pas partager une adresse figée", () => {
+  const registre = { formations: {}, organismes: { O001: "meme", O002: "meme" }, anciennes: {} };
+  assert.throws(() => chargerDonnees(JEU, registre), /O002 : adresse meme déjà prise par O001/);
+});
+
+test("une ancienne adresse ne peut pas imiter une adresse courte ni contenir n'importe quoi", () => {
+  assert.throws(
+    () => chargerDonnees(JEU, { formations: {}, organismes: {}, anciennes: { f9001: "F9001" } }),
+    /forme réservée aux adresses courtes/,
+  );
+  assert.throws(
+    () => chargerDonnees(JEU, { formations: {}, organismes: {}, anciennes: { "../a": "F9001" } }),
+    /caractères non permis/,
+  );
+});
+
+test("le contrôle refuse une redirection vers une page absente et une redirection dans le plan du site", () => {
+  const dist = mkdtempSync(join(tmpdir(), "cuspeed-dist-"));
+  writeFileSync(join(dist, "index.html"), pageTest("Accueil"));
+  mkdirSync(join(dist, "formations", "f9001"), { recursive: true });
+  const redirection = (vers) =>
+    `<!doctype html><html lang="fr"><head><meta http-equiv="refresh" content="0; url=${vers}">` +
+    `<link rel="canonical" href="https://cuspeed.fr${vers}"><title>Redirection</title>` +
+    `<meta name="description" content="Cette adresse renvoie vers une autre fiche du site."></head><body></body></html>`;
+  writeFileSync(join(dist, "formations", "f9001", "index.html"), redirection("/formations/absente/"));
+  let r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /redirige vers \/formations\/absente\/, page absente/);
+
+  writeFileSync(join(dist, "formations", "f9001", "index.html"), redirection("/"));
+  writeFileSync(join(dist, "sitemap-0.xml"), "<urlset><url><loc>https://cuspeed.fr/formations/f9001/</loc></url></urlset>");
+  r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /\/formations\/f9001\/ est une redirection/);
+  rmSync(dist, { recursive: true, force: true });
+});
+
+test("le contrôle refuse un plan du site absent, une chaîne de redirections et une redirection illisible", () => {
+  const dist = mkdtempSync(join(tmpdir(), "cuspeed-dist-"));
+  writeFileSync(join(dist, "index.html"), pageTest("Accueil"));
+  let r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /plan du site absent ou vide/);
+
+  writeFileSync(join(dist, "sitemap-0.xml"), "<urlset><url><loc>https://cuspeed.fr/</loc></url></urlset>");
+  const redir = (vers, forme = `0; url=${vers}`) =>
+    `<!doctype html><html lang="fr"><head><meta http-equiv="refresh" content="${forme}">` +
+    `<link rel="canonical" href="https://cuspeed.fr${vers}"><title>R</title>` +
+    `<meta name="description" content="Cette adresse renvoie vers une autre fiche du site."></head><body></body></html>`;
+  for (const d of ["a", "b"]) mkdirSync(join(dist, d));
+  writeFileSync(join(dist, "a", "index.html"), redir("/b/"));
+  writeFileSync(join(dist, "b", "index.html"), redir("/"));
+  r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /a\/index.html : redirige vers \/b\/, qui est elle-même une redirection/);
+
+  writeFileSync(join(dist, "a", "index.html"), redir("/absente/", "0;url=/absente/"));
+  r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /redirige vers \/absente\/, page absente/);
+
+  writeFileSync(join(dist, "a", "index.html"), redir("/", "0"));
+  r = controler(dist, JEU);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /redirection illisible/);
+  rmSync(dist, { recursive: true, force: true });
 });

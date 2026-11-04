@@ -38,6 +38,6 @@ Responsable du projet et seul valideur : Chris (Dr Christopher Huon).
 ## Technique
 
 - Site : Astro, pré-généré, hébergé chez Clever Cloud (France). Avant chaque publication : export des seules fiches `validee` depuis la base, contrôle (`verifier_donnees.py`), construction ; si une étape échoue, l'ancienne version reste en ligne.
-- Le site ne lit la base qu'avec la clé publique (`anon`), qui ne voit que les fiches validées et jamais les notes internes.
+- Le site ne lit aucune base au moment de la visite : il est construit à l'avance. La chaîne de publication (`scripts/publier.sh`) exporte la base avec le rôle `lecteur_sauvegarde` (lecture seule) : les seules fiches validées, sans note, pour le site ; la base complète pour le contrôle qui prouve qu'aucune fiche non validée ni note ne fuit. Le secret n'est accessible que depuis `main`, dans l'environnement GitHub `publication`, avec l'approbation de Chris. Une future version pourra exporter les fiches publiées avec la clé publique `anon`.
 - Technologies standard uniquement (Astro, PostgreSQL, SQL, Python), pour qu'un développeur puisse reprendre le projet.
 - V2 : comptes praticiens, alertes, favoris, avis, dans la même base (authentification Supabase, droits par ligne). Revue de sécurité indépendante et relecture RGPD avant l'ouverture.

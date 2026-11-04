@@ -26,7 +26,6 @@ const cible = new URL(chemin, Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="refresh" content={`0; url=${chemin}`} />
     <link rel="canonical" href={cible} />
-    <meta name="robots" content="noindex" />
     <title>{`Redirection : ${vers.intitule}`}</title>
     <meta name="description" content={`Cette adresse renvoie vers la fiche « ${vers.intitule} » sur Cuspeed.`} />
   </head>

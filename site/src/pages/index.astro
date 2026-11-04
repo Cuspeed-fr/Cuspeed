@@ -43,122 +43,348 @@ const page = {
   numberOfItems: formations.length,
 };
 ---
-<Base titre="Formations dentaires post-universitaires et continues en France" description={description} donneesStructurees={[page]}>
-  <section class="intro">
-    <h1>Toutes les formations dentaires post-universitaires, en un clic</h1>
-    <p>
-      Diplômes d'université, certificats et formations privées pour chirurgiens-dentistes en France,
-      relevés sur les sites officiels des facultés et des organismes. Chaque fiche renvoie à sa source.
-    </p>
-    <p class="chiffres-cles chiffres">
-      <span><b>{formations.length}</b> formations</span>
-      <span><b>{donnees.organismes.length}</b> organismes</span>
-      <span><b>{villesPresentes.length}</b> villes</span>
-    </p>
+<Base titre="Formations dentaires post-universitaires et continues en France" description={description} donneesStructurees={[page]} pleineLargeur>
+  <section class="bande blanche heros" aria-labelledby="titre-accueil">
+    <div class="cadre heros-grille">
+      <div class="heros-texte">
+        <p class="surtitre">Restez à la pointe, en un clic.</p>
+        <h1 id="titre-accueil">Toutes les formations dentaires post-universitaires et continues, au même endroit</h1>
+        <p class="chapo">
+          Diplômes d'université, certificats et formations privées pour chirurgiens-dentistes en France,
+          relevés sur les sites officiels des facultés et des organismes. Chaque fiche renvoie à sa source.
+        </p>
+        <div class="actions">
+          <a class="bouton" href="#recherche">Trouver une formation</a>
+          <a class="bouton secondaire" href="/a-propos/">Notre méthode</a>
+        </div>
+        <ul class="garanties">
+          <li>Sources officielles</li>
+          <li>Gratuit et indépendant</li>
+          <li>Sans cookie ni publicité</li>
+        </ul>
+      </div>
+      <ul class="chiffres-cles" aria-label="Cuspeed en chiffres">
+        <li class="tuile tuile-1"><b>{villesPresentes.length}</b><span>villes</span></li>
+        <li class="tuile tuile-2"><b>{donnees.organismes.length}</b><span>organismes</span></li>
+        <li class="tuile tuile-3"><b>{formations.length}</b><span>formations</span></li>
+      </ul>
+    </div>
   </section>
 
-  <div class="disposition">
-    <div class="colonne-carte">
-      <figure class="carte-bloc carte">
-        <svg viewBox={`0 0 ${LARGEUR_CARTE} ${HAUTEUR_CARTE}`} role="group" aria-label="Carte de France : choisir une ville">
-          <path class="terre" d={CONTOUR_FRANCE} />
-          {points.map((p) => (
-            <g
-              class="point"
-              data-ville={p.nom}
-              role="button"
-              tabindex="0"
-              aria-pressed="false"
-              aria-label={`${p.nom} : ${p.n} formation${p.n > 1 ? "s" : ""}`}
-              transform={`translate(${p.x} ${p.y})`}
-            >
-              {/* Zone tactile invisible d'au moins 44 px une fois la carte réduite sur téléphone */}
-              <circle class="zone" r={Math.max(rayon(p.n), 22)} />
-              <circle class="disque" r={rayon(p.n)} />
-              <text class="nombre" text-anchor="middle" dy="0.35em">{p.n}</text>
-              <text
-                class="nom"
-                x={Math.round((p.etiquette.x - p.x) * 10) / 10}
-                y={Math.round((p.etiquette.y - p.y) * 10) / 10}
-                text-anchor={p.etiquette.ancre}
-                dy="0.35em"
-              >{p.nom}</text>
-            </g>
-          ))}
-        </svg>
-        <figcaption class="discret">
-          Touchez une ville pour n'afficher que ses formations. Les formations à distance ou dans
-          plusieurs villes figurent dans la liste.
-        </figcaption>
-      </figure>
-    </div>
-
-    <div class="colonne-liste">
-      <form class="filtres carte-bloc" id="filtres" role="search" hidden>
-        <label class="champ champ-large">
-          <span>Rechercher</span>
-          <input type="search" name="q" placeholder="Intitulé, ville, faculté…" autocomplete="off" />
-        </label>
-        <label class="champ">
-          <span>Discipline</span>
-          <select name="discipline">
-            <option value="">Toutes</option>
-            {disciplinesPresentes.map(([code, nom]) => <option value={code}>{nom}</option>)}
-          </select>
-        </label>
-        <label class="champ">
-          <span>Type</span>
-          <select name="type">
-            <option value="">Tous</option>
-            {typesPresents.map(([code, nom]) => <option value={code}>{nom}</option>)}
-          </select>
-        </label>
-        <label class="champ">
-          <span>Secteur</span>
-          <select name="secteur">
-            <option value="">Tous</option>
-            {Object.entries(ref.secteurs).map(([code, nom]) => <option value={code}>{nom}</option>)}
-          </select>
-        </label>
-        <label class="champ">
-          <span>Ville</span>
-          <select name="ville">
-            <option value="">Toutes</option>
-            {villesPresentes.map((v) => <option value={v}>{v}</option>)}
-          </select>
-        </label>
-        <button type="reset" class="effacer">Effacer les filtres</button>
-      </form>
-
-      <h2 class="invisible">Liste des formations</h2>
-      <p class="resultat" id="resultat" aria-live="polite">
-        {formations.length} formations
-      </p>
-
-      <ul class="liste" id="liste">
-        {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
+  <section class="bande blanche disciplines" aria-labelledby="titre-disciplines">
+    <div class="cadre">
+      <h2 id="titre-disciplines">Parcourir par discipline</h2>
+      <ul class="pastilles">
+        {disciplinesPresentes.map(([code, nom]) => (
+          <li>
+            <a class="pastille" href={`/?discipline=${code}#recherche`} data-discipline={code}>
+              {nom}<span class="pastille-nombre">{formations.filter((f) => f.disciplines.includes(code)).length}</span>
+            </a>
+          </li>
+        ))}
       </ul>
-      <p class="aucun discret" id="aucun" hidden>
-        Aucune formation ne correspond à ces critères. Essayez d'effacer un filtre.
-      </p>
     </div>
-  </div>
+  </section>
+
+  <section class="bande glace" id="recherche" aria-labelledby="titre-recherche">
+    <div class="cadre">
+      <p class="surtitre">Carte et filtres</p>
+      <h2 id="titre-recherche">Trouver une formation</h2>
+      <div class="disposition">
+        <div class="colonne-carte">
+          <figure class="carte-bloc carte">
+            <svg viewBox={`0 0 ${LARGEUR_CARTE} ${HAUTEUR_CARTE}`} role="group" aria-label="Carte de France : choisir une ville">
+              <path class="terre" d={CONTOUR_FRANCE} />
+              {points.map((p) => (
+                <g
+                  class="point"
+                  data-ville={p.nom}
+                  role="button"
+                  tabindex="0"
+                  aria-pressed="false"
+                  aria-label={`${p.nom} : ${p.n} formation${p.n > 1 ? "s" : ""}`}
+                  transform={`translate(${p.x} ${p.y})`}
+                >
+                  {/* Zone tactile invisible d'au moins 44 px une fois la carte réduite sur téléphone */}
+                  <circle class="zone" r={Math.max(rayon(p.n), 22)} />
+                  <circle class="disque" r={rayon(p.n)} />
+                  <text class="nombre" text-anchor="middle" dy="0.35em">{p.n}</text>
+                  <text
+                    class="nom"
+                    x={Math.round((p.etiquette.x - p.x) * 10) / 10}
+                    y={Math.round((p.etiquette.y - p.y) * 10) / 10}
+                    text-anchor={p.etiquette.ancre}
+                    dy="0.35em"
+                  >{p.nom}</text>
+                </g>
+              ))}
+            </svg>
+            <figcaption class="discret">
+              Touchez une ville pour n'afficher que ses formations. Les formations à distance ou dans
+              plusieurs villes figurent dans la liste.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="colonne-liste">
+          <form class="filtres carte-bloc" id="filtres" role="search" hidden>
+            <label class="champ champ-large">
+              <span>Rechercher</span>
+              <input type="search" name="q" placeholder="Intitulé, ville, faculté…" autocomplete="off" />
+            </label>
+            <label class="champ">
+              <span>Discipline</span>
+              <select name="discipline">
+                <option value="">Toutes</option>
+                {disciplinesPresentes.map(([code, nom]) => <option value={code}>{nom}</option>)}
+              </select>
+            </label>
+            <label class="champ">
+              <span>Type</span>
+              <select name="type">
+                <option value="">Tous</option>
+                {typesPresents.map(([code, nom]) => <option value={code}>{nom}</option>)}
+              </select>
+            </label>
+            <label class="champ">
+              <span>Secteur</span>
+              <select name="secteur">
+                <option value="">Tous</option>
+                {Object.entries(ref.secteurs).map(([code, nom]) => <option value={code}>{nom}</option>)}
+              </select>
+            </label>
+            <label class="champ">
+              <span>Ville</span>
+              <select name="ville">
+                <option value="">Toutes</option>
+                {villesPresentes.map((v) => <option value={v}>{v}</option>)}
+              </select>
+            </label>
+            <button type="reset" class="effacer">Effacer les filtres</button>
+          </form>
+
+          <h3 class="invisible">Liste des formations</h3>
+          <p class="resultat" id="resultat" aria-live="polite">
+            {formations.length} formations
+          </p>
+
+          <ul class="liste" id="liste">
+            {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
+          </ul>
+          <p class="aucun discret" id="aucun" hidden>
+            Aucune formation ne correspond à ces critères. Essayez d'effacer un filtre.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bande blanche methode" aria-labelledby="titre-methode">
+    <div class="cadre">
+      <p class="surtitre">Méthode</p>
+      <h2 id="titre-methode">Des fiches fiables, reliées à leur source</h2>
+      <ol class="etapes">
+        <li>
+          <span class="etape-numero" aria-hidden="true">1</span>
+          <h3>Relevée à la source</h3>
+          <p>Chaque fiche est établie à partir de la page ou de la plaquette officielle de l'université ou de l'organisme, jamais d'un site tiers.</p>
+        </li>
+        <li>
+          <span class="etape-numero" aria-hidden="true">2</span>
+          <h3>Vérifiée avant publication</h3>
+          <p>Une seconde relecture recoupe chaque information avec la source, puis la fiche est validée avant d'être mise en ligne.</p>
+        </li>
+        <li>
+          <span class="etape-numero" aria-hidden="true">3</span>
+          <h3>Datée et sourcée</h3>
+          <p>La date de dernière vérification et le lien vers la source figurent sur chaque fiche. Ce qui n'est pas publié reste vide.</p>
+        </li>
+      </ol>
+      <p><a href="/a-propos/">Lire la méthode complète</a></p>
+    </div>
+  </section>
+
+  <section class="bande appel" aria-labelledby="titre-appel">
+    <div class="cadre appel-grille">
+      <div>
+        <h2 id="titre-appel">Une formation manque ou une information a changé ?</h2>
+        <p>Organismes et praticiens : écrivez-nous en indiquant la référence de la fiche ou le lien de la page officielle.</p>
+      </div>
+      <p class="appel-adresse"><span class="adresse">contact@cuspeed.fr</span></p>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .intro {
-    margin-bottom: 20px;
+  /* Héros */
+  .heros {
+    padding-block: clamp(36px, 6vw, 80px) clamp(32px, 5vw, 64px);
   }
-  .chiffres-cles {
+  .heros-grille {
+    display: grid;
+    gap: 32px;
+    align-items: center;
+  }
+  @media (min-width: 920px) {
+    .heros-grille {
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+      gap: 56px;
+    }
+  }
+  .heros-texte {
+    min-width: 0;
+  }
+  .chapo {
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    color: var(--discret);
+    margin: 0 0 24px;
+  }
+  .actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 4px 20px;
-    color: var(--discret);
+    gap: 12px;
+  }
+  .garanties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+    font-weight: 500;
     font-size: 0.95rem;
   }
-  .chiffres-cles b {
+  .garanties li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  /* Coche géométrique : carré lime, coche marine */
+  .garanties li::before {
+    content: "";
+    width: 18px;
+    height: 18px;
+    flex: none;
+    border-radius: 5px;
+    background:
+      no-repeat center / 12px
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.2 4.8 9 10 3' fill='none' stroke='%2317243B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),
+      var(--lime);
+  }
+
+  /* Chiffres en tuiles qui montent : la progression */
+  .chiffres-cles {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: end;
+    gap: 10px;
+  }
+  .tuile {
+    display: grid;
+    align-content: end;
+    gap: 2px;
+    border-radius: var(--rayon);
+    padding: 14px;
+    min-width: 0;
+  }
+  .tuile b {
+    font-family: var(--titre);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .tuile span {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  .tuile-1 {
+    min-height: 120px;
+    background: var(--lime);
+    color: var(--encre-marine);
+  }
+  .tuile-2 {
+    min-height: 170px;
+    background: var(--bleu-profond);
+    color: #ffffff;
+  }
+  .tuile-3 {
+    min-height: 220px;
+    background: var(--bleu);
+    color: #ffffff;
+  }
+  @media (min-width: 920px) {
+    .tuile-1 { min-height: 150px; }
+    .tuile-2 { min-height: 225px; }
+    .tuile-3 { min-height: 300px; }
+    .tuile { padding: 18px; }
+  }
+
+  /* Disciplines */
+  .disciplines {
+    padding-block: 0 clamp(40px, 6vw, 72px);
+  }
+  .disciplines h2 {
+    margin-top: 0;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  }
+  .pastilles {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pastille {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 8px 8px 16px;
+    border: 1px solid var(--trait);
+    border-radius: 999px;
+    background: var(--surface);
     color: var(--encre);
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+  }
+  .pastille:hover {
+    border-color: var(--accent);
+    color: var(--accent-fort);
+  }
+  .pastille[aria-current="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-texte);
+  }
+  .pastille-nombre {
+    min-width: 28px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--fond);
+    color: var(--discret);
+    font-size: 0.8rem;
     font-weight: 600;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .pastille[aria-current="true"] .pastille-nombre {
+    background: var(--lime);
+    color: var(--encre-marine);
+  }
+
+  /* Recherche : carte + liste */
+  #recherche {
+    scroll-margin-top: 8px;
+  }
+  #recherche h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
   }
   .disposition {
     display: grid;
@@ -182,7 +408,7 @@ const page = {
   }
   .carte {
     margin: 0;
-    padding: 10px;
+    padding: 12px;
   }
   .carte svg {
     display: block;
@@ -212,9 +438,12 @@ const page = {
     stroke-width: 2;
     transition: opacity 0.15s;
   }
+  .point:hover .disque {
+    fill: var(--accent-fort);
+  }
   .point .nombre {
     fill: var(--accent-texte);
-    font: 600 10px var(--chiffres);
+    font: 600 10px var(--texte);
   }
   .point .nom {
     fill: var(--encre);
@@ -230,8 +459,8 @@ const page = {
     fill: var(--discret);
   }
   .point[aria-pressed="true"] .disque {
-    stroke: var(--encre);
-    stroke-width: 3;
+    stroke: var(--lime);
+    stroke-width: 4;
   }
   .point:focus-visible {
     outline: none;
@@ -243,13 +472,14 @@ const page = {
   .filtres {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px 12px;
+    gap: 12px;
     align-items: end;
   }
   .champ {
     display: grid;
-    gap: 4px;
+    gap: 5px;
     font-size: 0.85rem;
+    font-weight: 500;
     color: var(--discret);
     min-width: 0;
   }
@@ -259,28 +489,125 @@ const page = {
   .champ input,
   .champ select {
     font: inherit;
+    font-weight: 400;
     font-size: 1rem;
     color: var(--encre);
     background: var(--fond);
     border: 1px solid var(--trait);
-    border-radius: 8px;
-    padding: 9px 10px;
+    border-radius: var(--rayon-petit);
+    padding: 10px 12px;
+    min-height: 46px;
     width: 100%;
     min-width: 0;
   }
+  .champ input:focus,
+  .champ select:focus {
+    border-color: var(--accent);
+  }
   .effacer {
     font: inherit;
-    font-size: 0.9rem;
-    color: var(--accent);
+    font-size: 0.95rem;
+    font-weight: 600;
+    min-height: 46px;
+    color: var(--accent-fort);
     background: none;
     border: 1px solid var(--trait);
-    border-radius: 8px;
-    padding: 9px 10px;
+    border-radius: var(--rayon-petit);
+    padding: 10px 12px;
     cursor: pointer;
   }
+  .effacer:hover {
+    border-color: var(--accent);
+  }
   .resultat {
-    margin: 4px 2px 0;
+    margin: 6px 2px 0;
+    font-family: var(--titre);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  /* Méthode */
+  .methode h2 {
+    margin-top: 0;
+  }
+  .etapes {
+    list-style: none;
+    padding: 0;
+    margin: 28px 0 20px;
+    display: grid;
+    gap: 16px;
+  }
+  @media (min-width: 760px) {
+    .etapes {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .etapes li {
+    background: var(--fond);
+    border-radius: var(--rayon);
+    padding: 22px;
+    min-width: 0;
+  }
+  .etapes h3 {
+    font-size: 1.1rem;
+    margin: 14px 0 6px;
+  }
+  .etapes p {
+    margin: 0;
+    color: var(--discret);
+  }
+  .etape-numero {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--bleu);
+    color: #ffffff;
+    font-family: var(--titre);
+    font-weight: 800;
+    font-size: 1.3rem;
+  }
+  .etapes li:last-child .etape-numero {
+    background: var(--lime);
+    color: var(--encre-marine);
+  }
+
+  /* Appel final */
+  .appel {
+    background: var(--bandeau);
+    color: var(--bandeau-texte);
+    padding-block: clamp(40px, 6vw, 72px);
+  }
+  .appel-grille {
+    display: grid;
+    gap: 20px;
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .appel-grille {
+      grid-template-columns: minmax(0, 1.6fr) auto;
+      gap: 40px;
+    }
+  }
+  .appel h2 {
+    margin: 0 0 10px;
+    color: #ffffff;
+  }
+  .appel p {
+    margin: 0;
+    color: #dfe7fb;
+  }
+  .appel-adresse .adresse {
+    display: inline-block;
+    background: var(--lime);
+    color: var(--encre-marine);
     font-weight: 600;
+    font-size: 1.1rem;
+    padding: 12px 20px;
+    border-radius: var(--rayon-petit);
+    user-select: all;
+    overflow-wrap: anywhere;
   }
 </style>
 
@@ -291,7 +618,26 @@ const page = {
   const points = [...document.querySelectorAll<SVGGElement>(".point")];
   const resultat = document.getElementById("resultat")!;
   const aucun = document.getElementById("aucun")!;
+  const pastilles = [...document.querySelectorAll<HTMLAnchorElement>(".pastille")];
+  const CHAMPS = ["q", "discipline", "type", "secteur", "ville"];
   formulaire.hidden = false;
+
+  // Filtres repris de l'adresse (?discipline=paro…) : liens partageables et pastilles des disciplines.
+  // Une valeur absente des listes est ignorée par le navigateur (le champ reste sur « Toutes »).
+  const parametres = new URLSearchParams(location.search);
+  for (const nom of CHAMPS) {
+    const valeur = parametres.get(nom);
+    const champ = formulaire.elements.namedItem(nom) as HTMLInputElement | HTMLSelectElement | null;
+    if (valeur && champ) champ.value = valeur.slice(0, 100);
+  }
+
+  // L'adresse suit les filtres, sans recharger la page ni créer d'entrée d'historique.
+  function majAdresse(f: Record<string, string>) {
+    const p = new URLSearchParams();
+    for (const nom of CHAMPS) if (f[nom]) p.set(nom, f[nom]);
+    const requete = p.toString();
+    history.replaceState(null, "", `${location.pathname}${requete ? "?" + requete : ""}${location.hash}`);
+  }
 
   const normaliser = (s: string) =>
     s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -319,6 +665,8 @@ const page = {
     }
     resultat.textContent = `${visibles} formation${visibles > 1 ? "s" : ""}`;
     aucun.hidden = visibles > 0;
+    for (const a of pastilles) a.setAttribute("aria-current", String(a.dataset.discipline === f.discipline));
+    majAdresse(f);
 
     // Les nombres de la carte suivent les autres filtres, pas celui de la ville.
     for (const p of points) {
@@ -345,6 +693,15 @@ const page = {
         e.preventDefault();
         choisirVille(p.dataset.ville!);
       }
+    });
+  }
+  for (const a of pastilles) {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      const champ = formulaire.elements.namedItem("discipline") as HTMLSelectElement;
+      champ.value = champ.value === a.dataset.discipline ? "" : a.dataset.discipline!;
+      appliquer();
+      document.getElementById("recherche")!.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
   formulaire.addEventListener("input", appliquer);

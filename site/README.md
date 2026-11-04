@@ -51,6 +51,7 @@ CUSPEED_DATA=/chemin/export-validees CUSPEED_DATA_CONTROLE=/chemin/miroir-comple
 ## Choix
 
 - Aucune ressource externe (police, carte, script, mesure d'audience) : rien n'est transmis à un tiers quand on visite le site, et pas de bandeau cookies.
+- Identité visuelle : polices League Spartan (titres, logo) et DM Sans (texte), hébergées sur le site via les paquets `@fontsource` (licence OFL, sous-ensemble latin, 5 fichiers d'environ 14 Ko) ; palette officielle et contrastes vérifiés en tête de `src/styles/global.css` ; logo vectorisé dans `src/lib/logo.js` et `src/components/Logo.astro`.
 - Liste complète écrite dans la page : lisible sans JavaScript et par les moteurs de recherche. Le script de la page d'accueil ne fait que masquer ce qui ne correspond pas aux filtres.
 - Adresses stables : une adresse publiée ne change plus, même si l'intitulé change, pour garder l'historique Google et les liens partagés. Voir ci-dessous.
 

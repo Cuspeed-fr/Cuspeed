@@ -31,6 +31,10 @@ Deux protections indépendantes :
 CUSPEED_DATA=/chemin/export-validees CUSPEED_DATA_CONTROLE=/chemin/miroir-complet CUSPEED_PUBLICATION=1 npm run build
 ```
 
+## Publication
+
+`scripts/publier.sh` (à la racine du dépôt) enchaîne l'export depuis la base, les contrôles et la construction ; `.github/workflows/publication.yml` le lance depuis GitHub (bouton « Run workflow »). Avec `--essai`, le site est construit pour une adresse de test : toutes les pages portent `noindex` et `robots.txt` interdit tout (`CUSPEED_ESSAI=1`).
+
 ## Organisation
 
 | Fichier | Rôle |

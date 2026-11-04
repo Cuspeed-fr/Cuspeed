@@ -10,6 +10,8 @@ interface Props {
 }
 
 const { titre, description, donneesStructurees = [], indexer = true } = Astro.props;
+// Construction pour une adresse de test (CUSPEED_ESSAI=1) : aucune page n'est référencée.
+const essai = process.env.CUSPEED_ESSAI === "1";
 const titreComplet = titre === "Cuspeed" ? titre : `${titre} | Cuspeed`;
 const canonique = new URL(Astro.url.pathname, Astro.site).href;
 
@@ -33,7 +35,7 @@ const json = (o: object) => JSON.stringify(o).replace(/</g, "\\u003c");
     <title>{titreComplet}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonique} />
-    {!indexer && <meta name="robots" content="noindex" />}
+    {(!indexer || essai) && <meta name="robots" content="noindex" />}
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#f5f6f4" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#121614" media="(prefers-color-scheme: dark)" />

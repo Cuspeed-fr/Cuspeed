@@ -1,0 +1,50 @@
+# Publication du site, lancée à la main (onglet Actions > Publication > Run workflow).
+# Exporte les fiches validées, contrôle, construit, puis conserve le site construit
+# comme fichier téléchargeable. L'envoi chez l'hébergeur sera ajouté quand l'hébergeur
+# sera choisi : tant qu'une étape échoue, rien n'est envoyé et la version en ligne reste en place.
+#
+# Secret utilisé : CUSPEED_SAUVEGARDE_DB_URL (rôle lecteur_sauvegarde, lecture seule).
+name: Publication
+
+on:
+  workflow_dispatch:
+    inputs:
+      essai:
+        description: "Adresse de test (pages non référencées, mentions légales incomplètes tolérées)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  publication:
+    runs-on: ubuntu-latest
+    # Une seule publication à la fois.
+    concurrency: publication
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml==6.0.2 "psycopg[binary]==3.2.3"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Exporter, contrôler, construire
+        env:
+          CUSPEED_DB_URL: ${{ secrets.CUSPEED_SAUVEGARDE_DB_URL }}
+        run: |
+          if [ "${{ inputs.essai }}" = "true" ]; then
+            scripts/publier.sh --essai
+          else
+            scripts/publier.sh
+          fi
+      - name: Conserver le site construit (30 jours)
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-${{ inputs.essai && 'essai' || 'production' }}-${{ github.run_number }}
+          path: site/dist/
+          retention-days: 30

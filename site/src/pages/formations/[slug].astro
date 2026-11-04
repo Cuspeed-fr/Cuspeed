@@ -1,7 +1,7 @@
 ---
 // Fiche d'une formation : une page par formation publiée.
 import Base from "../../layouts/Base.astro";
-import { chargerDonnees, tarifLisible, dateLisible, villesDe } from "../../lib/donnees.js";
+import { chargerDonnees, tarifLisible, dateLisible, villesDe, couper } from "../../lib/donnees.js";
 
 export function getStaticPaths() {
   const donnees = chargerDonnees();
@@ -30,7 +30,8 @@ const morceaux = [
   f.duree ? `Durée : ${f.duree}` : null,
   tarif ? `Tarif : ${tarif}` : null,
 ];
-const description = morceaux.filter(Boolean).join(". ") + ". Fiche relevée sur la source officielle.";
+// Les moteurs affichent environ 160 caractères : on coupe proprement à la fin d'un mot.
+const description = couper(morceaux.filter(Boolean).join(". ") + ". Source officielle citée.", 160);
 
 // Données structurées schema.org (Course). Seules les informations connues sont écrites.
 const instances = f.sessions

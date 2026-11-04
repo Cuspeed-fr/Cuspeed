@@ -116,12 +116,15 @@ for (const chemin of pages) {
   if (!nom.endsWith(".html")) continue;
   if (RESSOURCE_EXTERNE.some((m) => m.test(contenu))) erreurs.push(`${nom} : charge une ressource depuis un autre site`);
 
+  // Une page de redirection n'est pas une page de contenu : pas de contrôle de doublon.
+  const redirection = /<meta http-equiv="refresh"/.test(contenu);
+
   const titre = contenu.match(/<title>([^<]*)<\/title>/)?.[1]?.trim();
   if (!titre) erreurs.push(`${nom} : pas de titre`);
-  else titres.set(titre, [...(titres.get(titre) ?? []), nom]);
+  else if (!redirection) titres.set(titre, [...(titres.get(titre) ?? []), nom]);
   const description = contenu.match(/<meta name="description" content="([^"]*)"/)?.[1];
   if (!description || description.length < 30) erreurs.push(`${nom} : description absente ou trop courte`);
-  else if (!/<meta name="robots" content="noindex"/.test(contenu)) {
+  else if (!redirection && !/<meta name="robots" content="noindex"/.test(contenu)) {
     descriptions.set(description, [...(descriptions.get(description) ?? []), nom]);
   }
   if (!/<link rel="canonical"/.test(contenu)) erreurs.push(`${nom} : pas d'adresse canonique`);

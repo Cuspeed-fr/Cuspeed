@@ -19,6 +19,32 @@ export function dossierDonnees() {
   return resolve(process.env.CUSPEED_DATA || join(process.cwd(), "..", "data"));
 }
 
+/**
+ * Registre des adresses publiées (site/adresses.json).
+ * Une adresse de page, une fois publiée, ne change plus, même si l'intitulé change :
+ * Google garde l'historique de la page et les liens partagés restent valides.
+ * Format :
+ *   formations / organismes : { "F0084": "f0084-du-parodontologie" }  adresse figée par identifiant
+ *   anciennes : { "f0084-ancien-intitule": "F0084" }  anciennes adresses, redirigées vers l'actuelle
+ * Les fiches absentes du registre reçoivent une adresse calculée ; `npm run figer-adresses`
+ * les ajoute au registre (par pull request).
+ */
+export function fichierRegistre() {
+  return resolve(process.env.CUSPEED_REGISTRE || join(process.cwd(), "adresses.json"));
+}
+
+export function lireRegistre(chemin = fichierRegistre()) {
+  const vide = { formations: {}, organismes: {}, anciennes: {} };
+  if (!existsSync(chemin)) return vide;
+  const r = JSON.parse(readFileSync(chemin, "utf8"));
+  return { formations: r.formations ?? {}, organismes: r.organismes ?? {}, anciennes: r.anciennes ?? {} };
+}
+
+/** Adresse calculée à partir de l'identifiant et du nom. */
+export function adresseCalculee(id, nom) {
+  return `${String(id).toLowerCase()}-${enSlug(nom)}`;
+}
+
 function lireYaml(chemin) {
   return parse(readFileSync(chemin, "utf8"));
 }
@@ -37,10 +63,10 @@ export function enSlug(texte) {
 }
 
 /** Ne garde que les champs publics d'une fiche formation. */
-function formationPublique(f) {
+function formationPublique(f, registre) {
   return {
     id: f.id,
-    slug: `${f.id.toLowerCase()}-${enSlug(f.intitule)}`,
+    slug: registre.formations[f.id] ?? adresseCalculee(f.id, f.intitule),
     intitule: f.intitule,
     organisme: f.organisme,
     secteur: f.secteur,
@@ -73,10 +99,10 @@ function lienSur(url) {
   return typeof url === "string" && /^https?:\/\//i.test(url.trim()) ? url.trim() : null;
 }
 
-function organismePublic(o) {
+function organismePublic(o, registre) {
   return {
     id: o.id,
-    slug: `${o.id.toLowerCase()}-${enSlug(o.nom)}`,
+    slug: registre.organismes[o.id] ?? adresseCalculee(o.id, o.nom),
     nom: o.nom,
     type: o.type,
     ville: o.ville ?? null,
@@ -103,13 +129,14 @@ function lieuPublic(l) {
  */
 const cache = new Map();
 
-export function chargerDonnees(dossier = dossierDonnees()) {
+export function chargerDonnees(dossier = dossierDonnees(), registre = lireRegistre()) {
   // Chaque page appelle cette fonction : on ne relit les fichiers qu'une fois par construction.
-  if (!cache.has(dossier)) cache.set(dossier, lireDonnees(dossier));
-  return cache.get(dossier);
+  const cle = `${dossier}|${JSON.stringify(registre)}`;
+  if (!cache.has(cle)) cache.set(cle, lireDonnees(dossier, registre));
+  return cache.get(cle);
 }
 
-function lireDonnees(dossier) {
+function lireDonnees(dossier, registre) {
   const referentiels = lireYaml(join(dossier, "referentiels.yaml"));
   const tousOrganismes = lireYaml(join(dossier, "organismes.yaml")) ?? [];
   const tousLieux = lireYaml(join(dossier, "lieux.yaml")) ?? [];
@@ -124,9 +151,9 @@ function lireDonnees(dossier) {
     .sort()
     .map((nom) => lireYaml(join(dossierFormations, nom)))
     .filter((f) => f && f.statut === "validee")
-    .map(formationPublique);
+    .map((f) => formationPublique(f, registre));
 
-  const organismesParId = new Map(tousOrganismes.map((o) => [o.id, organismePublic(o)]));
+  const organismesParId = new Map(tousOrganismes.map((o) => [o.id, organismePublic(o, registre)]));
   const lieuxParId = new Map(tousLieux.map((l) => [l.id, lieuPublic(l)]));
 
   const erreurs = [];
@@ -144,9 +171,30 @@ function lireDonnees(dossier) {
       if (s.lieu && !lieuxParId.has(s.lieu)) erreurs.push(`${f.id} : lieu inconnu ${s.lieu}`);
     }
   }
+  // Deux pages ne peuvent pas partager une adresse, et une ancienne adresse ne peut pas
+  // être aussi l'adresse actuelle d'une page.
+  const adresses = new Map();
+  for (const f of formations) {
+    if (adresses.has(f.slug)) erreurs.push(`${f.id} : adresse ${f.slug} déjà prise par ${adresses.get(f.slug)}`);
+    adresses.set(f.slug, f.id);
+  }
+  for (const [ancienne, id] of Object.entries(registre.anciennes)) {
+    if (adresses.has(ancienne)) erreurs.push(`ancienne adresse ${ancienne} (${id}) encore utilisée par ${adresses.get(ancienne)}`);
+  }
   if (erreurs.length) {
     throw new Error("Données incohérentes, construction arrêtée :\n" + erreurs.join("\n"));
   }
+
+  // Redirections : adresse courte /formations/f0084/ et anciennes adresses, vers l'adresse
+  // actuelle. Seulement pour les fiches publiées (une fiche retirée n'est jamais mentionnée).
+  const parId = new Map(formations.map((f) => [f.id, f]));
+  const redirections = [
+    ...formations.map((f) => ({ de: f.id.toLowerCase(), vers: f })),
+    ...Object.entries(registre.anciennes)
+      .filter(([, id]) => parId.has(id))
+      .map(([ancienne, id]) => ({ de: ancienne, vers: parId.get(id) })),
+  ];
+  const nonFigees = formations.filter((f) => !registre.formations[f.id]).map((f) => f.id);
 
   // Seuls les organismes et lieux qui ont au moins une formation publiée sont exposés.
   const idsOrganismes = new Set(formations.map((f) => f.organisme));
@@ -168,6 +216,8 @@ function lireDonnees(dossier) {
     formations,
     organismes,
     lieux,
+    redirections,
+    nonFigees,
     organisme: (id) => organismesParId.get(id),
     lieu: (id) => lieuxParId.get(id),
   };
@@ -196,6 +246,14 @@ export function tarifLisible(tarif) {
     return tarif.annee ? `${montant} € (${tarif.annee})` : `${montant} €`;
   }
   return tarif?.texte ?? null;
+}
+
+/** Coupe un texte à `max` caractères au plus, à la fin d'un mot, avec « … ». */
+export function couper(texte, max) {
+  if (texte.length <= max) return texte;
+  const coupe = texte.slice(0, max - 1);
+  const fin = coupe.lastIndexOf(" ");
+  return (fin > max * 0.6 ? coupe.slice(0, fin) : coupe).replace(/[\s.,;:–-]+$/, "") + "…";
 }
 
 /** Date AAAA-MM-JJ → « 2 novembre 2026 ». */

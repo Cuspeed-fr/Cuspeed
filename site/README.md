@@ -48,4 +48,13 @@ CUSPEED_DATA=/chemin/export-validees CUSPEED_DATA_CONTROLE=/chemin/miroir-comple
 
 - Aucune ressource externe (police, carte, script, mesure d'audience) : rien n'est transmis à un tiers quand on visite le site, et pas de bandeau cookies.
 - Liste complète écrite dans la page : lisible sans JavaScript et par les moteurs de recherche. Le script de la page d'accueil ne fait que masquer ce qui ne correspond pas aux filtres.
-- Adresses de fiche : identifiant + intitulé. L'identifiant ne change jamais ; si un intitulé change, l'adresse change aussi (à traiter par des redirections le jour où cela arrivera).
+- Adresses stables : une adresse publiée ne change plus, même si l'intitulé change, pour garder l'historique Google et les liens partagés. Voir ci-dessous.
+
+## Adresses des pages (`adresses.json`)
+
+- Chaque fiche publiée a une adresse figée dans `adresses.json` (ex. `F0084` → `/formations/f0084-du-parodontologie-medicale-et-chirurgicale/`). Si l'intitulé change dans la base, l'adresse reste la même.
+- Chaque fiche a aussi une adresse courte permanente, `/formations/f0084/`, qui redirige vers l'adresse complète.
+- Une nouvelle fiche validée reçoit une adresse calculée. La construction le signale ; `npm run figer-adresses` l'ajoute au registre, à proposer par pull request. Un test vérifie que le registre couvre toutes les fiches validées du miroir `data/`.
+- Pour renommer volontairement une adresse (rare) : changer l'entrée, et ajouter l'ancienne dans `anciennes` pour qu'elle redirige vers la nouvelle.
+- Les redirections sont des pages à rafraîchissement immédiat (site statique) ; Google les traite comme des redirections permanentes. Si l'hébergeur permet de vraies redirections, on pourra les générer à la place.
+- Une fiche archivée n'est plus publiée : son adresse renvoie la page 404, et Google l'oublie. Aucune page ne mentionne une fiche non validée.

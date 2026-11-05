@@ -9,7 +9,7 @@ const organisme = donnees.organisme(f.organisme);
 const villes = villesDe(f, donnees);
 const tarif = tarifLisible(f.tarif);
 const texteRecherche = enSlug(
-  [f.intitule, organisme?.nom, ...villes, ...f.disciplines.map((d) => ref.disciplines[d])].join(" "),
+  [f.intitule, organisme?.nom, ...villes, ...f.disciplines.map((d) => ref.disciplines[d]), f.precisions ?? ""].join(" "),
 ).replace(/-/g, " ");
 ---
 <li

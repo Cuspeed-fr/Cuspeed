@@ -37,6 +37,19 @@ test("aucune note interne ni aucun statut ne sort du chargeur", () => {
   }
 });
 
+test("les précisions publiques sont chargées, et absentes elles valent null", () => {
+  const d = chargerDonnees(JEU);
+  assert.equal(d.formations[0].precisions, "Clinique le lundi (essai)");
+  const dossier = copieDuJeu();
+  try {
+    const chemin = join(dossier, "formations", "F9001-du-essai.yaml");
+    writeFileSync(chemin, readFileSync(chemin, "utf8").replace(/^precisions:.*\n/m, ""));
+    assert.equal(chargerDonnees(dossier).formations[0].precisions, null);
+  } finally {
+    rmSync(dossier, { recursive: true, force: true });
+  }
+});
+
 test("un organisme sans fiche publiée n'est pas exposé", () => {
   const d = chargerDonnees(JEU);
   assert.deepEqual(d.organismes.map((o) => o.id), ["O001"]);

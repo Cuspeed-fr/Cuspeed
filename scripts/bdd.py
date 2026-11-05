@@ -19,7 +19,7 @@ import psycopg
 
 # Champs qu'un agent peut proposer de changer sur une fiche (même liste que la contrainte de la table propositions)
 CHAMPS_PROPOSABLES = ("intitule", "duree", "volume_horaire_h", "tarif_texte", "tarif_euros", "tarif_annee",
-                      "prerequis", "url_officielle", "format", "notes")
+                      "prerequis", "url_officielle", "format", "notes", "precisions")
 
 
 def connexion():
@@ -37,12 +37,13 @@ def creer(chemin):
     with connexion() as conn, conn.cursor() as cur:
         cur.execute(
             """insert into formations (intitule, organisme_id, secteur, type, format, duree, volume_horaire_h,
-                   tarif_texte, tarif_euros, tarif_annee, prerequis, financement, url_officielle, statut,
-                   derniere_verification, notes)
-               values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'a-verifier',%s,%s) returning id""",
+                   tarif_texte, tarif_euros, tarif_annee, prerequis, precisions, financement, url_officielle,
+                   statut, derniere_verification, notes)
+               values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'a-verifier',%s,%s) returning id""",
             (d["intitule"], d["organisme"], d["secteur"], d["type"], d.get("format"), d.get("duree"),
              d.get("volume_horaire_h"), t.get("texte"), t.get("euros"), t.get("annee"), d.get("prerequis"),
-             d.get("financement") or [], d["url_officielle"], d.get("derniere_verification"), d.get("notes")))
+             d.get("precisions"), d.get("financement") or [], d["url_officielle"],
+             d.get("derniere_verification"), d.get("notes")))
         fid = cur.fetchone()[0]
         for disc in d.get("disciplines") or []:
             cur.execute("insert into formation_disciplines (formation_id, discipline) values (%s,%s)", (fid, disc))

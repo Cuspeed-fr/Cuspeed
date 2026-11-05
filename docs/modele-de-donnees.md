@@ -31,6 +31,7 @@ La base Supabase (région Paris) est la source de vérité. Sa structure est dé
 | `volume_horaire_h` | Nombre d'heures si la source le donne | `141` |
 | `tarif_texte`, `tarif_euros`, `tarif_annee` | Tarif formation continue TTC | `3200`, `2026-27` |
 | `prerequis` | Diplômes ou expérience demandés | |
+| `precisions` | Remarque **publique** courte (200 caractères au plus), tirée de la source officielle : partenariat avec une autre faculté, lieu délocalisé, organisation (« clinique le lundi »)… Affichée sur la fiche (« À savoir »). Ne jamais y mettre une durée, un format, un nombre de places ou le DPC, qui ont leur propre champ. | « Enseignement délocalisé à La Réunion » |
 | `financement` | `dpc`, `fifpl` si la source l'indique | `{dpc}` |
 | `url_officielle` | Page ou PDF officiel, obligatoire, commence par `http` | |
 | `statut` | `a-verifier`, `validee`, `archivee` | `validee` |

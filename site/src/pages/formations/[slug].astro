@@ -129,6 +129,12 @@ const fil = {
               <dd>{f.prerequis}</dd>
             </>
           )}
+          {f.precisions && (
+            <>
+              <dt>À savoir</dt>
+              <dd>{f.precisions}</dd>
+            </>
+          )}
           {f.financement.length > 0 && (
             <>
               <dt>Financement</dt>

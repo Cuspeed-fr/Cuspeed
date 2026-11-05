@@ -13,6 +13,7 @@ tarif:
   euros: 3200
   annee: 2026-27
 prerequis: null
+precisions: Clinique le lundi (essai)
 financement:
 - dpc
 url_officielle: https://exemple.invalid/du-paro

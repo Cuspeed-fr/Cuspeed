@@ -24,6 +24,11 @@ from psycopg.rows import dict_row
 
 RACINE = Path(__file__).resolve().parent.parent
 
+# Prises en charge autorisées par la base (migration 20261106000100) et leur libellé sur le site.
+# À tenir à jour avec la contrainte formations_financement_check : le contrôle des données
+# (verifier_donnees.py) refuse une valeur absente de cette liste.
+FINANCEMENTS = {"dpc": "DPC", "fifpl": "FIFPL", "opco": "OPCO", "cpf": "CPF"}
+
 
 def slug(texte, longueur=60):
     t = unicodedata.normalize("NFD", texte).encode("ascii", "ignore").decode().lower()
@@ -74,6 +79,8 @@ def main():
         ref["types"] = {r["code"]: r["libelle"] for r in sorted(types, key=lambda r: list(ref["types"]).index(r["code"])
                                                                   if r["code"] in ref["types"] else 99)}
         ref["types_universitaires"] = [c for c in ref["types"] if any(r["code"] == c and r["universitaire"] for r in types)]
+        # Prises en charge : mêmes valeurs que la contrainte formations_financement_check de la base.
+        ref["financements"] = {**(ref.get("financements") or {}), **FINANCEMENTS}
         ecrire_yaml(sortie / "referentiels.yaml", ref)
 
         cur.execute("select * from organismes order by id")

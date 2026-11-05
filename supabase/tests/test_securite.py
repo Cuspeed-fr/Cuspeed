@@ -49,6 +49,8 @@ essai("voit uniquement les fiches validées", "anon", "select id from formations
 essai("voit les fiches validées", "anon", "select id from formations", 160)
 essai("ne lit pas les notes internes", "anon", "select notes from formations", "erreur")
 essai("lit les précisions publiques des fiches validées", "anon", "select precisions from formations", 160)
+essai("lit la discipline « Gestion & management du cabinet »", "anon",
+      "select 1 from disciplines where code = 'gestion' and libelle = 'Gestion & management du cabinet'", 1)
 essai("ne lit pas les pistes", "anon", "select * from pistes", "erreur")
 essai("ne lit pas le journal", "anon", "select * from journal", "erreur")
 essai("n'écrit pas", "anon", NOUVELLE.replace("%s", "'a-verifier'"), "erreur")
@@ -68,6 +70,14 @@ essai("ne supprime aucune session d'une fiche validée", "agent_extracteur",
 essai("retire seulement les sessions d'une fiche à vérifier", "agent_extracteur", "delete from sessions", 35)
 essai("ne change pas les disciplines d'une fiche validée", "agent_extracteur",
       "delete from formation_disciplines where formation_id in (select id from formations where statut = 'validee')", 0)
+essai("range une fiche à vérifier dans la discipline gestion", "agent_extracteur",
+      "insert into formation_disciplines (formation_id, discipline) "
+      "select id, 'gestion' from formations f where statut = 'a-verifier' and not exists "
+      "(select 1 from formation_disciplines d where d.formation_id = f.id and d.discipline = 'gestion') "
+      "order by id limit 1", 1)
+essai("indique une prise en charge OPCO ou CPF sur une fiche à vérifier", "agent_extracteur",
+      "update formations set financement = array['dpc','fifpl','opco','cpf'] "
+      "where id = (select min(id) from formations where statut = 'a-verifier')", 1)
 essai("n'accède pas au service de l'API en tant que service_role", "anon", "select appliquer_proposition(1)", "erreur")
 essai("un utilisateur connecté n'accepte pas de proposition", "authenticated", "select appliquer_proposition(1)", "erreur")
 essai("un utilisateur connecté n'écrit pas", "authenticated", "update formations set intitule = 'x'", "erreur")
@@ -107,6 +117,7 @@ for nom, sql in [
     ("statut inconnu refusé", "update formations set statut = 'publie' where id = 'F0001'"),
     ("organisme inexistant refusé", "update formations set organisme_id = 'O999' where id = 'F0001'"),
     ("discipline inconnue refusée", "insert into formation_disciplines values ('F0001', 'magie')"),
+    ("prise en charge inconnue refusée", "update formations set financement = array['opco','mecenat'] where id = 'F0001'"),
     ("identifiant mal formé refusé", "insert into organismes (id, nom, type) values ('X1', 'x', 'universite')"),
     ("précisions de plus de 200 caractères refusées", "update formations set precisions = repeat('x', 201) where id = 'F0001'"),
     ("précisions vides refusées", "update formations set precisions = '  ' where id = 'F0001'"),

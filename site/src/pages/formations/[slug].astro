@@ -1,7 +1,7 @@
 ---
 // Fiche d'une formation : une page par formation publiée.
 import Base from "../../layouts/Base.astro";
-import { chargerDonnees, tarifLisible, dateLisible, villesDe, couper } from "../../lib/donnees.js";
+import { chargerDonnees, tarifLisible, aidesDe, dateLisible, villesDe, couper } from "../../lib/donnees.js";
 
 export function getStaticPaths() {
   const donnees = chargerDonnees();
@@ -17,6 +17,7 @@ const ref = donnees.referentiels;
 const organisme = donnees.organisme(f.organisme);
 const villes = villesDe(f, donnees);
 const tarif = tarifLisible(f.tarif);
+const aides = aidesDe(f, ref);
 const typeNom = ref.types[f.type] ?? f.type;
 const disciplines = f.disciplines.map((d) => ref.disciplines[d] ?? d);
 const lienFiche = new URL(`/formations/${f.slug}/`, Astro.site).href;
@@ -135,10 +136,10 @@ const fil = {
               <dd>{f.precisions}</dd>
             </>
           )}
-          {f.financement.length > 0 && (
+          {aides.length > 0 && (
             <>
-              <dt>Financement</dt>
-              <dd>{f.financement.map((c) => ref.financements[c] ?? c).join(", ")} (selon la source)</dd>
+              <dt>Éligible aux aides</dt>
+              <dd>{aides.join(", ")} <span class="discret">(selon la source)</span></dd>
             </>
           )}
         </dl>

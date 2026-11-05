@@ -29,6 +29,14 @@ const disciplinesPresentes = Object.entries(ref.disciplines).filter(([code]) =>
 );
 const typesPresents = Object.entries(ref.types).filter(([code]) => formations.some((f) => f.type === code));
 const villesPresentes = [...compte.keys()].sort((a, b) => a.localeCompare(b, "fr"));
+// Prises en charge (DPC, FIFPL, OPCO, CPF) présentes dans les fiches publiées. Sans aucune,
+// le filtre « Éligible aux aides » n'est pas affiché.
+const aidesPresentes = [
+  ...Object.keys(ref.financements),
+  ...formations.flatMap((f) => f.financement).filter((c) => !(c in ref.financements)),
+]
+  .filter((code, i, liste) => liste.indexOf(code) === i && formations.some((f) => f.financement.includes(code)))
+  .map((code) => [code, ref.financements[code] ?? code.toUpperCase()]);
 
 const description =
   `${formations.length} formations post-universitaires et continues pour chirurgiens-dentistes en France : ` +
@@ -161,6 +169,16 @@ const page = {
                 {villesPresentes.map((v) => <option value={v}>{v}</option>)}
               </select>
             </label>
+            {aidesPresentes.length > 0 && (
+              <label class="champ">
+                <span>Éligible aux aides</span>
+                <select name="aides">
+                  <option value="">Indifférent</option>
+                  <option value="oui">Au moins une aide</option>
+                  {aidesPresentes.map(([code, nom]) => <option value={code}>{nom}</option>)}
+                </select>
+              </label>
+            )}
             <button type="reset" class="effacer">Effacer les filtres</button>
           </form>
 
@@ -623,7 +641,7 @@ const page = {
   const resultat = document.getElementById("resultat")!;
   const aucun = document.getElementById("aucun")!;
   const pastilles = [...document.querySelectorAll<HTMLAnchorElement>(".pastille")];
-  const CHAMPS = ["q", "discipline", "type", "secteur", "ville"];
+  const CHAMPS = ["q", "discipline", "type", "secteur", "ville", "aides"];
   formulaire.hidden = false;
   const doux: ScrollBehavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
 
@@ -652,6 +670,10 @@ const page = {
     if (f.discipline && !(d.disciplines ?? "").split(" ").includes(f.discipline)) return false;
     if (f.type && d.type !== f.type) return false;
     if (f.secteur && d.secteur !== f.secteur) return false;
+    // « oui » : au moins une prise en charge ; sinon une prise en charge précise (dpc, opco…).
+    const aides = (d.aides ?? "").split(" ").filter(Boolean);
+    if (f.aides === "oui" && aides.length === 0) return false;
+    if (f.aides && f.aides !== "oui" && !aides.includes(f.aides)) return false;
     if (!ignorerVille && f.ville && !(d.villes ?? "").split("|").includes(f.ville)) return false;
     if (f.q) {
       const texte = d.texte ?? "";

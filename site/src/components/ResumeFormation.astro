@@ -1,13 +1,14 @@
 ---
 // Résumé d'une formation dans une liste. Les attributs data-* servent au filtrage
 // côté navigateur sur la page d'accueil ; ils ne contiennent que des données publiques.
-import { villesDe, regroupementsDe, tarifLisible, enSlug } from "../lib/donnees.js";
+import { villesDe, regroupementsDe, tarifLisible, aidesDe, enSlug } from "../lib/donnees.js";
 
 const { formation: f, donnees } = Astro.props;
 const ref = donnees.referentiels;
 const organisme = donnees.organisme(f.organisme);
 const villes = villesDe(f, donnees);
 const tarif = tarifLisible(f.tarif);
+const aides = aidesDe(f, ref);
 const texteRecherche = enSlug(
   [f.intitule, organisme?.nom, ...villes, ...f.disciplines.map((d) => ref.disciplines[d]), f.precisions ?? ""].join(" "),
 ).replace(/-/g, " ");
@@ -18,6 +19,7 @@ const texteRecherche = enSlug(
   data-type={f.type}
   data-secteur={f.secteur}
   data-villes={regroupementsDe(f, donnees).join("|")}
+  data-aides={f.financement.join(" ")}
   data-texte={texteRecherche}
 >
   <ul class="etiquettes" aria-label="Type et disciplines">
@@ -30,5 +32,6 @@ const texteRecherche = enSlug(
     {villes.length > 0 && <span>{villes.join(", ")}</span>}
     {f.duree && <span>{f.duree}</span>}
     {tarif && <span class="chiffres">{tarif}</span>}
+    {aides.length > 0 && <span>Éligible aux aides : {aides.join(", ")}</span>}
   </div>
 </li>

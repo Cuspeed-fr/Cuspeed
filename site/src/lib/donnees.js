@@ -81,6 +81,8 @@ function formationPublique(f, registre) {
       annee: f.tarif?.annee ?? null,
     },
     prerequis: f.prerequis ?? null,
+    // Remarque publique courte (champ ajouté le 5 novembre 2026, absent des anciennes copies)
+    precisions: typeof f.precisions === "string" && f.precisions.trim() ? f.precisions.trim() : null,
     financement: Array.isArray(f.financement) ? [...f.financement] : [],
     url_officielle: f.url_officielle,
     sessions: (f.sessions ?? []).map((s) => ({

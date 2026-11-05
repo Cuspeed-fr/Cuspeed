@@ -73,7 +73,7 @@ def main():
         formations.append([lit(d["id"]), lit(d["intitule"]), lit(d["organisme"]), lit(d["secteur"]), lit(d["type"]),
                            lit(d.get("format")), lit(d.get("duree")), lit(d.get("volume_horaire_h")),
                            lit(t.get("texte")), lit(t.get("euros")), lit(t.get("annee")), lit(d.get("prerequis")),
-                           tableau(d.get("financement") or []), lit(d["url_officielle"]), lit(d["statut"]),
+                           lit(d.get("precisions")), tableau(d.get("financement") or []), lit(d["url_officielle"]), lit(d["statut"]),
                            lit(d.get("derniere_verification")), lit(d.get("notes"))])
         for disc in d.get("disciplines") or []:
             disciplines.append([lit(d["id"]), lit(disc)])
@@ -82,8 +82,8 @@ def main():
                              lit(s.get("inscriptions") or "a-renseigner"), lit(s.get("places"))])
     parties.append(inserts("formations",
                            ["id", "intitule", "organisme_id", "secteur", "type", "format", "duree", "volume_horaire_h",
-                            "tarif_texte", "tarif_euros", "tarif_annee", "prerequis", "financement", "url_officielle",
-                            "statut", "derniere_verification", "notes"], formations))
+                            "tarif_texte", "tarif_euros", "tarif_annee", "prerequis", "precisions", "financement",
+                            "url_officielle", "statut", "derniere_verification", "notes"], formations))
     parties.append(inserts("formation_disciplines", ["formation_id", "discipline"], disciplines))
     parties.append(inserts("sessions", ["formation_id", "lieu_id", "debut", "fin", "inscriptions", "places"], sessions))
 

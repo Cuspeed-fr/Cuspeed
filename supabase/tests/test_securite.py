@@ -48,6 +48,7 @@ print("Public (le site)")
 essai("voit uniquement les fiches validées", "anon", "select id from formations where statut <> 'validee'", 0)
 essai("voit les fiches validées", "anon", "select id from formations", 160)
 essai("ne lit pas les notes internes", "anon", "select notes from formations", "erreur")
+essai("lit les précisions publiques des fiches validées", "anon", "select precisions from formations", 160)
 essai("ne lit pas les pistes", "anon", "select * from pistes", "erreur")
 essai("ne lit pas le journal", "anon", "select * from journal", "erreur")
 essai("n'écrit pas", "anon", NOUVELLE.replace("%s", "'a-verifier'"), "erreur")
@@ -75,6 +76,12 @@ essai("ne lit pas le journal", "agent_extracteur", "select * from journal", "err
 essai("dépose une proposition", "agent_extracteur",
       "insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
       "values ('F0001', 'duree', '10 h', 'https://exemple.fr')", 1)
+essai("dépose une proposition sur les précisions", "agent_extracteur",
+      "insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
+      "values ('F0001', 'precisions', 'En partenariat avec une autre faculté', 'https://exemple.fr')", 1)
+essai("ne propose pas un champ inconnu", "agent_extracteur",
+      "insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
+      "values ('F0001', 'statut', 'validee', 'https://exemple.fr')", "erreur")
 essai("ne s'accepte pas sa proposition", "agent_extracteur", "select appliquer_proposition(1)", "erreur")
 essai("ne crée pas une proposition déjà acceptée", "agent_extracteur",
       "insert into propositions (formation_id, champ, nouvelle_valeur, source_url, statut) "
@@ -99,6 +106,8 @@ for nom, sql in [
     ("organisme inexistant refusé", "update formations set organisme_id = 'O999' where id = 'F0001'"),
     ("discipline inconnue refusée", "insert into formation_disciplines values ('F0001', 'magie')"),
     ("identifiant mal formé refusé", "insert into organismes (id, nom, type) values ('X1', 'x', 'universite')"),
+    ("précisions de plus de 200 caractères refusées", "update formations set precisions = repeat('x', 201) where id = 'F0001'"),
+    ("précisions vides refusées", "update formations set precisions = '  ' where id = 'F0001'"),
     ("session qui finit avant de commencer refusée",
      "insert into sessions (formation_id, debut, fin) values ('F0001', '2027-02-01', '2027-01-01')"),
 ]:
@@ -116,10 +125,17 @@ with conn.cursor() as cur:
     nj = cur.fetchone()[0]
     cur.execute("select statut from propositions where id = %s", (pid,))
     st = cur.fetchone()[0]
+    cur.execute("insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
+                "values ('F0001', 'precisions', 'Clinique le lundi', 'https://exemple.fr') returning id")
+    pid2 = cur.fetchone()[0]
+    cur.execute("select appliquer_proposition(%s)", (pid2,))
+    cur.execute("select precisions from formations where id = 'F0001'")
+    pr = cur.fetchone()[0]
 conn.rollback()
 for nom, ok in [("accepter une proposition modifie la fiche", float(v) == 42.0),
                 ("la modification est inscrite au journal", nj >= 1),
-                ("la proposition est marquée acceptée", st == "acceptee")]:
+                ("la proposition est marquée acceptée", st == "acceptee"),
+                ("accepter une proposition de précisions remplit le champ", pr == "Clinique le lundi")]:
     print(("  ok   " if ok else "  ECHEC"), nom)
     if not ok:
         echecs.append(nom)

@@ -27,6 +27,10 @@ SECRET = re.compile(r"(sk-ant-[A-Za-z0-9_-]{10,}|ghp_[A-Za-z0-9]{20,}|github_pat
 CHAMPS = ["id", "intitule", "organisme", "secteur", "type", "disciplines", "format", "duree",
           "volume_horaire_h", "tarif", "prerequis", "financement", "url_officielle", "sessions",
           "statut", "derniere_verification", "notes"]
+# Champs facultatifs dans les fichiers : « precisions » (ajouté le 5 novembre 2026) n'existe pas encore dans
+# le miroir data/ d'origine. Il deviendra obligatoire quand toutes les copies l'auront.
+CHAMPS_FACULTATIFS = ["precisions"]
+PRECISIONS_MAX = 200
 BAISSE_MAX = 0.05  # au-delà de 5 % de fiches en moins, la publication est bloquée
 
 erreurs = []
@@ -91,7 +95,7 @@ def main():
             erreur(ou, "fichier vide ou illisible")
             continue
         manquants = [c for c in CHAMPS if c not in f]
-        inconnus = [c for c in f if c not in CHAMPS]
+        inconnus = [c for c in f if c not in CHAMPS and c not in CHAMPS_FACULTATIFS]
         if manquants:
             erreur(ou, f"champs manquants : {', '.join(manquants)}")
         if inconnus:
@@ -130,6 +134,10 @@ def main():
         if euros is not None and (not isinstance(euros, (int, float)) or not 0 < euros < 50000):
             erreur(ou, f"tarif en euros invraisemblable : {euros!r}")
         verifier_url(ou, f.get("url_officielle"))
+        precisions = f.get("precisions")
+        if precisions is not None and (not isinstance(precisions, str) or not precisions.strip()
+                                       or len(precisions) > PRECISIONS_MAX):
+            erreur(ou, f"precisions : texte non vide de {PRECISIONS_MAX} caractères au plus attendu")
         if f.get("statut") not in ref["statuts"]:
             erreur(ou, f"statut inconnu {f.get('statut')!r}")
         d = date_valide(f.get("derniere_verification"))

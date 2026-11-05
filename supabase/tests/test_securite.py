@@ -93,10 +93,12 @@ essai("dépose un avis", "agent_verificateur",
       "insert into verifications (formation_id, avis) values ('F0001', 'conforme')", 1)
 essai("ne modifie aucune fiche", "agent_verificateur", "update formations set intitule = 'x'", "erreur")
 essai("ne crée aucune fiche", "agent_verificateur", NOUVELLE.replace("%s", "'a-verifier'"), "erreur")
+essai("lit les précisions", "agent_verificateur", "select precisions from formations limit 1", 1)
 
 print("Copie nocturne")
 essai("lit le journal", "lecteur_sauvegarde", "select * from journal limit 1", 1)
 essai("n'écrit pas", "lecteur_sauvegarde", "update formations set intitule = 'x'", "erreur")
+essai("lit les précisions et les notes", "lecteur_sauvegarde", "select precisions, notes from formations limit 1", 1)
 
 print("Contraintes de qualité (propriétaire de la base)")
 for nom, sql in [

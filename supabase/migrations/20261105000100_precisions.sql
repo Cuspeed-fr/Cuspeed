@@ -1,7 +1,7 @@
 -- Cuspeed : champ public « précisions » sur les fiches formation (décision de Chris, 5 novembre 2026)
 --
 -- Une courte remarque utile au praticien, affichée sur la fiche : partenariat avec une autre faculté,
--- lieu délocalisé, éligibilité DPC, organisation (« clinique le lundi »)… Jusqu'ici ces remarques
+-- lieu délocalisé, organisation (« clinique le lundi »)… Jusqu'ici ces remarques
 -- avaient été rangées par erreur dans « duree ». Contrairement à « notes » (interne, jamais publié),
 -- ce champ est public : il ne doit contenir que des informations tirées de la source officielle.
 

@@ -103,7 +103,10 @@ def main():
                 "type": f["type"], "disciplines": discs, "format": f["format"], "duree": f["duree"],
                 "volume_horaire_h": valeur(f["volume_horaire_h"]),
                 "tarif": {"texte": f["tarif_texte"], "euros": valeur(f["tarif_euros"]), "annee": f["tarif_annee"]},
-                "prerequis": f["prerequis"], "precisions": f.get("precisions"), "financement": f["financement"], "url_officielle": f["url_officielle"],
+                "prerequis": f["prerequis"],
+                # Champ ajouté le 5 novembre 2026 : absent tant que la migration n'est pas appliquée.
+                "precisions": f.get("precisions"),
+                "financement": f["financement"], "url_officielle": f["url_officielle"],
                 "sessions": sessions, "statut": f["statut"], "derniere_verification": valeur(f["derniere_verification"]),
                 # L'export de publication ne contient aucune note interne.
                 "notes": None if args.seulement_validees else f["notes"],

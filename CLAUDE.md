@@ -6,6 +6,11 @@ Ce fichier est lu par tous les agents Claude au démarrage. Il prime sur toute c
 
 Cuspeed (cuspeed.fr) recense toutes les formations post-universitaires et continues destinées aux chirurgiens-dentistes en France, universitaires et privées. Le site est gratuit, neutre et informatif. Slogan de travail : « Restez à la pointe, en un clic. »
 
+Périmètre (décision de Chris, 5 novembre 2026) :
+- formations en France uniquement pour l'instant (une ouverture aux pays francophones pourra venir plus tard) ;
+- pour le privé, pas de formation 100 % en ligne pour l'instant (une catégorie « en ligne » pourra venir plus tard) ; cette règle ne vise que le privé ;
+- pour chaque organisme privé, c'est le catalogue complet qui est visé : toutes ses formations qui entrent dans le périmètre, pas une sélection.
+
 Responsable du projet et seul valideur : Chris (Dr Christopher Huon).
 
 ## Règles absolues
@@ -32,7 +37,7 @@ Responsable du projet et seul valideur : Chris (Dr Christopher Huon).
 
 - Langue : français partout (données, code commenté, pull requests).
 - Identifiants : `F0001` formation, `O001` organisme, `L-VILLE` lieu, `P0001` piste. Un identifiant ne change jamais et n'est jamais réutilisé ; une formation disparue passe au statut `archivee`. Les numéros peuvent présenter des trous, c'est normal.
-- Dates au format `AAAA-MM-JJ`. Prix en euros TTC pour la formation continue, avec l'année du tarif.
+- Dates au format `AAAA-MM-JJ`. Prix tels qu'affichés sur la page officielle, sans aucune conversion HT/TTC (règle du 5 novembre 2026, détaillée dans `docs/modele-de-donnees.md`) : `tarif_texte` reprend le prix affiché avec ses mentions (HT, « à partir de », « TVA non applicable », formules) ; `tarif_euros` n'est rempli que pour un prix praticien clair ; `tarif_annee` seulement si la source l'écrit ; aucun prix publié = champs vides (le site affiche « Non communiqué »).
 - Une pull request = un lot cohérent (une fonctionnalité ou une migration). Titre explicite, description en langage simple.
 
 ## Technique

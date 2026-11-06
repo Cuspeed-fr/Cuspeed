@@ -153,13 +153,14 @@ for nom, ok in [("accepter une proposition modifie la fiche", float(v) == 42.0),
     if not ok:
         echecs.append(nom)
 
+# Colonnes set_option et inherit_option : PostgreSQL 16 et plus (version de la CI).
 print("Compte du tableau de bord (lots de fiches)")
 essai("postgres peut prendre le rôle agent_extracteur", None,
       "select 1 from pg_auth_members m join pg_roles r on r.oid = m.roleid join pg_roles u on u.oid = m.member "
-      "where r.rolname = 'agent_extracteur' and u.rolname = 'postgres'", 1)
+      "where r.rolname = 'agent_extracteur' and u.rolname = 'postgres' and m.set_option", 1)
 essai("postgres peut prendre le rôle agent_verificateur", None,
       "select 1 from pg_auth_members m join pg_roles r on r.oid = m.roleid join pg_roles u on u.oid = m.member "
-      "where r.rolname = 'agent_verificateur' and u.rolname = 'postgres'", 1)
+      "where r.rolname = 'agent_verificateur' and u.rolname = 'postgres' and m.set_option", 1)
 essai("postgres ne cumule pas les droits des agents (inherit false)", None,
       "select 1 from pg_auth_members m join pg_roles r on r.oid = m.roleid join pg_roles u on u.oid = m.member "
       "where r.rolname in ('agent_extracteur', 'agent_verificateur') and u.rolname = 'postgres' and m.inherit_option", 0)

@@ -17,7 +17,7 @@ Appliqué au projet `Cuspeed` (région eu-west-3, Paris) avec le connecteur Supa
 
 Contrôles faits : empreinte (md5) de chaque table identique à celle d'une base de référence chargée depuis `supabase/seed.sql` ; le rôle public ne voit que les 160 fiches validées ; Security Advisor sans alerte.
 
-Pour un nouveau projet (test ou reprise), rejouer les trois migrations dans l'ordre puis `supabase/seed.sql`.
+Pour un nouveau projet (test ou reprise), rejouer toutes les migrations de `supabase/migrations/` dans l'ordre de leur nom, puis `supabase/seed.sql`.
 
 ## 3. Donner un mot de passe aux rôles (jamais dans le dépôt)
 

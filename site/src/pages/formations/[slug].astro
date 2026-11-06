@@ -1,7 +1,7 @@
 ---
 // Fiche d'une formation : une page par formation publiée.
 import Base from "../../layouts/Base.astro";
-import { chargerDonnees, tarifLisible, dateLisible, villesDe, couper } from "../../lib/donnees.js";
+import { chargerDonnees, tarifLisible, aidesDe, sessionsAVenir, dateLisible, villesDe, couper } from "../../lib/donnees.js";
 
 export function getStaticPaths() {
   const donnees = chargerDonnees();
@@ -17,6 +17,9 @@ const ref = donnees.referentiels;
 const organisme = donnees.organisme(f.organisme);
 const villes = villesDe(f, donnees);
 const tarif = tarifLisible(f.tarif);
+const aides = aidesDe(f, ref);
+// Éditions passées : retirées de la page et des données structurées, mais gardées en base.
+const sessions = sessionsAVenir(f);
 const typeNom = ref.types[f.type] ?? f.type;
 const disciplines = f.disciplines.map((d) => ref.disciplines[d] ?? d);
 const lienFiche = new URL(`/formations/${f.slug}/`, Astro.site).href;
@@ -34,7 +37,7 @@ const morceaux = [
 const description = couper(morceaux.filter(Boolean).join(". ") + ". Source officielle citée.", 160);
 
 // Données structurées schema.org (Course). Seules les informations connues sont écrites.
-const instances = f.sessions
+const instances = sessions
   .map((s) => {
     const lieu = s.lieu ? donnees.lieu(s.lieu) : null;
     const instance = { "@type": "CourseInstance" };
@@ -135,10 +138,10 @@ const fil = {
               <dd>{f.precisions}</dd>
             </>
           )}
-          {f.financement.length > 0 && (
+          {aides.length > 0 && (
             <>
-              <dt>Financement</dt>
-              <dd>{f.financement.map((c) => ref.financements[c] ?? c).join(", ")} (selon la source)</dd>
+              <dt>Éligible aux aides</dt>
+              <dd>{aides.join(", ")} <span class="discret">(selon la source)</span></dd>
             </>
           )}
         </dl>
@@ -146,11 +149,11 @@ const fil = {
 
       <section class="carte-bloc" aria-labelledby="sessions-titre">
         <h2 id="sessions-titre">Sessions</h2>
-        {f.sessions.length === 0 ? (
+        {sessions.length === 0 ? (
           <p class="discret">Aucune session annoncée pour le moment.</p>
         ) : (
           <ul class="sessions">
-            {f.sessions.map((s) => {
+            {sessions.map((s) => {
               const lieu = s.lieu ? donnees.lieu(s.lieu) : null;
               const debut = dateLisible(s.debut);
               const fin = dateLisible(s.fin);

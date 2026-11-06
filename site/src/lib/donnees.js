@@ -255,13 +255,34 @@ export function regroupementsDe(formation, donnees) {
   return [...new Set(noms)];
 }
 
-/** Tarif lisible : « 3 200 € (2026-27) », le texte de la source, ou null. */
+/**
+ * Tarif lisible, ou null s'il n'est pas renseigné (la page affiche alors « Non communiqué »).
+ * Règle du 5 novembre 2026 : le tarif est repris tel que la source l'affiche. Le texte
+ * (`tarif_texte`) porte ses mentions (HT, « à partir de », « TVA non applicable », formules) :
+ * il est affiché tel quel, en priorité. Le montant seul (« 3 200 € (2026-27) ») ne sert que
+ * s'il n'y a pas de texte.
+ */
 export function tarifLisible(tarif) {
+  const texte = typeof tarif?.texte === "string" ? tarif.texte.trim() : "";
+  if (texte) return texte;
   if (tarif?.euros != null) {
     const montant = new Intl.NumberFormat("fr-FR").format(tarif.euros);
     return tarif.annee ? `${montant} € (${tarif.annee})` : `${montant} €`;
   }
-  return tarif?.texte ?? null;
+  return null;
+}
+
+/**
+ * Prises en charge d'une formation (DPC, FIFPL, OPCO, CPF), dans l'ordre du référentiel.
+ * Libellé du référentiel, ou le code en majuscules si le référentiel ne le connaît pas encore.
+ */
+export function aidesDe(formation, referentiels) {
+  const libelles = referentiels?.financements ?? {};
+  const ordre = Object.keys(libelles);
+  const rang = (c) => (ordre.includes(c) ? ordre.indexOf(c) : ordre.length);
+  return [...new Set(formation.financement ?? [])]
+    .sort((a, b) => rang(a) - rang(b))
+    .map((c) => libelles[c] ?? String(c).toUpperCase());
 }
 
 /** Coupe un texte à `max` caractères au plus, à la fin d'un mot, avec « … ». */
@@ -270,6 +291,24 @@ export function couper(texte, max) {
   const coupe = texte.slice(0, max - 1);
   const fin = coupe.lastIndexOf(" ");
   return (fin > max * 0.6 ? coupe.slice(0, fin) : coupe).replace(/[\s.,;:–-]+$/, "") + "…";
+}
+
+/** Date du jour à Paris, au format AAAA-MM-JJ (le site est construit à l'avance). */
+export function dateDuJour() {
+  return new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Paris" }).format(new Date());
+}
+
+/**
+ * Sessions à afficher : les éditions passées sont retirées de l'affichage, mais restent en base.
+ * Une session est passée quand sa date de fin (ou, à défaut, de début) est antérieure à aujourd'hui.
+ * Une session sans aucune date est gardée : on ne sait pas si elle est passée.
+ * Les dates sont au format AAAA-MM-JJ, qui se compare bien comme du texte.
+ */
+export function sessionsAVenir(formation, aujourdhui = dateDuJour()) {
+  return (formation.sessions ?? []).filter((s) => {
+    const repere = s.fin ?? s.debut;
+    return !repere || String(repere) >= aujourdhui;
+  });
 }
 
 /** Date AAAA-MM-JJ → « 2 novembre 2026 ». */

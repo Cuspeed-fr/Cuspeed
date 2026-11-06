@@ -9,7 +9,7 @@ import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
-import { chargerDonnees, enSlug, tarifLisible, dateLisible, villesDe } from "../src/lib/donnees.js";
+import { chargerDonnees, enSlug, tarifLisible, aidesDe, sessionsAVenir, dateLisible, villesDe } from "../src/lib/donnees.js";
 import { pointsCarte, projeter } from "../src/lib/carte.js";
 
 const ICI = dirname(fileURLToPath(import.meta.url));
@@ -87,6 +87,64 @@ test("tarifs, dates et villes lisibles", () => {
   assert.equal(dateLisible(null), null);
   const d = chargerDonnees(JEU);
   assert.deepEqual(villesDe(d.formations[0], d), ["Arras"]);
+});
+
+test("le tarif affiché est le texte de la source, tel quel (règle du 5 novembre 2026)", () => {
+  // Le texte porte les mentions de la source : il passe avant le montant.
+  assert.equal(tarifLisible({ texte: "1 200 € HT", euros: 1200, annee: null }), "1 200 € HT");
+  assert.equal(tarifLisible({ texte: "À partir de 800 € (TVA non applicable)", euros: null }), "À partir de 800 € (TVA non applicable)");
+  assert.equal(tarifLisible({ texte: "2 800 €/an (2025-26)", euros: 2800, annee: "2025-26" }), "2 800 €/an (2025-26)");
+  // Sans texte, le montant ; sans rien, null (la fiche affiche « Non communiqué »).
+  assert.equal(tarifLisible({ texte: null, euros: 1500, annee: null }).replace(/\s/g, " "), "1 500 €");
+  assert.equal(tarifLisible({ texte: "  ", euros: null, annee: null }), null);
+  assert.equal(tarifLisible(undefined), null);
+});
+
+test("prises en charge : libellés du référentiel, dans son ordre, et code en majuscules sinon", () => {
+  const ref = { financements: { dpc: "DPC", fifpl: "FIFPL", opco: "OPCO", cpf: "CPF" } };
+  assert.deepEqual(aidesDe({ financement: ["cpf", "dpc", "opco"] }, ref), ["DPC", "OPCO", "CPF"]);
+  assert.deepEqual(aidesDe({ financement: ["opco"] }, { financements: { dpc: "DPC" } }), ["OPCO"]);
+  assert.deepEqual(aidesDe({ financement: [] }, ref), []);
+  const d = chargerDonnees(JEU);
+  assert.deepEqual(aidesDe(d.formations[0], d.referentiels), ["DPC"]);
+});
+
+test("une discipline ajoutée au référentiel (« gestion ») est acceptée sans changer le code", () => {
+  const dossier = copieDuJeu();
+  try {
+    const fiche = join(dossier, "formations", "F9001-du-essai.yaml");
+    writeFileSync(fiche, readFileSync(fiche, "utf8").replace("disciplines:\n- paro", "disciplines:\n- paro\n- gestion"));
+    // Tant que le référentiel ne la connaît pas, la construction s'arrête.
+    assert.throws(() => chargerDonnees(dossier), /discipline inconnue gestion/);
+    const ref = join(dossier, "referentiels.yaml");
+    writeFileSync(ref, readFileSync(ref, "utf8").replace("disciplines:\n", "disciplines:\n  gestion: Gestion & management du cabinet\n"));
+    const d = chargerDonnees(dossier);
+    assert.deepEqual(d.formations[0].disciplines, ["paro", "gestion"]);
+    assert.equal(d.referentiels.disciplines.gestion, "Gestion & management du cabinet");
+  } finally {
+    rmSync(dossier, { recursive: true, force: true });
+  }
+});
+
+test("les éditions passées sont retirées de l'affichage, pas des données", () => {
+  const f = {
+    sessions: [
+      { lieu: "L-ARRAS", debut: "2025-09-01", fin: "2026-06-30" }, // passée
+      { lieu: "L-ARRAS", debut: "2026-09-01", fin: "2027-06-30" }, // à venir
+      { lieu: "L-ARRAS", debut: "2026-10-01", fin: "2026-11-06" }, // finit aujourd'hui : gardée
+      { lieu: "L-ARRAS", debut: "2025-01-10", fin: null },         // sans fin, début passé : retirée
+      { lieu: "L-ARRAS", debut: null, fin: null },                  // sans date : gardée
+    ],
+  };
+  const a = sessionsAVenir(f, "2026-11-06");
+  assert.equal(a.length, 3);
+  assert.deepEqual(a.map((s) => s.debut), ["2026-09-01", "2026-10-01", null]);
+  assert.equal(f.sessions.length, 5, "les données d'origine ne sont pas modifiées");
+  // La page d'une formation dont toutes les sessions sont passées n'affiche plus rien.
+  assert.equal(sessionsAVenir({ sessions: [{ debut: "2024-01-01", fin: "2024-06-01" }] }, "2026-11-06").length, 0);
+  // Le chargeur garde bien toutes les sessions (le filtre est à l'affichage).
+  const d = chargerDonnees(JEU);
+  assert.equal(d.formations[0].sessions.length, 1);
 });
 
 test("la carte place un regroupement sur la ville qui porte son nom", () => {

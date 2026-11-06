@@ -36,11 +36,12 @@ def charger(nom):
         return yaml.safe_load(f)
 
 
-def inserts(table, colonnes, lignes):
+def inserts(table, colonnes, lignes, fin=""):
+    """Une instruction insert ; `fin` est ajouté avant le point-virgule (ex. « on conflict … »)."""
     if not lignes:
         return ""
     sortie = [f"insert into public.{table} ({', '.join(colonnes)}) values"]
-    sortie.append(",\n".join("  (" + ", ".join(ligne) + ")" for ligne in lignes) + ";\n")
+    sortie.append(",\n".join("  (" + ", ".join(ligne) + ")" for ligne in lignes) + (f"\n{fin}" if fin else "") + ";\n")
     return "\n".join(sortie)
 
 
@@ -48,8 +49,11 @@ def main():
     ref = charger("referentiels.yaml")
     parties = ["-- Chargement initial généré par scripts/yaml_vers_sql.py : ne pas modifier à la main.\n"]
 
+    # Une migration peut déjà avoir ajouté une discipline (ex. « gestion », 20261106000100) :
+    # on ne la recrée pas, pour que le chargement passe après toutes les migrations.
     parties.append(inserts("disciplines", ["code", "libelle"],
-                           [[lit(k), lit(v)] for k, v in ref["disciplines"].items()]))
+                           [[lit(k), lit(v)] for k, v in ref["disciplines"].items()],
+                           "on conflict (code) do nothing"))
     univ = set(ref["types_universitaires"])
     parties.append(inserts("types_formation", ["code", "libelle", "universitaire"],
                            [[lit(k), lit(v), lit(k in univ)] for k, v in ref["types"].items()]))

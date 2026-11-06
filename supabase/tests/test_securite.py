@@ -153,6 +153,23 @@ for nom, ok in [("accepter une proposition modifie la fiche", float(v) == 42.0),
     if not ok:
         echecs.append(nom)
 
+print("Compte du tableau de bord (lots de fiches)")
+essai("postgres peut prendre le rôle agent_extracteur", None,
+      "select 1 from pg_auth_members m join pg_roles r on r.oid = m.roleid join pg_roles u on u.oid = m.member "
+      "where r.rolname = 'agent_extracteur' and u.rolname = 'postgres'", 1)
+essai("postgres peut prendre le rôle agent_verificateur", None,
+      "select 1 from pg_auth_members m join pg_roles r on r.oid = m.roleid join pg_roles u on u.oid = m.member "
+      "where r.rolname = 'agent_verificateur' and u.rolname = 'postgres'", 1)
+essai("postgres ne cumule pas les droits des agents (inherit false)", None,
+      "select 1 from pg_auth_members m join pg_roles r on r.oid = m.roleid join pg_roles u on u.oid = m.member "
+      "where r.rolname in ('agent_extracteur', 'agent_verificateur') and u.rolname = 'postgres' and m.inherit_option", 0)
+for agent in ("agent_extracteur", "agent_verificateur", "lecteur_sauvegarde"):
+    essai(f"{agent} n'est membre d'aucun autre rôle", None,
+          "select 1 from pg_auth_members m join pg_roles u on u.oid = m.member where u.rolname = %s", 0, (agent,))
+essai("le rôle lecteur_sauvegarde n'est pas donné à postgres", None,
+      "select 1 from pg_auth_members m join pg_roles r on r.oid = m.roleid join pg_roles u on u.oid = m.member "
+      "where r.rolname = 'lecteur_sauvegarde' and u.rolname = 'postgres'", 0)
+
 print()
 if echecs:
     sys.exit(f"{len(echecs)} test(s) en échec : " + "; ".join(echecs))

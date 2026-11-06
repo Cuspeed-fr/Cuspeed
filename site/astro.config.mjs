@@ -28,6 +28,14 @@ export default defineConfig({
   build: {
     format: "directory",
   },
+  vite: {
+    build: {
+      // Le script de l'accueil (filtres, tri, « Afficher plus », environ 6 Ko) est écrit dans la
+      // page plutôt que téléchargé à part : une requête de moins, filtres prêts plus tôt en 4G
+      // lente (mesuré le 6 novembre 2026). Les polices (plus de 12 Ko) restent des fichiers.
+      assetsInlineLimit: 8192,
+    },
+  },
   integrations: [
     sitemap({
       // Ni la page 404, ni les pages de redirection (adresse courte /formations/f0084/

@@ -39,7 +39,7 @@ CUSPEED_DATA=/chemin/export-validees CUSPEED_DATA_CONTROLE=/chemin/miroir-comple
 
 | Fichier | Rôle |
 | --- | --- |
-| `src/pages/index.astro` | Accueil : carte, filtres, liste de toutes les formations |
+| `src/pages/index.astro` | Accueil : recherche, carte, filtres, tri, liste de toutes les formations par paquets |
 | `src/pages/formations/[slug].astro` | Une page par formation (`/formations/f0084-du-parodontologie/`) |
 | `src/pages/organismes/` | Liste des organismes et une page par organisme |
 | `src/pages/a-propos.astro`, `mentions-legales.astro`, `plan-du-site.astro`, `404.astro` | Pages fixes |
@@ -52,7 +52,8 @@ CUSPEED_DATA=/chemin/export-validees CUSPEED_DATA_CONTROLE=/chemin/miroir-comple
 
 - Aucune ressource externe (police, carte, script, mesure d'audience) : rien n'est transmis à un tiers quand on visite le site, et pas de bandeau cookies.
 - Identité visuelle : polices League Spartan (titres, logo) et DM Sans (texte), hébergées sur le site via les paquets `@fontsource` (licence OFL, sous-ensemble latin, 5 graisses d'environ 14 Ko en woff2 ; les fichiers woff de secours sont publiés mais les navigateurs actuels ne les téléchargent pas) ; palette officielle et contrastes vérifiés en tête de `src/styles/global.css` ; logo vectorisé dans `src/lib/logo.js` et `src/components/Logo.astro`.
-- Liste complète écrite dans la page : lisible sans JavaScript et par les moteurs de recherche. Le script de la page d'accueil ne fait que masquer ce qui ne correspond pas aux filtres.
+- Liste complète écrite dans la page : lisible sans JavaScript et par les moteurs de recherche. Le script de la page d'accueil (sans bibliothèque, écrit dans la page) filtre, trie et affiche la liste par paquets de 24 (« Afficher plus ») ; sans JavaScript, toutes les fiches s'affichent. Les cartes hors de l'écran ne sont pas dessinées (`content-visibility: auto`) : la liste reste fluide au-delà de 1 000 fiches.
+- La classe `js`, posée dans l'en-tête avant le premier affichage, réserve la place des commandes qui ont besoin de JavaScript (filtres, tri, « Afficher plus ») : la page ne se décale pas quand le script démarre.
 - Adresses stables : une adresse publiée ne change plus, même si l'intitulé change, pour garder l'historique Google et les liens partagés. Voir ci-dessous.
 
 ## Adresses des pages (`adresses.json`)

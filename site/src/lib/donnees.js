@@ -293,6 +293,24 @@ export function couper(texte, max) {
   return (fin > max * 0.6 ? coupe.slice(0, fin) : coupe).replace(/[\s.,;:–-]+$/, "") + "…";
 }
 
+/** Date du jour à Paris, au format AAAA-MM-JJ (le site est construit à l'avance). */
+export function dateDuJour() {
+  return new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Paris" }).format(new Date());
+}
+
+/**
+ * Sessions à afficher : les éditions passées sont retirées de l'affichage, mais restent en base.
+ * Une session est passée quand sa date de fin (ou, à défaut, de début) est antérieure à aujourd'hui.
+ * Une session sans aucune date est gardée : on ne sait pas si elle est passée.
+ * Les dates sont au format AAAA-MM-JJ, qui se compare bien comme du texte.
+ */
+export function sessionsAVenir(formation, aujourdhui = dateDuJour()) {
+  return (formation.sessions ?? []).filter((s) => {
+    const repere = s.fin ?? s.debut;
+    return !repere || String(repere) >= aujourdhui;
+  });
+}
+
 /** Date AAAA-MM-JJ → « 2 novembre 2026 ». */
 export function dateLisible(iso) {
   if (!iso) return null;

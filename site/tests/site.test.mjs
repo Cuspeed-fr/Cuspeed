@@ -9,7 +9,7 @@ import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
-import { chargerDonnees, enSlug, tarifLisible, aidesDe, dateLisible, villesDe } from "../src/lib/donnees.js";
+import { chargerDonnees, enSlug, tarifLisible, aidesDe, sessionsAVenir, dateLisible, villesDe } from "../src/lib/donnees.js";
 import { pointsCarte, projeter } from "../src/lib/carte.js";
 
 const ICI = dirname(fileURLToPath(import.meta.url));
@@ -124,6 +124,27 @@ test("une discipline ajoutée au référentiel (« gestion ») est acceptée san
   } finally {
     rmSync(dossier, { recursive: true, force: true });
   }
+});
+
+test("les éditions passées sont retirées de l'affichage, pas des données", () => {
+  const f = {
+    sessions: [
+      { lieu: "L-ARRAS", debut: "2025-09-01", fin: "2026-06-30" }, // passée
+      { lieu: "L-ARRAS", debut: "2026-09-01", fin: "2027-06-30" }, // à venir
+      { lieu: "L-ARRAS", debut: "2026-10-01", fin: "2026-11-06" }, // finit aujourd'hui : gardée
+      { lieu: "L-ARRAS", debut: "2025-01-10", fin: null },         // sans fin, début passé : retirée
+      { lieu: "L-ARRAS", debut: null, fin: null },                  // sans date : gardée
+    ],
+  };
+  const a = sessionsAVenir(f, "2026-11-06");
+  assert.equal(a.length, 3);
+  assert.deepEqual(a.map((s) => s.debut), ["2026-09-01", "2026-10-01", null]);
+  assert.equal(f.sessions.length, 5, "les données d'origine ne sont pas modifiées");
+  // La page d'une formation dont toutes les sessions sont passées n'affiche plus rien.
+  assert.equal(sessionsAVenir({ sessions: [{ debut: "2024-01-01", fin: "2024-06-01" }] }, "2026-11-06").length, 0);
+  // Le chargeur garde bien toutes les sessions (le filtre est à l'affichage).
+  const d = chargerDonnees(JEU);
+  assert.equal(d.formations[0].sessions.length, 1);
 });
 
 test("la carte place un regroupement sur la ville qui porte son nom", () => {

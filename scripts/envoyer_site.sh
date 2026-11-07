@@ -56,6 +56,12 @@ if git ls-remote --exit-code --heads depot "$BRANCHE" >/dev/null 2>&1; then
       echo "Il faut la supprimer sur GitHub ; le prochain envoi la recrée vide de tout code." >&2
       exit 1
     fi
+  else
+    code=$?
+    if [ "$code" -ne 2 ]; then
+      echo "Impossible de vérifier main (code $code) : rien n'est envoyé." >&2
+      exit 1
+    fi
   fi
 else
   code=$?

@@ -47,6 +47,19 @@ def valeur(v, flottant=False):
     return v
 
 
+def nom_fichier_fiche(fiche_id, intitule):
+    """Nom du fichier d'une fiche : identifiant + intitulé. Si l'intitulé change, le nom change aussi ;
+    l'ancien fichier doit donc disparaître (voir vider_dossier_formations), sinon l'identifiant serait en double."""
+    return f"{fiche_id}-{slug(intitule)}.yaml"
+
+
+def vider_dossier_formations(dossier):
+    """Recrée un dossier de fiches vide : la copie reflète exactement la base, aucun fichier périmé ne reste."""
+    if dossier.exists():
+        shutil.rmtree(dossier)
+    dossier.mkdir(parents=True)
+
+
 def ecrire_yaml(chemin, contenu):
     with open(chemin, "w", encoding="utf-8") as f:
         yaml.safe_dump(contenu, f, allow_unicode=True, sort_keys=False, width=100)
@@ -62,9 +75,7 @@ def main():
         sys.exit("CUSPEED_DB_URL manquant.")
     sortie = Path(args.sortie)
     dossier = sortie / "formations"
-    if dossier.exists():
-        shutil.rmtree(dossier)
-    dossier.mkdir(parents=True)
+    vider_dossier_formations(dossier)
 
     with psycopg.connect(url, row_factory=dict_row) as conn, conn.cursor() as cur:
         cur.execute("set transaction read only")
@@ -118,7 +129,7 @@ def main():
                 # L'export de publication ne contient aucune note interne.
                 "notes": None if args.seulement_validees else f["notes"],
             }
-            ecrire_yaml(dossier / f"{f['id']}-{slug(f['intitule'])}.yaml", fiche)
+            ecrire_yaml(dossier / nom_fichier_fiche(f["id"], f["intitule"]), fiche)
 
         # L'export de publication ne contient ni sources surveillées ni pistes (données internes) :
         # fichiers vides, pour garder le même format.

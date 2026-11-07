@@ -1,19 +1,27 @@
-# Publication du site, lancée à la main (onglet Actions > Publication > Run workflow).
-# Exporte les fiches validées, contrôle, construit, puis conserve le site construit
-# comme fichier téléchargeable. L'envoi chez l'hébergeur sera ajouté quand l'hébergeur
-# sera choisi : tant qu'une étape échoue, rien n'est envoyé et la version en ligne reste en place.
+# Mise en ligne du site, lancée à la main uniquement (onglet Actions > Publication > Run workflow).
 #
-# Secret utilisé : CUSPEED_SAUVEGARDE_DB_URL (rôle lecteur_sauvegarde, lecture seule), rangé
-# uniquement dans les environnements GitHub « publication » (approbation de Chris) et « sauvegarde »,
-# tous deux limités à la branche main, jamais en secret de dépôt. Une branche modifiée ne peut
-# donc pas le lire, ni par ce workflow ni par la copie nocturne.
+# Étapes : export des seules fiches validées, contrôle des données, tests, construction
+# (scripts/publier.sh) ; puis contrôle du dossier à envoyer et envoi vers l'application Clever Cloud
+# « cuspeed-site » (scripts/envoyer_site.sh). Si une étape échoue, rien n'est envoyé : la version en ligne reste.
+#
+# Garde-fous :
+# - aucun déclencheur automatique (ni push, ni planification, ni appel extérieur) : seulement workflow_dispatch ;
+# - le job tourne uniquement sur main et dans l'environnement « publication », dont Chris est « Required reviewer » :
+#   il doit approuver chaque exécution avant qu'un seul pas ne s'exécute ;
+# - l'option « essai » (case cochée par défaut) construit une adresse de test et n'envoie RIEN chez Clever Cloud.
+#
+# Secrets et variables (environnement « publication » uniquement, jamais au niveau du dépôt) :
+# - secret CUSPEED_SAUVEGARDE_DB_URL : adresse du rôle lecteur_sauvegarde (lecture seule). Nom historique, gardé.
+# - secret CLEVER_SSH_PRIVATE_KEY : clé SSH privée de déploiement Clever Cloud.
+# - variable CLEVER_GIT_URL : adresse de poussée Git de l'application cuspeed-site.
+# - variable CLEVER_SSH_KNOWN_HOSTS : empreintes du serveur Clever Cloud (contrôle de l'identité du serveur).
 name: Publication
 
 on:
   workflow_dispatch:
     inputs:
       essai:
-        description: "Adresse de test (pages non référencées, mentions légales incomplètes tolérées)"
+        description: "Adresse de test : construit sans envoyer chez Clever Cloud (pages non référencées, mentions légales incomplètes tolérées)"
         type: boolean
         default: true
 
@@ -22,24 +30,32 @@ permissions:
 
 jobs:
   publication:
+    name: Mettre en ligne (approbation de Chris requise)
     runs-on: ubuntu-latest
     # Jamais depuis une autre branche que main, même lancé à la main.
     if: github.ref == 'refs/heads/main'
+    # Environnement « publication » : Chris doit approuver l'exécution avant son démarrage.
     environment: publication
     # Une seule publication à la fois.
     concurrency: publication
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Récupérer main
+        uses: actions/checkout@v4
         with:
-          python-version: "3.12"
-      - run: pip install pyyaml==6.0.2 "psycopg[binary]==3.2.3"
-      - uses: actions/setup-node@v4
+          ref: main
+      - name: Installer Python (version figée)
+        uses: actions/setup-python@v5
         with:
-          node-version: "22"
+          python-version: "3.12.7"
+      - name: Installer les dépendances Python (versions figées)
+        run: pip install pyyaml==6.0.2 "psycopg[binary]==3.2.3"
+      - name: Installer Node (version figée)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.11.0"
           cache: npm
           cache-dependency-path: site/package-lock.json
-      - name: Exporter, contrôler, construire
+      - name: Exporter, contrôler, tester et construire (scripts/publier.sh)
         env:
           CUSPEED_DB_URL: ${{ secrets.CUSPEED_SAUVEGARDE_DB_URL }}
         run: |
@@ -48,9 +64,29 @@ jobs:
           else
             scripts/publier.sh
           fi
-      - name: Conserver le site construit (30 jours)
+      - name: Conserver le site construit (30 jours, même en essai)
         uses: actions/upload-artifact@v4
         with:
           name: site-${{ inputs.essai && 'essai' || 'production' }}-${{ github.run_number }}
           path: site/dist/
           retention-days: 30
+      - name: Préparer la clé d'envoi (fichiers temporaires, supprimés à la fin)
+        if: inputs.essai == false
+        env:
+          CLEVER_SSH_PRIVATE_KEY: ${{ secrets.CLEVER_SSH_PRIVATE_KEY }}
+          CLEVER_SSH_KNOWN_HOSTS: ${{ vars.CLEVER_SSH_KNOWN_HOSTS }}
+        run: |
+          # Fichiers en mode 600 ; si la clé ou les empreintes manquent, ssh échoue (on ne se connecte pas à l'aveugle).
+          install -m 600 /dev/null "$RUNNER_TEMP/clever_cle"
+          install -m 600 /dev/null "$RUNNER_TEMP/clever_hotes"
+          printf '%s\n' "$CLEVER_SSH_PRIVATE_KEY" > "$RUNNER_TEMP/clever_cle"
+          printf '%s\n' "$CLEVER_SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/clever_hotes"
+          echo "GIT_SSH_COMMAND=ssh -i $RUNNER_TEMP/clever_cle -o IdentitiesOnly=yes -o UserKnownHostsFile=$RUNNER_TEMP/clever_hotes -o StrictHostKeyChecking=yes" >> "$GITHUB_ENV"
+      - name: Envoyer site/dist/ vers Clever Cloud (cuspeed-site)
+        if: inputs.essai == false
+        env:
+          CLEVER_GIT_URL: ${{ vars.CLEVER_GIT_URL }}
+        run: scripts/envoyer_site.sh site/dist "$CLEVER_GIT_URL"
+      - name: Supprimer les fichiers de clé
+        if: always() && inputs.essai == false
+        run: rm -f "$RUNNER_TEMP/clever_cle" "$RUNNER_TEMP/clever_hotes"

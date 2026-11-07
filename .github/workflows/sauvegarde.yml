@@ -25,20 +25,25 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pyyaml==6.0.2 "psycopg[binary]==3.2.3"
-      - name: Se placer sur la branche sauvegarde
+      # Deux dossiers : le code vient TOUJOURS de main (dossier de travail, relu et fusionné) ;
+      # la branche sauvegarde est extraite à part (${{ runner.temp }}/sauvegarde) et ne sert que de support au dossier data/.
+      # Aucun script de la branche sauvegarde n'est jamais exécuté, a fortiori avec le secret.
+      - name: Extraire la branche sauvegarde dans un dossier séparé
         run: |
           if git ls-remote --exit-code --heads origin sauvegarde >/dev/null; then
-            git checkout -B sauvegarde origin/sauvegarde
+            git worktree add -B sauvegarde "$RUNNER_TEMP/sauvegarde" origin/sauvegarde
           else
-            git checkout -B sauvegarde
+            git worktree add --orphan -b sauvegarde "$RUNNER_TEMP/sauvegarde"
           fi
       - name: Exporter la base
         env:
           CUSPEED_DB_URL: ${{ secrets.CUSPEED_SAUVEGARDE_DB_URL }}
-        run: python3 scripts/sauvegarder_vers_yaml.py
+        run: python3 scripts/sauvegarder_vers_yaml.py --sortie "$RUNNER_TEMP/sauvegarde/data"
       - name: "Contrôler la copie (erreurs de données, baisse anormale du nombre de fiches)"
         id: controle
         continue-on-error: true
+        env:
+          CUSPEED_DATA: ${{ runner.temp }}/sauvegarde/data
         run: |
           if git rev-parse --verify origin/sauvegarde >/dev/null 2>&1; then
             python3 scripts/verifier_donnees.py --reference origin/sauvegarde
@@ -46,9 +51,11 @@ jobs:
             python3 scripts/verifier_donnees.py
           fi
       - name: "Enregistrer la copie, même en cas d'alerte (l'historique garde l'état précédent)"
+        working-directory: ${{ runner.temp }}/sauvegarde
         run: |
           git config user.name "Sauvegarde Cuspeed"
           git config user.email "contact@cuspeed.fr"
+          # Seul le dossier data/ est ajouté : jamais de scripts/ ni de .github/.
           git add data
           if git diff --cached --quiet; then echo "Aucun changement."; else
             git commit -m "Sauvegarde nocturne $(date -u +%F)"

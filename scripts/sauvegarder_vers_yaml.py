@@ -80,7 +80,11 @@ def main():
     with psycopg.connect(url, row_factory=dict_row) as conn, conn.cursor() as cur:
         cur.execute("set transaction read only")
         # Référentiels : valeurs variables lues dans la base, listes fixes reprises du fichier existant
-        ref = yaml.safe_load((RACINE / "data" / "referentiels.yaml").read_text(encoding="utf-8"))
+        # (celui du dossier de sortie s'il existe, sinon celui du miroir data/ du dépôt)
+        src_ref = sortie / "referentiels.yaml"
+        if not src_ref.is_file():
+            src_ref = RACINE / "data" / "referentiels.yaml"
+        ref = yaml.safe_load(src_ref.read_text(encoding="utf-8"))
         cur.execute("select code, libelle from disciplines order by code")
         disciplines = {r["code"]: r["libelle"] for r in cur.fetchall()}
         cur.execute("select code, libelle, universitaire from types_formation order by code")

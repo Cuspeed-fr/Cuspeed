@@ -38,12 +38,12 @@ Deux principes :
 
 ### Mise en ligne, pas à pas (Chris)
 
-Aucune mise en ligne ne part toute seule : tout commence par un clic de Chris. Le site envoyé ne contient que le site construit (`site/dist/`), jamais le dépôt ni les données.
+Aucune mise en ligne ne part toute seule : tout commence par un clic de Chris. Le workflow pousse le site construit (`site/dist/`, contrôlé par `scripts/preparer_envoi.py`) sur la branche `mise-en-ligne` du dépôt, qui ne contient que des pages construites, jamais le code ni les données. Clever Cloud, relié au dépôt sur cette seule branche, met le site en ligne.
 
 1. **Vérifier les fiches** : dans le tableau de bord Supabase, table `formations`, seules les fiches voulues sont au statut `validee`. C'est la seule étape qui décide de ce qui sera publié.
 2. **Lancer** : GitHub, onglet Actions, workflow « Publication », bouton « Run workflow », branche `main`. Case « essai » : cochée (par défaut) = construction de test, rien n'est envoyé ; décochée = mise en ligne réelle.
 3. **Approuver** : le job reste en attente. GitHub affiche « Review deployments » ; Chris coche l'environnement `publication` puis « Approve and deploy ». Sans cette approbation, aucune étape ne s'exécute.
-4. **Attendre le résultat** : une coche verte = contrôles passés et site envoyé. Une croix rouge = rien n'est parti, l'ancienne version reste en ligne ; l'étape en erreur est indiquée dans les journaux. Ne pas relancer en boucle : corriger la cause (souvent une fiche incomplète signalée par le contrôle) puis relancer.
+4. **Attendre le résultat** : deux temps, « Construire » puis « Envoyer sur la branche mise-en-ligne » (ce second temps est sauté en essai). Une coche verte = contrôles passés et site envoyé. Une croix rouge = rien n'est parti, l'ancienne version reste en ligne ; l'étape en erreur est indiquée dans les journaux. Ne pas relancer en boucle : corriger la cause (souvent une fiche incomplète signalée par le contrôle) puis relancer.
 5. **Vérifier en ligne** : ouvrir cuspeed.fr, une fiche récente et la page « mentions légales ». Le site peut mettre quelques minutes à changer (cache du navigateur : rafraîchir). En cas de doute, l'artefact « site-production-N » du run reste téléchargeable pendant 30 jours.
 6. **En cas de problème après mise en ligne** : ne rien modifier à la main sur Clever Cloud. Revenir à la version précédente par une pull request « Revert » (section 5), puis relancer la publication. Si la version précédente doit revenir tout de suite, la console Clever Cloud propose le retour à un déploiement antérieur (à vérifier la première fois).
 
@@ -71,17 +71,15 @@ GitHub :
   - `sauvegarde` (copie nocturne), sans approbation ;
   - `publication` (mise en ligne), avec « Required reviewers » = Chris : chaque publication attend son feu vert.
 - Le secret `CUSPEED_SAUVEGARDE_DB_URL` (voir la mise en place Supabase) est rangé dans **ces deux environnements**, jamais en secret de dépôt.
-- Dans l'environnement `publication` uniquement (noms seulement ; les valeurs ne figurent dans aucun fichier) :
-  - secret `CLEVER_SSH_PRIVATE_KEY` : clé SSH privée de déploiement (la clé publique est enregistrée côté Clever Cloud) ;
-  - variable `CLEVER_GIT_URL` : adresse de poussée Git de l'application `cuspeed-site` (fournie par Clever Cloud) ;
-  - variable `CLEVER_SSH_KNOWN_HOSTS` : empreinte du serveur Clever Cloud, à copier depuis la documentation Clever Cloud (contrôle de l'identité du serveur).
+- L'envoi sur la branche `mise-en-ligne` utilise le jeton temporaire que GitHub fournit à chaque exécution : aucune clé ni adresse à ranger pour Clever Cloud.
+- Règle de protection de la branche `mise-en-ligne` (Settings → Rules) : pas de suppression ni de poussée forcée ; seul le workflow Publication y écrit.
 
 Supabase : voir `docs/mise-en-place-supabase.md`.
 
 Clever Cloud :
 - Organisation « Cuspeed », région Paris, double authentification.
-- Application `cuspeed-site` de type site statique, **sans lien avec GitHub** : c'est le workflow Publication qui y pousse le site construit. Ne pas la relier à un dépôt.
-- Dans la console : aucune commande de construction (le site est déjà construit) ; à vérifier avant la première mise en ligne.
+- Application `cuspeed-site` de type site statique, reliée au dépôt GitHub **sur la seule branche `mise-en-ligne`** (onglet Informations, « Branche GitHub utilisée pour le déploiement »). Jamais `main` : `main` contient le code source, pas le site construit.
+- Dans la console : aucune commande de construction (la branche contient un site déjà construit, sans fichier de configuration Astro) ; à vérifier avant la première mise en ligne.
 - Plafond de dépenses ou alerte de facturation.
 
 Comptes provisoires : tant que la SASU n'existe pas, les comptes sont au nom de Chris avec l'adresse contact@cuspeed.fr. Ils seront transférés à la SASU à sa création (organisation GitHub, projet Supabase, organisation Clever Cloud, titulaire du domaine, marque).

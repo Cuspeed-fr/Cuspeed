@@ -17,6 +17,8 @@ La base Supabase (région Paris) est la source de vérité. Sa structure est dé
 | `surveillance` | Pages officielles relues chaque semaine | Extracteur |
 | `journal` | Qui a changé quoi, quand (automatique) | Personne : rempli par la base |
 
+Statuts d'une piste (`pistes.statut`) : `À vérifier` (à traiter), `Importée`, `Doublon`, `Écartée`, `Fiche créée` (la piste a donné lieu à une fiche). La base ne contraint pas la colonne ; la liste de référence est `STATUTS_PISTES` dans `scripts/verifier_donnees.py`, qui doit rester identique à ce paragraphe.
+
 ## Une formation (`formations`)
 
 | Champ | Contenu | Exemple |

@@ -183,11 +183,13 @@ def main():
             erreur("pistes.csv", f"{p['id']} : statut inconnu {p['statut']!r}")
 
     # Aucun secret dans le dépôt
-    for chemin in RACINE.rglob("*"):
+    # (le dépôt, plus le dossier d'export s'il est ailleurs, comme pour la copie nocturne)
+    dossiers = [RACINE] + ([DATA] if RACINE.resolve() not in DATA.resolve().parents else [])
+    for chemin in (c for d in dossiers for c in d.rglob("*")):
         if chemin.is_file() and ".git" not in chemin.parts and chemin.suffix in (
                 ".yaml", ".yml", ".csv", ".md", ".py", ".js", ".ts", ".json", ".astro", ".env", ".txt"):
             if SECRET.search(chemin.read_text(encoding="utf-8", errors="ignore")):
-                erreur(str(chemin.relative_to(RACINE)), "ressemble à un secret (clé, jeton, mot de passe)")
+                erreur(str(chemin), "ressemble à un secret (clé, jeton, mot de passe)")
 
     # Garde-fou contre les suppressions massives
     if args.reference:

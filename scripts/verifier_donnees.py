@@ -38,6 +38,11 @@ BAISSE_MAX = 0.05  # au-delà de 5 % de fiches en moins, la publication est bloq
 STATUTS_PISTES = ("À vérifier", "Importée", "Doublon", "Écartée", "Fiche créée")
 
 erreurs = []
+avertissements = []  # signalements non bloquants (n'empêchent ni la copie ni la publication)
+
+
+def avertissement(ou, message):
+    avertissements.append(f"{ou} : {message}")
 
 
 def erreur(ou, message):
@@ -149,8 +154,14 @@ def main():
             erreur(ou, "derniere_verification doit être une date AAAA-MM-JJ")
         elif d > aujourdhui:
             erreur(ou, "derniere_verification est dans le futur")
+        # Décision de Chris (7 novembre 2026) : une fiche sans session n'est pas une anomalie tant que
+        # l'organisme n'a pas publié de date. Seule une fiche publiée (validee) doit avoir une session ;
+        # pour les autres statuts, simple avertissement.
         if not f.get("sessions"):
-            erreur(ou, "au moins une session (avec son lieu) est requise")
+            if f.get("statut") == "validee":
+                erreur(ou, "au moins une session (avec son lieu) est requise pour une fiche publiée")
+            else:
+                avertissement(ou, "aucune session pour l'instant (non bloquant)")
         for s in f.get("sessions") or []:
             if s.get("lieu") not in ids_lieux:
                 erreur(ou, f"lieu inconnu {s.get('lieu')!r}")
@@ -191,6 +202,10 @@ def main():
     valides = sum(1 for c in fichiers if charger(c).get("statut") == "validee")
     print(f"{len(fichiers)} formations ({valides} validées), {len(ids_org)} organismes, "
           f"{len(ids_lieux)} lieux, {len(pistes)} pistes.")
+    if avertissements:
+        print(f"\n{len(avertissements)} avertissement(s) non bloquant(s) :")
+        for a in avertissements:
+            print(" -", a)
     if erreurs:
         print(f"\n{len(erreurs)} erreur(s) :")
         for e in erreurs:

@@ -39,7 +39,7 @@ concurrency: publication
 jobs:
   construction:
     name: Construire (approbation de Chris requise)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Jamais depuis une autre branche que main, même lancé à la main.
     if: github.ref == 'refs/heads/main'
     # Environnement « publication » : Chris doit approuver l'exécution avant son démarrage.
@@ -82,7 +82,7 @@ jobs:
 
   mise-en-ligne:
     name: Envoyer sur la branche mise-en-ligne (production seulement)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: construction
     if: github.ref == 'refs/heads/main' && inputs.essai == false
     # Deuxième approbation de Chris : même une relance de ce seul job (« Re-run ») ne part pas sans lui.

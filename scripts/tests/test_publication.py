@@ -239,6 +239,11 @@ class TestWorkflowPublication(unittest.TestCase):
             self.assertTrue(checkout and checkout[0]["with"]["ref"] == "main")
             self.assertIs(checkout[0]["with"].get("persist-credentials"), False)
 
+    def test_systeme_fige_pour_les_versions_figees(self):
+        # ubuntu-latest a changé (26.04) et n'a plus Python 3.12.7 : le système est donc figé.
+        for job in (self.construction, self.envoi):
+            self.assertEqual(job["runs-on"], "ubuntu-24.04")
+
     def test_une_publication_a_la_fois(self):
         self.assertEqual(self.doc.get("concurrency"), "publication")
 

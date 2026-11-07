@@ -13,6 +13,7 @@ tarif:
   euros: 2100
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.icdp.paris/formation/odontologie-pediatrique-traumatologie-dentaire/
 sessions: []

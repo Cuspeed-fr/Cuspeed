@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://ufr3s.univ-lille.fr/fileufr3s/user_upload/ufr3s-formation-continue/odontologie/du/du-implantologie-orale.pdf
 sessions:

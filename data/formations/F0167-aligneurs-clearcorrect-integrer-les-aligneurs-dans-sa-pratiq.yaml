@@ -13,6 +13,7 @@ tarif:
   euros: 2300
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.straumann.com/content/dam/sites/straumann/fr/landing-page/lp-brochure/FORMATION-STRAUMANN-academie-2026.pdf
 sessions:

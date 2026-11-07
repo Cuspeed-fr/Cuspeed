@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: 100 % en ligne ou en formule mixte
 financement: []
 url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/d-u-parodontologie-avance
 sessions:

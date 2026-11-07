@@ -15,6 +15,7 @@ tarif:
   euros: 375
   annee: null
 prerequis: null
+precisions: null
 financement:
 - fifpl
 url_officielle: https://www.sop.asso.fr/janvier-2027

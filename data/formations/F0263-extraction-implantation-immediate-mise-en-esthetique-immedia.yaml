@@ -13,6 +13,7 @@ tarif:
   euros: 1500
   annee: null
 prerequis: Aucun prérequis
+precisions: null
 financement: []
 url_officielle: https://implantologie-ifip.fr/formations/extraction-implantation-immediate/
 sessions:

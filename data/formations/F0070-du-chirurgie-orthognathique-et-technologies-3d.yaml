@@ -15,6 +15,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://fc.sorbonne-universite.fr/nos-offres/du-chirurgie-orthognathique-et-technologies-3d/
 sessions:

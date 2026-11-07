@@ -13,6 +13,7 @@ tarif:
   euros: 5200
   annee: null
 prerequis: Aucun
+precisions: null
 financement:
 - fifpl
 url_officielle: https://www.gad-center.com/formations-dentaires/fonction/formation-dentaire-occlusion-gad-center-leader-en-formation-dentaire/

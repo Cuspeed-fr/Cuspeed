@@ -13,6 +13,7 @@ tarif:
   euros: 500
   annee: null
 prerequis: null
+precisions: null
 financement:
 - dpc
 url_officielle: https://www.sop.asso.fr/odontologie-pediatrique

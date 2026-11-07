@@ -14,6 +14,7 @@ tarif:
   euros: 1100
   annee: null
 prerequis: Pas de pré-requis.
+precisions: null
 financement:
 - fifpl
 url_officielle: https://evolyou.dental/formations/les-greffes-de-sinus-commencez-demain-au-cabinet/

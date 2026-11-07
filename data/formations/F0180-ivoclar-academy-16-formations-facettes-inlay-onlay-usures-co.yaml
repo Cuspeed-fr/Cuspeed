@@ -15,6 +15,7 @@ tarif:
   euros: 500
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.ivoclar.com/fr_FR/CMS/IV%20Academy/Brochure%20Ivoclar%20Academy%202026_Chirurgiens-dentistes_version%20complete.pdf
 sessions:

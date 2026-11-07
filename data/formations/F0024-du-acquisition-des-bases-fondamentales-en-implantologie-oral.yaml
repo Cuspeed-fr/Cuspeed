@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://chirurgie-dentaire.unistra.fr/websites/dentaire/Documents/DU/Plaquette_DU_Implantologie_01.pdf
 sessions:

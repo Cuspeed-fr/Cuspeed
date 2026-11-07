@@ -15,6 +15,7 @@ tarif:
   euros: 3195
   annee: null
 prerequis: null
+precisions: Deux interventions chirurgicales en direct et interactives.
 financement:
 - dpc
 url_officielle: https://www.sop.asso.fr/chirurgie-plastique-parodontale

@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://smpm.univ-amu.fr/en/training/continuing-education/implantology
 sessions:

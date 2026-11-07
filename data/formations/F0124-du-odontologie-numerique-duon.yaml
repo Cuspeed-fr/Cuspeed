@@ -15,6 +15,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: '3 certificats : prothèse fixée, prothèse amovible, implantologie'
 financement: []
 url_officielle: https://www.umontpellier.fr/wp-content/uploads/2025/12/Livret-ODONTOLOGIE-2026-2027.pdf
 sessions:

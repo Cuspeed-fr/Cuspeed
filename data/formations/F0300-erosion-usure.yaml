@@ -13,6 +13,7 @@ tarif:
   euros: 1800
   annee: null
 prerequis: null
+precisions: Un encadrant pour 6 participants.
 financement:
 - dpc
 url_officielle: https://www.sop.asso.fr/erosion-usure

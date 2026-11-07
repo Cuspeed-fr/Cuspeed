@@ -13,6 +13,7 @@ tarif:
   euros: 650
   annee: null
 prerequis: Chirurgien-dentiste pratiquant l'implantologie
+precisions: null
 financement:
 - fifpl
 url_officielle: https://evolyou.dental/formations/implantologie-restez-conservateur/

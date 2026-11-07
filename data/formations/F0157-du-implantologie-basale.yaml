@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.uca.fr/medias/fichier/delib-cfvu-20250527-05-du-implantologie-basale-odonto_1748938600306-pdf
 sessions:

@@ -57,6 +57,8 @@ inscriptions:
 financements:
   dpc: DPC
   fifpl: FIFPL
+  opco: OPCO
+  cpf: CPF
 types_organisme:
   universite: Université
   societe-savante: Société savante

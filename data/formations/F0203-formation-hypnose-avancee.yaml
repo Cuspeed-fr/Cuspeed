@@ -13,6 +13,7 @@ tarif:
   euros: 1600
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.denttabulleformation.fr/formation/hypnose/
 sessions:

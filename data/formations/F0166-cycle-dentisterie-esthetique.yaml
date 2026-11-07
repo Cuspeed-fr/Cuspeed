@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://information-dentaire.fr/wp-content/uploads/gravity_forms/5-7f4c2376995d6911d98cbf4212a74301/2023/10/Fiche.formation.DENTISTERIE.ESTHETIQUE.2024-2025-SOP.pdf
 sessions:

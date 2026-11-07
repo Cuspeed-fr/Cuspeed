@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://odontologie.univ-lyon1.fr/formation/formation-continue-du-aeu-et-formations-courtes/post-university-courses-university-diplomas-d-u
 sessions:

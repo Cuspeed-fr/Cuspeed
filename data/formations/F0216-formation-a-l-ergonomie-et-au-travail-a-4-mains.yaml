@@ -14,6 +14,7 @@ tarif:
   annee: null
 prerequis: 'Inscriptions uniquement de binômes (Dentiste + assistante). Praticien : doctorat en chirurgie
   dentaire ou en cours de doctorat avec CSCT validé (ou équivalent européen).'
+precisions: 'Formation en binôme praticien + assistant(e) ; lieu : Paris - Boulogne.'
 financement: []
 url_officielle: https://www.endo-academie.fr/produit/formation-a-lergonomie-et-au-travail-a-4-mains/
 sessions:

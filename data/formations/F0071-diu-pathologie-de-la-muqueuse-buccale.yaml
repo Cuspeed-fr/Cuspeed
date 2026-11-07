@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://fc.sorbonne-universite.fr/nos-offres/diu-pathologie-de-la-muqueuse-buccale/
 sessions:

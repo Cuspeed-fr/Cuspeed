@@ -13,6 +13,7 @@ tarif:
   euros: 1200
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.straumann.com/content/dam/sites/neodent/fr/lp/lp-brochure/FORMATIONS-NEODENT-2026.pdf
 sessions:

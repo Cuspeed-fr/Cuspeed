@@ -13,6 +13,7 @@ tarif:
   euros: 4550
   annee: null
 prerequis: null
+precisions: null
 financement:
 - dpc
 url_officielle: https://sfpio.com/produit/formation-continue-en-parodontologie/

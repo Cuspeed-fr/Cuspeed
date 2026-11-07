@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://nouveau.univ-brest.fr/formation-continue-alternance/sites/formation-continue-alternance.www.univ-brest.fr/files/2026-04/DU-endodontie.pdf
 sessions:

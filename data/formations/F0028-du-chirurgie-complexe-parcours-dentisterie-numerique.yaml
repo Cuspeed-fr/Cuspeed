@@ -14,6 +14,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://chirurgie-dentaire.unistra.fr/formation/du/cours-chirurgie-complexe-LRZASW37-9659-LRZ76V0O
 sessions:

@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: Diplôme d'État de docteur en chirurgie dentaire ; CSCT pour les étudiants
+precisions: null
 financement:
 - dpc
 - fifpl

@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://formations.univ-evry.fr/plugins/evry/odf/_content/program-aligneurs-orthodontiques-duoa-2-2-2.pdf
 sessions:

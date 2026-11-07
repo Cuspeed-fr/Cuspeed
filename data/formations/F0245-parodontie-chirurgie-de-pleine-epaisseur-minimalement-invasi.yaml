@@ -13,6 +13,7 @@ tarif:
   euros: 2200
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.icdp.paris/formation/parodontie-chirurgie-de-pleine-epaisseur-et-chirurgie-muco-gingivale/
 sessions: []

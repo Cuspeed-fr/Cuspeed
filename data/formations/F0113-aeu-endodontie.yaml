@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.univ-tlse3.fr/decouvrir-nos-diplomes/aeu-endodontie
 sessions:

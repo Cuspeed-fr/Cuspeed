@@ -14,6 +14,7 @@ tarif:
   annee: null
 prerequis: Avoir suivi les trois premières sessions du cycle ou avoir une première expérience en parodontologie
   ; connaissances approfondies en parodontologie (CES, diplômes universitaires)
+precisions: null
 financement:
 - dpc
 url_officielle: https://sfpio.com/produit/chirurgie-plastique-parodontale/

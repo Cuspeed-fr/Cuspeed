@@ -13,6 +13,7 @@ tarif:
   euros: 240
   annee: null
 prerequis: Chirurgien-dentiste souhaitant se former à l'orthodontie invisible
+precisions: null
 financement:
 - fifpl
 url_officielle: https://evolyou.dental/formations/les-aligneurs-orthodontiques-en-omnipratique/

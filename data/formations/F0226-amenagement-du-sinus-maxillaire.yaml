@@ -14,6 +14,7 @@ tarif:
   euros: 1500
   annee: null
 prerequis: Chirurgien-dentiste pratiquant l'implantologie
+precisions: null
 financement:
 - fifpl
 url_officielle: https://evolyou.dental/formations/amenagement-du-sinus-maxillaire/

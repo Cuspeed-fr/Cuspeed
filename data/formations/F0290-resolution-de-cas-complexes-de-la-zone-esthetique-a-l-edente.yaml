@@ -14,6 +14,7 @@ tarif:
   euros: 1395
   annee: null
 prerequis: null
+precisions: null
 financement:
 - dpc
 url_officielle: https://sfpio.com/produit/resolution-de-cas-complexes-de-la-zone-esthetique-a-ledente-complet/

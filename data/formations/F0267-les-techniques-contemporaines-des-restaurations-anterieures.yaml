@@ -13,6 +13,7 @@ tarif:
   euros: 686.4
   annee: null
 prerequis: Être chirurgien-dentiste.
+precisions: null
 financement:
 - dpc
 - fifpl

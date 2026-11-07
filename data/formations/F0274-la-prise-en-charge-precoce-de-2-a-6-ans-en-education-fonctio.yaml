@@ -16,6 +16,7 @@ tarif:
   euros: null
   annee: null
 prerequis: Aucun
+precisions: null
 financement: []
 url_officielle: https://formations.orthoplus.fr/formations/la-prise-en-charge-precoce-de-2-a-6-ans-en-education-fonctionnelle/
 sessions:

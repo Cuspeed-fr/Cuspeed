@@ -13,6 +13,7 @@ tarif:
   euros: 250
   annee: null
 prerequis: Attestation de moins de 4 ans
+precisions: null
 financement: []
 url_officielle: https://www.sop.asso.fr/agenda
 sessions:

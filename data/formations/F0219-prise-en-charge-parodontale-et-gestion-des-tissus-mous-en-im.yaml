@@ -15,6 +15,7 @@ tarif:
   euros: 1500
   annee: null
 prerequis: Pas de pré-requis.
+precisions: null
 financement:
 - fifpl
 url_officielle: https://evolyou.dental/formations/prise-en-charge-parodontale-et-gestion-des-tissus-mous-en-implantologie-creer-des-conditions-de-succes-durable/

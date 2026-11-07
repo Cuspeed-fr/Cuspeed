@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-occlusodontie-2023.pdf
 sessions:

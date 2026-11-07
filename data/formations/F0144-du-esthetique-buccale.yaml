@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/d-u-esthetique-buccale
 sessions:

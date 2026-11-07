@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: Formation clinique, accessible après le DU fondamental
 financement: []
 url_officielle: https://export-odf-api.app.unistra.fr/ametys/pdf/FRUAI0673021VPRFH242/FRUAI0673021VPRPR1945
 sessions:

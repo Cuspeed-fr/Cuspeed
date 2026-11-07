@@ -14,6 +14,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.straumann.com/content/dam/sites/straumann/fr/landing-page/lp-brochure/LES-PARTENAIRES-STRAUMANN.pdf
 sessions:

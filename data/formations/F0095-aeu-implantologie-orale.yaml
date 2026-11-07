@@ -13,6 +13,7 @@ tarif:
   euros: 2000
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/AUI-ImplanOrale.pdf
 sessions:

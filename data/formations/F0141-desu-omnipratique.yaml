@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.univ-amu.fr/system/files/2019-02/SFPC%20ODONTO_DESU_Omnipratique_0.pdf
 sessions:

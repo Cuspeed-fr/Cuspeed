@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://s3.eu-west-1.amazonaws.com/abcdent/events/2879/attachments/16784/original.pdf?1576241980
 sessions:

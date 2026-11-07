@@ -14,6 +14,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.univ-reims.fr/media-files/21546/programme-du-implanto.pdf
 sessions:

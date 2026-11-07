@@ -13,6 +13,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
+precisions: null
 financement: []
 url_officielle: https://www.univ-reims.fr/cursus-informations-par-annee/formation-en-vue-du-diplome-de-docteur-en-chirurgie-dentaire,23627,39171.html
 sessions:

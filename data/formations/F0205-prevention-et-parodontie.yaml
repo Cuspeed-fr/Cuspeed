@@ -13,6 +13,7 @@ tarif:
   euros: 1600
   annee: null
 prerequis: Chirurgiens Dentistes, Assistant(e)s dentaires
+precisions: null
 financement: []
 url_officielle: https://www.denttabulleformation.fr/formation/prevention-parodontie/
 sessions:

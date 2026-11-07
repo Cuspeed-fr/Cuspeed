@@ -13,6 +13,7 @@ tarif:
   euros: 800
   annee: null
 prerequis: Chirurgiens dentistes uniquement, assistantes dentaires avec leurs praticiens.
+precisions: null
 financement: []
 url_officielle: https://www.denttabulleformation.fr/formation/acide-hyaluronique-en-cabinet-dentaire/
 sessions:

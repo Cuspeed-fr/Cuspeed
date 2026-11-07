@@ -14,6 +14,7 @@ tarif:
   euros: 750
   annee: null
 prerequis: Pas de pré-requis.
+precisions: null
 financement:
 - fifpl
 url_officielle: https://evolyou.dental/formations/chirurgie-guidee-maitriser-la-planification-implantaire-et-la-realisation-de-guide/

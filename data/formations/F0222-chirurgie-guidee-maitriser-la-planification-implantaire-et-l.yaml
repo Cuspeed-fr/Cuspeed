@@ -1,0 +1,25 @@
+id: F0222
+intitule: 'Chirurgie guidée : maîtriser la planification implantaire et la réalisation de guide'
+organisme: O041
+secteur: prive
+type: journee
+disciplines:
+- implanto
+- num
+format: presentiel
+duree: 1 jour
+volume_horaire_h: null
+tarif:
+  texte: 750 €
+  euros: 750
+  annee: null
+prerequis: Pas de pré-requis.
+financement:
+- fifpl
+url_officielle: https://evolyou.dental/formations/chirurgie-guidee-maitriser-la-planification-implantaire-et-la-realisation-de-guide/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Strasbourg, ''Ouverte'', date à la carte : aucune date, sessions vide. Tarif repris tel qu''affiché
+  : aucune mention HT/TTC ni année sur la page. | Citations de la source : duree : « 1 jour » ; tarif
+  : « €750 » ; financement : « FIF-PL et OPCO-EP »'

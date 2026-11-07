@@ -1,0 +1,40 @@
+id: F0202
+intitule: La pédodontie en omnipratique
+organisme: O039
+secteur: prive
+type: journee
+disciplines:
+- omni
+- pedo
+format: presentiel
+duree: 16 heures (2 jours)
+volume_horaire_h: 16
+tarif:
+  texte: 1600 €
+  euros: 1600
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.denttabulleformation.fr/formation/la-pedodontie-en-omnipratique-dec26/
+sessions:
+- lieu: L-AMBARES
+  debut: '2026-12-09'
+  fin: '2026-12-10'
+  inscriptions: ouvertes
+  places: null
+- lieu: L-AMBARES
+  debut: '2027-05-13'
+  fin: '2027-05-14'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
+  Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
+  salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
+  publiée dans precisions). Piste P0009. Une seule page pour les deux sessions (URL en « -dec26 », listée
+  deux fois au catalogue). Session 19-20 mars 2026 terminée, ignorée. Public : dentistes et assistant(e)s.
+  HT/TTC non précisé. | Citations de la source : intitule : « La pédodontie en omnipratique » ; duree
+  : « 16 heures (2 jours) » ; format : « Non, toutes nos formations se déroulent en présentiel dans notre
+  centre. » ; tarif : « Prix 1600 € » ; sessions : « Du 9 au 10 décembre 2026 : « Inscriptions ouvertes
+  » »'

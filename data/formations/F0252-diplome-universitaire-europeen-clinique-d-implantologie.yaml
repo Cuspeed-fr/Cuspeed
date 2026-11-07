@@ -1,0 +1,28 @@
+id: F0252
+intitule: Diplôme Universitaire Européen Clinique d'Implantologie
+organisme: O044
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+format: presentiel
+duree: 1 année universitaire
+volume_horaire_h: null
+tarif:
+  texte: À partir de 12 500 €
+  euros: 12500
+  annee: null
+prerequis: Doctorat en chirurgie dentaire (français ou UE), diplôme de médecin stomatologiste ou de chirurgie
+  orale, ou diplôme étranger équivalent ; formation théorique de base en implantologie ; au moins 3 ans
+  d'expérience professionnelle
+financement: []
+url_officielle: https://www.icdp.paris/formation/diplome-universitaire-europeen-clinique-dimplantologie/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Niveau N2+. Aucune université nommée sur la page (lien vers dueciparis.com) : secteur ''prive''
+  et type ''cursus'' par prudence, à trancher par Chris. Intervenants listés : J. Attias, P. Missika,
+  I. Kleinfinger, G. Drouhet. Sessions : aucune session future datée sur la page (au 2026-11-05). Tarif
+  « à partir de » repris tel qu''affiché : aucune mention HT/TTC ni année sur la page. | Citations de
+  la source : duree : « 1 année universitaire » ; prerequis : « 3-4 ans d''expérience professionnelle
+  dont 2 ans d''expérience en Implantologie (recrutement) » ; tarif : « À partir de 12 500€ »'

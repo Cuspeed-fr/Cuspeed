@@ -1,0 +1,30 @@
+id: F0213
+intitule: Diplôme universitaire d'endodontie avancée
+organisme: O040
+secteur: prive
+type: cursus
+disciplines:
+- endo
+format: hybride
+duree: 2 ans
+volume_horaire_h: 240
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: Avoir suivi une formation d’endodontie au cours des 5 dernières années. Niveau avancé en endodontie.
+  Avoir un exercice sous microscope opératoire. Maîtrise du vocabulaire endodontique en anglais.
+financement: []
+url_officielle: https://www.endo-academie.fr/produit/advanced-class/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Type « cursus » (organisme privé) bien que l''intitulé soit « Diplôme universitaire » ; à trancher
+  par Chris. Tarif : seulement « Tarif spécifique pour cette formation. » (pas de prix) : null. Aucune
+  date de session (promotion 2027-2028 annoncée, webinaire du 19/05/2026 passé). Logos ANDPC/FIFPL sans
+  taux ni mention propre à la formation : financement laissé vide. Prochaine promotion « Session 2027
+  » sur la liste. | Citations de la source : intitule : « DUEA - Diplôme universitaire d''endodontie avancée
+  » ; duree : « un cycle de formation avancé en endodontie sur deux années » ; volume_horaire_h : « 240h
+  » ; prerequis : « Avoir suivi une formation d’endodontie au cours des 5 dernières années. » ; format
+  : « Format Mixte » ; precisions : « 1 diplôme universitaire délivré par l’Université de Gênes, Italie.
+  »'

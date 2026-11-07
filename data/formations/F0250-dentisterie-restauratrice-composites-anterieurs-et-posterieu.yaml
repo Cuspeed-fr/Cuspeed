@@ -1,0 +1,27 @@
+id: F0250
+intitule: Dentisterie restauratrice - Composites antérieurs et postérieurs
+organisme: O044
+secteur: prive
+type: journee
+disciplines:
+- resto
+format: presentiel
+duree: 14 heures / 2 jours
+volume_horaire_h: 14
+tarif:
+  texte: À partir de 1 800 €
+  euros: 1800
+  annee: null
+prerequis: null
+financement:
+- dpc
+url_officielle: https://www.icdp.paris/formation/dentisterie-restauratrice-restaurations-adhesives-upgrade-perspectives-et-alternatives/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Niveau N2. Même page que la piste P0068 (ancien titre ''Restaurations Adhésives : Upgrade, perspectives
+  et alternatives'', visible dans l''URL). Type ''journee'' par défaut (à confirmer). Sessions : aucune
+  session future datée sur la page (au 2026-11-05). Tarif « à partir de » repris tel qu''affiché : aucune
+  mention HT/TTC ni année sur la page. | Citations de la source : duree : « 14 heures / 2 jours » ; financement
+  : « Eligible au DPC » ; dates : « Les dates de cette formation ne sont pas encore définies » ; tarif
+  : « À partir de 1 800€ »'

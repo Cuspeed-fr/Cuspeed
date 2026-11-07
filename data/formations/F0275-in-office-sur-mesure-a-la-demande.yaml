@@ -1,0 +1,24 @@
+id: F0275
+intitule: In-Office sur mesure, à la demande
+organisme: O047
+secteur: prive
+type: journee
+disciplines:
+- num
+- ortho
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://formations.orthoplus.fr/formations/in-office-sur-mesure-a-la-demande/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Workshop Laboratoire In-Office, intervenante Céline Hoarau. Doublon P0288. Format non explicite.
+  Tarif non publié : la page renvoie à un contact (e-mail, téléphone). | Citations de la source : precisions
+  : « directement au sein du cabinet ou au siège d''Orthoplus »'

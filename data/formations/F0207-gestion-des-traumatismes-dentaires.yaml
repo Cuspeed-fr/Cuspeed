@@ -1,0 +1,43 @@
+id: F0207
+intitule: Gestion des traumatismes dentaires
+organisme: O039
+secteur: prive
+type: journee
+disciplines:
+- chir
+- omni
+format: presentiel
+duree: 1 jour
+volume_horaire_h: null
+tarif:
+  texte: 800 €
+  euros: 800
+  annee: null
+prerequis: Être titulaire du diplôme de chirurgien-dentiste ou être étudiant en dernière année d’odontologie.
+  Disposer des connaissances fondamentales en odontologie conservatrice, endodontie, parodontologie et
+  radiologie dentaire. Comprendre les principes de base du diagnostic et de la prise en charge des urgences
+  dentaires.
+financement: []
+url_officielle: https://www.denttabulleformation.fr/formation/gestion-des-traumatismes/
+sessions:
+- lieu: L-AMBARES
+  debut: '2027-03-04'
+  fin: '2027-03-04'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
+  Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
+  salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
+  publiée dans precisions). Piste P0244. Inscription via Digiforma, statut « ouvertes » non écrit : a-renseigner.
+  Prérequis (paraphrase) : diplôme de chirurgien-dentiste ou dernière année d''odontologie, bases en conservatrice,
+  endodontie, parodontologie, radiologie. HT/TTC non précisé. Inscriptions : « Inscriptions ouvertes »
+  n''apparaît que dans le texte alternatif de l''image du calendrier, pas dans le texte de la page : a-renseigner.
+  | Décision de Chris, 6 nov. 2026 : le texte alternatif « Inscriptions ouvertes » compte comme information
+  écrite : inscriptions « ouvertes ». | Citations de la source : intitule : « Gestion des traumatismes
+  dentaires » ; duree : « 1 jour » ; format : « Non, toutes nos formations se déroulent en présentiel
+  dans notre centre. » ; tarif : « 800 € » ; sessions : « le 4 mars 2027 » ; prerequis : « Être titulaire
+  du diplôme de chirurgien-dentiste ou être étudiant en dernière année d’odontologie. Disposer des connaissances
+  fondamentales en odontologie conservatrice, endodontie, parodontologie et radiologie dentaire. Comprendre
+  les principes de base du diagnostic et de la prise en charge des urgences dentaires. »'

@@ -1,0 +1,26 @@
+id: F0245
+intitule: 'Parodontie : Chirurgie de pleine épaisseur minimalement invasive et chirurgies muco gingivales'
+organisme: O044
+secteur: prive
+type: cursus
+disciplines:
+- paro
+format: presentiel
+duree: 3 modules de 2 jours à la carte
+volume_horaire_h: null
+tarif:
+  texte: À partir de 2 200 €
+  euros: 2200
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.icdp.paris/formation/parodontie-chirurgie-de-pleine-epaisseur-et-chirurgie-muco-gingivale/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Dates 2026 toutes passées (1-2 avr, 10-11 juin, 8-9 juil). Incohérence page : ''Module 1 : 2 jours''
+  vs ''Cours et TP sur mâchoires : 3 jours''. Niveau N1. 30 stagiaires max. Type ''cursus'' choisi par
+  défaut (organisme privé, pas de diplôme). Sessions : aucune session future datée sur la page (au 2026-11-05).
+  Tarif « à partir de » repris tel qu''affiché : aucune mention HT/TTC ni année sur la page. | Citations
+  de la source : duree : « 3 modules de 2 jours à la carte » ; format : « EN PRÉSENTIEL » ; tarif : «
+  À partir de 2 200€ »'

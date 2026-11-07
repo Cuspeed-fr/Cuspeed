@@ -1,0 +1,33 @@
+id: F0205
+intitule: Prévention et Parodontie
+organisme: O039
+secteur: prive
+type: journee
+disciplines:
+- paro
+format: presentiel
+duree: 2 jours
+volume_horaire_h: null
+tarif:
+  texte: 1600 €
+  euros: 1600
+  annee: null
+prerequis: Chirurgiens Dentistes, Assistant(e)s dentaires
+financement: []
+url_officielle: https://www.denttabulleformation.fr/formation/prevention-parodontie/
+sessions:
+- lieu: L-AMBARES
+  debut: '2027-04-15'
+  fin: '2027-04-16'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
+  Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
+  salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
+  publiée dans precisions). Piste P0201. Public : chirurgiens-dentistes et assistant(e)s. Statut « ouvertes
+  » non écrit : a-renseigner. HT/TTC non précisé. | Citations de la source : intitule : « Prévention et
+  Parodontie » ; duree : « 2 jours » ; format : « Non, toutes nos formations se déroulent en présentiel
+  dans notre centre. » ; tarif : « 1600 € » ; sessions : « Du 15 au 16 avril 2027 ; Inscriptions ouvertes
+  » ; prerequis : « Chirurgiens Dentistes, Assistant(e)s dentaires »'

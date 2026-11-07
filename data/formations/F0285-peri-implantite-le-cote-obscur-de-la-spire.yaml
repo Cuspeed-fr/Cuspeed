@@ -1,0 +1,34 @@
+id: F0285
+intitule: 'Péri-implantite : le côté obscur de la spire'
+organisme: O048
+secteur: prive
+type: journee
+disciplines:
+- implanto
+- paro
+format: presentiel
+duree: 1 journée
+volume_horaire_h: null
+tarif:
+  texte: 1 800 € — TVA non applicable
+  euros: 1800
+  annee: null
+prerequis: Absence de prérequis
+financement: []
+url_officielle: https://www.parosphereformation.fr/formations/p%C3%A9ri-implantite/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-03-22'
+  fin: '2027-03-22'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format presentiel deduit du lieu physique (LISC, 64 rue Fondary 75015 Paris) et des travaux pratiques
+  ; le mot ''presentiel'' n''est pas ecrit. Volume horaire non indique (horaires seulement). Intitule
+  : H1 de la page ; titre de page ''Cycle Spécial - Péri-implantite''. Session PI27 22/03/2027 ; lieu
+  non precise dans l''agenda (Paris deduit de la page de detail). Max 20 participants. Tarif affiché avec
+  « TVA non applicable - Art 293b du CGI » ; pas de mention HT/TTC ni d''année. La reprise précédente
+  avait noté 1090 € : la page actuelle affiche 1800 €, valeur retenue. | Citations de la source : duree
+  : « 1 journée » ; prerequis : « Absence de prérequis » ; session : « PI27 - 22 mars 2027 - Ouvert »
+  ; tarif : « 1800 € - TVA non applicable - Art 293b du CGI »'

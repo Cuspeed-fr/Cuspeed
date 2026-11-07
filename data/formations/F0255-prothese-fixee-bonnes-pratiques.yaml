@@ -1,0 +1,27 @@
+id: F0255
+intitule: 'Prothèse fixée : Bonnes pratiques'
+organisme: O044
+secteur: prive
+type: cursus
+disciplines:
+- proth
+format: presentiel
+duree: 35 heures / 5 jours
+volume_horaire_h: 35
+tarif:
+  texte: À partir de 1 800 €
+  euros: 1800
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.icdp.paris/formation/prothese-fixee-bonnes-pratiques/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Niveau N1. Dates affichées nov-déc 2023 (passées). Le titre de page porte ''(DPC)'' mais le corps
+  ne mentionne pas le DPC : financement laissé vide, à vérifier. Sessions : aucune session future datée
+  sur la page (au 2026-11-05). Tarif « à partir de » repris tel qu''affiché : aucune mention HT/TTC ni
+  année sur la page. La page affiche désormais 1 800 € (la reprise précédente avait noté 4 250 € sur la
+  page et 1 800 € au catalogue) : contradiction entre deux lectures, valeur de la page actuelle retenue.
+  | Citations de la source : duree : « 35 heures / 5 jours » ; dates : « Prochaines dates : à définir
+  » ; tarif : « À partir de 1 800€ »'

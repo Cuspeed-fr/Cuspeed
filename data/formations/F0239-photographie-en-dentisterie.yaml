@@ -1,0 +1,29 @@
+id: F0239
+intitule: Photographie en dentisterie
+organisme: O043
+secteur: prive
+type: journee
+disciplines:
+- omni
+format: presentiel
+duree: 1 journée
+volume_horaire_h: 7
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: Aucun
+financement: []
+url_officielle: https://www.gad-center.com/formations-dentaires/esthetique/photographie-en-dentisterie-gad-center-leader-en-formation-dentaire/
+sessions:
+- lieu: L-BORDEAUX
+  debut: '2027-10-06'
+  fin: '2027-10-06'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: '9h-17h (7 h). Ibis Bordeaux Centre Mériadeck. Stagiaires : apporter leur reflex. Message générique
+  du formulaire ''plus assez de places'' : inscriptions laissées à renseigner. Discipline ''omni'' par
+  défaut : à confirmer. Tarif non publié : la colonne « Prix » de l''inscription est vide. | Citations
+  de la source : intitule : « Photographie en dentisterie » ; dates : « 06/10/2027 »'

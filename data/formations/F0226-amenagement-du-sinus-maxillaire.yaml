@@ -1,0 +1,27 @@
+id: F0226
+intitule: Aménagement du sinus maxillaire
+organisme: O041
+secteur: prive
+type: journee
+disciplines:
+- chir
+- implanto
+format: presentiel
+duree: 2 jours
+volume_horaire_h: null
+tarif:
+  texte: 1 500 €
+  euros: 1500
+  annee: null
+prerequis: Chirurgien-dentiste pratiquant l'implantologie
+financement:
+- fifpl
+url_officielle: https://evolyou.dental/formations/amenagement-du-sinus-maxillaire/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Villeneuve d''Ascq (59), ''Ouverte'', date à la carte : sessions vide. Mention ''RCP Certifiant''
+  sur la page, non reprise. Titre secondaire : ''Formation intégrer le sinus lift à sa pratique implantaire''.
+  A un doublon thématique possible avec P0162 mais pages distinctes (lieux et tarifs différents). Tarif
+  repris tel qu''affiché : aucune mention HT/TTC ni année sur la page. | Citations de la source : duree
+  : « 2 jours » ; tarif : « €1500 » ; financement : « FIF-PL et OPCO-EP »'

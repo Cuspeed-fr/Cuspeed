@@ -1,0 +1,33 @@
+id: F0289
+intitule: Dentisterie esthétique - Cycle 01
+organisme: O049
+secteur: prive
+type: cursus
+disciplines:
+- resto
+format: null
+duree: 3 jours
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: Diplôme d'État de docteur en chirurgie dentaire ; CSCT pour les étudiants
+financement:
+- dpc
+- fifpl
+url_officielle: https://formationgrf.com/cycle_1.php
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'FORMAT NON ECRIT : aucune page ne dit présentiel/hybride/en ligne ; critère de Chris (présentiel
+  ou hybride) non confirmé, à trancher. Pas de date, pas de lieu de session sur le site. DPC et FIFPL
+  : affirmés sur contact.php (organisme entier), alors que les PDF de programme ne les mentionnent pas.
+  Adresse : 280 boulevard Raspail, 75014 Paris. Contact : cycle.esthetique@formationgrf.com. Formateurs
+  : G. Tirlet, J.-P. Attal. Jours : inlays/onlays/overlays ; couronnes céramo-céramiques ; MIH et fluoroses.
+  PDF GRF1 : 8 heures pour la 1re journée (autres jours non lus). Prérequis : source = PDF de programme
+  du cycle (page cycle sans prérequis). Tarif non publié : aucun prix sur la page. | Citations de la source
+  : intitule : « Dentisterie esthétique - Cycle 01 » ; financement : « Formations accréditées et prises
+  en charge par le FIFPL et l''ANDPC (contact.php) » ; prerequis : « Diplôme d''État de docteur en chirurgie
+  dentaire ; CSCT pour les étudiants (PDF programme) » ; duree : « 3 jours de formation pour se mettre
+  à l''esthétique »'

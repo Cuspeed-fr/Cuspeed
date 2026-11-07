@@ -1,0 +1,33 @@
+id: F0204
+intitule: Acide hyaluronique en cabinet dentaire
+organisme: O039
+secteur: prive
+type: journee
+disciplines:
+- resto
+format: presentiel
+duree: 8h
+volume_horaire_h: 8
+tarif:
+  texte: 800 €
+  euros: 800
+  annee: null
+prerequis: Chirurgiens dentistes uniquement, assistantes dentaires avec leurs praticiens.
+financement: []
+url_officielle: https://www.denttabulleformation.fr/formation/acide-hyaluronique-en-cabinet-dentaire/
+sessions:
+- lieu: L-AMBARES
+  debut: '2027-01-28'
+  fin: '2027-01-28'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
+  Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
+  salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
+  publiée dans precisions). Piste P0129. Matinée théorie, après-midi TP sur patients modèles. HT/TTC non
+  précisé. | Citations de la source : intitule : « Acide hyaluronique en cabinet dentaire » ; duree :
+  « Durée 8h » ; format : « Non, toutes nos formations se déroulent en présentiel dans notre centre. »
+  ; tarif : « Prix 800 € » ; prerequis : « Chirurgiens dentistes uniquement, assistantes dentaires avec
+  leurs praticiens. » ; sessions : « Le 28 janvier 2027 ; Inscriptions ouvertes »'

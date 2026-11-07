@@ -1,0 +1,28 @@
+id: F0298
+intitule: Diagnostic pulpaire, indications des traitements endodontiques & protocoles cliniques
+organisme: O020
+secteur: prive
+type: journee
+disciplines:
+- endo
+format: presentiel
+duree: 7 h
+volume_horaire_h: 7
+tarif:
+  texte: 950 €
+  euros: 950
+  annee: null
+prerequis: null
+financement:
+- dpc
+url_officielle: https://www.sop.asso.fr/diagnostic-pulpaire
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans mention HT/TTC. Prix, durée et dates tirés de la page Agenda (https://www.sop.asso.fr/agenda),
+  la page de la formation n''affichant pas le tarif (modalités en PDF). Aucune date précise (« prochaine
+  session en 2027 ») : pas de session. Lieu : Maison de l''Amérique Latine (Paris). DPC : action n° 12632325006
+  (SOP organisme DPC n°1263). | Citations de la source : intitule : « Diagnostic pulpaire, indications
+  des traitements endodontiques & protocoles cliniques » ; duree : « Présentiel 7h » ; volume_horaire_h
+  : « Présentiel 7h » ; tarif : « 950 € » ; format : « Présentiel 7h » ; financement : « SOP Organisme
+  DPC n°1263 »'

@@ -4,6 +4,12 @@
   latitude: 43.53
   longitude: 5.45
   regroupement_carte: Marseille
+- id: L-AMBARES
+  nom: Ambarès-et-Lagrave
+  adresse: null
+  latitude: 44.925
+  longitude: -0.486
+  regroupement_carte: Bordeaux
 - id: L-ANNECY
   nom: Annecy
   adresse: null
@@ -34,6 +40,12 @@
   latitude: 48.39
   longitude: -4.49
   regroupement_carte: Brest
+- id: L-CANNES
+  nom: Cannes
+  adresse: null
+  latitude: 43.552
+  longitude: 7.017
+  regroupement_carte: Cannes
 - id: L-CHOLET
   nom: Cholet
   adresse: null

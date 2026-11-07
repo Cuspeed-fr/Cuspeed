@@ -1,0 +1,32 @@
+id: F0305
+intitule: Les Lasers et le chirurgien-dentiste
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- laser
+format: presentiel
+duree: 2 jours
+volume_horaire_h: 14
+tarif:
+  texte: 1995 €
+  euros: 1995
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.sop.asso.fr/laser
+sessions:
+- lieu: L-PARIS
+  debut: '2027-03-25'
+  fin: '2027-03-26'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans mention HT/TTC. Prix, durée et dates tirés de la page Agenda (https://www.sop.asso.fr/agenda),
+  la page de la formation n''affichant pas le tarif (modalités en PDF). Intitulé « Laser » sur l''Agenda.
+  Lieu page : Espace Saint-Martin. Pas de mention DPC (logos partenaires seulement). Statut d''inscription
+  non écrit. | Citations de la source : intitule : « Les Lasers et le chirurgien-dentiste » ; duree :
+  « 2 jours de formation continue en présentiel » ; volume_horaire_h : « 14h Formation Approfondie » ;
+  tarif : « 1995 € » ; format : « 2 jours de formation continue en présentiel » ; sessions : « Jeudi 25
+  et Vendredi 26 MARS 2027 »'

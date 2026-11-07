@@ -1,0 +1,33 @@
+id: F0297
+intitule: Dermatologie buccale
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- mbd
+format: presentiel
+duree: 5 jours
+volume_horaire_h: 35
+tarif:
+  texte: 2305 €
+  euros: 2305
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.sop.asso.fr/dermato
+sessions:
+- lieu: L-PARIS
+  debut: '2027-03-11'
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans mention HT/TTC. Prix, durée et dates tirés de la page Agenda (https://www.sop.asso.fr/agenda),
+  la page de la formation n''affichant pas le tarif (modalités en PDF). Modules : 11-12 mars et 10-11
+  juin 2027 ; masterclass un vendredi au choix, 1er octobre ou 3 décembre 2027 (page) / « octobre ou décembre
+  » (Agenda) : fin de session laissée vide. Format présentiel lu sur la page approfondies (« 5 jours en
+  présentiel avec travaux pratiques »). Lieu : Espace Saint-Martin. Aucune mention DPC. | Citations de
+  la source : intitule : « Formation Dermatologie buccale » ; duree : « 5 jours en 2027 » ; volume_horaire_h
+  : « 35h Formation Approfondie » ; tarif : « 2305 € » ; format : « 5 jours en présentiel avec travaux
+  pratiques » ; sessions : « M1: 11 & 12 MARS 2027 »'

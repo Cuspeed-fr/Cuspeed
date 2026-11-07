@@ -1,0 +1,31 @@
+id: F0277
+intitule: Intégrer l'Éducation Fonctionnelle dans votre cabinet
+organisme: O047
+secteur: prive
+type: masterclass
+disciplines:
+- ortho
+- pedo
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: Praticien.ne 950 € · Praticien.ne Club 850 € · Binôme 1 350 € · Assistant.e 600 € · Étudiant.e
+    600 € (TTC)
+  euros: 950
+  annee: null
+prerequis: Aucun
+financement: []
+url_officielle: https://formations.orthoplus.fr/formations/integrer-leducation-fonctionnelle-dans-votre-cabinet/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-09-30'
+  fin: '2027-09-30'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'MasterClass, 9h-17h, durée non explicite. Places : ''20 participants'' ambigu. Format non explicite.
+  Kit de démarrage inclus selon la page. DPC/FIFPL non mentionnés. | Citations de la source : tarif :
+  « Praticien.ne 950,00 € TTC ; Praticien.ne Club 850,00 € TTC ; Binôme 1 350,00 € TTC ; Assistant.e 600,00
+  € TTC ; Étudiant.e 600,00 € TTC » ; prerequis : « Aucun »'

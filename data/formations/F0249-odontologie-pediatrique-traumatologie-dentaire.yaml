@@ -1,0 +1,24 @@
+id: F0249
+intitule: 'Odontologie pédiatrique : Traumatologie dentaire'
+organisme: O044
+secteur: prive
+type: cursus
+disciplines:
+- pedo
+format: presentiel
+duree: 21 heures / 3 jours
+volume_horaire_h: 21
+tarif:
+  texte: À partir de 2 100 €
+  euros: 2100
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.icdp.paris/formation/odontologie-pediatrique-traumatologie-dentaire/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Niveau N2. Dates affichées 20-22 mars 2024 (passées). Page : programme J1 à J4 mais 3 jours de
+  dates, incohérence. Sessions : aucune session future datée sur la page (au 2026-11-05). Tarif « à partir
+  de » repris tel qu''affiché : aucune mention HT/TTC ni année sur la page. | Citations de la source :
+  duree : « 21 heures / 3 jours » ; tarif : « À partir de 2 100€ »'

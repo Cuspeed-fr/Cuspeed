@@ -1,0 +1,40 @@
+id: F0215
+intitule: L'Endodontie de A à Z
+organisme: O040
+secteur: prive
+type: journee
+disciplines:
+- endo
+format: presentiel
+duree: 1 journée
+volume_horaire_h: 9
+tarif:
+  texte: 795 €
+  euros: 795
+  annee: null
+prerequis: Doctorat en chirurgie dentaire (ou praticien en cours de doctorat ayant validé leur CSCT ou
+  équivalent européen)
+financement:
+- dpc
+url_officielle: https://www.endo-academie.fr/produit/lendodontie-de-a-a-z/
+sessions:
+- lieu: L-NICE
+  debut: '2026-11-13'
+  fin: '2026-11-13'
+  inscriptions: a-renseigner
+  places: null
+- lieu: L-PARIS
+  debut: '2027-09-16'
+  fin: '2027-09-16'
+  inscriptions: ouvertes
+  places: 30
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Session du 15 octobre 2026 (Paris-Montrouge) passée : ignorée. Nice 13/11/2026 (Drs Picot et Roos)
+  : statut non écrit, absente du sélecteur d''inscription. Durée : page « une journée », liste « 9h »
+  (module de réservation). Prix sans HT/TTC. DPC : « Prise en charge DPC : 541,20 € » (action 86952325003).
+  | Citations de la source : intitule : « L''Endodontie de A à Z » ; duree : « se déroule sur une journée
+  » ; volume_horaire_h : « 9h » ; tarif : « 795 € » ; prerequis : « Doctorat en chirurgie dentaire (ou
+  praticien en cours de doctorat ayant validé leur CSCT ou équivalent européen) » ; format : « Format
+  en Présentiel » ; financement : « Prise en charge DPC : 541,20 € » ; sessions : « Paris - (30 places
+  disponibles) »'

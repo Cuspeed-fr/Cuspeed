@@ -1,0 +1,39 @@
+id: F0165
+intitule: Formation continue en parodontologie
+organisme: O019
+secteur: prive
+type: cursus
+disciplines:
+- paro
+format: presentiel
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: 4 550,00 €
+  euros: 4550
+  annee: null
+prerequis: null
+financement:
+- dpc
+url_officielle: https://sfpio.com/produit/formation-continue-en-parodontologie/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-01-29'
+  fin: '2027-01-30'
+  inscriptions: a-renseigner
+  places: 60
+- lieu: L-PARIS
+  debut: '2027-03-12'
+  fin: '2027-03-13'
+  inscriptions: a-renseigner
+  places: 60
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Cycle 2026-2027 en 3 sessions ; session 1 (8-10 oct. 2026) passée, ignorée. Niveaux 1, 2, 3. Format
+  non écrit explicitement, présentiel déduit des travaux pratiques : à confirmer. Page modifiée le 2026-10-10
+  : places/inscriptions à revérifier. Programme PDF disponible. Contact contact@sfpio.com. Prix repris
+  tel qu''affiché : aucune mention HT/TTC ni tarif adhérent/non-adhérent sur la page. | Citations de la
+  source : intitule : « Formation continue en parodontologie » ; sessions : « Du 29 au 30 janvier 2027
+  / Du 12 au 13 mars 2027 » ; places : « Nombre de place : 60 » ; financement : « Formation éligible au
+  DPC » ; format : « travaux pratiques sur matériel prêté par l''industrie ou sur mâchoires animales »
+  ; tarif : « Prix : 4 550,00 € »'

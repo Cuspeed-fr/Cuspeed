@@ -1,0 +1,37 @@
+id: F0308
+intitule: Odontologie pédiatrique
+organisme: O020
+secteur: prive
+type: journee
+disciplines:
+- pedo
+format: hybride
+duree: 1 jour en présentiel
+volume_horaire_h: null
+tarif:
+  texte: 500 € (1 journée TP + e-learning DPC) ; 350 € (1 journée TP seule)
+  euros: 500
+  annee: null
+prerequis: null
+financement:
+- dpc
+url_officielle: https://www.sop.asso.fr/odontologie-pediatrique
+sessions:
+- lieu: L-PARIS
+  debut: '2027-06-03'
+  fin: '2027-06-03'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'TARIF DOUTEUX, laissé vide : Agenda « 350 € » (avec option e-learning 14 h) et catalogue « 500,00
+  € ». Format mixte (e-learning + présentiel) ; l''e-learning est « option » sur l''Agenda mais fait partie
+  de la formation mixte sur la page approfondies : volume horaire non renseigné. Lieu : Paris 12e (Agenda)
+  / Paris 16e (page). Aucune mention DPC pour la formation. Correction 2026-11-06 : precisions vidé (durée/format
+  n''y ont pas leur place). Page : « 7 h en présentiel » (duree), e-learning « 2 x 7 heures » / « Plateforme
+  SOP-Campus (14 h) » (option), format mixte déjà dans format ; volume horaire total non renseigné. |
+  Décision de Chris, 6 nov. 2026 : deux formules : 500 € avec e-learning DPC, 350 € pour la journée TP
+  seule ; tarif_euros = formule complète. | Contrôle du 6 nov. 2026 : type journee (1 jour). DPC écrit
+  sur l''Agenda pour l''option e-learning seulement. | Citations de la source : intitule : « Odontologie
+  pédiatrique » ; duree : « 7 h en présentiel » ; format : « Formation mixte » ; sessions : « Mercredi
+  3 JUIN 2027 »'

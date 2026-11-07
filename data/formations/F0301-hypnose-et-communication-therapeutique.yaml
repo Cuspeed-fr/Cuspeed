@@ -1,0 +1,34 @@
+id: F0301
+intitule: Hypnose et communication thérapeutique
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- sedation
+format: hybride
+duree: 3 modules
+volume_horaire_h: 51
+tarif:
+  texte: 3155 €
+  euros: 3155
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.sop.asso.fr/hypnose
+sessions:
+- lieu: L-PARIS
+  debut: '2027-03-11'
+  fin: '2027-09-25'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'TARIF DOUTEUX, laissé vide : Agenda « 3155 € » (51 h, 3 modules) mais le catalogue (page 2) liste
+  « Hypnose & communication thérapeutique au cabinet dentaire » à 900,00 € avec le même lien. Page /hypnose
+  illisible (erreur du site) : données lues sur l''Agenda et la page approfondies. Modules : 11-13 mars,
+  27-29 mai, 23-25 sept. 2027 (session = du 1er au dernier jour). Lieu : Espace Saint-Martin ou Paris
+  12e selon les pages. Durée « 3 modules » = nombre de modules écrit, à confirmer. | Décision de Chris,
+  6 nov. 2026 : tarif 3155 € confirmé par Chris sur la page produit SOP (le 900 € du catalogue est écarté).
+  | Citations de la source : intitule : « Hypnose et communication thérapeutique » ; volume_horaire_h
+  : « 51h Formation Approfondie Mixte » ; format : « 51h Formation Approfondie Mixte » ; duree : « 3 modules
+  de 3 jours avec travaux pratiques » ; sessions : « M1: 11,12 & 13 MARS 2027 »'

@@ -1,0 +1,38 @@
+id: F0304
+intitule: Journée Préservation alvéolaire
+organisme: O020
+secteur: prive
+type: journee
+disciplines:
+- chir
+- implanto
+format: presentiel
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: 'Formule 1 journée : 375 €, ou 350 € en tarif anticipé (jusqu''à 1 mois avant) ; formule 2 journées
+    : 675 € ; formule 4 journées : 975 € ; tarif assistant(e) dentaire : 175 €'
+  euros: 375
+  annee: null
+prerequis: null
+financement:
+- fifpl
+url_officielle: https://www.sop.asso.fr/janvier-2027
+sessions:
+- lieu: L-PARIS
+  debut: '2027-01-21'
+  fin: '2027-01-21'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans HT/TTC. Formules affichées sur https://www.sop.asso.fr/journees : 1 journée 375 € (350
+  € en tarif anticipé jusqu''à 1 mois avant), 2 journées 675 €, 4 journées 975 €, assistant(e) dentaire
+  175 €. Lieu : Espace Saint-Martin, Paris 3e. Statut d''inscription non écrit. La page /janvier-2027
+  écrit seulement « Janvier 2027 » ; le 21/01/2027 vient de /journees, du catalogue et de l''Agenda. Intitulé
+  catalogue : « Journée Préservation alvéolaire ». Responsable scientifique : Pr Christophe Rignon-Bret.
+  Format « présentiel » déduit du programme sur place (déjeuner, lieu), non écrit tel quel. | Citations
+  de la source : intitule : « Journée Préservation alvéolaire » ; tarif : « Formule 1 journée : 375 €
+  » ; financement : « Une prise en charge FIFPL est possible. » ; sessions : « Jeudi 21 JANVIER 2027 »
+  ; format : « Déjeuner convivial assis : 12h30-14h00 (programme de la journée sur place, Espace Saint-Martin)
+  »'

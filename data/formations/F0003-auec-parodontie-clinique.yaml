@@ -6,13 +6,14 @@ type: auec
 disciplines:
 - paro
 format: null
-duree: 5 sessions, 2026-2027
-volume_horaire_h: null
+duree: 5 sessions de 2 jours
+volume_horaire_h: 80
 tarif:
-  texte: null
-  euros: null
-  annee: null
-prerequis: null
+  texte: 3000 € (tarif individuel) ; tarif spécifique, nous consulter
+  euros: 3000
+  annee: 2026-27
+prerequis: 'Chirurgiens-dentistes omnipraticiens. Candidature sur dossier : lettre de motivation, CV et
+  copie des diplômes.'
 financement: []
 url_officielle: https://ufr3s.univ-lille.fr/fileufr3s/user_upload/ufr3s-formation-continue/odontologie/auec/auec-parodontie-clinique_2026-02-02.pdf
 sessions:
@@ -22,5 +23,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-05'
 notes: null

@@ -1,0 +1,33 @@
+id: F0271
+intitule: 'Prise en charge clinique en odontologie pédiatrique : prévention et thérapeutiques minimalement
+  invasives'
+organisme: O046
+secteur: prive
+type: journee
+disciplines:
+- pedo
+format: presentiel
+duree: 8 h
+volume_horaire_h: 8
+tarif:
+  texte: 422,40 €
+  euros: 422.4
+  annee: null
+prerequis: Être chirurgien-dentiste.
+financement:
+- dpc
+- fifpl
+url_officielle: https://www.medere.fr/formation/odontologie-pediatrique-prevention
+sessions:
+- lieu: L-PARIS
+  debut: '2026-12-17'
+  fin: '2026-12-17'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: '17 décembre 2026, « Rencontres Médéré Paris » (session 26.002), inscriptions jusqu''au 15.12.2026.
+  Source : page officielle Médéré. Tarif repris tel qu''affiché : aucune mention HT/TTC ni année sur la
+  page ; la page indique « 100% pris en charge et indemnisé » (ANDPC). | Citations de la source : duree
+  : « 8 h » ; format : « Présentiel » ; financement : « DPC ; FIF PL (N° d''action DPC indiqué sur la
+  page) » ; prerequis : « Être chirurgien-dentiste. » ; tarif : « 422.40 € »'

@@ -1,0 +1,30 @@
+id: F0243
+intitule: 'Offre DUO : Inlay, Onlay, Overlay + Facettes de A à Z'
+organisme: O043
+secteur: prive
+type: cursus
+disciplines:
+- resto
+format: presentiel
+duree: 3 jours
+volume_horaire_h: null
+tarif:
+  texte: 'Dentiste « Inlay + Facettes » : 2 300 € TTC ; assistantes : 600 € TTC'
+  euros: 2300
+  annee: null
+prerequis: Aucun
+financement: []
+url_officielle: https://www.gad-center.com/formations-dentaires/esthetique/formation-inlay-onlay-overlay-et-facettes-gad-center-leader-en-formation-dentaire/
+sessions:
+- lieu: L-BORDEAUX
+  debut: '2026-11-18'
+  fin: '2026-11-20'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Ibis Bordeaux Centre Mériadeck, 9h-18h. Théorie et TP sur modèle résine. La page est incohérente
+  sur les intervenants (non repris). Combine P0080 et P0004. Message générique du formulaire ''plus assez
+  de places'' : inscriptions laissées à renseigner. | Citations de la source : intitule : « Offre DUO
+  : Inlay, Onlay, Overlay + Facettes de A à Z » ; tarif : « Dentiste (tarif « Inlay + Facettes ») 2300
+  € TTC ; Assistantes 600 € TTC »'

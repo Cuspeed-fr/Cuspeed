@@ -1,0 +1,33 @@
+id: F0299
+intitule: 'Endodontie - Cycle 1/2 2027 : traitement initial'
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- endo
+format: presentiel
+duree: 6 jours (3 modules)
+volume_horaire_h: 42
+tarif:
+  texte: 3960 €
+  euros: 3960
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.sop.asso.fr/endodontie
+sessions:
+- lieu: L-PARIS
+  debut: '2027-01-28'
+  fin: '2027-06-04'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans mention HT/TTC. Prix, durée et dates tirés de la page Agenda (https://www.sop.asso.fr/agenda),
+  la page de la formation n''affichant pas le tarif (modalités en PDF). Session = du 1er jour du module
+  1 au dernier jour du module 3 ; modules : 28-29 janv., 25-26 mars, 3-4 juin 2027. Lieu : Maison de l''Amérique
+  Latine. DPC/FIFPL : logos de partenaires seulement, non retenu. Intitulé page : « CYCLE 1/2 - 2027 :
+  TRAITEMENT INITIAL » ; Agenda : « Endodontie ». | Citations de la source : intitule : « CYCLE 1/2 -
+  2027 : TRAITEMENT INITIAL » ; duree : « 6 Jours 3 Modules » ; volume_horaire_h : « 42 Heures en PRÉSENTIEL
+  avec Travaux Pratiques » ; tarif : « 3960 € » ; format : « 42 Heures en PRÉSENTIEL avec Travaux Pratiques
+  » ; precisions : « traitement canalaire en DIRECT » ; sessions : « M1: 28 & 29 JANVIER 2027 »'

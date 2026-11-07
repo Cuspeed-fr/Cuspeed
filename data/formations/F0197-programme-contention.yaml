@@ -1,0 +1,43 @@
+id: F0197
+intitule: Programme Contention
+organisme: O038
+secteur: prive
+type: journee
+disciplines:
+- paro
+format: null
+duree: 2 jours
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: Doctorat en chirurgie dentaire, ou praticiens en cours de doctorat ayant validé leur CSCT ou
+  équivalent européen
+financement: []
+url_officielle: https://www.academiedeparo.fr/contention/
+sessions:
+- lieu: L-AIX
+  debut: '2026-11-17'
+  fin: '2026-11-18'
+  inscriptions: a-renseigner
+  places: null
+- lieu: L-AIX
+  debut: '2027-03-23'
+  fin: '2027-03-24'
+  inscriptions: a-renseigner
+  places: null
+- lieu: L-AIX
+  debut: '2027-11-04'
+  fin: '2027-11-05'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format non écrit explicitement par la page (TP sur postes de travail avec modèles pédagogiques,
+  lieu Continuum à Aix-en-Provence) : format laissé vide, à trancher par Chris. Ville des sessions tirée
+  de la méta-description de la page et de l''accueil (lieu de formation : Continuum, 9 av. Henri Malacrida,
+  Aix-en-Provence). Listée « Contention fibrée » sur l''accueil. Tarif non publié. | Citations de la source
+  : prerequis : « Doctorat en chirurgie dentaire (ou praticiens en cours de doctorat ayant validé leur
+  CSCT ou équivalent européen) » ; tarif : « Veuillez prendre contact avec nous via le formulaire pour
+  obtenir le tarif » ; sessions : « 17 et 18 novembre 2026 »'

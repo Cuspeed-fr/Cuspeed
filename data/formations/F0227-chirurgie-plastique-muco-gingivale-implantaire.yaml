@@ -1,0 +1,36 @@
+id: F0227
+intitule: Chirurgie plastique muco-gingivale implantaire
+organisme: O042
+secteur: prive
+type: journee
+disciplines:
+- chir
+- implanto
+- paro
+format: presentiel
+duree: 2 jours (14 heures)
+volume_horaire_h: 14
+tarif:
+  texte: 2 140 € par praticien
+  euros: 2140
+  annee: null
+prerequis: Praticiens pratiquant déjà l'implantologie, du niveau basique au niveau avancé.
+financement:
+- dpc
+- fifpl
+url_officielle: https://fide.fr/formations/chirurgie-plastique-muco-gingivale-implantaire/
+sessions:
+- lieu: L-CANNES
+  debut: '2027-09-23'
+  fin: '2027-09-24'
+  inscriptions: a-renseigner
+  places: 24
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Page lue via un lecteur qui résume (accès direct bloqué) : citations à recontrôler. HT/TTC non
+  précisé. Places : 24 maximum. Piste P0084. N° DPC 26532325003. Type journee (2 jours) par défaut, à
+  trancher. Format : FAQ de l''accueil. | Citations de la source : intitule : « Chirurgie plastique muco-gingivale
+  implantaire » ; tarif : « 2 140 € par praticien » ; prerequis : « Praticiens pratiquant déjà l''implantologie,
+  du niveau basique au niveau avancé. » ; financement : « Éligible DPC ou FIFPL » ; sessions : « Jeudi
+  23 au vendredi 24 septembre 2027 » ; format : « Toutes nos formations sont organisées en présentiel
+  à Cannes (https://fide.fr/, Questions fréquentes) »'

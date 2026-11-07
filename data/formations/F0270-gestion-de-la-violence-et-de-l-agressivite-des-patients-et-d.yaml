@@ -1,0 +1,27 @@
+id: F0270
+intitule: Gestion de la violence et de l'agressivité des patients et de leur entourage
+organisme: O046
+secteur: prive
+type: journee
+disciplines:
+- omni
+format: presentiel
+duree: 7 h
+volume_horaire_h: 7
+tarif:
+  texte: 551,00 €
+  euros: 551
+  annee: null
+prerequis: null
+financement:
+- dpc
+- fifpl
+url_officielle: https://www.medere.fr/formation/gestion-de-l-agressivite-des-patients
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Aucune date ni ville. Formation ouverte à de nombreuses professions de santé (liste de publics,
+  pas un prérequis dentaire) : prerequis laissé vide. Source : page officielle Médéré. Tarif repris tel
+  qu''affiché : aucune mention HT/TTC ni année sur la page ; la page indique « 100% pris en charge et
+  indemnisé » (ANDPC). | Citations de la source : duree : « 7 h » ; format : « Présentiel » ; financement
+  : « DPC ; FIF PL (N° d''action DPC indiqué sur la page) » ; tarif : « 551.00 € »'

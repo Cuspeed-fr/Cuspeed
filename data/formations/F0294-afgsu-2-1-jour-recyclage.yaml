@@ -1,0 +1,33 @@
+id: F0294
+intitule: AFGSU 2 (1 jour) recyclage
+organisme: O020
+secteur: prive
+type: journee
+disciplines:
+- sp
+format: presentiel
+duree: 8 h
+volume_horaire_h: 8
+tarif:
+  texte: 250 €
+  euros: 250
+  annee: null
+prerequis: Attestation de moins de 4 ans
+financement: []
+url_officielle: https://www.sop.asso.fr/agenda
+sessions:
+- lieu: L-PARIS
+  debut: '2027-02-25'
+  fin: '2027-02-25'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans mention HT/TTC. Prix, durée et dates tirés de la page Agenda (https://www.sop.asso.fr/agenda),
+  la page de la formation n''affichant pas le tarif (modalités en PDF). Page /afgsu2 illisible lors de
+  la lecture (erreur du site) : durée, date, prérequis lus sur l''Agenda ; prérequis reformulé (non cité
+  mot pour mot). Lieu : Paris 12e. Pas de mention DPC. | Décision de Chris, 6 nov. 2026 : 8 h (et non
+  7 h), jeudi 25/02/2027, 9h-17h, confirmé par Chris. Source : Agenda SOP. | Citations de la source :
+  intitule : « AFGSU 2 (1 jour) recyclage » ; duree : « 8 heures de formation en présentiel » ; tarif
+  : « 250 € » ; sessions : « Jeudi 25 FÉVRIER 2027 » ; prerequis : « (Agenda) attestation de moins de
+  4 ans — paraphrase »'

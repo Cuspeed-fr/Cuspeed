@@ -1,0 +1,24 @@
+id: F0224
+intitule: 'Implantologie : restez conservateur !'
+organisme: O041
+secteur: prive
+type: journee
+disciplines:
+- implanto
+format: presentiel
+duree: 1 jour
+volume_horaire_h: null
+tarif:
+  texte: 650 €
+  euros: 650
+  annee: null
+prerequis: Chirurgien-dentiste pratiquant l'implantologie
+financement:
+- fifpl
+url_officielle: https://evolyou.dental/formations/implantologie-restez-conservateur/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Sallanches (74), ''À venir'', date à la carte : sessions vide. Tarif repris tel qu''affiché :
+  aucune mention HT/TTC ni année sur la page. | Citations de la source : duree : « 1 jour » ; tarif :
+  « €650 » ; financement : « FIF-PL et OPCO-EP »'

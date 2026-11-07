@@ -1,0 +1,35 @@
+id: F0228
+intitule: Implant unitaire en secteur esthétique
+organisme: O042
+secteur: prive
+type: journee
+disciplines:
+- implanto
+- resto
+format: presentiel
+duree: 1 jour, 7 heures
+volume_horaire_h: 7
+tarif:
+  texte: 965 € par praticien
+  euros: 965
+  annee: null
+prerequis: Praticiens pratiquant déjà l'implantologie, du niveau basique au niveau avancé.
+financement:
+- dpc
+- fifpl
+url_officielle: https://fide.fr/formations/implant-unitaire-en-secteur-esthetique/
+sessions:
+- lieu: L-CANNES
+  debut: '2027-10-06'
+  fin: '2027-10-06'
+  inscriptions: a-renseigner
+  places: 24
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Page lue via un lecteur qui résume (accès direct bloqué) : citations à recontrôler. HT/TTC non
+  précisé. Places : 24 maximum. Piste P0170. N° DPC 26532325009. Bouton d''inscription actif. Format :
+  FAQ de l''accueil. | Citations de la source : intitule : « Implant unitaire en secteur esthétique »
+  ; duree : « 1 jour, 7 heures » ; format : « Toutes nos formations sont organisées en présentiel à Cannes
+  (https://fide.fr/, Questions fréquentes) » ; tarif : « 965 € par praticien » ; prerequis : « Praticiens
+  pratiquant déjà l''implantologie, du niveau basique au niveau avancé. » ; financement : « Éligible DPC
+  ou FIFPL » ; sessions : « M 6 oct. 2027 »'

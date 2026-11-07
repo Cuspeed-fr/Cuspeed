@@ -257,3 +257,87 @@
   site_web: null
   page_catalogue: null
   fiche_revendiquee: false
+- id: O038
+  nom: Académie de Paro
+  type: organisme-prive
+  ville: Mérignac
+  site_web: https://www.academiedeparo.fr/
+  page_catalogue: https://www.academiedeparo.fr/
+  fiche_revendiquee: false
+- id: O039
+  nom: Dent Ta Bulle Formation
+  type: organisme-prive
+  ville: Ambarès-et-Lagrave
+  site_web: https://www.denttabulleformation.fr/
+  page_catalogue: https://www.denttabulleformation.fr/formations/
+  fiche_revendiquee: false
+- id: O040
+  nom: Endo Académie
+  type: organisme-prive
+  ville: null
+  site_web: https://www.endo-academie.fr/
+  page_catalogue: https://www.endo-academie.fr/formations/
+  fiche_revendiquee: false
+- id: O041
+  nom: Evolyou
+  type: organisme-prive
+  ville: Sallanches
+  site_web: https://evolyou.dental/
+  page_catalogue: https://evolyou.dental/formations/
+  fiche_revendiquee: false
+- id: O042
+  nom: FIDE – Institut Bonnet
+  type: organisme-prive
+  ville: Cannes
+  site_web: https://fide.fr/
+  page_catalogue: https://fide.fr/
+  fiche_revendiquee: false
+- id: O043
+  nom: GAD Center
+  type: organisme-prive
+  ville: Bordeaux
+  site_web: https://www.gad-center.com/
+  page_catalogue: https://www.gad-center.com/#formations
+  fiche_revendiquee: false
+- id: O044
+  nom: ICDP Paris (Institut de Chirurgie Dentaire de Paris)
+  type: organisme-prive
+  ville: Paris
+  site_web: https://www.icdp.paris/
+  page_catalogue: https://www.icdp.paris/catalogue-de-formation/
+  fiche_revendiquee: false
+- id: O045
+  nom: IFIP – Institut de Formation en Implantologie et Parodontologie
+  type: organisme-prive
+  ville: Paris
+  site_web: https://implantologie-ifip.fr/
+  page_catalogue: https://implantologie-ifip.fr/formations/
+  fiche_revendiquee: false
+- id: O046
+  nom: Médéré
+  type: organisme-prive
+  ville: null
+  site_web: https://www.medere.fr
+  page_catalogue: https://www.medere.fr/formations/chirurgien-dentiste
+  fiche_revendiquee: false
+- id: O047
+  nom: Orthoplus
+  type: industriel
+  ville: null
+  site_web: https://orthoplus.fr
+  page_catalogue: https://formations.orthoplus.fr/parcours-de-formation/
+  fiche_revendiquee: false
+- id: O048
+  nom: ParoSphère Formation (PSF)
+  type: organisme-prive
+  ville: Paris
+  site_web: https://www.parosphereformation.fr/
+  page_catalogue: https://www.parosphereformation.fr/formations/
+  fiche_revendiquee: false
+- id: O049
+  nom: Groupe Raphaël Formation
+  type: organisme-prive
+  ville: Paris
+  site_web: https://formationgrf.com
+  page_catalogue: https://formationgrf.com/accueil.php
+  fiche_revendiquee: false

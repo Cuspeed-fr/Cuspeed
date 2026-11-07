@@ -1,0 +1,33 @@
+id: F0235
+intitule: Facettes de A à Z – Bordeaux
+organisme: O043
+secteur: prive
+type: journee
+disciplines:
+- resto
+format: presentiel
+duree: 2 journées
+volume_horaire_h: null
+tarif:
+  texte: 'Dentiste : 1 550 € TTC ; jeune praticien diplômé (-2 ans) : 1 400 € TTC'
+  euros: 1550
+  annee: null
+prerequis: Aucun
+financement: []
+url_officielle: https://www.gad-center.com/formations-dentaires/esthetique/facettes-de-a-a-z-gad-center-leader-en-formation-dentaire/
+sessions:
+- lieu: L-BORDEAUX
+  debut: '2026-11-19'
+  fin: '2026-11-20'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix lus sur la page : dentiste 1 550 (TTC), jeune diplômé 1 400, assistant(e) 450, année du tarif
+  non précisée. Format : travaux pratiques (mock-up, préparations, collage sur Frasaco). Lieu : Ibis Bordeaux
+  Centre Mériadeck. Message générique du formulaire ''plus assez de places'' : inscriptions laissées à
+  renseigner. Volume horaire non écrit explicitement (9h/18h, 8h/jour) : laissé vide. Association libellé/montant
+  lue d''après l''ordre d''affichage de la section Inscription. | Citations de la source : intitule :
+  « Facettes de A à Z – Bordeaux » ; duree : « 2 journées » ; prerequis : « prérequis : aucun » ; inscriptions
+  : « Désolé, il n''y a plus assez de places disponibles ! » ; tarif : « Dentiste 1550 € TTC ; jeune praticien
+  diplômé (-2 ans) 1400 € TTC ; assistant(e) 450 € TTC »'

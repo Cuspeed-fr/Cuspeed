@@ -1,0 +1,33 @@
+id: F0200
+intitule: Parodontie Clinique
+organisme: O038
+secteur: prive
+type: cursus
+disciplines:
+- paro
+format: null
+duree: 5 jours
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: Doctorat en chirurgie dentaire, ou praticiens en cours de doctorat ayant validé leur CSCT ou
+  équivalent européen
+financement: []
+url_officielle: https://www.academiedeparo.fr/parodontie-clinique/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format non écrit explicitement par la page (TP sur postes de travail avec modèles pédagogiques,
+  lieu Continuum à Aix-en-Provence) : format laissé vide, à trancher par Chris. Ville des sessions tirée
+  de la méta-description de la page et de l''accueil (lieu de formation : Continuum, 9 av. Henri Malacrida,
+  Aix-en-Provence). Agenda de la page : dates écrites telles quelles, incohérences possibles (14-18 déc.
+  2027 complet et 13-17 déc. 2027 ; 12-16 oct. 2027 ; aucune date 2026) à vérifier. Dates affichées par
+  le site (dates incohérentes sur le site, à confirmer auprès de l''organisme) : 12-16 oct. 2027 (reste
+  1 place) ; 14-18 déc. 2027 (complet) ; 11-15 janv. 2027 (complet) ; 05-09 avril 2027 (complet) ; 14-18
+  juin 2027 ; 21-25 juin 2027 ; 20-24 sept. 2027 ; 13-17 déc. 2027. Tarif non publié. | Citations de la
+  source : prerequis : « Doctorat en chirurgie dentaire (ou praticiens en cours de doctorat ayant validé
+  leur CSCT ou équivalent européen) » ; tarif : « Veuillez prendre contact avec nous via le formulaire
+  pour obtenir le tarif » ; duree : « Jour 1 à Jour 5 » ; sessions : « 12 au 16 Octobre 2027 – Reste 1
+  place »'

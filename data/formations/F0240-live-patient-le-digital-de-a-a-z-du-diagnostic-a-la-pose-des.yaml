@@ -1,0 +1,32 @@
+id: F0240
+intitule: 'Live Patient : Le digital de A à Z du diagnostic à la pose des céramiques'
+organisme: O043
+secteur: prive
+type: cursus
+disciplines:
+- num
+- proth
+- resto
+format: presentiel
+duree: 3 jours
+volume_horaire_h: null
+tarif:
+  texte: 'Dentiste : 3 000 € TTC ; laboratoire : 1 900 € TTC ; assistant(e) : 1 900 € TTC'
+  euros: 3000
+  annee: null
+prerequis: Aucun
+financement: []
+url_officielle: https://www.gad-center.com/formations-dentaires/esthetique/formation-dentaire-digitale-gad-center-leader-en-formation-dentaire/
+sessions:
+- lieu: L-BORDEAUX
+  debut: '2027-06-07'
+  fin: '2027-06-09'
+  inscriptions: a-renseigner
+  places: 10
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: '''seulement 10 places disponibles'' ; GAD cabinet dentaire, 15 rue Ligier, Bordeaux ; 3 jours
+  d''immersion. Message générique du formulaire ''plus assez de places'' : inscriptions laissées à renseigner.
+  | Citations de la source : intitule : « Live Patient : Le digital de A à Z du diagnostic à la pose des
+  céramiques » ; places : « seulement 10 places disponibles » ; tarif : « Dentiste 3000 € TTC ; Laboratoire
+  1900 € TTC ; Assistant(e) dentaire 1900 € TTC »'

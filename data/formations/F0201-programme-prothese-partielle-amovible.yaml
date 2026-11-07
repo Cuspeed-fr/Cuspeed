@@ -1,0 +1,30 @@
+id: F0201
+intitule: Programme Prothèse partielle amovible
+organisme: O038
+secteur: prive
+type: cursus
+disciplines:
+- proth
+format: null
+duree: 3 jours
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: Doctorat en chirurgie dentaire, ou praticiens en cours de doctorat ayant validé leur CSCT ou
+  équivalent européen
+financement: []
+url_officielle: https://www.academiedeparo.fr/prothese-partielle-amovible/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format non écrit explicitement par la page (TP sur postes de travail avec modèles pédagogiques,
+  lieu Continuum à Aix-en-Provence) : format laissé vide, à trancher par Chris. Ville des sessions tirée
+  de la méta-description de la page et de l''accueil (lieu de formation : Continuum, 9 av. Henri Malacrida,
+  Aix-en-Provence). Aucune date : session annoncée sans date (si la base exige un début, ne pas créer
+  la session). Aucune date sur la page : « Nouvelle date à venir en 2027 », « Pré-inscription possible
+  ». Tarif non publié. | Citations de la source : prerequis : « Doctorat en chirurgie dentaire (ou praticiens
+  en cours de doctorat ayant validé leur CSCT ou équivalent européen) » ; tarif : « Veuillez prendre contact
+  avec nous via le formulaire pour obtenir le tarif » ; sessions : « Nouvelle date à venir en 2027 / Pré-inscription
+  possible »'

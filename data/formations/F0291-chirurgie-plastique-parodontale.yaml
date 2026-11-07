@@ -1,0 +1,32 @@
+id: F0291
+intitule: Chirurgie Plastique Parodontale
+organisme: O019
+secteur: prive
+type: masterclass
+disciplines:
+- paro
+format: presentiel
+duree: 2 jours
+volume_horaire_h: null
+tarif:
+  texte: 1 945,00 €
+  euros: 1945
+  annee: null
+prerequis: Avoir suivi les trois premières sessions du cycle ou avoir une première expérience en parodontologie
+  ; connaissances approfondies en parodontologie (CES, diplômes universitaires)
+financement:
+- dpc
+url_officielle: https://sfpio.com/produit/chirurgie-plastique-parodontale/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-01-29'
+  fin: '2027-01-30'
+  inscriptions: a-renseigner
+  places: 20
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Niveau Avancé. Format présentiel déduit des chirurgies live et TP : à confirmer. Prérequis reformulé
+  à partir de la page (vérifier). Prix repris tel qu''affiché : aucune mention HT/TTC ni tarif adhérent/non-adhérent
+  sur la page. | Citations de la source : intitule : « Chirurgie Plastique Parodontale » ; duree : « deux
+  jours » ; sessions : « Du 29 au 30 janvier 2027 » ; places : « Nombre de place : 20 » ; financement
+  : « Formation éligible au DPC » ; format : « chirurgies « live » » ; tarif : « Prix : 1 945,00 € »'

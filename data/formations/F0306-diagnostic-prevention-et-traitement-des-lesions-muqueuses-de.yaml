@@ -1,0 +1,36 @@
+id: F0306
+intitule: Diagnostic, prévention et traitement des lésions muqueuses de la cavité orale
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- mbd
+format: presentiel
+duree: 2 jours
+volume_horaire_h: 14
+tarif:
+  texte: 1600 € (RAC 60 €)
+  euros: 1600
+  annee: null
+prerequis: null
+financement:
+- dpc
+url_officielle: https://www.sop.asso.fr/lesions-muqueuses
+sessions:
+- lieu: L-PARIS
+  debut: '2026-12-10'
+  fin: '2026-12-11'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'DATES INCOHÉRENTES : la page de la formation et la page DPC présentiel affichent « Jeudi 10 &
+  Vend.11 DÉCEMBRE 2026 » (Hôtel Sofitel Arc de Triomphe, Paris) mais l''Agenda écrit « prochaine session
+  en 2027 » : aucune session saisie, à trancher par Chris. Durée en jours déduite des 2 dates. Prix sans
+  HT/TTC ; euros vide car RAC 60 € affiché aussi. DPC action n° 12632325003. | Décision de Chris, 6 nov.
+  2026 : session des 10-11 déc. 2026 conservée (encore possible) ; l''édition 2027 annoncée sur l''Agenda
+  n''a pas de date écrite. | Contrôle du 6 nov. 2026 : tarif_euros 1600 par cohérence avec Érosion & Usure
+  (reste à charge DPC dans le texte). | Citations de la source : intitule : « Diagnostic, prévention et
+  traitement des lésions muqueuses de la cavité orale » ; duree : « Jeudi 10 & Vend.11 DÉCEMBRE 2026 »
+  ; volume_horaire_h : « Présentiel 14 heures » ; tarif : « 1600 € » ; format : « Présentiel » ; financement
+  : « SOP Organisme DPC n°1263 »'

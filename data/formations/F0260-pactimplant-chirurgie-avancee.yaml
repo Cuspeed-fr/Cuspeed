@@ -1,0 +1,30 @@
+id: F0260
+intitule: PACTimplant-chirurgie avancée
+organisme: O044
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+format: presentiel
+duree: 77 heures / 9,5 jours
+volume_horaire_h: 77
+tarif:
+  texte: 'À partir de 3 200 € (programme complet, 4 modules) · 3 modules au choix : à partir de 7 900
+    € · 2 modules : à partir de 5 900 € · module 1 : 3 200 € · module 2 : 3 200 € · module 3 : 3 500 €'
+  euros: 3200
+  annee: null
+prerequis: N1 implantologie ou équivalent
+financement: []
+url_officielle: https://www.icdp.paris/formation/diplome-universitaire-europeen-dimplantologie-clinique/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Niveau N2. 4 modules (P.A.C.Tmucco 22 h, P.A.C.Taugmentation 22 h, P.A.C.Tnumérique 26 h, conférences
+  7 h). Aucune date. L''URL contient ''diplome-universitaire-europeen'' mais la page ne parle pas de diplôme.
+  DPC/FIFPL non mentionnés par la page (seulement ''Formation éligible à financement''). Aucune session
+  future datée fiable (au 2026-11-05). Tarif « à partir de » repris tel qu''affiché : aucune mention HT/TTC
+  ni année sur la page. Grille à vérifier : le programme complet est affiché moins cher que 2 ou 3 modules.
+  | Citations de la source : duree : « 77 heures / 9,5 jours » ; prerequis : « Pré-requis: N1 implantologie
+  ou équivalent » ; tarif : « À partir de 3 200€ (programme complet, 4 modules) ; 3 modules au choix :
+  À partir de 7 900€ ; 2 modules au choix : À partir de 5 900€ ; Module 1 : 3 200€ ; Module 2 : 3 200€
+  ; Module 3 : 3 500€ »'

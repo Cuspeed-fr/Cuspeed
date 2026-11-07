@@ -6,7 +6,7 @@ type: du
 disciplines:
 - sommeil
 format: null
-duree: Stages au CHU
+duree: null
 volume_horaire_h: null
 tarif:
   texte: null
@@ -22,5 +22,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-05'
 notes: null

@@ -1,0 +1,36 @@
+id: F0296
+intitule: Chirurgie plastique parodontale et péri-implantaire
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- chir
+- implanto
+- paro
+format: presentiel
+duree: 3 jours
+volume_horaire_h: 18
+tarif:
+  texte: 3195 €
+  euros: 3195
+  annee: null
+prerequis: null
+financement:
+- dpc
+url_officielle: https://www.sop.asso.fr/chirurgie-plastique-parodontale
+sessions:
+- lieu: L-PARIS
+  debut: '2027-03-25'
+  fin: '2027-03-27'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans mention HT/TTC. Prix, durée et dates tirés de la page Agenda (https://www.sop.asso.fr/agenda),
+  la page de la formation n''affichant pas le tarif (modalités en PDF). Lieux : Hôtel Napoléon (Paris
+  8e) et LISC (Paris 15e), sans précision par jour. DPC : action n° 12632425008. Durée en jours déduite
+  des dates 25-26-27 mars. Correction 2026-11-06 : mention « mâchoires de porc » retirée (absente de la
+  page). | Citations de la source : intitule : « Chirurgie plastique parodontale et péri-implantaire »
+  ; duree : « 25-26-27 MARS 2027 » ; volume_horaire_h : « Présentiel 18h » ; tarif : « 3195 € » ; format
+  : « Présentiel 18h » ; financement : « SOP Organisme DPC n°1263 » ; precisions : « Deux interventions
+  chirurgicales en direct et interactives » ; sessions : « 25-26-27 MARS 2027 »'

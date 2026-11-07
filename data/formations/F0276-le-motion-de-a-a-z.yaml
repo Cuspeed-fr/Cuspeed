@@ -1,0 +1,44 @@
+id: F0276
+intitule: Le Motion™ de A à Z
+organisme: O047
+secteur: prive
+type: journee
+disciplines:
+- ortho
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: Praticien.ne 980 € · Praticien.ne Club 880 € (TTC)
+  euros: 980
+  annee: null
+prerequis: Aucun
+financement: []
+url_officielle: https://formations.orthoplus.fr/formations/le-motion-de-a-a-z/
+sessions:
+- lieu: L-PARIS
+  debut: '2026-12-17'
+  fin: '2026-12-17'
+  inscriptions: a-renseigner
+  places: null
+- lieu: L-PARIS
+  debut: '2027-02-11'
+  fin: '2027-02-11'
+  inscriptions: a-renseigner
+  places: null
+- lieu: L-PARIS
+  debut: '2027-09-23'
+  fin: '2027-09-23'
+  inscriptions: a-renseigner
+  places: null
+- lieu: L-PARIS
+  debut: '2027-12-16'
+  fin: '2027-12-16'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Workshop Système CARRIERE, 9h30-15h30 (durée non reprise). Format non explicite (lieu physique).
+  Intitulé de la liste : ''Workshop Système CARRIERE Le Motion™ de A à Z''. DPC/FIFPL, places non mentionnés.
+  | Citations de la source : precisions : « au cabinet du Dr Jacques-Yves Assor » ; tarif : « Praticien.ne
+  980,00 € TTC ; Praticien.ne Club 880,00 € TTC »'

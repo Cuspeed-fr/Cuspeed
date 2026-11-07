@@ -1,0 +1,44 @@
+id: F0238
+intitule: Prise en charge des PATHOLOGIES OCCLUSALES et POSTURALES 2027
+organisme: O043
+secteur: prive
+type: cursus
+disciplines:
+- occlu
+format: presentiel
+duree: 7 jours répartis en 3 modules
+volume_horaire_h: null
+tarif:
+  texte: 'Dentiste, 3 modules / 7 jours : 5 200 € TTC'
+  euros: 5200
+  annee: null
+prerequis: Aucun
+financement:
+- fifpl
+url_officielle: https://www.gad-center.com/formations-dentaires/fonction/formation-dentaire-occlusion-gad-center-leader-en-formation-dentaire/
+sessions:
+- lieu: L-BORDEAUX
+  debut: '2027-02-04'
+  fin: '2027-02-06'
+  inscriptions: a-renseigner
+  places: 14
+- lieu: L-BORDEAUX
+  debut: '2027-04-01'
+  fin: '2027-04-02'
+  inscriptions: a-renseigner
+  places: 14
+- lieu: L-BORDEAUX
+  debut: '2027-05-27'
+  fin: '2027-05-28'
+  inscriptions: a-renseigner
+  places: 14
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Modules : 04-06 fév., 01-02 avril, 27-28 mai 2027 (la page catégorie Fonction donnait 03-04 juin,
+  divergence : on retient la page de la formation). Tarif 5 200 € TTC : année non écrite (l''intitulé
+  porte ''2027''). ''Cette formation est prise en charge par le FIF PL.'' Maximum 14 participants. Lieux
+  : Ibis Bordeaux Centre Mériadeck et GAD Cabinet, 15 rue Ligier. Message générique du formulaire ''plus
+  assez de places'' : inscriptions laissées à renseigner. | Citations de la source : intitule : « Prise
+  en charge des PATHOLOGIES OCCLUSALES et POSTURALES 2027 » ; financement : « Cette formation est prise
+  en charge par le FIF PL. » ; modules : « Module 1 : 04, 05 & 06 février 2027 » ; tarif : « Dentiste
+  3 modules 7 jours : 5200 € TTC ; 1 assistante au module 2 : 500 € TTC ; 2 assistantes : 800 € TTC »'

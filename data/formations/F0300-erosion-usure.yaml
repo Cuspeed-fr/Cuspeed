@@ -1,0 +1,28 @@
+id: F0300
+intitule: Erosion & Usure
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- resto
+format: presentiel
+duree: 2 jours
+volume_horaire_h: 14
+tarif:
+  texte: '1.800 € (RAC reste à charge : 260 €)'
+  euros: 1800
+  annee: null
+prerequis: null
+financement:
+- dpc
+url_officielle: https://www.sop.asso.fr/erosion-usure
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Page : statut « COMPLET » mais « Deux jours en 2027 » sans date précise : pas de session. Prix
+  sans HT/TTC ; 1.800 € (page, catalogue) et RAC 260 € (Agenda) : euros laissé vide car deux montants.
+  Lieu : Hôtel Napoléon (Paris). DPC action n° 12632325002. Intitulé Agenda : « Érosion et usure ». |
+  Décision de Chris, 6 nov. 2026 : tarif_euros = 1800 (reste à charge DPC 260 € dans le texte). | Citations
+  de la source : intitule : « Formation Erosion & Usure » ; duree : « Deux jours en 2027 » ; volume_horaire_h
+  : « Présentiel 14h DPC » ; tarif : « 1.800 € » ; format : « Présentiel » ; financement : « SOP Organisme
+  DPC n° 1263 » ; precisions : « 1 encadrant pour 6 participants »'

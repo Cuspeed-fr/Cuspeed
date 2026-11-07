@@ -1,0 +1,33 @@
+id: F0293
+intitule: AFGSU 2 (3 jours)
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- sp
+format: presentiel
+duree: 3 jours
+volume_horaire_h: 21
+tarif:
+  texte: 650 €
+  euros: 650
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.sop.asso.fr/agenda
+sessions:
+- lieu: L-PARIS
+  debut: '2027-01-13'
+  fin: '2027-01-15'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans mention HT/TTC. Prix, durée et dates tirés de la page Agenda (https://www.sop.asso.fr/agenda),
+  la page de la formation n''affichant pas le tarif (modalités en PDF). Page /afgsu2 illisible : données
+  lues sur l''Agenda. Intitulé catalogue : « AFGSU 2 » à 250,00 € (autre tarif, probablement le recyclage).
+  « Formation validante complète » selon l''Agenda. Durée en jours déduite des 3 dates écrites. Lieu :
+  Paris 12e. | Décision de Chris, 6 nov. 2026 : dates 13-15 janv. 2027, 9h-17h, 21 h en présentiel, confirmées
+  par Chris. Source : Agenda SOP. | Citations de la source : intitule : « AFGSU 2 (3 jours) » ; duree
+  : « 21h Présentiel » ; tarif : « 650 € » ; sessions : « Mercredi 13 JANVIER 2027 / Jeudi 14 JANVIER
+  2027 / Vendredi 15 JANVIER 2027 »'

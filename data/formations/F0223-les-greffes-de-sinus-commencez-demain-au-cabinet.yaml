@@ -1,0 +1,25 @@
+id: F0223
+intitule: 'Les greffes de sinus : commencez demain au cabinet !'
+organisme: O041
+secteur: prive
+type: journee
+disciplines:
+- chir
+- implanto
+format: presentiel
+duree: 2 jours
+volume_horaire_h: null
+tarif:
+  texte: 1 100 €
+  euros: 1100
+  annee: null
+prerequis: Pas de pré-requis.
+financement:
+- fifpl
+url_officielle: https://evolyou.dental/formations/les-greffes-de-sinus-commencez-demain-au-cabinet/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Sallanches (74) indiqué comme format/lieu, ''Ouverte'', date à la carte : aucune date, sessions
+  vide. Tarif repris tel qu''affiché : aucune mention HT/TTC ni année sur la page. | Citations de la source
+  : duree : « 2 jours » ; tarif : « €1100 » ; financement : « FIF-PL et OPCO-EP »'

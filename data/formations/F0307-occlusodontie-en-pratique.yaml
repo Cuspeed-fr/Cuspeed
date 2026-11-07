@@ -1,0 +1,35 @@
+id: F0307
+intitule: Occlusodontie en pratique
+organisme: O020
+secteur: prive
+type: cursus
+disciplines:
+- occlu
+format: hybride
+duree: 4 modules
+volume_horaire_h: 56
+tarif:
+  texte: 3 450 €
+  euros: 3450
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.sop.asso.fr/occluso
+sessions:
+- lieu: L-PARIS
+  debut: '2027-02-11'
+  fin: '2027-06-25'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'DATES INCOHÉRENTES entre la page (M2 8-9 avril, M4 24-25 juin 2027) et l''Agenda (M2 15-16 avril,
+  M4 23-24 septembre 2027) : seule la date de début commune (11 février 2027) est retenue, fin vide. Modules
+  en classe virtuelle (Zoom) et présentiel avec TP, lieu Espace Saint-Martin (Paris 3e) selon la page.
+  Prix sans HT/TTC. Durée non écrite sous forme de durée : volume 56 h (Agenda « 56h en Présentiel avec
+  T.P. »). | Décision de Chris, 6 nov. 2026 : calendrier transmis par Chris : M1 webinars 11 fév. et 11
+  mars 2027 ; M2 présentiel TP 8-9 avril ; M3 webinars 13 mai et 10 juin ; M4 présentiel TP 24-25 juin
+  2027. Session = du 11 février au 25 juin 2027 (dates de l''Agenda écartées). | Citations de la source
+  : intitule : « Formation Occlusodontie en pratique » ; volume_horaire_h : « 56h en Présentiel avec T.P.
+  » ; tarif : « 3 450 € » ; format : « Formation mixte » ; precisions : « Collège National d''Occlusodontologie
+  » ; sessions : « M1 11 FÉVRIER & 11 MARS 2027 »'

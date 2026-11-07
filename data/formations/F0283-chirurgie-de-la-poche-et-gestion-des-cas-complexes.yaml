@@ -1,0 +1,36 @@
+id: F0283
+intitule: Chirurgie de la poche et gestion des cas complexes
+organisme: O048
+secteur: prive
+type: cursus
+disciplines:
+- chir
+- paro
+format: presentiel
+duree: 4,5 jours
+volume_horaire_h: null
+tarif:
+  texte: 4 430 € — TVA non applicable
+  euros: 4430
+  annee: null
+prerequis: 'Prérequis obligatoire : aucun ; prérequis recommandé : stage PARO REPRISE'
+financement: []
+url_officielle: https://www.parosphereformation.fr/formations/chirurgie-de-la-poche-et-cas-complexes/
+sessions:
+- lieu: L-PARIS
+  debut: '2026-12-08'
+  fin: '2026-12-12'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format presentiel deduit du lieu physique (LISC, 64 rue Fondary 75015 Paris) et des travaux pratiques
+  ; le mot ''presentiel'' n''est pas ecrit. Volume horaire non indique (horaires seulement). Intitule
+  : titre affiche (balise title : ''Cycle Avancé - Chirurgie de la poche et cas complexes''). Session
+  PA26 : agenda donne ''du 08 au 12 décembre 2026'', ''6 places'' (colonne Disponibilite ; capacite ou
+  reste non precise, places=null), lieu non precise dans l''agenda (Paris deduit de la page de detail
+  LISC). Max 20 participants. Duree 4,5 jours vs 5 jours calendaires : ecart non explique. Tarif affiché
+  avec « TVA non applicable - Art 293b du CGI » ; pas de mention HT/TTC ni d''année. | Citations de la
+  source : duree : « 4,5 jours » ; prerequis : « Prérequis recommandé : stage PARO REPRISE » ; session
+  : « PA26 - Du 8 au 12 décembre 2026 - 6 places » ; tarif : « 4430 € - TVA non applicable - Art 293b
+  du CGI »'

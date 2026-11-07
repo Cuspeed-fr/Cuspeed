@@ -1,0 +1,37 @@
+id: F0216
+intitule: Formation à l'ergonomie et au travail à 4 mains
+organisme: O040
+secteur: prive
+type: journee
+disciplines:
+- omni
+format: presentiel
+duree: null
+volume_horaire_h: 7
+tarif:
+  texte: 'Binôme Praticien + Assistante : 1 500 € ; assistante supplémentaire : 500 €'
+  euros: 1500
+  annee: null
+prerequis: 'Inscriptions uniquement de binômes (Dentiste + assistante). Praticien : doctorat en chirurgie
+  dentaire ou en cours de doctorat avec CSCT validé (ou équivalent européen).'
+financement: []
+url_officielle: https://www.endo-academie.fr/produit/formation-a-lergonomie-et-au-travail-a-4-mains/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-03-25'
+  fin: '2027-03-25'
+  inscriptions: ouvertes
+  places: 19
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'À TRANCHER PAR CHRIS : formation en binôme dentiste + assistante (hors périmètre « praticiens
+  seuls » ?). Durée : seul « 7 heures » est écrit (volume), pas de durée en jours. Places : 20 pour chacune
+  des deux formules. DPC : accréditation « en cours » : non retenu. Liste des formations affiche 1 500
+  € mais la page affiche 1 350 € : page retenue. | Décision de Chris, 6 nov. 2026 : prix relu sur la page
+  le 6 nov. 2026 (deux lectures) : 1 500 € ; l''ancienne lecture à 1 350 € est abandonnée. OPCO/FIFPL
+  « susceptible » et DPC « en cours » : non retenus tant que non confirmés. | Contrôle du 6 nov. 2026
+  : 19 places pour la formule 1+1 sur la page (20 pour 1+2). | Citations de la source : intitule : « Formation
+  à l''ergonomie et au travail à 4 mains » ; volume_horaire_h : « 7 heures » ; tarif : « Binôme Praticien
+  + Assistante : 1 500 € » ; prerequis : « Inscriptions uniquement de binômes (Dentiste + assistante)
+  » ; format : « Présentiel » ; sessions : « Binôme 1 Praticien + 1 Assistant(e) - (20 places disponibles)
+  »'

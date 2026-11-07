@@ -1,0 +1,34 @@
+id: F0282
+intitule: 'Hygiène : l''épreuve de l''oral'
+organisme: O048
+secteur: prive
+type: cursus
+disciplines:
+- paro
+format: presentiel
+duree: 2,5 journées
+volume_horaire_h: null
+tarif:
+  texte: 1 500 € (chirurgien-dentiste) · 1 300 € (assistant(e) dentaire) — TVA non applicable
+  euros: 1500
+  annee: null
+prerequis: Absence de prérequis
+financement: []
+url_officielle: https://www.parosphereformation.fr/formations/hygi%C3%A8ne-orale/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-10-21'
+  fin: '2027-10-23'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format presentiel deduit du lieu physique (LISC, 64 rue Fondary 75015 Paris) et des travaux pratiques
+  ; le mot ''presentiel'' n''est pas ecrit. Volume horaire non indique (horaires seulement). Intitule
+  : titre de page ; titre technique ''Cycle Spécial - Hygiène orale''. Formation mixte praticiens + assistant(e)s
+  (tarifs distincts). Session HO27 21-23/10/2027 ; lieu non precise dans l''agenda (Paris deduit de la
+  page de detail). Max 25 participants. Tarif affiché avec « TVA non applicable - Art 293b du CGI » ;
+  pas de mention HT/TTC ni d''année. | Citations de la source : duree : « 2,5 journées » ; prerequis :
+  « Absence de prérequis » ; session : « HO27 - 21, 22 et 23 octobre 2027 - Ouvert » ; tarif : « 1500
+  € pour les chirurgiens-dentistes ; 1300 € pour les assistant(e)s dentaires ; TVA non applicable - Art
+  293b du CGI »'

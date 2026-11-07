@@ -1,0 +1,41 @@
+id: F0264
+intitule: Implantologie Chirurgicale et Prothétique
+organisme: O045
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+format: hybride
+duree: 3 jours
+volume_horaire_h: 21
+tarif:
+  texte: '3 000 € nets de TVA (e-learning prérequis : 800 €, ou entièrement pris en charge par le DPC)'
+  euros: 3000
+  annee: null
+prerequis: Inscription au cours théorique en e-learning « Implantologie Chirurgicale et Prothétique »
+  (16 h, plateforme Blendi), inscription indépendante
+financement: []
+url_officielle: https://implantologie-ifip.fr/formations/implantologie-chirurgicale-prothetique/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-01-06'
+  fin: '2027-01-08'
+  inscriptions: a-renseigner
+  places: null
+- lieu: L-PARIS
+  debut: '2027-03-03'
+  fin: '2027-03-05'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Lieu : Experience Center Henry Schein Paris, 25 boulevard Romain Rolland, 75014 Paris. Prix «
+  nets de TVA », sans mention HT/TTC. Inscription par billetterie tierce ou virement : liens non ouverts.
+  Sessions de septembre et octobre 2026 passées : ignorées. DPC écrit pour l''e-learning prérequis seulement
+  : financement laissé vide. Mots de la page : « 3 jours 100% Travaux Pratiques ». Les dates « 27-29 mai
+  / 8-10 juillet » de l''accueil (posts) ne sont pas sur la page de la formation : ignorées. | Citations
+  de la source : intitule : « Implantologie Chirurgicale et Prothétique » ; duree : « 3 jours 100% Travaux
+  Pratiques » ; volume_horaire_h : « 21 heures sur 3 jours (page de la formation, lu par synthèse) » ;
+  tarif : « 3000 € » ; prerequis : « inscription au cours théorique en e-learning » ; format : « E-learning
+  de 16 h puis 3 jours en présentiel » ; precisions : « agréée par les assureurs (RCP) » ; sessions :
+  « 06, 07 et 08/01/2027 »'

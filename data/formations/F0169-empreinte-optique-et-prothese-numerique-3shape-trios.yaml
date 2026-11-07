@@ -7,7 +7,7 @@ disciplines:
 - num
 - proth
 format: null
-duree: 1 jour · Lyon, Rennes, Marseille, Paris, Bordeaux
+duree: 1 jour
 volume_horaire_h: null
 tarif:
   texte: 800 € (assistantes 200 €)
@@ -23,5 +23,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-05'
 notes: null

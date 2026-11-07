@@ -6,7 +6,7 @@ type: du
 disciplines:
 - paro
 format: hybride
-duree: 141 h · sept. à mai · hybride
+duree: 141 h · sept. à mai
 volume_horaire_h: 141
 tarif:
   texte: 3 200 € (2026-27)
@@ -22,5 +22,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-05'
 notes: null

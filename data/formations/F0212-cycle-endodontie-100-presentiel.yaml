@@ -1,0 +1,48 @@
+id: F0212
+intitule: Cycle Endodontie 100% Présentiel
+organisme: O040
+secteur: prive
+type: cursus
+disciplines:
+- endo
+format: presentiel
+duree: null
+volume_horaire_h: 37
+tarif:
+  texte: 4695 €
+  euros: 4695
+  annee: null
+prerequis: Doctorat en chirurgie dentaire (ou praticien en cours de doctorat ayant validé leur CSCT ou
+  équivalent européen)
+financement:
+- dpc
+url_officielle: https://www.endo-academie.fr/produit/le-cycle-endodontie-presentiel/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-03-22'
+  fin: '2027-03-24'
+  inscriptions: complet
+  places: null
+- lieu: L-PARIS
+  debut: '2027-03-22'
+  fin: '2027-03-24'
+  inscriptions: ouvertes
+  places: 22
+- lieu: L-PARIS
+  debut: '2027-10-11'
+  fin: '2027-10-13'
+  inscriptions: ouvertes
+  places: 26
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Dates de session = jours de cours. Travaux pratiques : 10-11 mai 2027 (session complète), 12-13
+  mai 2027 (nouvelle session), 6-7 décembre 2027 (octobre). Durée écrite : « 37h » seulement (volume).
+  Prix sans HT/TTC. DPC partiel, sous réserve des crédits ANDPC (action 86952325023). Témoignages de la
+  page factices (« Lorem ipsum », « John Doe ») : non utilisés. Correction 2026-11-06 : places relues
+  sur le sélecteur de la page : mars TP 10-11 mai = COMPLET (places null) ; mars TP 12-13 mai = « 22 places
+  disponibles » ; octobre = « 26 places disponibles ». | Citations de la source : intitule : « Cycle Endodontie
+  100% Présentiel » ; volume_horaire_h : « 37h » ; tarif : « 4695€ » ; prerequis : « Doctorat en chirurgie
+  dentaire (ou praticien en cours de doctorat ayant validé leur CSCT ou équivalent européen) » ; format
+  : « Le Cycle Endodontie se déroule initialement en présentiel » ; financement : « Prise en charge DPC
+  partielle » ; precisions : « jusqu’à 1 mois avant le début de la formation » ; sessions : « Paris -
+  22 au 24 mars 2027 (COMPLET) ; (22 places disponibles) ; (26 places disponibles) »'

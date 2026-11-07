@@ -1,0 +1,38 @@
+id: F0302
+intitule: 'Le Composite : injecté, pressé, usiné ou stratifié : comment l''aimez-vous ?'
+organisme: O020
+secteur: prive
+type: journee
+disciplines:
+- resto
+format: null
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: 'Formule 1 journée : 375 €, ou 350 € en tarif anticipé (jusqu''à 1 mois avant) ; formule 2 journées
+    : 675 € ; formule 4 journées : 975 € ; tarif assistant(e) dentaire : 175 €'
+  euros: 375
+  annee: null
+prerequis: null
+financement:
+- fifpl
+url_officielle: https://www.sop.asso.fr/product-page/mars-2027
+sessions:
+- lieu: L-PARIS
+  debut: '2027-03-18'
+  fin: '2027-03-18'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans HT/TTC. Formules affichées sur https://www.sop.asso.fr/journees : 1 journée 375 € (350
+  € en tarif anticipé jusqu''à 1 mois avant), 2 journées 675 €, 4 journées 975 €, assistant(e) dentaire
+  175 €. Lieu : Espace Saint-Martin, Paris 3e. Statut d''inscription non écrit. Titre de la page produit
+  : « Journée Composites injectés - 18/03/27 ». Format « présentiel » déduit du programme sur place (déjeuner,
+  lieu), non écrit tel quel. Correction 2026-11-06 : citation « Déjeuner convivial assis : 12h30-14h00
+  » introuvable sur la page, retirée ; aucun horaire conservé ; format laissé null car non écrit sur la
+  page (présentiel seulement déduit du lieu Espace Saint-Martin). | Contrôle du 6 nov. 2026 : « Prise
+  en charge FIFPL possible » est écrit sur https://www.sop.asso.fr/journees (pas sur la page produit).
+  | Citations de la source : intitule : « Le Composite : injecté, pressé, usiné ou stratifié : comment
+  l''aimez-vous ? » ; tarif : « 375,00 € » ; financement : « Une prise en charge FIFPL est possible. »
+  ; sessions : « Journée Composites injectés - 18/03/27 »'

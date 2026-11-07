@@ -1,0 +1,34 @@
+id: F0209
+intitule: Formation Hypnose
+organisme: O039
+secteur: prive
+type: journee
+disciplines:
+- sedation
+format: presentiel
+duree: 1 jour
+volume_horaire_h: null
+tarif:
+  texte: 800 €
+  euros: 800
+  annee: null
+prerequis: null
+financement: []
+url_officielle: https://www.denttabulleformation.fr/formation/hypnose-1jour/
+sessions:
+- lieu: L-AMBARES
+  debut: '2026-11-12'
+  fin: '2026-11-12'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
+  Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
+  salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
+  publiée dans precisions). Piste P0253 (Hypnose au cabinet dentaire - Initiation). Public : dentistes,
+  assistant(e)s, orthophonistes, kinésithérapeutes, paramédicaux ; tarifs préférentiels paramédicaux.
+  Texte alternatif d''image parle de « Formation Hypnose avancée » (incohérence). HT/TTC non précisé.
+  | Citations de la source : intitule : « Formation Hypnose » ; duree : « 1 jour » ; format : « Non, toutes
+  nos formations se déroulent en présentiel dans notre centre. » ; tarif : « 800 € » ; sessions : « Le
+  12 novembre 2026 ; Inscriptions ouvertes »'

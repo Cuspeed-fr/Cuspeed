@@ -1,0 +1,38 @@
+id: F0217
+intitule: Utilisation du microscope en omnipratique
+organisme: O040
+secteur: prive
+type: cursus
+disciplines:
+- endo
+- omni
+format: hybride
+duree: 2 jours
+volume_horaire_h: 20
+tarif:
+  texte: 2550 €
+  euros: 2550
+  annee: null
+prerequis: Doctorat en chirurgie dentaire (ou praticien en cours de doctorat ayant validé leur CSCT ou
+  équivalent européen)
+financement: []
+url_officielle: https://www.endo-academie.fr/produit/utilisation-du-microscope-en-omnipratique-2/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-10-13'
+  fin: '2027-10-14'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'INCOHÉRENCES : la page produit affiche une session « 6 et 7 octobre 2023 » à Rouen et « Durée
+  : 17 heures », alors que la liste des formations affiche « Paris – 13 au 14 octobre 2027 » et « 20h
+  ». Ni durée, ni volume, ni session retenus. Contenu : webinaire + 3 h e-learning, 1,5 jour de TP, demi-journée
+  d''immersion en cabinet (présentiel + e-learning : hybride). Aucun DPC écrit. Prix sans HT/TTC. | Décision
+  de Chris, 6 nov. 2026 : on garde l''affichage de la liste (Paris, 13-14 oct. 2027, 20 h) ; la session
+  2023 de Rouen et les 17 h de la page produit sont écartés. | Contrôle du 6 nov. 2026 : page produit
+  : « 27 places disponibles » et « Prise en charge DPC partielle* » (peut venir du gabarit) : non retenus.
+  | Citations de la source : intitule : « Utilisation du microscope en omnipratique » ; tarif : « 2550
+  € » ; prerequis : « Doctorat en chirurgie dentaire (ou praticien en cours de doctorat ayant validé leur
+  CSCT ou équivalent européen) » ; format : « 3h de cours en E-Learning et 2 journées de formation pratique
+  »'

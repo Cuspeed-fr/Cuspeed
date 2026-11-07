@@ -1,0 +1,31 @@
+id: F0295
+intitule: CBCT
+organisme: O020
+secteur: prive
+type: journee
+disciplines:
+- omni
+format: presentiel
+duree: 7 h
+volume_horaire_h: 7
+tarif:
+  texte: 950 €
+  euros: 950
+  annee: null
+prerequis: null
+financement:
+- dpc
+url_officielle: https://www.sop.asso.fr/cbct-presentiel
+sessions:
+- lieu: L-PARIS
+  debut: '2027-09-30'
+  fin: '2027-09-30'
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Prix sans mention HT/TTC. Titre de la page : « Formation CBCT Présentiel » ; catalogue : « CBCT
+  - Formation Validante » (https://www.sop.asso.fr/product-page/cbct, mêmes 950 € et action DPC n° 12632325004,
+  sans date). Lieu : Sofitel Paris Arc de Triomphe. | Citations de la source : intitule : « CBCT » ; duree
+  : « 7 heures » ; volume_horaire_h : « 7 heures » ; tarif : « 950 € » ; format : « Présentiel » ; financement
+  : « Formation continue habilitée DPC » ; sessions : « Jeudi 30 SEPTEMBRE 2027 »'

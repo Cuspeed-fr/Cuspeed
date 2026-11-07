@@ -1,0 +1,37 @@
+id: F0218
+intitule: Cycle complet en implantologie
+organisme: O041
+secteur: prive
+type: cursus
+disciplines:
+- implanto
+format: presentiel
+duree: null
+volume_horaire_h: null
+tarif:
+  texte: 4 400 €
+  euros: 4400
+  annee: null
+prerequis: Aucun
+financement: []
+url_officielle: https://evolyou.dental/formations/cycle-complet-en-implantologie/
+sessions:
+- lieu: L-SALLANCHES
+  debut: '2026-12-03'
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+- lieu: L-SALLANCHES
+  debut: '2027-02-03'
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Apport théorique de 64h indiqué, mais pas un total d''heures : volume_horaire_h et duree laissés
+  vides. OPCO seulement, ni DPC ni FIF-PL cités. Deux départs affichés (3 déc. 2026 et 3 fév. 2027), fin
+  non écrite : deux sessions à Sallanches, inscriptions a-renseigner. Le module 2 inclut le 5 fév. 2027
+  à Grenoble (pratique sur pièces anatomiques). Tarif repris tel qu''affiché : aucune mention HT/TTC ni
+  année sur la page. | Citations de la source : volume : « un apport théorique de 64h » ; tarif : « €4400
+  » ; prerequis : « Pas de pré-requis. » ; financement : « Cette formation est éligible au financement
+  des OPCO. »'

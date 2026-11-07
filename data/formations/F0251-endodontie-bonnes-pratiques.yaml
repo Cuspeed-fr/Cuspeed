@@ -1,0 +1,25 @@
+id: F0251
+intitule: Endodontie - Bonnes pratiques
+organisme: O044
+secteur: prive
+type: cursus
+disciplines:
+- endo
+format: presentiel
+duree: 28 heures / 4 jours
+volume_horaire_h: 28
+tarif:
+  texte: À partir de 3 480 €
+  euros: 3480
+  annee: null
+prerequis: null
+financement:
+- dpc
+url_officielle: https://www.icdp.paris/formation/endodontie-bonnes-pratiques/
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Niveau N1. Sessions affichées 6-7 fév 2026 et 10-11 avr 2026 (passées). Sessions : aucune session
+  future datée sur la page (au 2026-11-05). Tarif « à partir de » repris tel qu''affiché : aucune mention
+  HT/TTC ni année sur la page. | Citations de la source : duree : « 28 heures / 4 jours » ; financement
+  : « Eligible au DPC » ; places : « 30 stagiaires maximum » ; tarif : « À partir de 3 480€ »'

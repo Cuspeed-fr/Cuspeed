@@ -1,0 +1,35 @@
+id: F0229
+intitule: Régénération osseuse guidée — Gestion des alvéoles d'extraction
+organisme: O042
+secteur: prive
+type: journee
+disciplines:
+- chir
+- implanto
+format: presentiel
+duree: 1 jour (7 heures)
+volume_horaire_h: 7
+tarif:
+  texte: 1 070 € par praticien
+  euros: 1070
+  annee: null
+prerequis: Praticiens pratiquant déjà l'implantologie, du niveau basique au niveau avancé.
+financement:
+- dpc
+- fifpl
+url_officielle: https://fide.fr/formations/regeneration-osseuse-guidee-gestion-des-alveoles-dextraction/
+sessions:
+- lieu: L-CANNES
+  debut: '2027-06-10'
+  fin: '2027-06-10'
+  inscriptions: a-renseigner
+  places: 24
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Page lue via un lecteur qui résume (accès direct bloqué) : citations à recontrôler. HT/TTC non
+  précisé. Places : 24 maximum. Piste P0190. N° DPC 26532325001. Inscription en ligne active. Format :
+  FAQ de l''accueil. | Citations de la source : intitule : « Régénération osseuse guidée — Gestion des
+  alvéoles d''extraction » ; duree : « Une journée intensive » ; tarif : « 1 070 € par praticien » ; prerequis
+  : « Praticiens pratiquant déjà l''implantologie, du niveau basique au niveau avancé. » ; financement
+  : « Éligible DPC ou FIFPL » ; sessions : « jeudi 10 juin 2027 » ; format : « Toutes nos formations sont
+  organisées en présentiel à Cannes (https://fide.fr/, Questions fréquentes) »'

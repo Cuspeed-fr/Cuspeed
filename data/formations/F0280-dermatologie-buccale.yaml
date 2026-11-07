@@ -1,0 +1,33 @@
+id: F0280
+intitule: Dermatologie buccale
+organisme: O048
+secteur: prive
+type: journee
+disciplines:
+- mbd
+- paro
+format: presentiel
+duree: 1 journée
+volume_horaire_h: null
+tarif:
+  texte: 750 € — TVA non applicable
+  euros: 750
+  annee: null
+prerequis: Absence de prérequis
+financement: []
+url_officielle: https://www.parosphereformation.fr/formations/dermatologie-buccale/
+sessions:
+- lieu: L-PARIS
+  debut: '2027-04-19'
+  fin: '2027-04-19'
+  inscriptions: ouvertes
+  places: null
+statut: a-verifier
+derniere_verification: '2026-11-05'
+notes: 'Format presentiel deduit du lieu physique (LISC, 64 rue Fondary 75015 Paris) et de l''enseignement
+  theorique/etudes de cas cliniques ; le mot ''presentiel'' n''est pas ecrit. Volume horaire non indique
+  (horaires seulement). Sous-titre : ''La gencive saigne, mais ce n''est pas une parodontite''. Session
+  DB27 19/04/2027 ; lieu non precise dans l''agenda (Paris deduit de la page de detail). Max 25 participants.
+  Tarif affiché avec « TVA non applicable - Art 293b du CGI » ; pas de mention HT/TTC ni d''année. | Citations
+  de la source : duree : « 1 journée » ; prerequis : « Absence de prérequis » ; session : « DB27 - 19
+  avril 2027 - Ouvert » ; tarif : « 750 € - TVA non applicable - Art 293b du CGI »'

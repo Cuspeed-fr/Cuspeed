@@ -8,6 +8,8 @@ import "@fontsource/dm-sans/latin-400.css";
 import "@fontsource/dm-sans/latin-500.css";
 import "@fontsource/dm-sans/latin-600.css";
 import "../styles/global.css";
+// Police des grands titres (League Spartan 800), préchargée : voir le commentaire dans <body>.
+import policeTitre from "@fontsource/league-spartan/files/league-spartan-latin-800-normal.woff2?url";
 import Logo from "../components/Logo.astro";
 
 interface Props {
@@ -46,6 +48,10 @@ const json = (o: object) => JSON.stringify(o).replace(/</g, "\\u003c");
     <title>{titreComplet}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonique} />
+    {/* Classe « js » posée avant le premier affichage, seulement si le navigateur exécutera les
+        scripts de la page : les commandes qui ont besoin de JavaScript (filtres, tri, « Afficher
+        plus ») ont leur place dès le départ, sans décaler la page. Sans JavaScript, tout s'affiche. */}
+    <script is:inline>if ("noModule" in HTMLScriptElement.prototype) document.documentElement.classList.add("js");</script>
     {(!indexer || essai) && <meta name="robots" content="noindex" />}
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -61,6 +67,12 @@ const json = (o: object) => JSON.stringify(o).replace(/</g, "\\u003c");
     {blocs.map((b) => <script type="application/ld+json" set:html={json(b)} />)}
   </head>
   <body>
+    {/* Préchargement de la seule police du titre, placé ici pour passer APRÈS les feuilles de
+        style (Astro les écrit en fin d'en-tête). Mesuré le 6 novembre 2026 : sans lui, le titre
+        change de taille quand la police arrive et décale la page (CLS 0,027 sur bureau) ; placé
+        avant les feuilles de style, il retardait le premier affichage d'environ 100 ms en 4G
+        lente. Ici : décalage nul, premier affichage au niveau d'avant. */}
+    <link rel="preload" href={policeTitre} as="font" type="font/woff2" crossorigin />
     <a class="evitement" href="#contenu">Aller au contenu</a>
     <header class="entete">
       <div class="cadre entete-cadre">

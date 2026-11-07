@@ -412,3 +412,136 @@ test("le contrôle refuse un plan du site absent, une chaîne de redirections et
   assert.match(r.stderr, /redirection illisible/);
   rmSync(dist, { recursive: true, force: true });
 });
+
+// --- Recherche, cartes et fiches (pull request site/ux-recherche-et-fiches) ---
+
+import { prochaineSession, dateCourte, sessionsTriees } from "../src/lib/donnees.js";
+import { readdirSync } from "node:fs";
+
+test("prochaine session : la première qui n'a pas commencé, avec sa ville", () => {
+  const donnees = { lieu: (id) => ({ "L-ARRAS": { nom: "Arras" }, "L-LILLE": { nom: "Lille" } })[id] };
+  const f = {
+    sessions: [
+      { lieu: "L-ARRAS", debut: "2026-09-01", fin: "2027-06-30", inscriptions: "fermees" }, // commencée
+      { lieu: "L-LILLE", debut: "2027-03-10", fin: null, inscriptions: "ouvertes" },
+      { lieu: "L-ARRAS", debut: "2027-01-14", fin: "2027-01-15", inscriptions: null },
+      { lieu: "L-ARRAS", debut: null, fin: null }, // sans date
+    ],
+  };
+  assert.deepEqual(prochaineSession(f, donnees, "2026-11-06"), {
+    debut: "2027-01-14",
+    fin: "2027-01-15",
+    ville: "Arras",
+    inscriptions: null,
+  });
+  // Ordre de la frise : chronologique, sans date à la fin, éditions passées retirées.
+  assert.deepEqual(sessionsTriees(f, "2026-11-06").map((s) => s.debut), ["2026-09-01", "2027-01-14", "2027-03-10", null]);
+  // Aucune session datée à venir : pas de prochaine session.
+  assert.equal(prochaineSession({ sessions: [{ lieu: "L-ARRAS", debut: null }] }, donnees, "2026-11-06"), null);
+  assert.equal(prochaineSession({ sessions: [] }, donnees, "2026-11-06"), null);
+  assert.equal(dateCourte("2027-01-14"), "14 janv. 2027");
+  assert.equal(dateCourte(null), null);
+});
+
+/**
+ * Construit le site une fois, sur un jeu d'essai élargi à 30 fiches validées (inventées),
+ * plus la fiche non validée F9002 et sa note interne, pour vérifier le HTML produit.
+ */
+let construit = null;
+function siteConstruit() {
+  if (construit) return construit;
+  const donnees = copieDuJeu();
+  const modele = readFileSync(join(donnees, "formations", "F9001-du-essai.yaml"), "utf8");
+  for (let i = 1; i <= 29; i++) {
+    const id = `F${9100 + i}`;
+    let fiche = modele
+      .replace("id: F9001", `id: ${id}`)
+      .replace("intitule: DU Parodontologie d'essai", `intitule: DU Essai numéro ${i}`)
+      .replace(/^notes:.*$/m, `notes: NOTE-INTERNE-SECRETE-${id} ne doit jamais sortir`);
+    // Une fiche avec une session qui commence plus tard : « Prochaine session » sur sa carte.
+    if (i === 1) fiche = fiche.replace("debut: '2026-09-01'", "debut: '2099-01-14'").replace("fin: '2027-06-30'", "fin: '2099-06-30'");
+    writeFileSync(join(donnees, "formations", `${id}.yaml`), fiche);
+  }
+  const sortie = mkdtempSync(join(tmpdir(), "cuspeed-construit-"));
+  const astro = join(ICI, "..", "node_modules", ".bin", "astro");
+  const r = spawnSync(astro, ["build", "--outDir", sortie], {
+    cwd: join(ICI, ".."),
+    env: { ...process.env, CUSPEED_DATA: donnees, CUSPEED_REGISTRE: join(donnees, "registre-absent.json"), ASTRO_TELEMETRY_DISABLED: "1" },
+    encoding: "utf8",
+  });
+  assert.equal(r.status, 0, `la construction du jeu d'essai a échoué :\n${r.stderr}\n${r.stdout.slice(-2000)}`);
+  construit = { sortie, donnees, lire: (chemin) => readFileSync(join(sortie, chemin), "utf8") };
+  return construit;
+}
+
+/** Les cartes de la liste d'accueil, une chaîne HTML par carte. */
+function cartesAccueil(html) {
+  const liste = html.slice(html.indexOf('id="liste"'), html.indexOf('id="aucun"'));
+  return liste.split('<li class="fiche-resume"').slice(1);
+}
+
+test("accueil : toute la liste est dans la page, affichée par paquets de 24 avec « Afficher plus »", () => {
+  const { lire } = siteConstruit();
+  const html = lire("index.html");
+  // Sans JavaScript, tout est là (30 cartes) ; le script n'en montre que 24 à la fois.
+  assert.equal(cartesAccueil(html).length, 30);
+  assert.match(html, /<button[^>]*id="plus"[^>]*>Afficher 24 formations de plus<\/button>/);
+  assert.match(html, /id="compteur"[^>]*>24 sur 30 formations affichées</);
+  // Le champ de recherche du haut de page fonctionne aussi sans JavaScript (formulaire GET).
+  assert.match(html, /<form class="recherche-heros"[^>]*action="\/#recherche"[^>]*method="get"/);
+  assert.match(html, /<input[^>]*id="q-heros"[^>]*name="q"/);
+  // Le script de la page est un fichier du site (aucune ressource d'un autre site).
+  assert.doesNotMatch(html, /<script[^>]*src="https?:/);
+});
+
+test("accueil : chaque carte n'a qu'un seul lien, vers la fiche", () => {
+  const { lire } = siteConstruit();
+  for (const carte of cartesAccueil(lire("index.html"))) {
+    const liens = [...carte.matchAll(/<a\s[^>]*href="([^"]*)"/g)].map((m) => m[1]);
+    assert.equal(liens.length, 1, `carte avec ${liens.length} liens : ${carte.slice(0, 200)}`);
+    assert.match(liens[0], /^\/formations\/f\d+-[a-z0-9-]+\/$/);
+  }
+});
+
+test("accueil : prochaine session et badge « Éligible aux aides » sur les cartes", () => {
+  const { lire } = siteConstruit();
+  const cartes = cartesAccueil(lire("index.html"));
+  const avecSession = cartes.find((c) => c.includes("DU Essai numéro 1<"));
+  assert.match(avecSession, /data-debut="2099-01-14"/);
+  assert.match(avecSession, /Prochaine session :<\/span> <b>14 janv\. 2099<\/b>, Arras/);
+  // Une session déjà commencée n'est pas « la prochaine » : la carte affiche la ville seule.
+  const enCours = cartes.find((c) => c.includes("DU Parodontologie d&#39;essai<") || c.includes("DU Parodontologie d'essai<"));
+  assert.doesNotMatch(enCours, /Prochaine session/);
+  assert.match(enCours, /class="r-lieu"/);
+  // F9001 est finançable DPC dans le jeu d'essai.
+  assert.match(enCours, /<p class="badge-aides">Éligible aux aides : DPC<\/p>/);
+});
+
+test("fiche : bouton « Voir la page officielle » collant et frise des sessions", () => {
+  const { sortie, lire } = siteConstruit();
+  const dossier = readdirSync(join(sortie, "formations")).find((n) => n.startsWith("f9101-"));
+  const html = lire(join("formations", dossier, "index.html"));
+  assert.match(html, /<div class="action-collante"[^>]*>\s*<a class="bouton"[^>]*href="https:\/\/exemple\.invalid\/du-paro"/);
+  assert.match(html, /<ol class="frise"/);
+  assert.match(html, /<time datetime="2099-01-14"[^>]*>14 janv\. 2099<\/time>/);
+  assert.match(html, /Inscriptions ouvertes/);
+});
+
+test("site construit : aucune note interne ni fiche non validée dans le HTML", () => {
+  const { sortie } = siteConstruit();
+  const tous = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? tous(join(d, e.name)) : [join(d, e.name)]));
+  const pages = tous(sortie).filter((p) => /\.(html|js|css|xml)$/.test(p));
+  assert.ok(pages.length > 30);
+  for (const p of pages) {
+    const contenu = readFileSync(p, "utf8");
+    assert.doesNotMatch(contenu, /NOTE-INTERNE/, `note interne dans ${p}`);
+    assert.doesNotMatch(contenu, /F9002|f9002|Cursus implantologie à vérifier/, `fiche non validée dans ${p}`);
+  }
+  assert.ok(!readdirSync(join(sortie, "formations")).some((n) => n.startsWith("f9003")), "la fiche archivée n'est pas publiée");
+});
+
+test("nettoyage du site construit pour les tests", () => {
+  if (!construit) return;
+  rmSync(construit.sortie, { recursive: true, force: true });
+  rmSync(construit.donnees, { recursive: true, force: true });
+});

@@ -1,7 +1,7 @@
 ---
 // Fiche d'une formation : une page par formation publiée.
 import Base from "../../layouts/Base.astro";
-import { chargerDonnees, tarifLisible, aidesDe, sessionsAVenir, dateLisible, villesDe, couper } from "../../lib/donnees.js";
+import { chargerDonnees, tarifLisible, aidesDe, sessionsTriees, dateLisible, dateCourte, villesDe, couper } from "../../lib/donnees.js";
 
 export function getStaticPaths() {
   const donnees = chargerDonnees();
@@ -19,7 +19,16 @@ const villes = villesDe(f, donnees);
 const tarif = tarifLisible(f.tarif);
 const aides = aidesDe(f, ref);
 // Éditions passées : retirées de la page et des données structurées, mais gardées en base.
-const sessions = sessionsAVenir(f);
+// Ordre chronologique, les sessions sans date à la fin.
+const sessions = sessionsTriees(f);
+// État des inscriptions affiché sur la frise. « À renseigner » n'est pas une information
+// pour le visiteur : rien n'est affiché (un champ inconnu reste vide).
+const etatInscriptions = (code) => {
+  if (!code || code === "a-renseigner") return null;
+  const libelle = ref.inscriptions[code] ?? code;
+  if (code === "ouvertes" || code === "fermees") return `Inscriptions ${libelle.toLowerCase()}`;
+  return libelle;
+};
 const typeNom = ref.types[f.type] ?? f.type;
 const disciplines = f.disciplines.map((d) => ref.disciplines[d] ?? d);
 const lienFiche = new URL(`/formations/${f.slug}/`, Astro.site).href;
@@ -152,23 +161,32 @@ const fil = {
         {sessions.length === 0 ? (
           <p class="discret">Aucune session annoncée pour le moment.</p>
         ) : (
-          <ul class="sessions">
+          <ol class="frise">
             {sessions.map((s) => {
               const lieu = s.lieu ? donnees.lieu(s.lieu) : null;
-              const debut = dateLisible(s.debut);
-              const fin = dateLisible(s.fin);
+              const etat = etatInscriptions(s.inscriptions);
               return (
-                <li>
-                  <strong>{lieu?.nom ?? "Lieu non précisé"}</strong>
-                  <span>
-                    {debut && fin ? `du ${debut} au ${fin}` : debut ? `à partir du ${debut}` : "Dates non publiées"}
-                  </span>
-                  {s.inscriptions && <span class="etiquette">Inscriptions : {(ref.inscriptions[s.inscriptions] ?? s.inscriptions).toLowerCase()}</span>}
-                  {s.places != null && <span class="discret">{s.places} places</span>}
+                <li class:list={["frise-etape", { "sans-date": !s.debut }]}>
+                  {/* Date en tête quand elle est connue ; sinon la ville, et « Dates non publiées » dessous */}
+                  <p class="frise-titre">
+                    {s.debut ? (
+                      <>
+                        <time datetime={s.debut}>{dateCourte(s.debut)}</time>
+                        {s.fin && <> au <time datetime={s.fin}>{dateCourte(s.fin)}</time></>}
+                      </>
+                    ) : (
+                      lieu?.nom ?? "Lieu non précisé"
+                    )}
+                  </p>
+                  <p class="frise-detail">
+                    {s.debut ? <span>{lieu?.nom ?? "Lieu non précisé"}</span> : <span class="discret">Dates non publiées</span>}
+                    {etat && <span class:list={["etat", `etat-${s.inscriptions}`]}>{etat}</span>}
+                    {s.places != null && <span class="discret chiffres">{s.places} places</span>}
+                  </p>
                 </li>
               );
             })}
-          </ul>
+          </ol>
         )}
       </section>
 
@@ -178,12 +196,17 @@ const fil = {
           Les informations de cette fiche viennent de la page officielle de l'organisme.
           {f.derniere_verification && <> Dernière vérification : <strong>{dateLisible(f.derniere_verification)}</strong>.</>}
         </p>
-        <p><a class="bouton" href={f.url_officielle} rel="noopener external">Voir la page officielle ↗</a></p>
+        <p class="lien-source"><a class="bouton" href={f.url_officielle} rel="noopener external">Voir la page officielle ↗</a></p>
         <p class="discret petit">
           Une information erronée ou périmée ? Écrivez à <span class="adresse">contact@cuspeed.fr</span> en indiquant
           la référence <span class="chiffres">{f.id}</span>.
         </p>
       </section>
+    </div>
+    {/* Sur téléphone, le lien vers la source reste à portée de pouce en bas de l'écran
+        (CSS seul, sans JavaScript) ; il reprend sa place à la fin de la fiche. */}
+    <div class="action-collante">
+      <a class="bouton" href={f.url_officielle} rel="noopener external">Voir la page officielle ↗</a>
     </div>
   </article>
 </Base>
@@ -218,24 +241,101 @@ const fil = {
     margin-top: 0;
     font-size: 1.1rem;
   }
-  .sessions {
+  /* Frise des sessions : une pastille par session, reliées par un trait vertical */
+  .frise {
     list-style: none;
     padding: 0;
     margin: 0;
     display: grid;
-    gap: 10px;
   }
-  .sessions li {
+  .frise-etape {
+    position: relative;
+    padding: 0 0 16px 26px;
+  }
+  .frise-etape:last-child {
+    padding-bottom: 0;
+  }
+  .frise-etape::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.35em;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-doux);
+  }
+  .frise-etape.sans-date::before {
+    background: var(--surface);
+    border: 2px solid var(--point-vide);
+    box-shadow: none;
+  }
+  .frise-etape:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: calc(0.35em + 16px);
+    bottom: 2px;
+    width: 2px;
+    background: var(--trait);
+  }
+  .frise-titre {
+    margin: 0;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .frise-detail {
+    margin: 2px 0 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 4px 10px;
-    padding-top: 10px;
+  }
+  .etat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-fort);
+  }
+  .etat::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .etat-ouvertes {
+    color: var(--ok);
+  }
+  .etat-complet,
+  .etat-fermees {
+    color: var(--alerte);
+  }
+  /* Bouton collant (téléphone et tablette) ; sur grand écran, le bouton de la colonne suffit */
+  .action-collante {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    margin: 16px -16px 0;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--fond);
     border-top: 1px solid var(--trait);
   }
-  .sessions li:first-child {
-    border-top: 0;
-    padding-top: 0;
+  .action-collante .bouton {
+    width: 100%;
+  }
+  @media (max-width: 919px) {
+    .lien-source {
+      display: none;
+    }
+  }
+  @media (min-width: 920px) {
+    .action-collante {
+      display: none;
+    }
   }
   .petit {
     font-size: 0.88rem;

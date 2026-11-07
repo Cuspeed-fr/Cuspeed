@@ -311,6 +311,42 @@ export function sessionsAVenir(formation, aujourdhui = dateDuJour()) {
   });
 }
 
+/**
+ * Sessions à venir dans l'ordre chronologique : celles qui ont une date de début d'abord
+ * (de la plus proche à la plus lointaine), puis celles sans date, dans l'ordre de la fiche.
+ */
+export function sessionsTriees(formation, aujourdhui = dateDuJour()) {
+  const sessions = sessionsAVenir(formation, aujourdhui);
+  const datees = sessions.filter((s) => s.debut).sort((a, b) => String(a.debut).localeCompare(String(b.debut)));
+  return [...datees, ...sessions.filter((s) => !s.debut)];
+}
+
+/**
+ * Prochaine session d'une formation : { debut, fin, ville, inscriptions }, ou null.
+ * C'est la première session qui n'a pas encore commencé (début aujourd'hui ou plus tard).
+ * Une session déjà commencée reste sur la fiche, mais n'est pas « la prochaine » ; une
+ * session sans date de début non plus (« Dates non publiées »).
+ */
+export function prochaineSession(formation, donnees, aujourdhui = dateDuJour()) {
+  const s = sessionsTriees(formation, aujourdhui).find((x) => x.debut && String(x.debut) >= aujourdhui);
+  if (!s) return null;
+  return {
+    debut: String(s.debut),
+    fin: s.fin ? String(s.fin) : null,
+    ville: s.lieu ? donnees.lieu(s.lieu)?.nom ?? null : null,
+    inscriptions: s.inscriptions ?? null,
+  };
+}
+
+/** Date AAAA-MM-JJ → « 12 janv. 2027 » (cartes de la liste, frise des sessions). */
+export function dateCourte(iso) {
+  if (!iso) return null;
+  const [a, m, j] = String(iso).split("-").map(Number);
+  if (!a || !m || !j) return String(iso);
+  return new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })
+    .format(new Date(Date.UTC(a, m - 1, j)));
+}
+
 /** Date AAAA-MM-JJ → « 2 novembre 2026 ». */
 export function dateLisible(iso) {
   if (!iso) return null;

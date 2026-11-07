@@ -1,7 +1,10 @@
 ---
-// Résumé d'une formation dans une liste. Les attributs data-* servent au filtrage
-// côté navigateur sur la page d'accueil ; ils ne contiennent que des données publiques.
-import { villesDe, regroupementsDe, tarifLisible, aidesDe, enSlug } from "../lib/donnees.js";
+// Résumé d'une formation dans une liste (carte cliquable). Les attributs data-* servent au
+// filtrage et au tri côté navigateur sur la page d'accueil ; ils ne contiennent que des
+// données publiques. La recherche lit le texte visible de la carte (intitulé, organisme,
+// disciplines, lieu…) : il n'est pas répété dans un attribut, la page reste légère. Un seul lien par carte (le titre) : toute la carte est cliquable grâce
+// au CSS (lien étiré), et les lecteurs d'écran n'entendent qu'un lien.
+import { villesDe, regroupementsDe, tarifLisible, aidesDe, prochaineSession, dateCourte } from "../lib/donnees.js";
 
 const { formation: f, donnees } = Astro.props;
 const ref = donnees.referentiels;
@@ -9,9 +12,9 @@ const organisme = donnees.organisme(f.organisme);
 const villes = villesDe(f, donnees);
 const tarif = tarifLisible(f.tarif);
 const aides = aidesDe(f, ref);
-const texteRecherche = enSlug(
-  [f.intitule, organisme?.nom, ...villes, ...f.disciplines.map((d) => ref.disciplines[d]), f.precisions ?? ""].join(" "),
-).replace(/-/g, " ");
+// Prochaine session datée (les éditions passées et les sessions sans date sont ignorées).
+const prochaine = prochaineSession(f, donnees);
+const aReperes = Boolean(prochaine || villes.length || f.duree || tarif);
 ---
 <li
   class="fiche-resume"
@@ -19,19 +22,27 @@ const texteRecherche = enSlug(
   data-type={f.type}
   data-secteur={f.secteur}
   data-villes={regroupementsDe(f, donnees).join("|")}
-  data-aides={f.financement.join(" ")}
-  data-texte={texteRecherche}
+  data-aides={f.financement.length ? f.financement.join(" ") : undefined}
+  data-precisions={f.precisions ?? undefined}
+  data-debut={prochaine?.debut}
+  data-prix={f.tarif.euros ?? undefined}
 >
   <ul class="etiquettes" aria-label="Type et disciplines">
     <li class="etiquette forte">{ref.types[f.type] ?? f.type}</li>
     {f.disciplines.map((d) => <li class="etiquette">{ref.disciplines[d] ?? d}</li>)}
   </ul>
+  {aides.length > 0 && <p class="badge-aides">Éligible aux aides : {aides.join(", ")}</p>}
   <h3><a href={`/formations/${f.slug}/`}>{f.intitule}</a></h3>
-  <div class="meta">
-    {organisme && <span>{organisme.nom}</span>}
-    {villes.length > 0 && <span>{villes.join(", ")}</span>}
-    {f.duree && <span>{f.duree}</span>}
-    {tarif && <span class="chiffres">{tarif}</span>}
-    {aides.length > 0 && <span>Éligible aux aides : {aides.join(", ")}</span>}
-  </div>
+  {organisme && <p class="resume-organisme">{organisme.nom}</p>}
+  {aReperes && (
+  <ul class="reperes">
+    {prochaine ? (
+      <li class="r-session"><span class="discret libelle">Prochaine session :</span> <b>{dateCourte(prochaine.debut)}</b>{prochaine.ville && `, ${prochaine.ville}`}</li>
+    ) : (
+      villes.length > 0 && <li class="r-lieu"><span class="invisible">Lieu : </span>{villes.join(", ")}</li>
+    )}
+    {f.duree && <li class="r-duree"><span class="invisible">Durée : </span>{f.duree}</li>}
+    {tarif && <li class="r-tarif chiffres"><span class="invisible">Tarif : </span>{tarif}</li>}
+  </ul>
+  )}
 </li>

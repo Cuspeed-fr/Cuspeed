@@ -196,6 +196,20 @@ main.cadre {
   padding: 8px 12px;
 }
 
+/* Mouvements réduits (réglage du système) : pas de transition ni de défilement animé */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+p {
+  text-wrap: pretty;
+}
+
 /* Accueil : bandes pleine largeur */
 .bande {
   padding-block: clamp(40px, 7vw, 88px);
@@ -426,21 +440,78 @@ main.cadre {
   border-radius: var(--rayon);
   padding: 16px 18px;
   display: grid;
-  gap: 8px;
+  gap: 6px;
   min-width: 0;
-  transition: border-color 0.15s, transform 0.15s;
+  /* Les cartes hors de l'écran ne sont ni mises en page ni dessinées tant qu'on n'y arrive
+     pas : la liste reste fluide avec des centaines de fiches. « auto » retient la hauteur
+     réelle une fois la carte affichée, la barre de défilement ne saute pas. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 150px;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
 .fiche-resume:hover {
   border-color: var(--accent);
+  box-shadow: 0 8px 20px -14px rgb(23 36 59 / 0.45);
 }
 @media (prefers-reduced-motion: no-preference) {
   .fiche-resume:hover {
     transform: translateY(-1px);
   }
 }
-.fiche-resume h3 {
-  font-size: 1.08rem;
+/* Grille de la carte : étiquettes en haut à gauche, badge « aides » en haut à droite,
+   le reste sur toute la largeur. Sur petit écran, le badge passe sous les étiquettes. */
+.fiche-resume {
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 10px;
+}
+.fiche-resume > * {
+  grid-column: 1 / -1;
+}
+.fiche-resume > .etiquettes {
+  grid-column: 1;
+}
+.fiche-resume > .badge-aides {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+}
+@media (max-width: 479px) {
+  .fiche-resume > .etiquettes,
+  .fiche-resume > .badge-aides {
+    grid-column: 1 / -1;
+  }
+  .fiche-resume > .badge-aides {
+    grid-row: auto;
+    justify-self: start;
+  }
+}
+/* Badge « Éligible aux aides » : aplat lime, texte marine (11,1:1), aussi en mode sombre */
+.badge-aides {
+  display: inline-flex;
+  justify-self: end;
+  align-items: center;
+  gap: 5px;
   margin: 0;
+  padding: 2px 10px 2px 7px;
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--encre-marine);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.badge-aides::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  flex: none;
+  background: no-repeat center / contain
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.2 4.8 9 10 3' fill='none' stroke='%2317243B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.fiche-resume h3 {
+  font-size: 1.12rem;
+  line-height: 1.3;
+  margin: 2px 0 0;
 }
 .fiche-resume h3 a {
   color: var(--encre);
@@ -463,12 +534,64 @@ main.cadre {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
-.fiche-resume .meta {
-  font-size: 0.9rem;
-  color: var(--discret);
+.resume-organisme {
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+/* Repères de la carte : prochaine session, lieu, durée, tarif, chacun précédé d'une icône */
+.reperes {
+  list-style: none;
+  padding: 0;
+  margin: 2px 0 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 2px 14px;
+  gap: 2px 16px;
+  font-size: 0.9rem;
+  color: var(--discret);
+}
+.reperes li {
+  position: relative;
+  min-width: 0;
+}
+/* Icônes dessinées par masque CSS (aucune image dans la page) ; navigateurs trop anciens : pas d'icône */
+@supports (mask-image: none) {
+  .reperes li {
+    padding-left: 20px;
+  }
+  .reperes li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 14px;
+    height: 14px;
+    background: currentColor;
+    mask: var(--icone) no-repeat center / contain;
+  }
+}
+.reperes .r-session {
+  flex-basis: 100%;
+  color: var(--encre);
+}
+.r-session b {
+  font-weight: 600;
+}
+.r-session::before {
+  color: var(--accent);
+}
+.r-session {
+  --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'%3E%3Crect x='2' y='3' width='12' height='11' rx='2'/%3E%3Cpath d='M2 7h12M5.5 1.5v3M10.5 1.5v3'/%3E%3C/svg%3E");
+}
+.r-lieu {
+  --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.6'%3E%3Cpath d='M8 15s5-4.6 5-8.5A5 5 0 0 0 3 6.5C3 10.4 8 15 8 15Z'/%3E%3Ccircle cx='8' cy='6.5' r='1.8'/%3E%3C/svg%3E");
+}
+.r-duree {
+  --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='8' cy='8' r='6.2'/%3E%3Cpath d='M8 4.5V8l2.4 1.6'/%3E%3C/svg%3E");
+}
+.r-tarif {
+  --icone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M12 3.6A5 5 0 1 0 12 12.4M2.5 6.6h7M2.5 9.4h7'/%3E%3C/svg%3E");
 }
 
 /* Tableau d'informations (fiche) */

@@ -1,48 +1,57 @@
 # Mise en ligne du site, lancée à la main uniquement (onglet Actions > Publication > Run workflow).
 #
-# Étapes : export des seules fiches validées, contrôle des données, tests, construction
-# (scripts/publier.sh) ; puis contrôle du dossier à envoyer et envoi vers l'application Clever Cloud
-# « cuspeed-site » (scripts/envoyer_site.sh). Si une étape échoue, rien n'est envoyé : la version en ligne reste.
+# Deux temps :
+# 1. « construction » : export des seules fiches validées, contrôle des données, tests, construction
+#    (scripts/publier.sh). Droits du dépôt en lecture seule.
+# 2. « mise en ligne » (production seulement) : contrôle du dossier construit, puis envoi sur la branche
+#    « mise-en-ligne » du dépôt (scripts/envoyer_site.sh). L'application Clever Cloud « cuspeed-site » est
+#    reliée au dépôt GitHub sur cette seule branche et met le site en ligne. Ce temps n'installe aucun paquet :
+#    le jeton qui peut écrire sur le dépôt ne côtoie jamais le code de npm.
+# Si une étape échoue, rien n'est envoyé : la version en ligne reste.
 #
 # Garde-fous :
 # - aucun déclencheur automatique (ni push, ni planification, ni appel extérieur) : seulement workflow_dispatch ;
-# - le job tourne uniquement sur main et dans l'environnement « publication », dont Chris est « Required reviewer » :
-#   il doit approuver chaque exécution avant qu'un seul pas ne s'exécute ;
-# - l'option « essai » (case cochée par défaut) construit une adresse de test et n'envoie RIEN chez Clever Cloud.
+# - tout tourne uniquement sur main ; les deux temps sont dans l'environnement « publication », dont Chris est
+#   « Required reviewer » : il approuve la construction, puis l'envoi (une relance de l'envoi seul redemande
+#   aussi son accord) ;
+# - l'option « essai » (case cochée par défaut) construit une adresse de test et n'envoie RIEN ;
+# - la branche « mise-en-ligne » ne contient que des pages construites (jamais le code ni les données).
 #
-# Secrets et variables (environnement « publication » uniquement, jamais au niveau du dépôt) :
-# - secret CUSPEED_SAUVEGARDE_DB_URL : adresse du rôle lecteur_sauvegarde (lecture seule). Nom historique, gardé.
-# - secret CLEVER_SSH_PRIVATE_KEY : clé SSH privée de déploiement Clever Cloud.
-# - variable CLEVER_GIT_URL : adresse de poussée Git de l'application cuspeed-site.
-# - variable CLEVER_SSH_KNOWN_HOSTS : empreintes du serveur Clever Cloud (contrôle de l'identité du serveur).
+# Secret (environnement « publication » uniquement, jamais au niveau du dépôt) :
+# - CUSPEED_SAUVEGARDE_DB_URL : adresse du rôle lecteur_sauvegarde (lecture seule). Nom historique, gardé.
+# L'envoi utilise le jeton temporaire fourni par GitHub à chaque exécution : aucune clé à ranger.
 name: Publication
 
 on:
   workflow_dispatch:
     inputs:
       essai:
-        description: "Adresse de test : construit sans envoyer chez Clever Cloud (pages non référencées, mentions légales incomplètes tolérées)"
+        description: "Adresse de test : construit sans rien envoyer (pages non référencées, mentions légales incomplètes tolérées)"
         type: boolean
         default: true
 
 permissions:
   contents: read
 
+# Une seule publication à la fois.
+concurrency: publication
+
 jobs:
-  publication:
-    name: Mettre en ligne (approbation de Chris requise)
+  construction:
+    name: Construire (approbation de Chris requise)
     runs-on: ubuntu-latest
     # Jamais depuis une autre branche que main, même lancé à la main.
     if: github.ref == 'refs/heads/main'
     # Environnement « publication » : Chris doit approuver l'exécution avant son démarrage.
     environment: publication
-    # Une seule publication à la fois.
-    concurrency: publication
+    permissions:
+      contents: read
     steps:
       - name: Récupérer main
         uses: actions/checkout@v4
         with:
           ref: main
+          persist-credentials: false
       - name: Installer Python (version figée)
         uses: actions/setup-python@v5
         with:
@@ -70,23 +79,38 @@ jobs:
           name: site-${{ inputs.essai && 'essai' || 'production' }}-${{ github.run_number }}
           path: site/dist/
           retention-days: 30
-      - name: Préparer la clé d'envoi (fichiers temporaires, supprimés à la fin)
-        if: inputs.essai == false
+
+  mise-en-ligne:
+    name: Envoyer sur la branche mise-en-ligne (production seulement)
+    runs-on: ubuntu-latest
+    needs: construction
+    if: github.ref == 'refs/heads/main' && inputs.essai == false
+    # Deuxième approbation de Chris : même une relance de ce seul job (« Re-run ») ne part pas sans lui.
+    environment: publication
+    # Seul droit d'écriture du workflow, limité à ce job qui n'installe rien.
+    permissions:
+      contents: write
+    steps:
+      - name: Récupérer les scripts de main (sans garder d'identifiants)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Récupérer le site construit
+        uses: actions/download-artifact@v4
+        with:
+          name: site-production-${{ github.run_number }}
+          path: site/dist/
+      - name: Contrôler et envoyer site/dist/ sur la branche mise-en-ligne
         env:
-          CLEVER_SSH_PRIVATE_KEY: ${{ secrets.CLEVER_SSH_PRIVATE_KEY }}
-          CLEVER_SSH_KNOWN_HOSTS: ${{ vars.CLEVER_SSH_KNOWN_HOSTS }}
+          JETON: ${{ github.token }}
+          DEPOT: ${{ github.server_url }}/${{ github.repository }}.git
         run: |
-          # Fichiers en mode 600 ; si la clé ou les empreintes manquent, ssh échoue (on ne se connecte pas à l'aveugle).
-          install -m 600 /dev/null "$RUNNER_TEMP/clever_cle"
-          install -m 600 /dev/null "$RUNNER_TEMP/clever_hotes"
-          printf '%s\n' "$CLEVER_SSH_PRIVATE_KEY" > "$RUNNER_TEMP/clever_cle"
-          printf '%s\n' "$CLEVER_SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/clever_hotes"
-          echo "GIT_SSH_COMMAND=ssh -i $RUNNER_TEMP/clever_cle -o IdentitiesOnly=yes -o UserKnownHostsFile=$RUNNER_TEMP/clever_hotes -o StrictHostKeyChecking=yes" >> "$GITHUB_ENV"
-      - name: Envoyer site/dist/ vers Clever Cloud (cuspeed-site)
-        if: inputs.essai == false
-        env:
-          CLEVER_GIT_URL: ${{ vars.CLEVER_GIT_URL }}
-        run: scripts/envoyer_site.sh site/dist "$CLEVER_GIT_URL"
-      - name: Supprimer les fichiers de clé
-        if: always() && inputs.essai == false
-        run: rm -f "$RUNNER_TEMP/clever_cle" "$RUNNER_TEMP/clever_hotes"
+          # Le jeton passe par la configuration Git en variables d'environnement, jamais sur la ligne de commande.
+          # Sa forme base64 est masquée dans les journaux, comme le fait actions/checkout.
+          ENCODE="$(printf 'x-access-token:%s' "$JETON" | base64 -w0)"
+          echo "::add-mask::$ENCODE"
+          export GIT_CONFIG_COUNT=1
+          export GIT_CONFIG_KEY_0="http.${{ github.server_url }}/.extraheader"
+          export GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $ENCODE"
+          scripts/envoyer_site.sh site/dist "$DEPOT" mise-en-ligne

@@ -11,8 +11,9 @@
 #
 # Garde-fous :
 # - aucun déclencheur automatique (ni push, ni planification, ni appel extérieur) : seulement workflow_dispatch ;
-# - tout tourne uniquement sur main ; la construction est dans l'environnement « publication », dont Chris est
-#   « Required reviewer » : il approuve chaque exécution avant qu'un seul pas ne s'exécute ;
+# - tout tourne uniquement sur main ; les deux temps sont dans l'environnement « publication », dont Chris est
+#   « Required reviewer » : il approuve la construction, puis l'envoi (une relance de l'envoi seul redemande
+#   aussi son accord) ;
 # - l'option « essai » (case cochée par défaut) construit une adresse de test et n'envoie RIEN ;
 # - la branche « mise-en-ligne » ne contient que des pages construites (jamais le code ni les données).
 #
@@ -84,6 +85,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: construction
     if: github.ref == 'refs/heads/main' && inputs.essai == false
+    # Deuxième approbation de Chris : même une relance de ce seul job (« Re-run ») ne part pas sans lui.
+    environment: publication
     # Seul droit d'écriture du workflow, limité à ce job qui n'installe rien.
     permissions:
       contents: write
@@ -104,7 +107,10 @@ jobs:
           DEPOT: ${{ github.server_url }}/${{ github.repository }}.git
         run: |
           # Le jeton passe par la configuration Git en variables d'environnement, jamais sur la ligne de commande.
+          # Sa forme base64 est masquée dans les journaux, comme le fait actions/checkout.
+          ENCODE="$(printf 'x-access-token:%s' "$JETON" | base64 -w0)"
+          echo "::add-mask::$ENCODE"
           export GIT_CONFIG_COUNT=1
           export GIT_CONFIG_KEY_0="http.${{ github.server_url }}/.extraheader"
-          export GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$JETON" | base64 -w0)"
+          export GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $ENCODE"
           scripts/envoyer_site.sh site/dist "$DEPOT" mise-en-ligne

@@ -42,7 +42,7 @@ Aucune mise en ligne ne part toute seule : tout commence par un clic de Chris. L
 
 1. **Vérifier les fiches** : dans le tableau de bord Supabase, table `formations`, seules les fiches voulues sont au statut `validee`. C'est la seule étape qui décide de ce qui sera publié.
 2. **Lancer** : GitHub, onglet Actions, workflow « Publication », bouton « Run workflow », branche `main`. Case « essai » : cochée (par défaut) = construction de test, rien n'est envoyé ; décochée = mise en ligne réelle.
-3. **Approuver** : le job reste en attente. GitHub affiche « Review deployments » ; Chris coche l'environnement `publication` puis « Approve and deploy ». Sans cette approbation, aucune étape ne s'exécute.
+3. **Approuver** : le job reste en attente. GitHub affiche « Review deployments » ; Chris coche l'environnement `publication` puis « Approve and deploy ». Sans cette approbation, aucune étape ne s'exécute. En production, une **deuxième approbation** est demandée avant l'envoi : c'est le moment de télécharger l'artefact « site-production-N » pour un dernier coup d'œil si besoin. Une relance de l'envoi seul redemande aussi l'approbation.
 4. **Attendre le résultat** : deux temps, « Construire » puis « Envoyer sur la branche mise-en-ligne » (ce second temps est sauté en essai). Une coche verte = contrôles passés et site envoyé. Une croix rouge = rien n'est parti, l'ancienne version reste en ligne ; l'étape en erreur est indiquée dans les journaux. Ne pas relancer en boucle : corriger la cause (souvent une fiche incomplète signalée par le contrôle) puis relancer.
 5. **Vérifier en ligne** : ouvrir cuspeed.fr, une fiche récente et la page « mentions légales ». Le site peut mettre quelques minutes à changer (cache du navigateur : rafraîchir). En cas de doute, l'artefact « site-production-N » du run reste téléchargeable pendant 30 jours.
 6. **En cas de problème après mise en ligne** : ne rien modifier à la main sur Clever Cloud. Revenir à la version précédente par une pull request « Revert » (section 5), puis relancer la publication. Si la version précédente doit revenir tout de suite, la console Clever Cloud propose le retour à un déploiement antérieur (à vérifier la première fois).
@@ -72,7 +72,7 @@ GitHub :
   - `publication` (mise en ligne), avec « Required reviewers » = Chris : chaque publication attend son feu vert.
 - Le secret `CUSPEED_SAUVEGARDE_DB_URL` (voir la mise en place Supabase) est rangé dans **ces deux environnements**, jamais en secret de dépôt.
 - L'envoi sur la branche `mise-en-ligne` utilise le jeton temporaire que GitHub fournit à chaque exécution : aucune clé ni adresse à ranger pour Clever Cloud.
-- Règle de protection de la branche `mise-en-ligne` (Settings → Rules) : pas de suppression ni de poussée forcée ; seul le workflow Publication y écrit.
+- Règle de protection de la branche `mise-en-ligne` (Settings → Rules) : pas de suppression ni de poussée forcée. Attention : toute personne ou tout agent ayant le droit d'écrire sur le dépôt peut techniquement pousser sur cette branche, et Clever la déploierait. Règle de travail : **seul le workflow Publication écrit sur `mise-en-ligne`** ; aucun agent n'y pousse, et un commit sur cette branche qui ne vient pas du workflow est une alerte à signaler à Chris.
 
 Supabase : voir `docs/mise-en-place-supabase.md`.
 

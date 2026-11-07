@@ -4,7 +4,7 @@
 # Usage (depuis la racine du dépôt) : scripts/envoyer_site.sh DOSSIER_DIST URL_DEPOT BRANCHE
 #   DOSSIER_DIST : site/dist/ (le seul dossier envoyé)
 #   URL_DEPOT    : adresse du dépôt GitHub (https://github.com/Cuspeed-fr/Cuspeed.git)
-#   BRANCHE      : branche de mise en ligne (« mise-en-ligne ») ; jamais main ni sauvegarde
+#   BRANCHE      : obligatoirement « mise-en-ligne » (toute autre branche est refusée)
 #
 # Fonctionnement :
 #   1. scripts/preparer_envoi.py contrôle le dossier et n'en copie que le site ; en cas de refus, on s'arrête.
@@ -14,7 +14,8 @@
 #   3. Clever Cloud, relié au dépôt GitHub sur cette seule branche, met le site en ligne.
 #
 # Authentification : fournie par le workflow (jeton GitHub temporaire passé par l'environnement Git,
-# jamais sur la ligne de commande). Rien de secret n'est écrit ici.
+# variables GIT_CONFIG_*, jamais sur la ligne de commande). Rien de secret n'est écrit ici.
+# Le contrôle Python tourne sans ces variables : seules les commandes Git les reçoivent.
 
 set -euo pipefail
 
@@ -25,19 +26,19 @@ fi
 DIST="$1"
 URL="$2"
 BRANCHE="$3"
-case "$BRANCHE" in
-  main|master|sauvegarde|"")
-    echo "Branche « $BRANCHE » refusée : le site construit ne va que sur la branche de mise en ligne." >&2
-    exit 2
-    ;;
-esac
+# Une seule branche permise : toute autre (main, sauvegarde, refs/heads/main, Main...) est refusée.
+if [ "$BRANCHE" != "mise-en-ligne" ]; then
+  echo "Branche « $BRANCHE » refusée : le site construit ne va que sur la branche « mise-en-ligne »." >&2
+  exit 2
+fi
 
 RACINE="$(cd "$(dirname "$0")/.." && pwd)"
 TRAVAIL="$(mktemp -d)"
 trap 'rm -rf "$TRAVAIL"' EXIT
 
 echo "== 1. Contrôle du dossier à envoyer"
-python3 "$RACINE/scripts/preparer_envoi.py" "$DIST" "$TRAVAIL/envoi"
+env -u GIT_CONFIG_COUNT -u GIT_CONFIG_KEY_0 -u GIT_CONFIG_VALUE_0 \
+  python3 "$RACINE/scripts/preparer_envoi.py" "$DIST" "$TRAVAIL/envoi"
 
 echo "== 2. Branche de mise en ligne « $BRANCHE »"
 git init -q -b "$BRANCHE" "$TRAVAIL/depot"
@@ -47,6 +48,15 @@ git remote add depot "$URL"
 if git ls-remote --exit-code --heads depot "$BRANCHE" >/dev/null 2>&1; then
   git fetch -q depot "$BRANCHE"
   git checkout -q -B "$BRANCHE" FETCH_HEAD
+  # La branche de mise en ligne ne doit partager aucun historique avec main (sinon elle contient le code source).
+  if git ls-remote --exit-code --heads depot main >/dev/null 2>&1; then
+    git fetch -q depot main:refs/remotes/depot/main
+    if git merge-base "$BRANCHE" refs/remotes/depot/main >/dev/null 2>&1; then
+      echo "La branche « $BRANCHE » partage de l'historique avec main (code source) : rien n'est envoyé." >&2
+      echo "Il faut la supprimer sur GitHub ; le prochain envoi la recrée vide de tout code." >&2
+      exit 1
+    fi
+  fi
 else
   code=$?
   if [ "$code" -ne 2 ]; then

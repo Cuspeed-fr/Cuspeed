@@ -168,9 +168,23 @@ class TestEnvoiVersUnDepotLocal(unittest.TestCase):
                                 capture_output=True, text=True)
         self.assertNotEqual(commun.returncode, 0, "la branche de mise en ligne ne partage aucun historique avec main")
 
+    def test_branche_issue_de_main_refusee(self):
+        # Quelqu'un a créé « mise-en-ligne » à partir de main (avec le code source) : l'envoi doit s'arrêter.
+        git("--git-dir", str(self.depot), "branch", BRANCHE, "main")
+        faux_site(self.dist)
+        resultat = self.lancer(self.dist)
+        self.assertNotEqual(resultat.returncode, 0)
+        self.assertIn("partage de l'historique avec main", resultat.stderr)
+        self.assertEqual(git("--git-dir", str(self.depot), "rev-parse", BRANCHE).strip(), self.main_avant,
+                         "la branche n'a pas bougé")
+
+    def test_controle_python_sans_identifiants_git(self):
+        texte = (RACINE / "scripts" / "envoyer_site.sh").read_text(encoding="utf-8")
+        self.assertIn("env -u GIT_CONFIG_COUNT -u GIT_CONFIG_KEY_0 -u GIT_CONFIG_VALUE_0", texte)
+
     def test_branches_protegees_refusees(self):
         faux_site(self.dist)
-        for interdite in ("main", "master", "sauvegarde"):
+        for interdite in ("main", "master", "sauvegarde", "Main", "refs/heads/main", "mise-en-ligne-2", ""):
             resultat = self.lancer(self.dist, interdite)
             self.assertNotEqual(resultat.returncode, 0, interdite)
             self.assertIn("refusée", resultat.stderr)
@@ -205,8 +219,15 @@ class TestWorkflowPublication(unittest.TestCase):
         for interdit in ("push", "pull_request", "schedule", "workflow_run", "repository_dispatch", "release", "deployment"):
             self.assertNotIn(interdit, self.declencheurs)
 
-    def test_construction_exige_l_environnement_publication(self):
+    def test_les_deux_temps_exigent_l_environnement_publication(self):
+        # L'envoi a sa propre approbation : une relance du seul envoi ne part pas sans Chris.
         self.assertEqual(self.construction.get("environment"), "publication")
+        self.assertEqual(self.envoi.get("environment"), "publication")
+
+    def test_jeton_encode_masque_dans_les_journaux(self):
+        commandes = " ".join(str(e.get("run", "")) for e in self.envoi["steps"])
+        self.assertIn('echo "::add-mask::$ENCODE"', commandes)
+        self.assertLess(commandes.index("::add-mask::"), commandes.index("GIT_CONFIG_VALUE_0"))
 
     def test_envoi_attend_la_construction_approuvee(self):
         self.assertEqual(self.envoi.get("needs"), "construction")

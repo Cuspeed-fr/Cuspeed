@@ -239,6 +239,12 @@ class TestWorkflowPublication(unittest.TestCase):
             self.assertTrue(checkout and checkout[0]["with"]["ref"] == "main")
             self.assertIs(checkout[0]["with"].get("persist-credentials"), False)
 
+    def test_node_assez_recent_pour_astro(self):
+        # Astro 7 refuse Node < 22.22.0 : la version figée doit au moins atteindre ce minimum.
+        version = [s for s in self.construction["steps"] if s.get("uses", "").startswith("actions/setup-node")][0]
+        figee = tuple(int(x) for x in version["with"]["node-version"].split("."))
+        self.assertGreaterEqual(figee, (22, 22, 0))
+
     def test_systeme_fige_pour_les_versions_figees(self):
         # ubuntu-latest a changé (26.04) et n'a plus Python 3.12.7 : le système est donc figé.
         for job in (self.construction, self.envoi):

@@ -32,6 +32,10 @@ CHAMPS = ["id", "intitule", "organisme", "secteur", "type", "disciplines", "form
 CHAMPS_FACULTATIFS = ["precisions"]
 PRECISIONS_MAX = 200
 BAISSE_MAX = 0.05  # au-delà de 5 % de fiches en moins, la publication est bloquée
+# Statuts possibles d'une piste (colonne « statut » de la table pistes). La base ne contraint pas la colonne :
+# cette liste doit rester alignée sur docs/modele-de-donnees.md. « Fiche créée » : la piste a donné lieu à une fiche
+# (lot du 6 novembre 2026).
+STATUTS_PISTES = ("À vérifier", "Importée", "Doublon", "Écartée", "Fiche créée")
 
 erreurs = []
 
@@ -164,7 +168,7 @@ def main():
     with open(DATA / "pistes.csv", encoding="utf-8") as fp:
         pistes = list(csv.DictReader(fp))
     for p in pistes:
-        if p["statut"] not in ("À vérifier", "Importée", "Doublon", "Écartée"):
+        if p["statut"] not in STATUTS_PISTES:
             erreur("pistes.csv", f"{p['id']} : statut inconnu {p['statut']!r}")
 
     # Aucun secret dans le dépôt

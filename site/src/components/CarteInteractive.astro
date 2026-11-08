@@ -172,6 +172,8 @@
       racine!.hidden = true;
       svg!.hidden = false;
       envoyerZone(null);
+      // Sans carte, plus de bouton de mode : la liste revient aux formations.
+      document.dispatchEvent(new CustomEvent("cuspeed:mode", { detail: { mode: "formations" } }));
     };
 
     const depart = lireVue();
@@ -393,6 +395,7 @@
     // ---- Mode Organismes / Formations ---------------------------------------------------------
     function majMode() {
       for (const b of boutonsMode) b.setAttribute("aria-pressed", String(b.dataset.mode === mode));
+      document.dispatchEvent(new CustomEvent("cuspeed:mode", { detail: { mode } }));
       dessiner();
       majUrl();
     }

@@ -476,9 +476,26 @@ function siteConstruit() {
 
 /** Les cartes de la liste d'accueil, une chaîne HTML par carte. */
 function cartesAccueil(html) {
-  const liste = html.slice(html.indexOf('id="liste"'), html.indexOf('id="aucun"'));
+  const liste = html.slice(html.indexOf('id="liste"'), html.indexOf('id="liste-organismes"'));
   return liste.split('<li class="fiche-resume"').slice(1);
 }
+
+test("accueil : liste des organismes (mode Organismes de la carte), un lien par organisme", () => {
+  const { lire } = siteConstruit();
+  const html = lire("index.html");
+  const bloc = html.slice(html.indexOf('id="liste-organismes"'), html.indexOf('id="aucun"'));
+  assert.match(bloc, /\bhidden\b/, "la liste des organismes est masquée par défaut");
+  const cartes = bloc.split('<li class="organisme-resume"').slice(1);
+  assert.ok(cartes.length > 0);
+  for (const carte of cartes) {
+    assert.match(carte, /data-id="O\d{3,}"/);
+    const liens = [...carte.matchAll(/<a\s[^>]*href="([^"]*)"/g)].map((m) => m[1]);
+    assert.equal(liens.length, 1);
+    assert.match(liens[0], /^\/organismes\/[a-z0-9-]+\/$/);
+  }
+  // Chaque carte de formation porte son organisme, pour le comptage par organisme.
+  for (const carte of cartesAccueil(html)) assert.match(carte, /data-organisme="O\d{3,}"/);
+});
 
 test("accueil : toute la liste est dans la page, affichée par paquets de 24 avec « Afficher plus »", () => {
   const { lire } = siteConstruit();

@@ -71,3 +71,22 @@ test("performance : 3 000 formations, regroupement sous 500 ms", () => {
   assert.ok(Date.now() - t < 500);
   assert.ok(els.length > 0);
 });
+
+import { regroupementsDe } from "../src/lib/donnees.js";
+
+test("la liste et la carte ignorent les mêmes sessions terminées", () => {
+  const lx = { A: { regroupement_carte: "Lille" }, B: { regroupement_carte: "Paris" } };
+  const d = { lieu: (id) => lx[id] };
+  const fiche = { sessions: [{ lieu: "A", fin: "2020-01-01" }, { lieu: "B" }] };
+  assert.deepEqual(regroupementsDe(fiche, d), ["Paris"]);
+});
+
+test("après reconstruction de l'index, un groupe se retrouve par ses lieux, pas par son ancien identifiant", () => {
+  const d = donnees([f("F1", "O1", "L-LILLE", "L-ARRAS"), f("F2", "O2", "L-PARIS")]);
+  const { points } = construirePoints(d, "2026-11-08");
+  const emprise = [-5, 41, 10, 51.5];
+  const cle = (els) => els.filter((e) => e.type === "groupe").map((e) => e.lieux.slice().sort().join(",")).sort();
+  const a = cle(elementsVisibles(creerIndex(points, { rayon: 200 }), emprise, 4));
+  const b = cle(elementsVisibles(creerIndex([...points].reverse(), { rayon: 200 }), emprise, 4));
+  assert.deepEqual(a, b);
+});

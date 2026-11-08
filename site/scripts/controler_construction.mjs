@@ -182,7 +182,7 @@ for (const [description, noms] of descriptions) {
     if (avecCarte) erreurs.push("carte-donnees.json absent alors que la page d'accueil contient la carte");
   } else {
     const carte = JSON.parse(readFileSync(chemin, "utf8"));
-    const attendus = "points,organismes,formations,sansCoordonnees,sansLieu";
+    const attendus = "points,formations,sansCoordonnees,sansLieu";
     if (Object.keys(carte).sort().join() !== attendus.split(",").sort().join()) {
       erreurs.push(`carte-donnees.json : champs inattendus (${Object.keys(carte).join(", ")})`);
     }

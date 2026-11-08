@@ -10,6 +10,7 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { parse } from "yaml";
+import { sessionActive } from "./carte-moteur.js";
 
 /**
  * Dossier des données : variable CUSPEED_DATA, sinon le miroir data/ du dépôt.
@@ -249,7 +250,10 @@ export function villesDe(formation, donnees) {
 
 /** Regroupements de carte (ex. « Paris / IDF ») d'une formation. */
 export function regroupementsDe(formation, donnees) {
+  // Mêmes sessions que la carte : une session terminée ne compte plus (voir sessionActive).
+  const aujourdhui = new Date().toISOString().slice(0, 10);
   const noms = formation.sessions
+    .filter((s) => sessionActive(s, aujourdhui))
     .map((s) => (s.lieu ? donnees.lieu(s.lieu)?.regroupement_carte : null))
     .filter(Boolean);
   return [...new Set(noms)];

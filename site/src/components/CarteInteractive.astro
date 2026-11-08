@@ -5,20 +5,21 @@
 ---
 <div class="carte-vive" id="carte-vive" hidden>
   <div class="carte-barre">
-    <div class="carte-mode" role="radiogroup" aria-label="Ce que la carte compte">
-      <button type="button" role="radio" aria-checked="false" data-mode="organismes">Organismes</button>
-      <button type="button" role="radio" aria-checked="true" data-mode="formations">Formations</button>
+    <div class="carte-mode" role="group" aria-label="Ce que la carte compte">
+      <button type="button" aria-pressed="false" data-mode="organismes">Organismes</button>
+      <button type="button" aria-pressed="true" data-mode="formations">Formations</button>
     </div>
     <button type="button" class="carte-bouton" id="carte-autour" aria-label="Centrer la carte autour de moi">Autour de moi</button>
   </div>
   <div class="carte-scene">
-    <div id="carte-toile" class="carte-toile" role="application" aria-label="Carte interactive des formations. La liste à côté contient les mêmes informations."></div>
+    <div id="carte-toile" class="carte-toile" role="group" aria-label="Carte interactive des formations. La liste contient les mêmes informations."></div>
     <button type="button" class="carte-zone" id="carte-zone" hidden>Rechercher dans cette zone</button>
     <div class="carte-fiche" id="carte-fiche" hidden role="dialog" aria-label="Détail du lieu"></div>
   </div>
   <div class="carte-pied">
     <label class="carte-suivi"><input type="checkbox" id="carte-suivi" checked /> Mettre la liste à jour quand je déplace la carte</label>
     <p class="discret" id="carte-etat" role="status" aria-live="polite"></p>
+    <button type="button" class="carte-bouton" id="carte-retirer" hidden>Retirer la zone : revoir toute la France</button>
   </div>
 </div>
 
@@ -30,7 +31,7 @@
     font: 600 0.875rem var(--texte); padding: 8px 14px; min-height: 40px; cursor: pointer;
     background: var(--surface); color: var(--encre); border: 0;
   }
-  .carte-mode button[aria-checked="true"] { background: var(--accent); color: var(--accent-texte); }
+  .carte-mode button[aria-pressed="true"] { background: var(--accent); color: var(--accent-texte); }
   .carte-bouton { border: 1px solid var(--terre-bord); border-radius: 999px; }
   .carte-scene { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--terre-bord); }
   .carte-toile { height: min(68vh, 560px); min-height: 360px; background: var(--surface); }
@@ -107,6 +108,12 @@
     observateur.observe(bloc);
   }
 
+  // Les filtres de la liste arrivent avant la fin du chargement de la carte : on garde le dernier état.
+  let idsRecus: string[] | null = null;
+  document.addEventListener("cuspeed:filtres", (e) => {
+    idsRecus = (e as CustomEvent<{ ids: string[] }>).detail.ids;
+  });
+
   async function demarrer() {
     const [maplibre, reponse] = await Promise.all([
       import("maplibre-gl"),
@@ -129,10 +136,16 @@
     const EMPRISE_FRANCE: [number, number, number, number] = [-5.4, 41.2, 9.8, 51.2];
     const params = new URLSearchParams(location.search);
     let mode: "formations" | "organismes" = params.get("mode") === "organismes" ? "organismes" : "formations";
-    let idsFiltres: Set<string> | null = null; // formations qui passent les filtres de la liste
+    const nombreTotal = Object.keys(donnees.formations).length;
+    let idsFiltres: Set<string> | null =
+      idsRecus && (idsRecus as string[]).length !== nombreTotal ? new Set(idsRecus as string[]) : null; // formations qui passent les filtres de la liste
     let index = creerIndex(donnees.points);
     let pointsCourants: Point[] = donnees.points;
-    const marques = new Map<string, { marque: any; el: HTMLButtonElement }>();
+    if (idsFiltres) {
+      pointsCourants = filtrer(donnees.points);
+      index = creerIndex(pointsCourants);
+    }
+    const marques = new Map<string, { marque: any; el: HTMLButtonElement; courant: any }>();
     let lieuOuvert: string | null = null;
     let initial = true;
 
@@ -148,6 +161,17 @@
 
     racine!.hidden = false;
     svg!.hidden = true;
+    let pret = false;
+    let replie = false;
+    const replier = (raison: unknown) => {
+      if (replie) return;
+      replie = true;
+      console.warn("Carte interactive indisponible :", raison);
+      try { carte.remove(); } catch { /* déjà retirée */ }
+      racine!.hidden = true;
+      svg!.hidden = false;
+      envoyerZone(null);
+    };
 
     const depart = lireVue();
     const carte = new maplibre.Map({
@@ -159,11 +183,20 @@
       minZoom: 3.5,
       maxZoom: 14,
       attributionControl: false,
+      locale: {
+        "NavigationControl.ZoomIn": "Zoomer",
+        "NavigationControl.ZoomOut": "Dézoomer",
+        "CooperativeGesturesHandler.WindowsHelpText": "Ctrl + molette pour zoomer la carte",
+        "CooperativeGesturesHandler.MacHelpText": "⌘ + molette pour zoomer la carte",
+        "CooperativeGesturesHandler.MobileHelpText": "Utilisez deux doigts pour déplacer la carte",
+      },
       cooperativeGestures: matchMedia("(pointer: coarse)").matches,
       fadeDuration: calme ? 0 : 150,
     });
     carte.addControl(new maplibre.NavigationControl({ showCompass: false }), "top-right");
-    const vueInitiale = { centre: carte.getCenter(), zoom: carte.getZoom() };
+    const cadreFrance = carte.cameraForBounds(EMPRISE_FRANCE)!;
+    const vueInitiale = { centre: maplibre.LngLat.convert(cadreFrance.center as [number, number]), zoom: cadreFrance.zoom as number };
+    let geolocalise = false; // la position de la personne n'est jamais écrite dans l'adresse
 
     // Thème clair / sombre : les couleurs du fond suivent les variables CSS de la page.
     const majTheme = () => {
@@ -182,16 +215,17 @@
     }
 
     // ---- Points selon les filtres de la liste ------------------------------------------------
+    function filtrer(points: Point[]) {
+      return points
+        .map((p) => {
+          const formations = p.formations.filter((id) => idsFiltres!.has(id));
+          const organismes = [...new Set(formations.map((id) => donnees.formations[id].organisme))];
+          return { ...p, formations, organismes };
+        })
+        .filter((p) => p.formations.length > 0);
+    }
     function reconstruire() {
-      pointsCourants = idsFiltres
-        ? donnees.points
-            .map((p) => {
-              const formations = p.formations.filter((id) => idsFiltres!.has(id));
-              const organismes = [...new Set(formations.map((id) => donnees.formations[id].organisme))];
-              return { ...p, formations, organismes };
-            })
-            .filter((p) => p.formations.length > 0)
-        : donnees.points;
+      pointsCourants = idsFiltres ? filtrer(donnees.points) : donnees.points;
       index = creerIndex(pointsCourants);
       dessiner();
     }
@@ -218,16 +252,19 @@
           el.className = e.type === "lieu" ? "repere repere-lieu" : "repere";
           el.addEventListener("click", (ev) => {
             ev.stopPropagation();
-            if (e.type === "groupe") {
-              carte.easeTo({ center: [e.longitude, e.latitude], zoom: zoomEclatement(index, e.idGroupe), duration: calme ? 0 : 400 });
+            const c = marques.get(cle)?.courant; // élément à jour (l'index peut avoir été reconstruit)
+            if (!c) return;
+            if (c.type === "groupe") {
+              carte.easeTo({ center: [c.longitude, c.latitude], zoom: zoomEclatement(index, c.idGroupe), duration: calme ? 0 : 400 });
             } else {
-              ouvrirLieu(e.id!, e.longitude, e.latitude);
+              ouvrirLieu(c.id, c.longitude, c.latitude, el);
             }
           });
           const marque = new maplibre.Marker({ element: el }).setLngLat([e.longitude, e.latitude]).addTo(carte);
-          m = { marque, el };
+          m = { marque, el, courant: e };
           marques.set(cle, m);
         }
+        m.courant = e;
         const t = taille(n);
         m.el.style.width = m.el.style.height = `${t}px`;
         m.el.textContent = String(n);
@@ -251,7 +288,9 @@
     }
 
     // ---- Fiche d'un lieu (carte flottante, panneau du bas sur téléphone) -----------------------
-    function ouvrirLieu(id: string, lng: number, lat: number) {
+    let declencheur: HTMLElement | null = null;
+    function ouvrirLieu(id: string, lng: number, lat: number, depuis?: HTMLElement) {
+      if (depuis) declencheur = depuis;
       const p = pointsCourants.find((x) => x.id === id);
       if (!p) return;
       lieuOuvert = id;
@@ -259,7 +298,7 @@
         .slice(0, 5)
         .map((fid) => {
           const f = donnees.formations[fid];
-          return `<li><a href="/formations/${f.slug}/">${echapper(f.intitule)}</a></li>`;
+          return `<li><a href="/formations/${echapper(f.slug)}/">${echapper(f.intitule)}</a></li>`;
         })
         .join("");
       const suite = p.formations.length > 5 ? `<p class="discret">et ${p.formations.length - 5} autre${p.formations.length - 5 > 1 ? "s" : ""}</p>` : "";
@@ -269,6 +308,7 @@
         <ul>${lignes}</ul>${suite}
         <button type="button" class="carte-bouton" id="carte-liste-lieu">Voir toutes dans la liste</button>`;
       fiche.hidden = false;
+      fiche.querySelector<HTMLButtonElement>(".fermer")!.focus();
       fiche.querySelector<HTMLButtonElement>(".fermer")!.onclick = fermerLieu;
       fiche.querySelector<HTMLButtonElement>("#carte-liste-lieu")!.onclick = () => {
         envoyerZone(p.formations);
@@ -281,6 +321,8 @@
       lieuOuvert = null;
       fiche.hidden = true;
       dessiner();
+      const cible = [...marques.values()].find((m) => m.el === declencheur)?.el ?? declencheur;
+      if (cible && document.contains(cible)) (cible as HTMLElement).focus();
     }
     addEventListener("keydown", (e) => { if (e.key === "Escape" && lieuOuvert) fermerLieu(); });
     carte.on("click", () => { if (lieuOuvert) fermerLieu(); });
@@ -298,18 +340,28 @@
     }
     function majEtat() {
       const z = zoneCourante();
-      etat.textContent = `${z.formations.size} formation${z.formations.size > 1 ? "s" : ""} et ${z.organismes.size} organisme${z.organismes.size > 1 ? "s" : ""} dans la zone affichée.`;
+      const horsLieu = donnees.sansLieu.length + donnees.sansCoordonnees.length;
+      etat.textContent = (horsLieu ? `${horsLieu} formation${horsLieu > 1 ? "s" : ""} sans lieu précis (à distance ou lieu à préciser) : visibles dans la liste sans zone. ` : "") + `${z.formations.size} formation${z.formations.size > 1 ? "s" : ""} et ${z.organismes.size} organisme${z.organismes.size > 1 ? "s" : ""} dans la zone affichée.`;
       return z;
     }
     function appliquerZone() {
       const z = majEtat();
       envoyerZone(dansLaVueDeDepart() ? null : [...z.formations]);
       boutonZone.hidden = true;
+      boutonRetirer.hidden = dansLaVueDeDepart();
     }
     boutonZone.addEventListener("click", appliquerZone);
+    const boutonRetirer = document.getElementById("carte-retirer") as HTMLButtonElement;
+    boutonRetirer.addEventListener("click", () => {
+      carte.fitBounds(EMPRISE_FRANCE, { duration: calme ? 0 : 500 });
+      envoyerZone(null);
+      boutonRetirer.hidden = true;
+      boutonZone.hidden = true;
+    });
 
     let minuterie = 0;
     carte.on("moveend", (e: any) => {
+      if (e.originalEvent) geolocalise = false;
       dessiner();
       majUrl();
       majEtat();
@@ -326,7 +378,7 @@
     // ---- Adresse partageable : ?c=lat,lng,zoom&mode=… (les filtres de la liste y sont déjà) ------
     function majUrl() {
       const p = new URLSearchParams(location.search);
-      if (dansLaVueDeDepart()) p.delete("c");
+      if (dansLaVueDeDepart() || geolocalise) p.delete("c");
       else {
         const c = carte.getCenter();
         p.set("c", `${c.lat.toFixed(3)},${c.lng.toFixed(3)},${carte.getZoom().toFixed(1)}`);
@@ -339,7 +391,7 @@
 
     // ---- Mode Organismes / Formations ---------------------------------------------------------
     function majMode() {
-      for (const b of boutonsMode) b.setAttribute("aria-checked", String(b.dataset.mode === mode));
+      for (const b of boutonsMode) b.setAttribute("aria-pressed", String(b.dataset.mode === mode));
       dessiner();
       majUrl();
     }
@@ -354,7 +406,7 @@
     document.getElementById("carte-autour")!.addEventListener("click", () => {
       if (!navigator.geolocation) { etat.textContent = "La géolocalisation n'est pas disponible sur cet appareil."; return; }
       navigator.geolocation.getCurrentPosition(
-        (pos) => carte.flyTo({ center: [pos.coords.longitude, pos.coords.latitude], zoom: 8.5, duration: calme ? 0 : 900 }),
+        (pos) => { geolocalise = true; carte.flyTo({ center: [pos.coords.longitude, pos.coords.latitude], zoom: 8.5, duration: calme ? 0 : 900 }); },
         () => { etat.textContent = "Position indisponible : autorisez-la dans le navigateur ou cherchez une ville."; },
         { timeout: 8000, maximumAge: 600000 },
       );
@@ -363,7 +415,7 @@
     // ---- Filtres de la liste → points de la carte --------------------------------------------
     document.addEventListener("cuspeed:filtres", (e) => {
       const ids = (e as CustomEvent<{ ids: string[] }>).detail.ids;
-      idsFiltres = ids.length === Object.keys(donnees.formations).length ? null : new Set(ids);
+      idsFiltres = ids.length === nombreTotal ? null : new Set(ids);
       reconstruire();
       majEtat();
     });
@@ -372,8 +424,14 @@
       return t.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
     }
 
-    carte.once("idle", () => { initial = false; });
+    carte.once("idle", () => {
+      initial = false;
+      if (depart) appliquerZone(); // lien partagé : la liste suit la zone de l'adresse
+    });
+    carte.on("error", (e: any) => { if (!pret) replier(e?.error ?? e); });
+    window.setTimeout(() => { if (!pret) replier("délai dépassé"); }, 15000);
     carte.on("load", () => {
+      pret = true;
       majMode();
       majEtat();
     });

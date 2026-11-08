@@ -435,6 +435,7 @@ p {
 }
 /* Mode « Organismes » de la carte : une carte par organisme. */
 .organisme-resume {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--trait);
   border-radius: var(--rayon);
@@ -452,6 +453,13 @@ p {
 .organisme-nom {
   font-weight: 700;
   font-size: 1.05rem;
+}
+/* Toute la carte est cliquable, le lien reste le nom (une seule cible pour les lecteurs d'écran) */
+.organisme-nom::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
 }
 .organisme-nombre {
   font-size: 0.9rem;

@@ -226,7 +226,7 @@ const page = {
           </form>
 
           <div class="barre-resultat">
-            <h3 class="invisible">Liste des formations</h3>
+            <h3 class="invisible" id="titre-liste">Liste des formations</h3>
             <p class="resultat" id="resultat" aria-live="polite" tabindex="-1">
               {formations.length} formations
             </p>
@@ -254,8 +254,7 @@ const page = {
                   {ref.types_organisme[o.type] ?? o.type}{o.ville ? ` · ${o.ville}` : ""}
                 </p>
                 <p class="organisme-nombre">
-                  <span class="nombre-organisme">{nombreParOrganisme.get(o.id)}</span> formation(s)
-                  correspondant à la recherche
+                  {nombreParOrganisme.get(o.id)} formation{nombreParOrganisme.get(o.id) > 1 ? "s" : ""}
                 </p>
               </li>
             ))}
@@ -954,6 +953,7 @@ const page = {
 </style>
 
 <script>
+  import { compterParOrganisme, texteResultat } from "../lib/liste.js";
   // Recherche, filtres, tri et affichage par paquets, entièrement dans le navigateur.
   // Aucune donnée n'est envoyée nulle part. Sans JavaScript, toute la liste reste visible.
   const PAQUET = 24; // même valeur que dans la page (rendu et CSS « li:nth-child(n + 25) »)
@@ -1035,8 +1035,10 @@ const page = {
     // Zone de la carte : identifiants des formations visibles dans l'emprise (null = pas de zone).
     let zone: Set<string> | null = null;
     // Mode de la carte : « formations » (liste des formations) ou « organismes » (liste des organismes).
-    let mode: "formations" | "organismes" =
-      new URLSearchParams(location.search).get("mode") === "organismes" ? "organismes" : "formations";
+    // Il ne vient que de la carte interactive (événement cuspeed:mode), qui seule affiche le bouton de
+    // bascule : sans carte, la liste reste celle des formations, même si l'adresse contient ?mode=.
+    let mode: "formations" | "organismes" = "formations";
+    const titreListe = document.getElementById("titre-liste");
     let affichees = PAQUET;
 
     // Filtres repris de l'adresse (?discipline=paro…) : liens partageables et pastilles.
@@ -1108,15 +1110,15 @@ const page = {
       let total = 0;
       const montrees: Fiche[] = [];
       const parVille = new Map<string, number>();
-      const parOrganisme = new Map<string, number>();
       const pourLaCarte: string[] = [];
+      const retenues: { organisme: string; retenue: boolean }[] = [];
       for (const x of ordre) {
         const sansVille = correspond(x, f, mots);
         if (sansVille) for (const v of x.villes) parVille.set(v, (parVille.get(v) ?? 0) + 1);
         const memeVille = sansVille && (!f.ville || x.villes.includes(f.ville));
         if (memeVille) pourLaCarte.push(x.id);
         const ok = memeVille && (!zone || zone.has(x.id));
-        if (ok) parOrganisme.set(x.organisme, (parOrganisme.get(x.organisme) ?? 0) + 1);
+        retenues.push({ organisme: x.organisme, retenue: ok });
         if (ok && ++total <= affichees) montrees.push(x);
         const cache = !ok || total > affichees;
         if (x.li.hidden !== cache) x.li.hidden = cache;
@@ -1128,11 +1130,13 @@ const page = {
       affichage = montrees;
       liste.classList.add("pilotee");
 
-      resultat.textContent = `${total} formation${total > 1 ? "s" : ""}`;
+      resultat.textContent = texteResultat("formations", 0, total);
       aucun.hidden = total > 0;
+      const parOrganisme = compterParOrganisme(retenues);
       // Mode « Organismes » : la même recherche, présentée par organisme.
       const parOrg = mode === "organismes" && listeOrganismes;
       liste.hidden = Boolean(parOrg);
+      if (titreListe) titreListe.textContent = parOrg ? "Liste des organismes" : "Liste des formations";
       if (listeOrganismes) {
         listeOrganismes.hidden = !parOrg;
         let nbOrganismes = 0;
@@ -1143,10 +1147,7 @@ const page = {
           li.querySelector(".organisme-nombre")!.textContent =
             `${n} formation${n > 1 ? "s" : ""} correspondant à la recherche`;
         }
-        if (parOrg) {
-          resultat.textContent =
-            `${nbOrganismes} organisme${nbOrganismes > 1 ? "s" : ""} · ${total} formation${total > 1 ? "s" : ""}`;
-        }
+        if (parOrg) resultat.textContent = texteResultat("organismes", nbOrganismes, total);
       }
       if (plusBloc && parOrg) plusBloc.hidden = true;
       else if (plusBloc && compteur && plus) {
@@ -1330,6 +1331,9 @@ const page = {
   } catch (erreur) {
     // En cas de souci, on revient à la page sans JavaScript : toute la liste, sans filtres.
     html.classList.remove("js");
+    liste.hidden = false;
+    const listeOrg = document.getElementById("liste-organismes");
+    if (listeOrg) listeOrg.hidden = true;
     for (const li of liste.children) (li as HTMLElement).hidden = false;
     throw erreur;
   }

@@ -97,10 +97,11 @@
         if (entrees.some((e) => e.isIntersecting)) {
           observateur.disconnect();
           demarrer().catch((erreur) => {
-            // Repli : le dessin SVG reste affiché, la liste continue de fonctionner.
+            // Repli : le dessin SVG reste affiché, la liste continue de fonctionner (formations).
             console.warn("Carte interactive indisponible :", erreur);
             racine.hidden = true;
             svg.hidden = false;
+            revenirAuxFormations();
           });
         }
       },
@@ -114,6 +115,18 @@
   document.addEventListener("cuspeed:filtres", (e) => {
     idsRecus = (e as CustomEvent<{ ids: string[] }>).detail.ids;
   });
+
+  // Sans carte, plus de bouton de mode : la liste revient aux formations et l'adresse perd ?mode= et ?c=.
+  function revenirAuxFormations() {
+    document.dispatchEvent(new CustomEvent("cuspeed:mode", { detail: { mode: "formations" } }));
+    const p = new URLSearchParams(location.search);
+    if (p.has("mode") || p.has("c")) {
+      p.delete("mode");
+      p.delete("c");
+      const q = p.toString();
+      history.replaceState(history.state, "", `${location.pathname}${q ? "?" + q : ""}${location.hash}`);
+    }
+  }
 
   async function demarrer() {
     const [maplibre, reponse] = await Promise.all([
@@ -172,8 +185,7 @@
       racine!.hidden = true;
       svg!.hidden = false;
       envoyerZone(null);
-      // Sans carte, plus de bouton de mode : la liste revient aux formations.
-      document.dispatchEvent(new CustomEvent("cuspeed:mode", { detail: { mode: "formations" } }));
+      revenirAuxFormations();
     };
 
     const depart = lireVue();

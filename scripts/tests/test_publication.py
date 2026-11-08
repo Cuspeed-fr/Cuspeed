@@ -80,6 +80,7 @@ class TestPreparerEnvoi(unittest.TestCase):
         self.assertFalse(self.destination.exists(), "rien ne doit être copié en cas de refus")
 
     def test_fond_de_carte_geojson_accepte(self):
+        ecrire(self.dist, "index.html", "<html>accueil</html>")
         (self.dist / "geo").mkdir(parents=True)
         (self.dist / "geo" / "departements.geojson").write_text('{"type":"FeatureCollection","features":[]}', encoding="utf8")
         _, erreurs = preparer_envoi.preparer(self.dist, self.destination)

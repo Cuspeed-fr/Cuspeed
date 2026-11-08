@@ -176,8 +176,11 @@ for (const [description, noms] of descriptions) {
 // Données de la carte interactive : seulement les champs prévus (jamais de note ni de champ inattendu).
 {
   const chemin = join(DIST, "carte-donnees.json");
-  if (!existsSync(chemin)) erreurs.push("carte-donnees.json absent");
-  else {
+  const accueil = join(DIST, "index.html");
+  const avecCarte = existsSync(accueil) && readFileSync(accueil, "utf8").includes('id="carte-vive"');
+  if (!existsSync(chemin)) {
+    if (avecCarte) erreurs.push("carte-donnees.json absent alors que la page d'accueil contient la carte");
+  } else {
     const carte = JSON.parse(readFileSync(chemin, "utf8"));
     const attendus = "points,organismes,formations,sansCoordonnees,sansLieu";
     if (Object.keys(carte).sort().join() !== attendus.split(",").sort().join()) {

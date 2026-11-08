@@ -5,6 +5,7 @@
 // disciplines, lieu…) : il n'est pas répété dans un attribut, la page reste légère. Un seul lien par carte (le titre) : toute la carte est cliquable grâce
 // au CSS (lien étiré), et les lecteurs d'écran n'entendent qu'un lien.
 import { villesDe, regroupementsDe, tarifLisible, aidesDe, prochaineSession, dateCourte } from "../lib/donnees.js";
+import { sessionActive } from "../lib/carte-moteur.js";
 
 const { formation: f, donnees } = Astro.props;
 const ref = donnees.referentiels;
@@ -14,10 +15,15 @@ const tarif = tarifLisible(f.tarif);
 const aides = aidesDe(f, ref);
 // Prochaine session datée (les éditions passées et les sessions sans date sont ignorées).
 const prochaine = prochaineSession(f, donnees);
+// Lieux des sessions en cours ou à venir : la liste et la carte s'accordent sur ces identifiants.
+const aujourdhui = new Date().toISOString().slice(0, 10);
+const lieux = [...new Set(f.sessions.filter((s) => s.lieu && sessionActive(s, aujourdhui)).map((s) => s.lieu))];
 const aReperes = Boolean(prochaine || villes.length || f.duree || tarif);
 ---
 <li
   class="fiche-resume"
+  data-id={f.id}
+  data-lieux={lieux.length ? lieux.join(" ") : undefined}
   data-disciplines={f.disciplines.join(" ")}
   data-type={f.type}
   data-secteur={f.secteur}

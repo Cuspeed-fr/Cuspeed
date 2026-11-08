@@ -19,7 +19,12 @@ import psycopg
 
 # Champs qu'un agent peut proposer de changer sur une fiche (même liste que la contrainte de la table propositions)
 CHAMPS_PROPOSABLES = ("intitule", "duree", "volume_horaire_h", "tarif_texte", "tarif_euros", "tarif_annee",
-                      "prerequis", "url_officielle", "format", "notes", "precisions")
+                      "prerequis", "url_officielle", "format", "notes", "precisions",
+                      # depuis le 8 novembre 2026 (migration 20261108000100) :
+                      # financement et disciplines = tableau texte « {dpc,fifpl} » ; type = code ;
+                      # sessions = tableau JSON [{"lieu":"L-LILLE","debut":"2027-01-15","fin":null,
+                      #            "inscriptions":"ouvertes","places":12}] qui remplace les sessions de la fiche
+                      "financement", "type", "disciplines", "sessions")
 
 
 def connexion():
@@ -59,7 +64,18 @@ def proposer(fid, champ, valeur, source, motif=None):
     if champ not in CHAMPS_PROPOSABLES:
         sys.exit(f"Champ non modifiable par proposition : {champ}. Champs possibles : {', '.join(CHAMPS_PROPOSABLES)}")
     with connexion() as conn, conn.cursor() as cur:
-        cur.execute(f"select {champ}::text from formations where id = %s", (fid,))  # champ validé par la liste ci-dessus
+        cur.execute("select 1 from formations where id = %s", (fid,))
+        if cur.fetchone() is None:
+            sys.exit(f"Fiche {fid} introuvable.")
+        if champ == "disciplines":
+            cur.execute("select coalesce(array_agg(discipline order by discipline), '{}')::text "
+                        "from formation_disciplines where formation_id = %s", (fid,))
+        elif champ == "sessions":
+            cur.execute("select coalesce(json_agg(json_build_object('lieu', lieu_id, 'debut', debut, 'fin', fin, "
+                        "'inscriptions', inscriptions, 'places', places) order by id), '[]')::text "
+                        "from sessions where formation_id = %s", (fid,))
+        else:
+            cur.execute(f"select {champ}::text from formations where id = %s", (fid,))  # champ validé par la liste ci-dessus
         ligne = cur.fetchone()
         if ligne is None:
             sys.exit(f"Fiche {fid} introuvable.")

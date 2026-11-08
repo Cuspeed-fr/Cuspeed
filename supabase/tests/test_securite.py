@@ -89,6 +89,12 @@ essai("dépose une proposition", "agent_extracteur",
 essai("dépose une proposition sur les précisions", "agent_extracteur",
       "insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
       "values ('F0001', 'precisions', 'En partenariat avec une autre faculté', 'https://exemple.fr')", 1)
+essai("dépose une proposition sur les prises en charge", "agent_extracteur",
+      "insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
+      "values ('F0001', 'financement', '{dpc,fifpl}', 'https://exemple.fr')", 1)
+essai("dépose une proposition sur les sessions", "agent_extracteur",
+      "insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
+      "values ('F0001', 'sessions', '[{\"lieu\":\"L-LILLE\",\"debut\":\"2027-01-15\"}]', 'https://exemple.fr')", 1)
 essai("ne propose pas un champ inconnu", "agent_extracteur",
       "insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
       "values ('F0001', 'statut', 'validee', 'https://exemple.fr')", "erreur")
@@ -144,11 +150,49 @@ with conn.cursor() as cur:
     cur.execute("select appliquer_proposition(%s)", (pid2,))
     cur.execute("select precisions from formations where id = 'F0001'")
     pr = cur.fetchone()[0]
+    ids = {}
+    for champ, valeur in [("financement", "{dpc,fifpl}"), ("type", "diu"), ("disciplines", "{paro,implanto}"),
+                          ("sessions", '[{"lieu":"L-LILLE","debut":"2027-01-15","fin":"2027-06-30",'
+                                       '"inscriptions":"ouvertes","places":12},{"lieu":null}]')]:
+        cur.execute("insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
+                    "values ('F0001', %s, %s, 'https://exemple.fr') returning id", (champ, valeur))
+        ids[champ] = cur.fetchone()[0]
+        cur.execute("select appliquer_proposition(%s)", (ids[champ],))
+    cur.execute("select financement, type from formations where id = 'F0001'")
+    fin_type = cur.fetchone()
+    cur.execute("select array_agg(discipline order by discipline) from formation_disciplines where formation_id = 'F0001'")
+    disc = cur.fetchone()[0]
+    cur.execute("select lieu_id, debut::text, fin::text, inscriptions, places from sessions "
+                "where formation_id = 'F0001' order by lieu_id nulls last")
+    sess = cur.fetchall()
 conn.rollback()
+# Une proposition invalide échoue sans rien modifier (contraintes de la base).
+invalides = []
+for champ, valeur in [("sessions", '[{"lieu":"L-LILLE","debut":"2027-02-01","fin":"2027-01-01"}]'),
+                      ("sessions", '[{"lieu":"L-INEXISTANT"}]'),
+                      ("disciplines", "{paro,inconnue}"),
+                      ("type", "inconnu"),
+                      ("financement", "{dpc,mecenat}")]:
+    with conn.cursor() as cur:
+        try:
+            cur.execute("insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "
+                        "values ('F0001', %s, %s, 'https://exemple.fr') returning id", (champ, valeur))
+            cur.execute("select appliquer_proposition(%s)", (cur.fetchone()[0],))
+            invalides.append(f"{champ}={valeur}")
+        except psycopg.Error:
+            pass
+        finally:
+            conn.rollback()
 for nom, ok in [("accepter une proposition modifie la fiche", float(v) == 42.0),
                 ("la modification est inscrite au journal", nj >= 1),
                 ("la proposition est marquée acceptée", st == "acceptee"),
-                ("accepter une proposition de précisions remplit le champ", pr == "Clinique le lundi")]:
+                ("accepter une proposition de précisions remplit le champ", pr == "Clinique le lundi"),
+                ("accepter les prises en charge et le type", fin_type == (["dpc", "fifpl"], "diu")),
+                ("accepter les disciplines remplace la liste", disc == ["implanto", "paro"]),
+                ("accepter les sessions remplace les sessions",
+                 sess == [("L-LILLE", "2027-01-15", "2027-06-30", "ouvertes", 12), (None, None, None, "a-renseigner", None)]),
+                ("une proposition invalide échoue (session à l'envers, lieu, discipline, type, prise en charge inconnus)",
+                 not invalides)]:
     print(("  ok   " if ok else "  ECHEC"), nom)
     if not ok:
         echecs.append(nom)

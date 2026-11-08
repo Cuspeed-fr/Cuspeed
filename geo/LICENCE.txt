@@ -1,0 +1,9 @@
+departements.geojson : contours des départements métropolitains (codes 01 à 95, 2A, 2B).
+
+Source : jeu « Contours administratifs » de data.gouv.fr (https://www.data.gouv.fr/datasets/contours-administratifs),
+fichier departements-5m.geojson.gz, calculé à partir d'Admin Express (© IGN) et de données
+© les contributeurs d'OpenStreetMap.
+Modifications par Cuspeed : outre-mer retiré, géométries simplifiées (tolérance 0,005°), champ « region » retiré.
+
+Licence : Open Database License (ODbL) 1.0 — https://opendatacommons.org/licenses/odbl/1-0/
+Ce fichier modifié est partagé sous la même licence.

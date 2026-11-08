@@ -22,6 +22,8 @@ from pathlib import Path
 EXTENSIONS_PERMISES = {
     ".html", ".css", ".js", ".mjs", ".json", ".xml", ".txt", ".svg", ".png", ".jpg", ".jpeg",
     ".webp", ".avif", ".ico", ".woff", ".woff2", ".webmanifest",
+    # Fond de carte (données publiques, sans note) chargé par la carte interactive.
+    ".geojson",
 }
 # Dossiers de travail qui ne doivent jamais se retrouver à la racine du site envoyé.
 DOSSIERS_INTERDITS = {"data", "scripts", "src", "supabase", "docs", "tests", "node_modules", ".github", ".git"}

@@ -60,9 +60,28 @@ def creer(chemin):
     print(f"{fid} créée (à vérifier).")
 
 
+def controler_valeur(champ, valeur):
+    """Refuse avant dépôt une valeur mal formée (sinon l'erreur n'apparaîtrait que chez Chris)."""
+    import re
+    if champ in ("financement", "disciplines"):
+        if not re.fullmatch(r"\{[a-z-]+(,[a-z-]+)*\}" + ("" if champ == "disciplines" else r"|\{\}"), valeur):
+            sys.exit(f"{champ} : attendu un tableau texte comme {{dpc,fifpl}}, reçu {valeur!r}")
+    elif champ == "sessions":
+        try:
+            sessions = json.loads(valeur)
+        except ValueError:
+            sys.exit(f"sessions : JSON invalide {valeur!r}")
+        cles = {"lieu", "debut", "fin", "inscriptions", "places"}
+        if not isinstance(sessions, list) or any(not isinstance(x, dict) or set(x) - cles or
+                                                 not (x.get("lieu") or x.get("debut") or x.get("fin"))
+                                                 for x in sessions):
+            sys.exit(f"sessions : attendu un tableau d'objets {sorted(cles)} avec un lieu ou une date")
+
+
 def proposer(fid, champ, valeur, source, motif=None):
     if champ not in CHAMPS_PROPOSABLES:
         sys.exit(f"Champ non modifiable par proposition : {champ}. Champs possibles : {', '.join(CHAMPS_PROPOSABLES)}")
+    controler_valeur(champ, valeur)
     with connexion() as conn, conn.cursor() as cur:
         cur.execute("select 1 from formations where id = %s", (fid,))
         if cur.fetchone() is None:
@@ -77,8 +96,6 @@ def proposer(fid, champ, valeur, source, motif=None):
         else:
             cur.execute(f"select {champ}::text from formations where id = %s", (fid,))  # champ validé par la liste ci-dessus
         ligne = cur.fetchone()
-        if ligne is None:
-            sys.exit(f"Fiche {fid} introuvable.")
         cur.execute("insert into propositions (formation_id, champ, ancienne_valeur, nouvelle_valeur, source_url, motif) "
                     "values (%s,%s,%s,%s,%s,%s) returning id", (fid, champ, ligne[0], valeur, source, motif))
         print(f"Proposition {cur.fetchone()[0]} déposée : {fid}.{champ} {ligne[0]!r} -> {valeur!r}")

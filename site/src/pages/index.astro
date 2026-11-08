@@ -5,6 +5,7 @@
 import Base from "../layouts/Base.astro";
 import ResumeFormation from "../components/ResumeFormation.astro";
 import { chargerDonnees, regroupementsDe, prochaineSession } from "../lib/donnees.js";
+import CarteInteractive from "../components/CarteInteractive.astro";
 import { pointsCarte, placerEtiquettes, LARGEUR_CARTE, HAUTEUR_CARTE } from "../lib/carte.js";
 import { CONTOUR_FRANCE } from "../lib/contour-france.js";
 
@@ -124,6 +125,7 @@ const page = {
       <h2 id="titre-recherche">Trouver une formation</h2>
       <div class="disposition">
         <div class="colonne-carte">
+          <CarteInteractive />
           <figure class="carte-bloc carte">
             <svg viewBox={`0 0 ${LARGEUR_CARTE} ${HAUTEUR_CARTE}`} role="group" aria-label="Carte de France : choisir une ville">
               <path class="terre" d={CONTOUR_FRANCE} />
@@ -975,6 +977,7 @@ const page = {
       return {
         li,
         rang, // ordre alphabétique de la page
+        id: d.id ?? "",
         disciplines: (d.disciplines ?? "").split(" "),
         type: d.type ?? "",
         secteur: d.secteur ?? "",
@@ -1004,6 +1007,8 @@ const page = {
     }
     type Filtres = Record<string, string>;
     let affichage: Fiche[] = []; // cartes affichées, dans l'ordre
+    // Zone de la carte : identifiants des formations visibles dans l'emprise (null = pas de zone).
+    let zone: Set<string> | null = null;
     let affichees = PAQUET;
 
     // Filtres repris de l'adresse (?discipline=paro…) : liens partageables et pastilles.
@@ -1025,6 +1030,11 @@ const page = {
     function majAdresse(f: Filtres) {
       const p = new URLSearchParams();
       for (const nom of CHAMPS) if (f[nom]) p.set(nom, f[nom]);
+      // Position de la carte et mode (ajoutés par la carte interactive) : conservés tels quels.
+      for (const nom of ["c", "mode"]) {
+        const v = new URLSearchParams(location.search).get(nom);
+        if (v) p.set(nom, v);
+      }
       const requete = p.toString();
       history.replaceState({ affichees }, "", `${location.pathname}${requete ? "?" + requete : ""}${location.hash}`);
     }
@@ -1070,10 +1080,13 @@ const page = {
       let total = 0;
       const montrees: Fiche[] = [];
       const parVille = new Map<string, number>();
+      const pourLaCarte: string[] = [];
       for (const x of ordre) {
         const sansVille = correspond(x, f, mots);
         if (sansVille) for (const v of x.villes) parVille.set(v, (parVille.get(v) ?? 0) + 1);
-        const ok = sansVille && (!f.ville || x.villes.includes(f.ville));
+        const memeVille = sansVille && (!f.ville || x.villes.includes(f.ville));
+        if (memeVille) pourLaCarte.push(x.id);
+        const ok = memeVille && (!zone || zone.has(x.id));
         if (ok && ++total <= affichees) montrees.push(x);
         const cache = !ok || total > affichees;
         if (x.li.hidden !== cache) x.li.hidden = cache;
@@ -1097,6 +1110,9 @@ const page = {
       for (const a of pastilles) a.setAttribute("aria-current", String(a.dataset.discipline === f.discipline));
       majPuces(f);
       majAdresse(f);
+
+      // La carte interactive reçoit les formations qui passent tous les filtres sauf la zone.
+      document.dispatchEvent(new CustomEvent("cuspeed:filtres", { detail: { ids: pourLaCarte, total } }));
 
       // Les nombres de la carte suivent les autres filtres, pas celui de la ville.
       for (const p of points) {
@@ -1227,6 +1243,12 @@ const page = {
     });
 
     formulaire.addEventListener("input", () => appliquer());
+    // La carte interactive demande à ne montrer que les formations de la zone affichée.
+    document.addEventListener("cuspeed:zone", (e) => {
+      const ids = (e as CustomEvent<{ ids: string[] | null }>).detail.ids;
+      zone = ids ? new Set(ids) : null;
+      appliquer();
+    });
     tri?.addEventListener("input", () => appliquer());
     formulaire.addEventListener("submit", (e) => {
       e.preventDefault();

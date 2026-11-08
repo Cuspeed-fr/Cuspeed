@@ -7,6 +7,7 @@
 # Fichiers générés
 node_modules/
 dist/
+site/public/maplibre/
 .astro/
 __pycache__/
 

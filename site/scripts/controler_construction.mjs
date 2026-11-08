@@ -173,6 +173,26 @@ for (const [description, noms] of descriptions) {
   if (noms.length > 1) erreurs.push(`Description en double « ${description.slice(0, 60)}… » : ${noms.join(", ")}`);
 }
 
+// Données de la carte interactive : seulement les champs prévus (jamais de note ni de champ inattendu).
+{
+  const chemin = join(DIST, "carte-donnees.json");
+  if (!existsSync(chemin)) erreurs.push("carte-donnees.json absent");
+  else {
+    const carte = JSON.parse(readFileSync(chemin, "utf8"));
+    const attendus = "points,organismes,formations,sansCoordonnees,sansLieu";
+    if (Object.keys(carte).sort().join() !== attendus.split(",").sort().join()) {
+      erreurs.push(`carte-donnees.json : champs inattendus (${Object.keys(carte).join(", ")})`);
+    }
+    const champsPoint = "id,nom,latitude,longitude,formations,organismes";
+    for (const p of carte.points ?? []) {
+      if (Object.keys(p).sort().join() !== champsPoint.split(",").sort().join()) {
+        erreurs.push(`carte-donnees.json : point ${p.id} avec des champs inattendus`);
+        break;
+      }
+    }
+  }
+}
+
 const nbPages = pages.filter((p) => p.endsWith(".html")).length;
 if (erreurs.length) {
   console.error(`Contrôle du site construit : ${erreurs.length} problème(s)\n- ` + erreurs.join("\n- "));

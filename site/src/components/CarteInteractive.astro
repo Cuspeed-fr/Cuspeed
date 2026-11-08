@@ -1,0 +1,382 @@
+---
+// Carte interactive : se charge seulement quand elle approche de l'écran, remplace alors la carte
+// en dessin (SVG) qui reste le repli sans JavaScript. Le fond de carte (départements) vient de notre
+// propre site : aucune requête vers un service tiers, donc aucun bandeau de consentement.
+---
+<div class="carte-vive" id="carte-vive" hidden>
+  <div class="carte-barre">
+    <div class="carte-mode" role="radiogroup" aria-label="Ce que la carte compte">
+      <button type="button" role="radio" aria-checked="false" data-mode="organismes">Organismes</button>
+      <button type="button" role="radio" aria-checked="true" data-mode="formations">Formations</button>
+    </div>
+    <button type="button" class="carte-bouton" id="carte-autour" aria-label="Centrer la carte autour de moi">Autour de moi</button>
+  </div>
+  <div class="carte-scene">
+    <div id="carte-toile" class="carte-toile" role="application" aria-label="Carte interactive des formations. La liste à côté contient les mêmes informations."></div>
+    <button type="button" class="carte-zone" id="carte-zone" hidden>Rechercher dans cette zone</button>
+    <div class="carte-fiche" id="carte-fiche" hidden role="dialog" aria-label="Détail du lieu"></div>
+  </div>
+  <div class="carte-pied">
+    <label class="carte-suivi"><input type="checkbox" id="carte-suivi" checked /> Mettre la liste à jour quand je déplace la carte</label>
+    <p class="discret" id="carte-etat" role="status" aria-live="polite"></p>
+  </div>
+</div>
+
+<style is:global>
+  .carte-vive { display: grid; gap: 8px; }
+  .carte-barre { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; }
+  .carte-mode { display: inline-flex; border: 1px solid var(--terre-bord); border-radius: 999px; overflow: hidden; }
+  .carte-mode button, .carte-bouton, .carte-zone {
+    font: 600 0.875rem var(--texte); padding: 8px 14px; min-height: 40px; cursor: pointer;
+    background: var(--surface); color: var(--encre); border: 0;
+  }
+  .carte-mode button[aria-checked="true"] { background: var(--accent); color: var(--accent-texte); }
+  .carte-bouton { border: 1px solid var(--terre-bord); border-radius: 999px; }
+  .carte-scene { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--terre-bord); }
+  .carte-toile { height: min(68vh, 560px); min-height: 360px; background: var(--surface); }
+  .carte-zone {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 3;
+    border-radius: 999px; box-shadow: 0 2px 10px rgb(0 0 0 / 0.25); border: 1px solid var(--terre-bord);
+  }
+  .carte-suivi { font-size: 0.875rem; display: flex; gap: 8px; align-items: center; }
+  .carte-pied { display: grid; gap: 4px; }
+  .carte-pied p { margin: 0; font-size: 0.85rem; }
+
+  .repere {
+    display: grid; place-items: center; border-radius: 50%; cursor: pointer; padding: 0;
+    background: var(--accent); color: var(--accent-texte); border: 2px solid var(--surface);
+    font: 700 0.8rem var(--texte); box-shadow: 0 1px 6px rgb(0 0 0 / 0.3);
+  }
+  .repere:hover, .repere:focus-visible, .repere[aria-pressed="true"] { background: var(--accent-fort); outline: 3px solid var(--encre); outline-offset: 2px; }
+  .repere-nom {
+    position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); white-space: nowrap;
+    font: 600 0.75rem var(--texte); color: var(--encre); pointer-events: none;
+    text-shadow: 0 0 3px var(--surface), 0 0 3px var(--surface), 0 0 3px var(--surface);
+  }
+  .repere.vide { background: var(--point-vide); color: var(--encre); }
+
+  .carte-fiche {
+    position: absolute; z-index: 4; left: 10px; bottom: 10px; width: min(340px, calc(100% - 20px));
+    background: var(--surface); color: var(--encre); border: 1px solid var(--terre-bord);
+    border-radius: 12px; padding: 14px; box-shadow: 0 6px 24px rgb(0 0 0 / 0.3); max-height: 60%; overflow: auto;
+  }
+  .carte-fiche h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  .carte-fiche ul { margin: 8px 0; padding-left: 18px; }
+  .carte-fiche .fermer { position: absolute; top: 6px; right: 6px; min-width: 40px; min-height: 40px; background: none; border: 0; font-size: 1.3rem; cursor: pointer; color: inherit; }
+  .carte-fiche .carte-bouton { margin-top: 4px; }
+  @media (max-width: 640px) {
+    .carte-fiche { left: 0; right: 0; bottom: 0; width: auto; border-radius: 16px 16px 0 0; max-height: 55%; }
+  }
+  .maplibregl-ctrl-attrib { display: none; }
+</style>
+
+<script>
+  // Chargement différé : MapLibre (plusieurs centaines de Ko) n'est téléchargé que si la carte
+  // approche de l'écran. Entre-temps, le dessin SVG de la page reste la carte.
+  import "maplibre-gl/dist/maplibre-gl.css";
+  import { creerIndex, elementsVisibles, contenuDansEmprise, zoomEclatement } from "../lib/carte-moteur.js";
+
+  type Point = { id: string; nom: string; latitude: number; longitude: number; formations: string[]; organismes: string[] };
+  type Donnees = {
+    points: Point[];
+    organismes: Record<string, { nom: string; slug: string }>;
+    formations: Record<string, { intitule: string; slug: string; organisme: string }>;
+    sansCoordonnees: string[];
+    sansLieu: string[];
+  };
+
+  const racine = document.getElementById("carte-vive");
+  const bloc = document.querySelector<HTMLElement>(".colonne-carte");
+  const svg = document.querySelector<HTMLElement>(".carte-bloc.carte");
+
+  if (racine && bloc && svg && "IntersectionObserver" in window) {
+    const observateur = new IntersectionObserver(
+      (entrees) => {
+        if (entrees.some((e) => e.isIntersecting)) {
+          observateur.disconnect();
+          demarrer().catch((erreur) => {
+            // Repli : le dessin SVG reste affiché, la liste continue de fonctionner.
+            console.warn("Carte interactive indisponible :", erreur);
+            racine.hidden = true;
+            svg.hidden = false;
+          });
+        }
+      },
+      { rootMargin: "300px" },
+    );
+    observateur.observe(bloc);
+  }
+
+  async function demarrer() {
+    const [maplibre, reponse] = await Promise.all([
+      import("maplibre-gl"),
+      fetch("/carte-donnees.json"),
+    ]);
+    if (!reponse.ok) throw new Error(`carte-donnees.json : ${reponse.status}`);
+    const donnees: Donnees = await reponse.json();
+
+    // Le moteur de calcul est servi par notre site (copié par scripts/copier_maplibre.mjs).
+    maplibre.setWorkerUrl(`${location.origin}/maplibre/maplibre-gl-worker.mjs`);
+    const toile = document.getElementById("carte-toile")!;
+    const fiche = document.getElementById("carte-fiche")!;
+    const boutonZone = document.getElementById("carte-zone") as HTMLButtonElement;
+    const suivi = document.getElementById("carte-suivi") as HTMLInputElement;
+    const etat = document.getElementById("carte-etat")!;
+    const boutonsMode = [...racine!.querySelectorAll<HTMLButtonElement>("[data-mode]")];
+    const calme = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const couleur = (nom: string) => getComputedStyle(document.documentElement).getPropertyValue(nom).trim() || "#888";
+
+    const EMPRISE_FRANCE: [number, number, number, number] = [-5.4, 41.2, 9.8, 51.2];
+    const params = new URLSearchParams(location.search);
+    let mode: "formations" | "organismes" = params.get("mode") === "organismes" ? "organismes" : "formations";
+    let idsFiltres: Set<string> | null = null; // formations qui passent les filtres de la liste
+    let index = creerIndex(donnees.points);
+    let pointsCourants: Point[] = donnees.points;
+    const marques = new Map<string, { marque: any; el: HTMLButtonElement }>();
+    let lieuOuvert: string | null = null;
+    let initial = true;
+
+    const style = () => ({
+      version: 8 as const,
+      sources: { departements: { type: "geojson" as const, data: `${location.origin}/geo/departements.geojson` } },
+      layers: [
+        { id: "fond", type: "background" as const, paint: { "background-color": couleur("--surface") } },
+        { id: "terre", type: "fill" as const, source: "departements", paint: { "fill-color": couleur("--terre") } },
+        { id: "bords", type: "line" as const, source: "departements", paint: { "line-color": couleur("--terre-bord"), "line-width": 0.8 } },
+      ],
+    });
+
+    racine!.hidden = false;
+    svg!.hidden = true;
+
+    const depart = lireVue();
+    const carte = new maplibre.Map({
+      container: toile,
+      style: style(),
+      bounds: depart ? undefined : EMPRISE_FRANCE,
+      center: depart?.centre,
+      zoom: depart?.zoom,
+      minZoom: 3.5,
+      maxZoom: 14,
+      attributionControl: false,
+      cooperativeGestures: matchMedia("(pointer: coarse)").matches,
+      fadeDuration: calme ? 0 : 150,
+    });
+    carte.addControl(new maplibre.NavigationControl({ showCompass: false }), "top-right");
+    const vueInitiale = { centre: carte.getCenter(), zoom: carte.getZoom() };
+
+    // Thème clair / sombre : les couleurs du fond suivent les variables CSS de la page.
+    const majTheme = () => {
+      if (!carte.isStyleLoaded()) return;
+      carte.setPaintProperty("fond", "background-color", couleur("--surface"));
+      carte.setPaintProperty("terre", "fill-color", couleur("--terre"));
+      carte.setPaintProperty("bords", "line-color", couleur("--terre-bord"));
+    };
+    matchMedia("(prefers-color-scheme: dark)").addEventListener("change", majTheme);
+    new MutationObserver(majTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme", "class"] });
+
+    function lireVue() {
+      const c = params.get("c")?.split(",").map(Number);
+      if (c && c.length === 3 && c.every(Number.isFinite)) return { centre: [c[1], c[0]] as [number, number], zoom: c[2] };
+      return null;
+    }
+
+    // ---- Points selon les filtres de la liste ------------------------------------------------
+    function reconstruire() {
+      pointsCourants = idsFiltres
+        ? donnees.points
+            .map((p) => {
+              const formations = p.formations.filter((id) => idsFiltres!.has(id));
+              const organismes = [...new Set(formations.map((id) => donnees.formations[id].organisme))];
+              return { ...p, formations, organismes };
+            })
+            .filter((p) => p.formations.length > 0)
+        : donnees.points;
+      index = creerIndex(pointsCourants);
+      dessiner();
+    }
+
+    // ---- Dessin des repères ------------------------------------------------------------------
+    const nombreDe = (el: { formations: Set<string>; organismes: Set<string> }) =>
+      mode === "formations" ? el.formations.size : el.organismes.size;
+    const taille = (n: number) => Math.round(30 + Math.min(Math.sqrt(n) * 4, 26));
+    const mot = (n: number) =>
+      mode === "formations" ? `formation${n > 1 ? "s" : ""}` : `organisme${n > 1 ? "s" : ""}`;
+
+    function dessiner() {
+      const b = carte.getBounds();
+      const elements = elementsVisibles(index, [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()], carte.getZoom());
+      const garde = new Set<string>();
+      for (const e of elements) {
+        const cle = e.type === "lieu" ? `l:${e.id}` : `g:${e.lieux.slice().sort().join(",")}`;
+        garde.add(cle);
+        const n = nombreDe(e);
+        let m = marques.get(cle);
+        if (!m) {
+          const el = document.createElement("button");
+          el.type = "button";
+          el.className = e.type === "lieu" ? "repere repere-lieu" : "repere";
+          el.addEventListener("click", (ev) => {
+            ev.stopPropagation();
+            if (e.type === "groupe") {
+              carte.easeTo({ center: [e.longitude, e.latitude], zoom: zoomEclatement(index, e.idGroupe), duration: calme ? 0 : 400 });
+            } else {
+              ouvrirLieu(e.id!, e.longitude, e.latitude);
+            }
+          });
+          const marque = new maplibre.Marker({ element: el }).setLngLat([e.longitude, e.latitude]).addTo(carte);
+          m = { marque, el };
+          marques.set(cle, m);
+        }
+        const t = taille(n);
+        m.el.style.width = m.el.style.height = `${t}px`;
+        m.el.textContent = String(n);
+        if (e.type === "lieu") {
+          const nom = document.createElement("span");
+          nom.className = "repere-nom";
+          nom.textContent = e.nom!;
+          m.el.append(nom);
+          m.el.setAttribute("aria-label", `${e.nom} : ${n} ${mot(n)}`);
+        } else {
+          m.el.setAttribute("aria-label", `Groupe de ${e.lieux.length} lieux : ${n} ${mot(n)}. Zoomer.`);
+        }
+        m.el.setAttribute("aria-pressed", String(e.type === "lieu" && e.id === lieuOuvert));
+      }
+      for (const [cle, m] of marques) {
+        if (!garde.has(cle)) {
+          m.marque.remove();
+          marques.delete(cle);
+        }
+      }
+    }
+
+    // ---- Fiche d'un lieu (carte flottante, panneau du bas sur téléphone) -----------------------
+    function ouvrirLieu(id: string, lng: number, lat: number) {
+      const p = pointsCourants.find((x) => x.id === id);
+      if (!p) return;
+      lieuOuvert = id;
+      const lignes = p.formations
+        .slice(0, 5)
+        .map((fid) => {
+          const f = donnees.formations[fid];
+          return `<li><a href="/formations/${f.slug}/">${echapper(f.intitule)}</a></li>`;
+        })
+        .join("");
+      const suite = p.formations.length > 5 ? `<p class="discret">et ${p.formations.length - 5} autre${p.formations.length - 5 > 1 ? "s" : ""}</p>` : "";
+      fiche.innerHTML = `<button type="button" class="fermer" aria-label="Fermer">×</button>
+        <h3>${echapper(p.nom)}</h3>
+        <p class="discret">${p.formations.length} formation${p.formations.length > 1 ? "s" : ""} · ${p.organismes.length} organisme${p.organismes.length > 1 ? "s" : ""}</p>
+        <ul>${lignes}</ul>${suite}
+        <button type="button" class="carte-bouton" id="carte-liste-lieu">Voir toutes dans la liste</button>`;
+      fiche.hidden = false;
+      fiche.querySelector<HTMLButtonElement>(".fermer")!.onclick = fermerLieu;
+      fiche.querySelector<HTMLButtonElement>("#carte-liste-lieu")!.onclick = () => {
+        envoyerZone(p.formations);
+        document.getElementById("liste")?.scrollIntoView({ behavior: calme ? "auto" : "smooth", block: "start" });
+      };
+      carte.easeTo({ center: [lng, lat], duration: calme ? 0 : 300 });
+      dessiner();
+    }
+    function fermerLieu() {
+      lieuOuvert = null;
+      fiche.hidden = true;
+      dessiner();
+    }
+    addEventListener("keydown", (e) => { if (e.key === "Escape" && lieuOuvert) fermerLieu(); });
+    carte.on("click", () => { if (lieuOuvert) fermerLieu(); });
+
+    // ---- Zone : liste synchronisée avec la carte ---------------------------------------------
+    function envoyerZone(ids: string[] | null) {
+      document.dispatchEvent(new CustomEvent("cuspeed:zone", { detail: { ids } }));
+    }
+    function zoneCourante() {
+      const b = carte.getBounds();
+      return contenuDansEmprise(pointsCourants, [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()]);
+    }
+    function dansLaVueDeDepart() {
+      return Math.abs(carte.getZoom() - vueInitiale.zoom) < 0.05 && carte.getCenter().distanceTo(vueInitiale.centre) < 5000;
+    }
+    function majEtat() {
+      const z = zoneCourante();
+      etat.textContent = `${z.formations.size} formation${z.formations.size > 1 ? "s" : ""} et ${z.organismes.size} organisme${z.organismes.size > 1 ? "s" : ""} dans la zone affichée.`;
+      return z;
+    }
+    function appliquerZone() {
+      const z = majEtat();
+      envoyerZone(dansLaVueDeDepart() ? null : [...z.formations]);
+      boutonZone.hidden = true;
+    }
+    boutonZone.addEventListener("click", appliquerZone);
+
+    let minuterie = 0;
+    carte.on("moveend", (e: any) => {
+      dessiner();
+      majUrl();
+      majEtat();
+      if (initial) return; // mouvements de mise en place : la liste n'est pas filtrée
+      if (!e.originalEvent && !suivi.checked) return;
+      if (suivi.checked) {
+        clearTimeout(minuterie);
+        minuterie = window.setTimeout(appliquerZone, 250);
+      } else if (!dansLaVueDeDepart()) {
+        boutonZone.hidden = false;
+      }
+    });
+
+    // ---- Adresse partageable : ?c=lat,lng,zoom&mode=… (les filtres de la liste y sont déjà) ------
+    function majUrl() {
+      const p = new URLSearchParams(location.search);
+      if (dansLaVueDeDepart()) p.delete("c");
+      else {
+        const c = carte.getCenter();
+        p.set("c", `${c.lat.toFixed(3)},${c.lng.toFixed(3)},${carte.getZoom().toFixed(1)}`);
+      }
+      if (mode === "organismes") p.set("mode", mode);
+      else p.delete("mode");
+      const q = p.toString();
+      history.replaceState(history.state, "", `${location.pathname}${q ? "?" + q : ""}${location.hash}`);
+    }
+
+    // ---- Mode Organismes / Formations ---------------------------------------------------------
+    function majMode() {
+      for (const b of boutonsMode) b.setAttribute("aria-checked", String(b.dataset.mode === mode));
+      dessiner();
+      majUrl();
+    }
+    for (const b of boutonsMode) {
+      b.addEventListener("click", () => {
+        mode = b.dataset.mode as typeof mode;
+        majMode();
+      });
+    }
+
+    // ---- Autour de moi (position lue seulement après un clic, jamais envoyée) ---------------------
+    document.getElementById("carte-autour")!.addEventListener("click", () => {
+      if (!navigator.geolocation) { etat.textContent = "La géolocalisation n'est pas disponible sur cet appareil."; return; }
+      navigator.geolocation.getCurrentPosition(
+        (pos) => carte.flyTo({ center: [pos.coords.longitude, pos.coords.latitude], zoom: 8.5, duration: calme ? 0 : 900 }),
+        () => { etat.textContent = "Position indisponible : autorisez-la dans le navigateur ou cherchez une ville."; },
+        { timeout: 8000, maximumAge: 600000 },
+      );
+    });
+
+    // ---- Filtres de la liste → points de la carte --------------------------------------------
+    document.addEventListener("cuspeed:filtres", (e) => {
+      const ids = (e as CustomEvent<{ ids: string[] }>).detail.ids;
+      idsFiltres = ids.length === Object.keys(donnees.formations).length ? null : new Set(ids);
+      reconstruire();
+      majEtat();
+    });
+
+    function echapper(t: string) {
+      return t.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+    }
+
+    carte.once("idle", () => { initial = false; });
+    carte.on("load", () => {
+      majMode();
+      majEtat();
+    });
+    carte.on("styledata", () => { /* thème appliqué par majTheme */ });
+  }
+</script>

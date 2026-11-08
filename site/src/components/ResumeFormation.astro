@@ -23,6 +23,7 @@ const aReperes = Boolean(prochaine || villes.length || f.duree || tarif);
 <li
   class="fiche-resume"
   data-id={f.id}
+  data-organisme={f.organisme}
   data-lieux={lieux.length ? lieux.join(" ") : undefined}
   data-disciplines={f.disciplines.join(" ")}
   data-type={f.type}

@@ -28,6 +28,14 @@ const points = placerEtiquettes(
 const disciplinesPresentes = Object.entries(ref.disciplines).filter(([code]) =>
   formations.some((f) => f.disciplines.includes(code)),
 );
+// Organismes présents (mode « Organismes » de la carte) : la liste est écrite dans la page, le script
+// n'affiche que ceux qui ont au moins une formation correspondant aux filtres et à la zone.
+const nombreParOrganisme = new Map();
+for (const f of formations) nombreParOrganisme.set(f.organisme, (nombreParOrganisme.get(f.organisme) ?? 0) + 1);
+const organismesListes = donnees.organismes
+  .filter((o) => nombreParOrganisme.has(o.id))
+  .sort((a, b) => a.nom.localeCompare(b.nom, "fr"));
+
 const typesPresents = Object.entries(ref.types).filter(([code]) => formations.some((f) => f.type === code));
 const villesPresentes = [...compte.keys()].sort((a, b) => a.localeCompare(b, "fr"));
 // Prises en charge (DPC, FIFPL, OPCO, CPF) présentes dans les fiches publiées. Sans aucune,
@@ -218,7 +226,7 @@ const page = {
           </form>
 
           <div class="barre-resultat">
-            <h3 class="invisible">Liste des formations</h3>
+            <h3 class="invisible" id="titre-liste">Liste des formations</h3>
             <p class="resultat" id="resultat" aria-live="polite" tabindex="-1">
               {formations.length} formations
             </p>
@@ -237,6 +245,19 @@ const page = {
 
           <ul class="liste" id="liste">
             {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
+          </ul>
+          <ul class="liste liste-organismes" id="liste-organismes" aria-label="Organismes" hidden>
+            {organismesListes.map((o) => (
+              <li class="organisme-resume" data-id={o.id}>
+                <a href={`/organismes/${o.slug}/`} class="organisme-nom">{o.nom}</a>
+                <p class="discret">
+                  {ref.types_organisme[o.type] ?? o.type}{o.ville ? ` · ${o.ville}` : ""}
+                </p>
+                <p class="organisme-nombre">
+                  {nombreParOrganisme.get(o.id)} formation{nombreParOrganisme.get(o.id) > 1 ? "s" : ""}
+                </p>
+              </li>
+            ))}
           </ul>
           <p class="aucun discret" id="aucun" hidden>
             Aucune formation ne correspond à ces critères. Essayez d'effacer un filtre.
@@ -932,6 +953,7 @@ const page = {
 </style>
 
 <script>
+  import { compterParOrganisme, texteResultat } from "../lib/liste.js";
   // Recherche, filtres, tri et affichage par paquets, entièrement dans le navigateur.
   // Aucune donnée n'est envoyée nulle part. Sans JavaScript, toute la liste reste visible.
   const PAQUET = 24; // même valeur que dans la page (rendu et CSS « li:nth-child(n + 25) »)
@@ -958,6 +980,8 @@ const page = {
     const resultat = document.getElementById("resultat")!;
     const aucun = document.getElementById("aucun")!;
     const plusBloc = document.getElementById("plus-bloc");
+    const listeOrganismes = document.getElementById("liste-organismes") as HTMLUListElement | null;
+    const organismesLi = listeOrganismes ? [...listeOrganismes.querySelectorAll<HTMLLIElement>("li")] : [];
     const compteur = document.getElementById("compteur");
     const plus = document.getElementById("plus") as HTMLButtonElement | null;
     const puces = document.getElementById("puces")!;
@@ -983,6 +1007,7 @@ const page = {
         secteur: d.secteur ?? "",
         villes: (d.villes ?? "").split("|").filter(Boolean),
         aides: (d.aides ?? "").split(" ").filter(Boolean),
+        organisme: d.organisme ?? "",
         texte: null as string | null, // calculé à la première recherche
         debut: d.debut ?? "",
         prix: d.prix ? Number(d.prix) : SANS_PRIX,
@@ -1009,6 +1034,11 @@ const page = {
     let affichage: Fiche[] = []; // cartes affichées, dans l'ordre
     // Zone de la carte : identifiants des formations visibles dans l'emprise (null = pas de zone).
     let zone: Set<string> | null = null;
+    // Mode de la carte : « formations » (liste des formations) ou « organismes » (liste des organismes).
+    // Il ne vient que de la carte interactive (événement cuspeed:mode), qui seule affiche le bouton de
+    // bascule : sans carte, la liste reste celle des formations, même si l'adresse contient ?mode=.
+    let mode: "formations" | "organismes" = "formations";
+    const titreListe = document.getElementById("titre-liste");
     let affichees = PAQUET;
 
     // Filtres repris de l'adresse (?discipline=paro…) : liens partageables et pastilles.
@@ -1081,12 +1111,14 @@ const page = {
       const montrees: Fiche[] = [];
       const parVille = new Map<string, number>();
       const pourLaCarte: string[] = [];
+      const retenues: { organisme: string; retenue: boolean }[] = [];
       for (const x of ordre) {
         const sansVille = correspond(x, f, mots);
         if (sansVille) for (const v of x.villes) parVille.set(v, (parVille.get(v) ?? 0) + 1);
         const memeVille = sansVille && (!f.ville || x.villes.includes(f.ville));
         if (memeVille) pourLaCarte.push(x.id);
         const ok = memeVille && (!zone || zone.has(x.id));
+        retenues.push({ organisme: x.organisme, retenue: ok });
         if (ok && ++total <= affichees) montrees.push(x);
         const cache = !ok || total > affichees;
         if (x.li.hidden !== cache) x.li.hidden = cache;
@@ -1098,9 +1130,27 @@ const page = {
       affichage = montrees;
       liste.classList.add("pilotee");
 
-      resultat.textContent = `${total} formation${total > 1 ? "s" : ""}`;
+      resultat.textContent = texteResultat("formations", 0, total);
       aucun.hidden = total > 0;
-      if (plusBloc && compteur && plus) {
+      const parOrganisme = compterParOrganisme(retenues);
+      // Mode « Organismes » : la même recherche, présentée par organisme.
+      const parOrg = mode === "organismes" && listeOrganismes;
+      liste.hidden = Boolean(parOrg);
+      if (titreListe) titreListe.textContent = parOrg ? "Liste des organismes" : "Liste des formations";
+      if (listeOrganismes) {
+        listeOrganismes.hidden = !parOrg;
+        let nbOrganismes = 0;
+        for (const li of organismesLi) {
+          const n = parOrganisme.get(li.dataset.id!) ?? 0;
+          if (n > 0) nbOrganismes++;
+          li.hidden = n === 0;
+          li.querySelector(".organisme-nombre")!.textContent =
+            `${n} formation${n > 1 ? "s" : ""} correspondant à la recherche`;
+        }
+        if (parOrg) resultat.textContent = texteResultat("organismes", nbOrganismes, total);
+      }
+      if (plusBloc && parOrg) plusBloc.hidden = true;
+      else if (plusBloc && compteur && plus) {
         const nb = montrees.length;
         plusBloc.hidden = total <= nb;
         compteur.textContent = `${nb} sur ${total} formation${total > 1 ? "s" : ""} affichée${nb > 1 ? "s" : ""}`;
@@ -1244,6 +1294,11 @@ const page = {
 
     formulaire.addEventListener("input", () => appliquer());
     // La carte interactive demande à ne montrer que les formations de la zone affichée.
+    // La carte interactive change de mode : la liste suit (formations ou organismes).
+    document.addEventListener("cuspeed:mode", (e) => {
+      mode = (e as CustomEvent<{ mode: "formations" | "organismes" }>).detail.mode;
+      appliquer(false);
+    });
     document.addEventListener("cuspeed:zone", (e) => {
       const ids = (e as CustomEvent<{ ids: string[] | null }>).detail.ids;
       zone = ids ? new Set(ids) : null;
@@ -1276,6 +1331,9 @@ const page = {
   } catch (erreur) {
     // En cas de souci, on revient à la page sans JavaScript : toute la liste, sans filtres.
     html.classList.remove("js");
+    liste.hidden = false;
+    const listeOrg = document.getElementById("liste-organismes");
+    if (listeOrg) listeOrg.hidden = true;
     for (const li of liste.children) (li as HTMLElement).hidden = false;
     throw erreur;
   }

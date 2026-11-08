@@ -433,6 +433,37 @@ p {
   display: grid;
   gap: 10px;
 }
+/* Mode « Organismes » de la carte : une carte par organisme. */
+.organisme-resume {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon);
+  padding: 14px 18px;
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.organisme-resume:hover {
+  border-color: var(--accent);
+}
+.organisme-resume p {
+  margin: 0;
+}
+.organisme-nom {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+/* Toute la carte est cliquable, le lien reste le nom (une seule cible pour les lecteurs d'écran) */
+.organisme-nom::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.organisme-nombre {
+  font-size: 0.9rem;
+}
 .fiche-resume {
   position: relative;
   background: var(--surface);

@@ -11,7 +11,7 @@ La base Supabase (région Paris) est la source de vérité. Sa structure est dé
 | `sessions` | Dates, lieu, inscriptions, places | Extracteur sur les fiches `a-verifier` |
 | `organismes`, `lieux` | Organismes de formation, villes | Extracteur : ajout seulement. Chris : tout. |
 | `disciplines`, `types_formation` | Valeurs autorisées | Chris |
-| `propositions` | Changements proposés sur une fiche publiée | Extracteur : dépôt. Chris : décision. |
+| `propositions` | Changements proposés sur une fiche publiée (champs texte et nombre, et depuis le 8 novembre 2026 : `financement`, `type`, `disciplines`, `sessions`) | Extracteur : dépôt. Chris : décision. |
 | `verifications` | Avis du vérificateur par fiche | Vérificateur : dépôt |
 | `pistes` | Formations repérées ailleurs, à vérifier | Extracteur |
 | `surveillance` | Pages officielles relues chaque semaine | Extracteur |
@@ -58,6 +58,17 @@ Formules et variantes de prix :
 1. **Un même programme vendu à la carte** (formation complète ou modules au choix) : une seule fiche ; `tarif_euros` = prix de la formation complète ; les formules dans `tarif_texte`.
 2. **Des formats différents sous un même nom** (en ligne, immersion, masterclass, à des prix distincts) : des fiches distinctes, une par format.
 3. **Des tarifs selon le public ou la session** (praticien ou jeune diplômé, membre ou non-membre) : une seule fiche ; `tarif_euros` = prix standard praticien ; les variantes dans `tarif_texte`.
+
+## Propositions sur une fiche publiée
+
+Une fiche publiée ne se modifie que par une proposition (`propositions`), que Chris accepte (`select appliquer_proposition(N);`) ou refuse (`select refuser_proposition(N);`). Format de `nouvelle_valeur` :
+
+- champs texte et nombre : la valeur telle quelle ;
+- `financement`, `disciplines` : tableau texte, ex. `{dpc,fifpl}` ; la liste remplace l'ancienne ;
+- `type` : le code, ex. `du` ;
+- `sessions` : tableau JSON, ex. `[{"lieu":"L-LILLE","debut":"2027-01-15","fin":null,"inscriptions":"ouvertes","places":12}]` ; la liste remplace toutes les sessions de la fiche.
+
+Une proposition invalide (code inconnu, lieu inexistant, session qui finit avant de commencer) échoue sans rien modifier.
 
 ## Sessions (`sessions`)
 

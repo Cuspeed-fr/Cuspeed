@@ -1,0 +1,11 @@
+---
+// Visuel décoratif d'une formation (dessin par discipline, voir lib/visuels.js) : ignoré par
+// les lecteurs d'écran, le texte de la carte porte déjà la discipline.
+import { visuelDe } from "../lib/visuels.js";
+
+const { disciplines = [], classe = "" } = Astro.props;
+const v = visuelDe(disciplines);
+---
+<div class:list={["visuel", `visuel-${v.ton}`, classe]} data-visuel={v.code} aria-hidden="true">
+  <svg viewBox="0 0 48 48" focusable="false" set:html={v.dessin} />
+</div>

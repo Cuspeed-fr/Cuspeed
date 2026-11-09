@@ -1,6 +1,8 @@
 ---
 // Fiche d'une formation : une page par formation publiée.
 import Base from "../../layouts/Base.astro";
+import Visuel from "../../components/Visuel.astro";
+import LogoOrganisme from "../../components/LogoOrganisme.astro";
 import { chargerDonnees, tarifLisible, aidesDe, sessionsTriees, dateLisible, dateCourte, villesDe, couper } from "../../lib/donnees.js";
 
 export function getStaticPaths() {
@@ -98,6 +100,7 @@ const fil = {
 
   <article class="fiche">
     <header class="fiche-entete">
+      <Visuel disciplines={f.disciplines} classe="fiche-banniere" />
       <ul class="etiquettes" aria-label="Type, secteur et disciplines">
         <li class="etiquette forte">{typeNom}</li>
         <li class="etiquette">{ref.secteurs[f.secteur] ?? f.secteur}</li>
@@ -106,6 +109,7 @@ const fil = {
       <h1>{f.intitule}</h1>
       {organisme && (
         <p class="organisme">
+          <LogoOrganisme organisme={organisme} taille={28} />
           <a href={`/organismes/${organisme.slug}/`}>{organisme.nom}</a>
           {villes.length > 0 && <span class="discret"> · {villes.join(", ")}</span>}
         </p>
@@ -219,6 +223,16 @@ const fil = {
   }
   .fiche-entete h1 {
     margin: 0;
+  }
+  /* Bandeau dessiné de la discipline, en tête de fiche (comme la photo d'une annonce). */
+  .fiche-entete :global(.fiche-banniere) {
+    height: clamp(120px, 22vw, 200px);
+    border-radius: var(--rayon);
+    margin-bottom: 6px;
+  }
+  .fiche-entete :global(.fiche-banniere svg) {
+    width: auto;
+    height: 58%;
   }
   .organisme {
     margin: 0;

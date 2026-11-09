@@ -95,3 +95,8 @@ Comptes provisoires : tant que la SASU n'existe pas, les comptes sont au nom de 
 
 ## Fond de carte (départements)
 Le fichier `site/public/geo/departements.geojson` est dérivé du jeu « Contours administratifs » de data.gouv.fr (Admin Express © IGN et données © contributeurs d'OpenStreetMap), publié sous licence ODbL. Les modifications (outre-mer retiré, simplification) et la licence sont décrites dans `site/public/geo/LICENCE.txt`. Les mentions sont affichées sur la carte et dans les mentions légales. Toute mise à jour du fond doit conserver ces mentions ; la licence IGN gratuite de 2017 ne couvre pas un site privé et n'est pas utilisée.
+
+## Visuels : logos des organismes et dessins des fiches
+
+- **Logos** : fournis par Chris, avec l'accord de chaque organisme (un logo est une marque protégée ; on ne le copie pas depuis un site). Un fichier par organisme dans `site/public/logos/`, nommé par son identifiant : `O001.svg`, `O021.png`… Formats : svg de préférence, sinon webp, png ou jpg, fond transparent, au moins 96 pixels de haut. L'ajout passe par une pull request comme tout fichier du site. Sans fichier, aucun logo n'est affiché.
+- **Dessins des fiches** : chaque formation montre le dessin de sa première discipline (`site/src/lib/visuels.js`), dessiné pour Cuspeed, sans photo ni image d'un site tiers (décision de Chris du 9 novembre 2026). Des photos fournies par les organismes pourront venir plus tard, seulement avec leur autorisation écrite.

@@ -2,6 +2,7 @@
 // Page d'un organisme : ses formations publiées.
 import Base from "../../layouts/Base.astro";
 import ResumeFormation from "../../components/ResumeFormation.astro";
+import LogoOrganisme from "../../components/LogoOrganisme.astro";
 import { chargerDonnees } from "../../lib/donnees.js";
 
 export function getStaticPaths() {
@@ -43,6 +44,7 @@ const organisation = {
   </nav>
   <header class="entete-organisme">
     <ul class="etiquettes"><li class="etiquette forte">{typeNom}</li>{o.ville && <li class="etiquette">{o.ville}</li>}</ul>
+    <LogoOrganisme organisme={o} taille={64} classe="logo-entete" />
     <h1>{o.nom}</h1>
     <p class="discret">
       {formations.length} formation{formations.length > 1 ? "s" : ""} publiée{formations.length > 1 ? "s" : ""} sur Cuspeed.

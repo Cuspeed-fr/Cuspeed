@@ -10,7 +10,7 @@
     "dev": "node scripts/copier_maplibre.mjs && astro dev",
     "build": "node scripts/copier_maplibre.mjs && astro build && node scripts/controler_construction.mjs",
     "preview": "astro preview",
-    "test": "node --test tests/site.test.mjs tests/carte-moteur.test.mjs tests/liste.test.mjs",
+    "test": "node --test tests/site.test.mjs tests/carte-moteur.test.mjs tests/liste.test.mjs tests/visuels.test.mjs",
     "figer-adresses": "node scripts/figer_adresses.mjs"
   },
   "dependencies": {

@@ -1,0 +1,19 @@
+---
+// Logo d'un organisme s'il a été fourni (site/public/logos/Oxxx.ext) ; rien sinon.
+// decoratif : le nom de l'organisme est écrit juste à côté, le logo n'a pas besoin d'être lu.
+import { logoDe } from "../lib/logos.js";
+
+const { organisme, taille = 24, decoratif = true, classe = "" } = Astro.props;
+const src = organisme ? logoDe(organisme.id) : null;
+---
+{src && (
+  <img
+    class:list={["logo-organisme", classe]}
+    src={src}
+    alt={decoratif ? "" : `Logo de ${organisme.nom}`}
+    height={taille}
+    style={`height:${taille}px`}
+    loading="lazy"
+    decoding="async"
+  />
+)}

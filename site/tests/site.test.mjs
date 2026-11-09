@@ -524,7 +524,7 @@ test("accueil : prochaine session et badge « Éligible aux aides » sur les car
   const { lire } = siteConstruit();
   const cartes = cartesAccueil(lire("index.html"));
   const avecSession = cartes.find((c) => c.includes("DU Essai numéro 1<"));
-  assert.match(avecSession, /data-debut="2099-01-14"/);
+  assert.match(avecSession, /data-debuts="2099-01-14"/);
   assert.match(avecSession, /Prochaine session :<\/span> <b>14 janv\. 2099<\/b>, Arras/);
   // Une session déjà commencée n'est pas « la prochaine » : la carte affiche la ville seule.
   const enCours = cartes.find((c) => c.includes("DU Parodontologie d&#39;essai<") || c.includes("DU Parodontologie d'essai<"));

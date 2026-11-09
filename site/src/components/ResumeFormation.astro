@@ -34,7 +34,6 @@ const debuts = [...new Set(f.sessions.map((s) => (s.debut ? String(s.debut) : ""
   data-villes={regroupementsDe(f, donnees).join("|")}
   data-aides={f.financement.length ? f.financement.join(" ") : undefined}
   data-precisions={f.precisions ?? undefined}
-  data-debut={prochaine?.debut}
   data-debuts={debuts.length ? debuts.join(" ") : undefined}
   data-prix={f.tarif.euros ?? undefined}
 >

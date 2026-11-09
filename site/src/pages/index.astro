@@ -144,12 +144,12 @@ const page = {
       <form class="filtres carte-bloc" id="filtres" role="search" aria-label="Filtrer les formations">
         <label class="champ champ-recherche">
           <span class="invisible">Rechercher</span>
-          <input type="search" name="q" placeholder="Rechercher : intitulé, ville, organisme…" autocomplete="off" enterkeyhint="search" maxlength="100" />
+          <input type="search" name="q" placeholder="Intitulé, ville, organisme…" autocomplete="off" enterkeyhint="search" maxlength="100" />
         </label>
         <div class="outils" role="group" aria-label="Trier, filtrer, carte">
           <label class="outil outil-tri" id="outil-tri">
             <svg class="icone" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 16V4M6 4 3 7M6 4l3 3M14 4v12M14 16l-3-3M14 16l3-3" /></svg>
-            <span>Trier</span>
+            <span id="libelle-tri">Trier</span>
             <select name="tri" aria-label="Trier les formations">
               <option value="">{triSession ? "Sessions à venir d'abord" : "Recommandé"}</option>
               {triPrix && <option value="prix">Prix croissant</option>}
@@ -963,6 +963,12 @@ const page = {
     const compteFiltres = document.getElementById("compte-filtres")!;
     const pastilles = [...document.querySelectorAll<HTMLAnchorElement>(".pastille")];
     const doux: ScrollBehavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    const grandEcran = matchMedia("(min-width: 920px)");
+    const disposition = document.getElementById("disposition")!;
+    const colonneCarte = document.getElementById("colonne-carte")!;
+    const boutonCarte = document.getElementById("bouton-carte")!;
+    const libelleTri = document.getElementById("libelle-tri");
+    const carteVisible = () => getComputedStyle(colonneCarte).display !== "none";
 
     const normaliser = (s: string) =>
       s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -1119,7 +1125,9 @@ const page = {
       aucun.hidden = total > 0;
       const parOrganisme = compterParOrganisme(retenues);
       // Mode « Organismes » : la même recherche, présentée par organisme.
-      const parOrg = mode === "organismes" && listeOrganismes;
+      // Le choix Organismes / Formations est sur la carte : carte masquée, la liste revient aux formations
+      // (sinon on resterait sur les organismes sans bouton visible pour en sortir).
+      const parOrg = mode === "organismes" && listeOrganismes && carteVisible();
       liste.hidden = Boolean(parOrg);
       if (titreListe) titreListe.textContent = parOrg ? "Liste des organismes" : "Liste des formations";
       if (listeOrganismes) {
@@ -1216,6 +1224,8 @@ const page = {
       compteFiltres.textContent = String(nombre);
       boutonFiltres.setAttribute("aria-label", nombre ? `Filtrer, ${nombre} filtre${nombre > 1 ? "s" : ""} actif${nombre > 1 ? "s" : ""}` : "Filtrer");
       document.getElementById("outil-tri")?.classList.toggle("actif", Boolean(f.tri));
+      // Le tri choisi se lit sur le bouton (« Trier : prix »), sauf l'ordre par défaut.
+      if (libelleTri) libelleTri.textContent = f.tri === "prix" ? "Trier : prix" : f.tri === "alpha" ? "Trier : A → Z" : "Trier";
     }
 
     // Amène la recherche et les premiers résultats à l'écran, et y place le focus
@@ -1280,23 +1290,27 @@ const page = {
 
     // Carte : affiche ou masque la colonne de la carte. Par défaut (« auto »), elle est visible sur
     // grand écran et repliée sur téléphone, comme sur les sites de réservation.
-    const disposition = document.getElementById("disposition")!;
-    const colonneCarte = document.getElementById("colonne-carte")!;
-    const boutonCarte = document.getElementById("bouton-carte")!;
-    const carteVisible = () => getComputedStyle(colonneCarte).display !== "none";
     const majBoutonCarte = () => boutonCarte.setAttribute("aria-pressed", String(carteVisible()));
-    boutonCarte.addEventListener("click", () => {
-      const montrer = !carteVisible();
-      disposition.dataset.carte = montrer ? "ouverte" : "fermee";
+    // Quand la carte apparaît ou disparaît : bouton à jour, liste à jour (mode Organismes), et la carte
+    // interactive reprend la taille de son cadre si elle réapparaît.
+    function carteChangee() {
+      const visible = carteVisible();
       majBoutonCarte();
-      // La carte interactive recalcule sa taille quand sa colonne réapparaît.
-      document.dispatchEvent(new CustomEvent("cuspeed:carte-visible", { detail: { visible: montrer } }));
-      if (montrer && !matchMedia("(min-width: 920px)").matches) {
-        colonneCarte.scrollIntoView({ behavior: doux, block: "start" });
-      }
+      appliquer(false);
+      if (visible) document.dispatchEvent(new CustomEvent("cuspeed:carte-visible", { detail: { visible } }));
+    }
+    boutonCarte.addEventListener("click", () => {
+      disposition.dataset.carte = carteVisible() ? "fermee" : "ouverte";
+      carteChangee();
+      if (carteVisible() && !grandEcran.matches) colonneCarte.scrollIntoView({ behavior: doux, block: "start" });
     });
-    matchMedia("(min-width: 920px)").addEventListener("change", majBoutonCarte);
+    grandEcran.addEventListener("change", carteChangee);
     majBoutonCarte();
+    // Sur grand écran, les filtres sont dépliés au départ (comme avant) ; sur téléphone, repliés.
+    if (grandEcran.matches) {
+      boutonFiltres.setAttribute("aria-expanded", "true");
+      formulaire.classList.add("ouvert");
+    }
 
     formulaire.addEventListener("input", () => appliquer());
     // La carte interactive demande à ne montrer que les formations de la zone affichée.
@@ -1314,12 +1328,15 @@ const page = {
       e.preventDefault();
       allerAuxResultats();
     });
-    formulaire.addEventListener("reset", () =>
+    // « Effacer les filtres » efface les filtres, pas le tri (comme la puce « Tout effacer »).
+    formulaire.addEventListener("reset", () => {
+      const t = tri?.value ?? "";
       setTimeout(() => {
+        if (tri) tri.value = t;
         qHeros.value = "";
         appliquer();
-      }, 0),
-    );
+      }, 0);
+    });
     appliquer(false);
 
     // Le texte des cartes est préparé pendant les temps morts, par petits lots :

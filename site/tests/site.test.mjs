@@ -534,6 +534,35 @@ test("accueil : prochaine session et badge « Éligible aux aides » sur les car
   assert.match(enCours, /<p class="badge-aides">Éligible aux aides : DPC<\/p>/);
 });
 
+test("accueil : formations avec une session à venir en tête de liste, dates à venir sur la carte", () => {
+  const { lire } = siteConstruit();
+  const cartes = cartesAccueil(lire("index.html"));
+  // La seule fiche du jeu d'essai qui a une session à venir passe avant les autres (sinon alphabétique).
+  assert.match(cartes[0], /DU Essai numéro 1</);
+  assert.match(cartes[0], /data-debuts="2099-01-14"/);
+  // Les autres suivent l'ordre alphabétique et n'ont pas de date à venir.
+  const autres = cartes.slice(1).map((c) => c.match(/<h3><a[^>]*>([^<]+)</)[1]);
+  assert.deepEqual(autres, [...autres].sort((a, b) => a.localeCompare(b, "fr")));
+  for (const c of cartes.slice(1)) assert.doesNotMatch(c, /data-debuts=/);
+});
+
+test("accueil : outils Trier, Filtrer et Carte sous la recherche, sans la partie Méthode", () => {
+  const { lire } = siteConstruit();
+  const html = lire("index.html");
+  const outils = html.slice(html.indexOf('class="outils"'), html.indexOf('id="panneau-filtres"'));
+  assert.match(outils, /<select name="tri"/);
+  assert.match(outils, /<option value=""[^>]*>Sessions à venir d(&#39;|')abord<\/option>/);
+  assert.match(outils, /<option value="alpha"[^>]*>Ordre alphabétique<\/option>/);
+  assert.match(outils, /id="bouton-filtres"[^>]*aria-controls="panneau-filtres"/);
+  assert.match(outils, /id="bouton-carte"[^>]*aria-controls="colonne-carte"/);
+  // Chaque outil a son icône (dessin décoratif, ignoré par les lecteurs d'écran).
+  assert.equal([...outils.matchAll(/<svg class="icone"[^>]*aria-hidden="true"/g)].length, 3);
+  assert.match(html, /id="disposition"[^>]*data-carte="auto"/);
+  assert.match(html, /id="colonne-carte"/);
+  assert.doesNotMatch(html, /titre-methode|Des fiches fiables, reliées à leur source/);
+  assert.doesNotMatch(html, /relevés sur les sites officiels des facultés/);
+});
+
 test("fiche : bouton « Voir la page officielle » collant et frise des sessions", () => {
   const { sortie, lire } = siteConstruit();
   const dossier = readdirSync(join(sortie, "formations")).find((n) => n.startsWith("f9101-"));

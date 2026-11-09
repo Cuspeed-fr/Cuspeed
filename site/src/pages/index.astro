@@ -11,7 +11,15 @@ import { CONTOUR_FRANCE } from "../lib/contour-france.js";
 
 const donnees = chargerDonnees();
 const ref = donnees.referentiels;
-const formations = [...donnees.formations].sort((a, b) => a.intitule.localeCompare(b.intitule, "fr"));
+// Ordre par défaut : d'abord les formations qui ont une session à venir, de la plus proche à la plus
+// lointaine, puis les autres par ordre alphabétique. Le script de la page refait ce tri avec la date
+// du jour du visiteur (le site est construit à l'avance).
+const debutDe = new Map(donnees.formations.map((f) => [f.id, prochaineSession(f, donnees)?.debut ?? null]));
+const formations = [...donnees.formations].sort(
+  (a, b) =>
+    (debutDe.get(a.id) ?? "9999").localeCompare(debutDe.get(b.id) ?? "9999") ||
+    a.intitule.localeCompare(b.intitule, "fr"),
+);
 
 // Nombre de formations par point de la carte.
 const compte = new Map();
@@ -77,8 +85,7 @@ const page = {
         <p class="surtitre">Restez à la pointe, en un clic.</p>
         <h1 id="titre-accueil">Toutes les formations dentaires post-universitaires et continues, au même endroit</h1>
         <p class="chapo">
-          Diplômes d'université, certificats et formations privées pour chirurgiens-dentistes en France,
-          relevés sur les sites officiels des facultés et des organismes. Chaque fiche renvoie à sa source.
+          Diplômes d'université, certificats et formations privées pour chirurgiens-dentistes en France.
         </p>
         {/* Sans JavaScript, le formulaire ouvre la liste complète (?q=… est repris dès que le script tourne) */}
         <form class="recherche-heros" action="/#recherche" method="get" role="search" aria-label="Rechercher une formation">
@@ -131,8 +138,81 @@ const page = {
     <div class="cadre">
       <p class="surtitre">Carte et filtres</p>
       <h2 id="titre-recherche">Trouver une formation</h2>
-      <div class="disposition">
-        <div class="colonne-carte">
+      {/* Recherche, puis une rangée d'outils (Trier, Filtrer, Carte) comme sur les sites de réservation.
+          Ces outils ont besoin de JavaScript : ils ne s'affichent qu'avec lui (classe « js » posée dans
+          l'en-tête). Sans JavaScript, la carte en dessin et toute la liste restent visibles. */}
+      <form class="filtres carte-bloc" id="filtres" role="search" aria-label="Filtrer les formations">
+        <label class="champ champ-recherche">
+          <span class="invisible">Rechercher</span>
+          <input type="search" name="q" placeholder="Rechercher : intitulé, ville, organisme…" autocomplete="off" enterkeyhint="search" maxlength="100" />
+        </label>
+        <div class="outils" role="group" aria-label="Trier, filtrer, carte">
+          <label class="outil outil-tri" id="outil-tri">
+            <svg class="icone" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 16V4M6 4 3 7M6 4l3 3M14 4v12M14 16l-3-3M14 16l3-3" /></svg>
+            <span>Trier</span>
+            <select name="tri" aria-label="Trier les formations">
+              <option value="">{triSession ? "Sessions à venir d'abord" : "Recommandé"}</option>
+              {triPrix && <option value="prix">Prix croissant</option>}
+              <option value="alpha">Ordre alphabétique</option>
+            </select>
+          </label>
+          <button type="button" class="outil" id="bouton-filtres" aria-expanded="false" aria-controls="panneau-filtres">
+            <svg class="icone" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h8M15 5h2M3 10h2M9 10h8M3 15h9M16 15h1" /><circle cx="13" cy="5" r="2" /><circle cx="7" cy="10" r="2" /><circle cx="14" cy="15" r="2" /></svg>
+            <span>Filtrer</span><span class="compte-filtres" id="compte-filtres" hidden></span>
+          </button>
+          <button type="button" class="outil" id="bouton-carte" aria-pressed="false" aria-controls="colonne-carte">
+            <svg class="icone" viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 5.2 7.5 3l5 2.2 5-2.2v11.8l-5 2.2-5-2.2-5 2.2Z" /><path d="M7.5 3v11.8M12.5 5.2V17" /></svg>
+            <span>Carte</span>
+          </button>
+        </div>
+        <div class="panneau-filtres" id="panneau-filtres">
+          <label class="champ">
+            <span>Discipline</span>
+            <select name="discipline">
+              <option value="">Toutes</option>
+              {disciplinesPresentes.map(([code, nom]) => <option value={code}>{nom}</option>)}
+            </select>
+          </label>
+          <label class="champ">
+            <span>Type</span>
+            <select name="type">
+              <option value="">Tous</option>
+              {typesPresents.map(([code, nom]) => <option value={code}>{nom}</option>)}
+            </select>
+          </label>
+          <label class="champ">
+            <span>Secteur</span>
+            <select name="secteur">
+              <option value="">Tous</option>
+              {Object.entries(ref.secteurs).map(([code, nom]) => <option value={code}>{nom}</option>)}
+            </select>
+          </label>
+          <label class="champ">
+            <span>Ville</span>
+            <select name="ville">
+              <option value="">Toutes</option>
+              {villesPresentes.map((v) => <option value={v}>{v}</option>)}
+            </select>
+          </label>
+          {aidesPresentes.length > 0 && (
+            <label class="champ">
+              <span>Éligible aux aides</span>
+              <select name="aides">
+                <option value="">Indifférent</option>
+                <option value="oui">Au moins une aide</option>
+                {aidesPresentes.map(([code, nom]) => <option value={code}>{nom}</option>)}
+              </select>
+            </label>
+          )}
+          <button type="reset" class="effacer">Effacer les filtres</button>
+        </div>
+      </form>
+      <ul class="puces-actives" id="puces" aria-label="Filtres actifs" hidden></ul>
+
+      {/* data-carte : « auto » = carte visible sur grand écran, repliée sur téléphone ;
+          « ouverte » ou « fermee » = choix fait avec le bouton Carte. */}
+      <div class="disposition" id="disposition" data-carte="auto">
+        <div class="colonne-carte" id="colonne-carte">
           <CarteInteractive />
           <figure class="carte-bloc carte">
             <svg viewBox={`0 0 ${LARGEUR_CARTE} ${HAUTEUR_CARTE}`} role="group" aria-label="Carte de France : choisir une ville">
@@ -170,78 +250,12 @@ const page = {
         </div>
 
         <div class="colonne-liste">
-          {/* Filtres, tri et « Afficher plus » ont besoin de JavaScript : ils ne s'affichent qu'avec
-              lui (classe « js » posée dans l'en-tête). Sans JavaScript, toute la liste est visible. */}
-          <form class="filtres carte-bloc" id="filtres" role="search" aria-label="Filtrer les formations">
-            <div class="filtres-ligne">
-              <label class="champ champ-recherche">
-                <span>Rechercher</span>
-                <input type="search" name="q" placeholder="Intitulé, ville…" autocomplete="off" enterkeyhint="search" maxlength="100" />
-              </label>
-              <button type="button" class="bouton-filtres" id="bouton-filtres" aria-expanded="false" aria-controls="panneau-filtres">
-                Filtres<span class="compte-filtres" id="compte-filtres" hidden></span>
-              </button>
-            </div>
-            <div class="panneau-filtres" id="panneau-filtres">
-              <label class="champ">
-                <span>Discipline</span>
-                <select name="discipline">
-                  <option value="">Toutes</option>
-                  {disciplinesPresentes.map(([code, nom]) => <option value={code}>{nom}</option>)}
-                </select>
-              </label>
-              <label class="champ">
-                <span>Type</span>
-                <select name="type">
-                  <option value="">Tous</option>
-                  {typesPresents.map(([code, nom]) => <option value={code}>{nom}</option>)}
-                </select>
-              </label>
-              <label class="champ">
-                <span>Secteur</span>
-                <select name="secteur">
-                  <option value="">Tous</option>
-                  {Object.entries(ref.secteurs).map(([code, nom]) => <option value={code}>{nom}</option>)}
-                </select>
-              </label>
-              <label class="champ">
-                <span>Ville</span>
-                <select name="ville">
-                  <option value="">Toutes</option>
-                  {villesPresentes.map((v) => <option value={v}>{v}</option>)}
-                </select>
-              </label>
-              {aidesPresentes.length > 0 && (
-                <label class="champ">
-                  <span>Éligible aux aides</span>
-                  <select name="aides">
-                    <option value="">Indifférent</option>
-                    <option value="oui">Au moins une aide</option>
-                    {aidesPresentes.map(([code, nom]) => <option value={code}>{nom}</option>)}
-                  </select>
-                </label>
-              )}
-              <button type="reset" class="effacer">Effacer les filtres</button>
-            </div>
-          </form>
-
           <div class="barre-resultat">
             <h3 class="invisible" id="titre-liste">Liste des formations</h3>
             <p class="resultat" id="resultat" aria-live="polite" tabindex="-1">
               {formations.length} formations
             </p>
-            {(triSession || triPrix) && (
-              <label class="tri">
-                <span>Trier par</span>
-                <select name="tri" form="filtres">
-                  <option value="">Pertinence</option>
-                  {triSession && <option value="session">Prochaine session</option>}
-                  {triPrix && <option value="prix">Prix croissant</option>}
-                </select>
-              </label>
-            )}
           </div>
-          <ul class="puces-actives" id="puces" aria-label="Filtres actifs" hidden></ul>
 
           <ul class="liste" id="liste">
             {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
@@ -270,31 +284,6 @@ const page = {
           )}
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="bande blanche methode" aria-labelledby="titre-methode">
-    <div class="cadre">
-      <p class="surtitre">Méthode</p>
-      <h2 id="titre-methode">Des fiches fiables, reliées à leur source</h2>
-      <ol class="etapes">
-        <li>
-          <span class="etape-numero" aria-hidden="true">1</span>
-          <h3>Relevée à la source</h3>
-          <p>Chaque fiche est établie à partir de la page ou de la plaquette officielle de l'université ou de l'organisme, jamais d'un site tiers.</p>
-        </li>
-        <li>
-          <span class="etape-numero" aria-hidden="true">2</span>
-          <h3>Vérifiée avant publication</h3>
-          <p>Une seconde relecture recoupe chaque information avec la source, puis la fiche est validée avant d'être mise en ligne.</p>
-        </li>
-        <li>
-          <span class="etape-numero" aria-hidden="true">3</span>
-          <h3>Datée et sourcée</h3>
-          <p>La date de dernière vérification et le lien vers la source figurent sur chaque fiche. Ce qui n'est pas publié reste vide.</p>
-        </li>
-      </ol>
-      <p><a href="/a-propos/">Lire la méthode complète</a></p>
     </div>
   </section>
 
@@ -642,68 +631,114 @@ const page = {
     stroke-width: 3;
   }
 
-  /* Filtres : visibles seulement avec JavaScript ; repliables sur téléphone et tablette */
+  /* Recherche et outils (Trier, Filtrer, Carte) : visibles seulement avec JavaScript */
   .filtres,
-  .tri,
   .plus-bloc {
     display: none;
   }
   :global(.js) .filtres {
     display: grid;
     gap: 12px;
+    margin-bottom: 12px;
+    padding: 14px;
     scroll-margin-top: 12px;
-  }
-  :global(.js) .tri {
-    display: inline-flex;
   }
   :global(.js) .plus-bloc {
     display: grid;
   }
-  .filtres-ligne {
-    display: flex;
-    align-items: end;
-    gap: 8px;
+  .champ.champ-recherche input {
+    min-height: 50px;
+    border-radius: 999px;
+    padding-inline: 20px;
   }
-  .champ-recherche {
-    flex: 1;
+  .outils {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 1px solid var(--trait);
+    border-radius: var(--rayon-petit);
+    overflow: hidden;
+  }
+  @media (min-width: 640px) {
+    .outils {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      border: 0;
+      border-radius: 0;
+      overflow: visible;
+    }
+  }
+  .outil {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 46px;
+    min-width: 0;
+    padding: 8px 14px;
+    font: inherit;
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: var(--accent-fort);
+    background: var(--surface);
+    border: 0;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s;
+  }
+  .outil + .outil {
+    border-left: 1px solid var(--trait);
+  }
+  @media (min-width: 640px) {
+    .outil,
+    .outil + .outil {
+      border: 1px solid var(--bord-champ);
+      border-radius: 999px;
+    }
+  }
+  .outil:hover {
+    background: var(--accent-doux);
+  }
+  .outil[aria-pressed="true"],
+  .outil[aria-expanded="true"],
+  .outil.actif {
+    background: var(--accent-doux);
+    border-color: var(--accent);
+  }
+  .outil:focus-visible,
+  .outil-tri:focus-within {
+    outline: 3px solid var(--accent);
+    outline-offset: -3px;
+  }
+  .icone {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  /* Trier : le menu natif couvre tout le bouton (sur téléphone, il ouvre le sélecteur du système). */
+  .outil-tri select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    font-size: 16px;
+    cursor: pointer;
   }
   .panneau-filtres {
-    display: grid;
+    display: none;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 12px;
     align-items: end;
+    padding-top: 4px;
   }
-  .bouton-filtres {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font: inherit;
-    font-weight: 600;
-    min-height: 46px;
-    padding: 10px 14px;
-    color: var(--accent-fort);
-    background: var(--surface);
-    border: 1px solid var(--bord-champ);
-    border-radius: var(--rayon-petit);
-    cursor: pointer;
-    transition: border-color 0.15s;
-  }
-  .bouton-filtres::after {
-    content: "";
-    width: 8px;
-    height: 8px;
-    margin: -4px 2px 0;
-    border: solid currentColor;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-    transition: transform 0.15s;
-  }
-  .bouton-filtres[aria-expanded="true"]::after {
-    transform: rotate(-135deg);
-    margin-top: 4px;
-  }
-  .bouton-filtres:hover {
-    border-color: var(--accent);
+  .filtres.ouvert .panneau-filtres {
+    display: grid;
   }
   .compte-filtres {
     min-width: 22px;
@@ -716,16 +751,19 @@ const page = {
     text-align: center;
     font-variant-numeric: tabular-nums;
   }
+
+  /* Carte : visible sur grand écran, repliée sur téléphone, sauf choix fait avec le bouton Carte.
+     Sans JavaScript (pas de bouton), elle reste toujours visible. */
   @media (max-width: 919px) {
-    .panneau-filtres {
+    :global(.js) .disposition:not([data-carte="ouverte"]) .colonne-carte {
       display: none;
-    }
-    .filtres.ouvert .panneau-filtres {
-      display: grid;
     }
   }
   @media (min-width: 920px) {
-    .bouton-filtres {
+    :global(.js) .disposition[data-carte="fermee"] {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    :global(.js) .disposition[data-carte="fermee"] .colonne-carte {
       display: none;
     }
   }
@@ -738,8 +776,7 @@ const page = {
     min-width: 0;
   }
   .champ input,
-  .champ select,
-  .tri select {
+  .champ select {
     font: inherit;
     font-weight: 400;
     font-size: 1rem;
@@ -753,8 +790,7 @@ const page = {
     min-width: 0;
   }
   .champ input:focus,
-  .champ select:focus,
-  .tri select:focus {
+  .champ select:focus {
     border-color: var(--accent);
   }
   .effacer {
@@ -773,7 +809,7 @@ const page = {
     border-color: var(--accent);
   }
 
-  /* Nombre de résultats et tri */
+  /* Nombre de résultats */
   .barre-resultat {
     display: flex;
     flex-wrap: wrap;
@@ -792,21 +828,6 @@ const page = {
   .resultat:focus {
     outline: none;
   }
-  .tri {
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--discret);
-  }
-  .tri select {
-    width: auto;
-    min-height: 40px;
-    padding: 6px 10px;
-    font-size: 0.95rem;
-    background: var(--surface);
-  }
-
   /* Puces des filtres actifs : un geste pour retirer un filtre. Elles sont créées par le
      script, d'où :global() (le style limité à la page ne les atteindrait pas). */
   .puces-actives {
@@ -865,53 +886,6 @@ const page = {
     font-size: 0.9rem;
     color: var(--discret);
     font-variant-numeric: tabular-nums;
-  }
-
-  /* Méthode */
-  .methode h2 {
-    margin-top: 0;
-  }
-  .etapes {
-    list-style: none;
-    padding: 0;
-    margin: 28px 0 20px;
-    display: grid;
-    gap: 16px;
-  }
-  @media (min-width: 760px) {
-    .etapes {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-  }
-  .etapes li {
-    background: var(--fond);
-    border-radius: var(--rayon);
-    padding: 22px;
-    min-width: 0;
-  }
-  .etapes h3 {
-    font-size: 1.1rem;
-    margin: 14px 0 6px;
-  }
-  .etapes p {
-    margin: 0;
-    color: var(--discret);
-  }
-  .etape-numero {
-    display: inline-grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: var(--bleu);
-    color: #ffffff;
-    font-family: var(--titre);
-    font-weight: 800;
-    font-size: 1.3rem;
-  }
-  .etapes li:last-child .etape-numero {
-    background: var(--lime);
-    color: var(--encre-marine);
   }
 
   /* Appel final */
@@ -1000,7 +974,7 @@ const page = {
       const d = li.dataset;
       return {
         li,
-        rang, // ordre alphabétique de la page
+        rang, // ordre de la page (sessions à venir d'abord, au jour de la construction)
         id: d.id ?? "",
         disciplines: (d.disciplines ?? "").split(" "),
         type: d.type ?? "",
@@ -1009,9 +983,10 @@ const page = {
         aides: (d.aides ?? "").split(" ").filter(Boolean),
         organisme: d.organisme ?? "",
         texte: null as string | null, // calculé à la première recherche
-        debut: d.debut ?? "",
+        debuts: (d.debuts ?? "").split(" ").filter(Boolean),
         prix: d.prix ? Number(d.prix) : SANS_PRIX,
         titre: null as string | null,
+        nom: null as string | null, // intitulé tel qu'affiché, pour l'ordre alphabétique
       };
     });
     type Fiche = (typeof fiches)[number];
@@ -1080,21 +1055,31 @@ const page = {
       return mots.length === 0 || mots.every((mot) => texteDe(x).includes(mot));
     }
 
-    // Pertinence : sans recherche, l'ordre alphabétique ; avec une recherche, les fiches dont
-    // l'intitulé contient tous les mots d'abord. Prochaine session : les plus proches d'abord.
-    // Prix : du moins cher au plus cher. Les fiches sans date ou sans prix vont à la fin.
+    // Ordre par défaut : avec une recherche, les fiches dont l'intitulé contient tous les mots d'abord ;
+    // puis les formations qui ont une session à venir (la plus proche d'abord) ; puis l'ordre alphabétique.
+    // Prix : du moins cher au plus cher, les fiches sans prix à la fin. Alphabétique : par intitulé.
+    // La date du jour est celle du visiteur : une session passée depuis la construction ne compte plus.
+    const jour = new Date();
+    const aujourdhui = `${jour.getFullYear()}-${String(jour.getMonth() + 1).padStart(2, "0")}-${String(jour.getDate()).padStart(2, "0")}`;
+    const SANS_DATE = "9999";
+    const debutDe = (x: Fiche) => x.debuts.find((d) => d >= aujourdhui) ?? SANS_DATE;
+    const nomDe = (x: Fiche) => (x.nom ??= x.li.querySelector("h3")?.textContent?.trim() ?? "");
+    const alpha = (a: Fiche, b: Fiche) => nomDe(a).localeCompare(nomDe(b), "fr");
+    const parSession = (a: Fiche, b: Fiche) => debutDe(a).localeCompare(debutDe(b)) || alpha(a, b);
     function ordonner(f: Filtres, mots: string[]) {
       const ordre = [...fiches];
-      if (f.tri === "session") {
-        ordre.sort((a, b) => (a.debut || "9999").localeCompare(b.debut || "9999") || a.rang - b.rang);
-      } else if (f.tri === "prix") {
-        ordre.sort((a, b) => a.prix - b.prix || a.rang - b.rang);
+      if (f.tri === "prix") {
+        ordre.sort((a, b) => a.prix - b.prix || parSession(a, b));
+      } else if (f.tri === "alpha") {
+        ordre.sort(alpha);
       } else if (mots.length) {
         const dansTitre = (x: Fiche) => {
           x.titre ??= normaliser(x.li.querySelector("h3")?.textContent ?? "");
           return mots.every((m) => x.titre!.includes(m)) ? 1 : 0;
         };
-        ordre.sort((a, b) => dansTitre(b) - dansTitre(a) || a.rang - b.rang);
+        ordre.sort((a, b) => dansTitre(b) - dansTitre(a) || parSession(a, b));
+      } else {
+        ordre.sort(parSession);
       }
       return ordre;
     }
@@ -1229,7 +1214,8 @@ const page = {
       puces.hidden = elements.length === 0;
       compteFiltres.hidden = nombre === 0;
       compteFiltres.textContent = String(nombre);
-      boutonFiltres.setAttribute("aria-label", nombre ? `Filtres, ${nombre} actif${nombre > 1 ? "s" : ""}` : "Filtres");
+      boutonFiltres.setAttribute("aria-label", nombre ? `Filtrer, ${nombre} filtre${nombre > 1 ? "s" : ""} actif${nombre > 1 ? "s" : ""}` : "Filtrer");
+      document.getElementById("outil-tri")?.classList.toggle("actif", Boolean(f.tri));
     }
 
     // Amène la recherche et les premiers résultats à l'écran, et y place le focus
@@ -1285,12 +1271,32 @@ const page = {
       affichage[premiere]?.li.querySelector("a")?.focus();
     });
 
-    // Filtres repliables (téléphone et tablette)
+    // Filtrer : ouvre ou referme le panneau des filtres.
     boutonFiltres.addEventListener("click", () => {
       const ouvert = boutonFiltres.getAttribute("aria-expanded") !== "true";
       boutonFiltres.setAttribute("aria-expanded", String(ouvert));
       formulaire.classList.toggle("ouvert", ouvert);
     });
+
+    // Carte : affiche ou masque la colonne de la carte. Par défaut (« auto »), elle est visible sur
+    // grand écran et repliée sur téléphone, comme sur les sites de réservation.
+    const disposition = document.getElementById("disposition")!;
+    const colonneCarte = document.getElementById("colonne-carte")!;
+    const boutonCarte = document.getElementById("bouton-carte")!;
+    const carteVisible = () => getComputedStyle(colonneCarte).display !== "none";
+    const majBoutonCarte = () => boutonCarte.setAttribute("aria-pressed", String(carteVisible()));
+    boutonCarte.addEventListener("click", () => {
+      const montrer = !carteVisible();
+      disposition.dataset.carte = montrer ? "ouverte" : "fermee";
+      majBoutonCarte();
+      // La carte interactive recalcule sa taille quand sa colonne réapparaît.
+      document.dispatchEvent(new CustomEvent("cuspeed:carte-visible", { detail: { visible: montrer } }));
+      if (montrer && !matchMedia("(min-width: 920px)").matches) {
+        colonneCarte.scrollIntoView({ behavior: doux, block: "start" });
+      }
+    });
+    matchMedia("(min-width: 920px)").addEventListener("change", majBoutonCarte);
+    majBoutonCarte();
 
     formulaire.addEventListener("input", () => appliquer());
     // La carte interactive demande à ne montrer que les formations de la zone affichée.
@@ -1304,7 +1310,6 @@ const page = {
       zone = ids ? new Set(ids) : null;
       appliquer();
     });
-    tri?.addEventListener("input", () => appliquer());
     formulaire.addEventListener("submit", (e) => {
       e.preventDefault();
       allerAuxResultats();

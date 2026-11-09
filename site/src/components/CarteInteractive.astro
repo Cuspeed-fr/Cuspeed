@@ -209,6 +209,11 @@
       fadeDuration: calme ? 0 : 150,
     });
     carte.addControl(new maplibre.NavigationControl({ showCompass: false }), "top-right");
+    // Bouton « Carte » de l'accueil : la colonne de la carte peut être masquée puis réaffichée ;
+    // la carte reprend alors la taille de son cadre.
+    document.addEventListener("cuspeed:carte-visible", (e) => {
+      if ((e as CustomEvent<{ visible: boolean }>).detail.visible) requestAnimationFrame(() => carte.resize());
+    });
     const cadreFrance = carte.cameraForBounds(EMPRISE_FRANCE)!;
     const vueInitiale = { centre: maplibre.LngLat.convert(cadreFrance.center as [number, number]), zoom: cadreFrance.zoom as number };
     let geolocalise = false; // la position de la personne n'est jamais écrite dans l'adresse

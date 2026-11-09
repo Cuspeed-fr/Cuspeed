@@ -6,6 +6,8 @@
 // au CSS (lien étiré), et les lecteurs d'écran n'entendent qu'un lien.
 import { villesDe, regroupementsDe, tarifLisible, aidesDe, prochaineSession, dateCourte } from "../lib/donnees.js";
 import { sessionActive } from "../lib/carte-moteur.js";
+import Visuel from "./Visuel.astro";
+import LogoOrganisme from "./LogoOrganisme.astro";
 
 const { formation: f, donnees } = Astro.props;
 const ref = donnees.referentiels;
@@ -37,22 +39,25 @@ const debuts = [...new Set(f.sessions.map((s) => (s.debut ? String(s.debut) : ""
   data-debuts={debuts.length ? debuts.join(" ") : undefined}
   data-prix={f.tarif.euros ?? undefined}
 >
-  <ul class="etiquettes" aria-label="Type et disciplines">
-    <li class="etiquette forte">{ref.types[f.type] ?? f.type}</li>
-    {f.disciplines.map((d) => <li class="etiquette">{ref.disciplines[d] ?? d}</li>)}
-  </ul>
-  {aides.length > 0 && <p class="badge-aides">Éligible aux aides : {aides.join(", ")}</p>}
-  <h3><a href={`/formations/${f.slug}/`}>{f.intitule}</a></h3>
-  {organisme && <p class="resume-organisme">{organisme.nom}</p>}
-  {aReperes && (
-  <ul class="reperes">
-    {prochaine ? (
-      <li class="r-session"><span class="discret libelle">Prochaine session :</span> <b>{dateCourte(prochaine.debut)}</b>{prochaine.ville && `, ${prochaine.ville}`}</li>
-    ) : (
-      villes.length > 0 && <li class="r-lieu"><span class="invisible">Lieu : </span>{villes.join(", ")}</li>
+  <Visuel disciplines={f.disciplines} classe="fiche-visuel" />
+  <div class="fiche-contenu">
+    <ul class="etiquettes" aria-label="Type et disciplines">
+      <li class="etiquette forte">{ref.types[f.type] ?? f.type}</li>
+      {f.disciplines.map((d) => <li class="etiquette">{ref.disciplines[d] ?? d}</li>)}
+    </ul>
+    {aides.length > 0 && <p class="badge-aides">Éligible aux aides : {aides.join(", ")}</p>}
+    <h3><a href={`/formations/${f.slug}/`}>{f.intitule}</a></h3>
+    {organisme && <p class="resume-organisme"><LogoOrganisme organisme={organisme} taille={20} />{organisme.nom}</p>}
+    {aReperes && (
+    <ul class="reperes">
+      {prochaine ? (
+        <li class="r-session"><span class="discret libelle">Prochaine session :</span> <b>{dateCourte(prochaine.debut)}</b>{prochaine.ville && `, ${prochaine.ville}`}</li>
+      ) : (
+        villes.length > 0 && <li class="r-lieu"><span class="invisible">Lieu : </span>{villes.join(", ")}</li>
+      )}
+      {f.duree && <li class="r-duree"><span class="invisible">Durée : </span>{f.duree}</li>}
+      {tarif && <li class="r-tarif chiffres"><span class="invisible">Tarif : </span>{tarif}</li>}
+    </ul>
     )}
-    {f.duree && <li class="r-duree"><span class="invisible">Durée : </span>{f.duree}</li>}
-    {tarif && <li class="r-tarif chiffres"><span class="invisible">Tarif : </span>{tarif}</li>}
-  </ul>
-  )}
+  </div>
 </li>

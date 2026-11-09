@@ -1,18 +1,23 @@
 ---
 // Logo d'un organisme s'il a été fourni (site/public/logos/Oxxx.ext) ; rien sinon.
 // decoratif : le nom de l'organisme est écrit juste à côté, le logo n'a pas besoin d'être lu.
-import { logoDe } from "../lib/logos.js";
+// Largeur et hauteur sont écrites dans la page (proportions lues dans le fichier SVG ou PNG ; sinon un
+// cadre de hauteur × 2,5) : le texte voisin ne bouge pas au chargement de l'image, qui n'est pas déformée.
+import { logoInfo } from "../lib/logos.js";
 
 const { organisme, taille = 24, decoratif = true, classe = "" } = Astro.props;
-const src = organisme ? logoDe(organisme.id) : null;
+const info = organisme ? logoInfo(organisme.id) : null;
+const src = info?.chemin ?? null;
+const largeur = Math.round(taille * Math.min(Math.max(info?.ratio ?? 2.5, 0.5), 4));
 ---
 {src && (
   <img
     class:list={["logo-organisme", classe]}
     src={src}
     alt={decoratif ? "" : `Logo de ${organisme.nom}`}
+    width={largeur}
     height={taille}
-    style={`height:${taille}px`}
+    style={`width:${largeur}px;height:${taille}px`}
     loading="lazy"
     decoding="async"
   />

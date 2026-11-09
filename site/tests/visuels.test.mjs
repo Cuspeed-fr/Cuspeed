@@ -33,14 +33,23 @@ test("visuels : première discipline connue, sinon une dent", () => {
 test("logos : fichier nommé par l'identifiant de l'organisme, svg préféré, autres fichiers ignorés", async () => {
   const racine = mkdtempSync(join(tmpdir(), "cuspeed-logos-"));
   mkdirSync(join(racine, "public", "logos"), { recursive: true });
-  for (const nom of ["O001.png", "O001.svg", "O021.webp", "notes.txt", "O9.png", "O002.gif", "O003.exe"]) {
+  for (const nom of ["O001.png", "O021.webp", "notes.txt", "O9.png", "O002.gif", "O003.exe"]) {
     writeFileSync(join(racine, "public", "logos", nom), "x");
   }
+  writeFileSync(join(racine, "public", "logos", "O001.svg"), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40"></svg>');
+  // PNG minimal : signature, puis largeur 300 et hauteur 100 dans l'en-tête IHDR.
+  const png = Buffer.alloc(24);
+  png.writeUInt32BE(300, 16);
+  png.writeUInt32BE(100, 20);
+  writeFileSync(join(racine, "public", "logos", "O005.png"), png);
   const avant = process.cwd();
   process.chdir(racine);
   try {
-    const { logoDe } = await import(`../src/lib/logos.js?essai=${Date.now()}`);
+    const { logoDe, logoInfo } = await import(`../src/lib/logos.js?essai=${Date.now()}`);
     assert.equal(logoDe("O001"), "/logos/O001.svg");
+    assert.equal(logoInfo("O001").ratio, 3);
+    assert.equal(logoInfo("O005").ratio, 3);
+    assert.equal(logoInfo("O021").ratio, null);
     assert.equal(logoDe("o021"), "/logos/O021.webp");
     assert.equal(logoDe("O002"), null);
     assert.equal(logoDe("O003"), null);

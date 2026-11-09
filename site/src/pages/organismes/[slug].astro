@@ -34,8 +34,10 @@ const organisation = {
   sameAs: lienOfficiel ?? undefined,
   address: o.ville ? { "@type": "PostalAddress", addressLocality: o.ville, addressCountry: "FR" } : undefined,
 };
+import SpriteVisuels from "../../components/SpriteVisuels.astro";
 ---
 <Base titre={`Formations dentaires – ${o.nom}`} description={description} donneesStructurees={[organisation]}>
+  <SpriteVisuels />
   <nav class="fil" aria-label="Fil d'Ariane">
     <ol>
       <li><a href="/organismes/">Organismes</a></li>

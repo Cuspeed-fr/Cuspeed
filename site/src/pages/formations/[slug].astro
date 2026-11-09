@@ -88,8 +88,10 @@ const fil = {
     { "@type": "ListItem", position: organisme ? 3 : 2, name: f.intitule, item: lienFiche },
   ].filter(Boolean),
 };
+import SpriteVisuels from "../../components/SpriteVisuels.astro";
 ---
 <Base titre={titre} description={description} donneesStructurees={[cours, fil]}>
+  <SpriteVisuels />
   <nav class="fil" aria-label="Fil d'Ariane">
     <ol>
       <li><a href="/">Formations</a></li>

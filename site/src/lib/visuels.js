@@ -4,7 +4,7 @@
 // La teinte du fond (« ton ») est l'une des quatre teintes de la charte, définies dans global.css.
 
 // Dent (molaire) réutilisée par plusieurs pictogrammes.
-const DENT =
+export const DENT =
   '<path d="M16 9c-4.2 0-7 3-7 7.4 0 3.4 1.2 6.2 2.4 9.2 1 2.6 1.5 6 2.1 9.6.6 3.4 1.5 5 2.9 5s2.2-1.8 2.8-5.2c.5-3 1.4-4.8 2.8-4.8s2.3 1.8 2.8 4.8c.6 3.4 1.4 5.2 2.8 5.2s2.3-1.6 2.9-5c.6-3.6 1.1-7 2.1-9.6 1.2-3 2.4-5.8 2.4-9.2C39 12 36.2 9 32 9c-2.8 0-4.6 1.6-8 1.6S18.8 9 16 9Z"/>';
 const petiteDent = (x, y, echelle) => `<g transform="translate(${x} ${y}) scale(${echelle})">${DENT}</g>`;
 

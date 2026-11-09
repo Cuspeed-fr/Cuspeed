@@ -477,7 +477,7 @@ p {
      pas : la liste reste fluide avec des centaines de fiches. « auto » retient la hauteur
      réelle une fois la carte affichée, la barre de défilement ne saute pas. */
   content-visibility: auto;
-  contain-intrinsic-size: auto 150px;
+  contain-intrinsic-size: auto 210px;
   transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
 .fiche-resume:hover {
@@ -573,14 +573,27 @@ p {
   }
 }
 
-/* Logo d'un organisme (fourni par l'organisme) : petit, à côté de son nom. */
+@media (max-width: 719px) {
+  .fiche-resume {
+    contain-intrinsic-size: auto 300px;
+  }
+}
+
+/* Logo d'un organisme (fourni par l'organisme) : petit, à côté de son nom, calé à gauche de son cadre. */
 .logo-organisme {
-  width: auto;
-  max-width: 96px;
   object-fit: contain;
+  object-position: left center;
   vertical-align: middle;
   margin-right: 8px;
   border-radius: 4px;
+}
+/* En mode sombre, une pastille claire : un logo foncé sur fond transparent reste lisible. */
+@media (prefers-color-scheme: dark) {
+  .logo-organisme {
+    background: #ffffff;
+    padding: 2px 4px;
+    box-sizing: content-box;
+  }
 }
 /* Badge « Éligible aux aides » : aplat lime, texte marine (11,1:1), aussi en mode sombre */
 .badge-aides {

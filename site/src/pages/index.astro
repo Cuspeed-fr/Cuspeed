@@ -77,8 +77,10 @@ const page = {
   inLanguage: "fr-FR",
   numberOfItems: formations.length,
 };
+import SpriteVisuels from "../components/SpriteVisuels.astro";
 ---
 <Base titre="Formations dentaires post-universitaires et continues en France" description={description} donneesStructurees={[page]} pleineLargeur>
+  <SpriteVisuels />
   <section class="bande blanche heros" aria-labelledby="titre-accueil">
     <div class="cadre heros-grille">
       <div class="heros-texte">

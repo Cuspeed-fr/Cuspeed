@@ -563,6 +563,18 @@ test("accueil : outils Trier, Filtrer et Carte sous la recherche, sans la partie
   assert.doesNotMatch(html, /relevés sur les sites officiels des facultés/);
 });
 
+test("visuels : dessins définis une fois par page, chaque carte y renvoie, sans lien de plus", () => {
+  const { lire } = siteConstruit();
+  const html = lire("index.html");
+  assert.equal([...html.matchAll(/class="sprite-visuels"/g)].length, 1);
+  const definis = new Set([...html.matchAll(/<symbol id="(v-[a-z]+)"/g)].map((m) => m[1]));
+  for (const carte of cartesAccueil(html)) {
+    const m = carte.match(/class="visuel[^"]*"[^>]*aria-hidden="true"[^>]*>\s*<svg[^>]*><use href="#(v-[a-z]+)"/);
+    assert.ok(m, "carte sans visuel");
+    assert.ok(definis.has(m[1]), `dessin ${m[1]} non défini dans la page`);
+  }
+});
+
 test("fiche : bouton « Voir la page officielle » collant et frise des sessions", () => {
   const { sortie, lire } = siteConstruit();
   const dossier = readdirSync(join(sortie, "formations")).find((n) => n.startsWith("f9101-"));

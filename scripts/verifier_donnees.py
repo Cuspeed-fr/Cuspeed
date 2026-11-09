@@ -41,6 +41,24 @@ erreurs = []
 avertissements = []  # signalements non bloquants (n'empêchent ni la copie ni la publication)
 
 
+# Formations universitaires qui ne sont pas un diplôme (décision de Chris, 9 novembre 2026) : elles
+# peuvent être du secteur « universitaire » sans être un DU, DIU, DESU, CES, AUEC ou AEU. Elles ne
+# sont pas dans types_universitaires : le site ne leur attribue donc pas de diplôme.
+TYPES_COURTS_UNIVERSITAIRES = {"cursus", "masterclass", "journee"}
+
+
+def type_et_secteur_coherents(type_formation, secteur, types_universitaires):
+    """Vrai si le type et le secteur vont ensemble.
+
+    - Un diplôme universitaire (types_universitaires) doit être du secteur universitaire.
+    - Une formation du secteur universitaire doit être un diplôme ou une formation courte universitaire.
+    - Une formation du secteur privé ne peut pas porter un type de diplôme universitaire.
+    """
+    if secteur == "universitaire":
+        return type_formation in types_universitaires or type_formation in TYPES_COURTS_UNIVERSITAIRES
+    return type_formation not in types_universitaires
+
+
 def avertissement(ou, message):
     avertissements.append(f"{ou} : {message}")
 
@@ -125,7 +143,7 @@ def main():
             erreur(ou, f"secteur inconnu {f.get('secteur')!r}")
         if f.get("type") not in ref["types"]:
             erreur(ou, f"type inconnu {f.get('type')!r}")
-        elif (f["type"] in ref["types_universitaires"]) != (f.get("secteur") == "universitaire"):
+        elif not type_et_secteur_coherents(f["type"], f.get("secteur"), ref["types_universitaires"]):
             erreur(ou, "type et secteur incohérents")
         disc = f.get("disciplines") or []
         if not disc:

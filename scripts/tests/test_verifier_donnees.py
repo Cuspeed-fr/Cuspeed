@@ -28,5 +28,26 @@ class StatutsPistes(unittest.TestCase):
                 self.assertNotIn(statut, verifier_donnees.STATUTS_PISTES)
 
 
+class TypeEtSecteur(unittest.TestCase):
+    UNIV = ["du", "diu", "desu", "ces", "auec", "aeu"]
+
+    def test_diplome_universitaire_accepte(self):
+        self.assertTrue(verifier_donnees.type_et_secteur_coherents("du", "universitaire", self.UNIV))
+
+    def test_formation_courte_universitaire_acceptee(self):
+        for t in ("journee", "cursus", "masterclass"):
+            with self.subTest(type=t):
+                self.assertTrue(verifier_donnees.type_et_secteur_coherents(t, "universitaire", self.UNIV))
+
+    def test_diplome_dans_le_secteur_prive_refuse(self):
+        self.assertFalse(verifier_donnees.type_et_secteur_coherents("du", "prive", self.UNIV))
+
+    def test_formation_privee_de_type_court_acceptee(self):
+        self.assertTrue(verifier_donnees.type_et_secteur_coherents("journee", "prive", self.UNIV))
+
+    def test_catalogue_universitaire_refuse(self):
+        self.assertFalse(verifier_donnees.type_et_secteur_coherents("catalogue", "universitaire", self.UNIV))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -16,6 +16,9 @@ Tu es le vérificateur de Cuspeed. Tu n'as pas fait l'extraction et tu ne la cor
    - **Prises en charge** (`financement` : `dpc`, `fifpl`, `opco`, `cpf`) : chacune doit être écrite par la source officielle, sur la page de la formation ou dans une mention générale de l'organisme (alors signalée dans `notes` avec l'adresse de la page).
    - **Périmètre** : formation en France ; pour le privé, pas de formation 100 % en ligne. Une fiche hors périmètre est `a-corriger`, avec la raison.
 4. Vérifie que la source est bien officielle (domaine de l'université ou de l'organisme) et qu'aucun texte ne vient d'un site concurrent.
+   - **Contrôle indépendant de l'existence** (9 novembre 2026) : refais toi-même au moins deux recherches web par mots-clés, différentes de celles de l'extracteur, pour l'organisme et pour chaque formation. La formation doit être publiée par l'organisme qui l'organise, jamais seulement par un site tiers, une brochure d'industriel ou un agenda ; sinon `source-introuvable`.
+   - **Doublons** : une formation n'existe qu'une fois dans toute la base, y compris chez un autre organisme (marque industrielle qui liste un partenaire, organisme connu sous deux noms).
+   - **Source morte ou périmée** (lien en erreur, édition passée seulement, formation absente du catalogue actuel) : signale que la fiche doit être archivée.
 5. Dépose un avis par fiche : `python3 scripts/bdd.py avis F0200 conforme "détails"`, avec l'un des verdicts :
    - `conforme` ;
    - `a-corriger` avec, dans les détails, le champ, la valeur attendue et la citation de la source ;

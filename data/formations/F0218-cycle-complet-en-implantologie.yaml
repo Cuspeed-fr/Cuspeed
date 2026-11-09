@@ -6,33 +6,37 @@ type: cursus
 disciplines:
 - implanto
 format: presentiel
-duree: null
+duree: 3 modules
 volume_horaire_h: null
 tarif:
   texte: 4 400 €
   euros: 4400
   annee: null
-prerequis: Aucun
-precisions: null
-financement: []
+prerequis: Pas de pré-requis.
+precisions: Dissection sur pièces anatomiques à Grenoble le 5 février 2027
+financement:
+- opco
+- fifpl
 url_officielle: https://evolyou.dental/formations/cycle-complet-en-implantologie/
 sessions:
 - lieu: L-SALLANCHES
   debut: '2026-12-03'
-  fin: null
+  fin: '2027-05-14'
   inscriptions: a-renseigner
   places: null
-- lieu: L-SALLANCHES
-  debut: '2027-02-03'
-  fin: null
-  inscriptions: a-renseigner
-  places: null
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Apport théorique de 64h indiqué, mais pas un total d''heures : volume_horaire_h et duree laissés
   vides. OPCO seulement, ni DPC ni FIF-PL cités. Deux départs affichés (3 déc. 2026 et 3 fév. 2027), fin
   non écrite : deux sessions à Sallanches, inscriptions a-renseigner. Le module 2 inclut le 5 fév. 2027
   à Grenoble (pratique sur pièces anatomiques). Tarif repris tel qu''affiché : aucune mention HT/TTC ni
   année sur la page. | Citations de la source : volume : « un apport théorique de 64h » ; tarif : « €4400
   » ; prerequis : « Pas de pré-requis. » ; financement : « Cette formation est éligible au financement
-  des OPCO. »'
+  des OPCO. »
+
+  Complément du 8 nov. 2026 — duree : « Durée : 3 modules » (https://evolyou.dental/formations/cycle-complet-en-implantologie/)
+  | prerequis : « Pas de pré-requis. » (https://evolyou.dental/formations/cycle-complet-en-implantologie/)
+  | financement : « Cette formation est éligible au financement des OPCO (page) ; mention FIF-PL sur le
+  catalogue https://evolyou.dental/formations/ » (https://evolyou.dental/formations/cycle-complet-en-implantologie/)
+  | precisions : « Module 2 : 3-4 février 2027, Sallanches ; 5 février 2027, Grenoble (dissection sur
+  pièces anatomiques) » (https://evolyou.dental/formations/cycle-complet-en-implantologie/)'

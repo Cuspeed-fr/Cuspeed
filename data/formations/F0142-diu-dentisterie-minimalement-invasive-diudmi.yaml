@@ -1,0 +1,28 @@
+id: F0142
+intitule: DIU Dentisterie minimalement invasive (DIUDMI)
+organisme: O014
+secteur: universitaire
+type: diu
+disciplines:
+- resto
+format: presentiel
+duree: 1 an
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: Docteur en chirurgie dentaire ou interne en chirurgie dentaire ; dossier (lettre de motivation,
+  CV, copie du diplôme)
+precisions: Diplôme partagé avec Montpellier
+financement: []
+url_officielle: https://formations-en.umontpellier.fr/fr/formations/diplome-universite-niv-form-bac-5-UF/diplome-interuniversitaire-dentisterie-minimalement-invasive-diudmi-LR646W6H.html
+sessions:
+- lieu: L-MARSEILLE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: null

@@ -1,0 +1,32 @@
+id: F0140
+intitule: DESU Occlusodontie
+organisme: O014
+secteur: universitaire
+type: desu
+disciplines:
+- occlu
+format: presentiel
+duree: 1 an
+volume_horaire_h: null
+tarif:
+  texte: 2 269 € en formation continue ; 2 200 € en formation initiale
+  euros: 2269
+  annee: null
+prerequis: null
+precisions: null
+financement: []
+url_officielle: https://smpm.univ-amu.fr/en/training/continuing-education/occlusodontics
+sessions:
+- lieu: L-MARSEILLE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Complément du 8 nov. 2026 — intitule : « Page « Occlusodontics » (DESU) » (https://smpm.univ-amu.fr/en/training/continuing-education/occlusodontics)
+  | url_officielle : « Page dédiée occlusodontics » (https://smpm.univ-amu.fr/en/training/continuing-education/occlusodontics)
+  | format : « Format : présentiel » (https://smpm.univ-amu.fr/en/training/continuing-education/occlusodontics)
+  | duree : « Durée : 1 an » (https://smpm.univ-amu.fr/en/training/continuing-education/occlusodontics)
+  | tarif_texte : « formation initiale 2 200 € ; formation continue 2 269 € » (https://smpm.univ-amu.fr/en/training/continuing-education/occlusodontics)
+  | tarif_euros : « formation continue 2 269 € » (https://smpm.univ-amu.fr/en/training/continuing-education/occlusodontics)'

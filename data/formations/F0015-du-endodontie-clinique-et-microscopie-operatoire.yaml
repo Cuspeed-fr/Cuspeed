@@ -6,16 +6,18 @@ type: du
 disciplines:
 - endo
 format: null
-duree: null
+duree: 2 ans
 volume_horaire_h: null
 tarif:
-  texte: null
+  texte: 'Droit de formation : 5000 € / an ; internes : 3000 € / an ; droits universitaires ≃ 250 € /
+    an (selon tarif ministériel)'
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteur en chirurgie dentaire ; autorisation d'exercice en France et justificatif d'enregistrement
+  au conseil de l'Ordre
 precisions: null
 financement: []
-url_officielle: https://odonto.univ-lorraine.fr/?p=1818
+url_officielle: https://odonto.univ-lorraine.fr/formations-continues/formations-longues/du-dendodontie-clinique-et-microscopie-operatoire/
 sessions:
 - lieu: L-NANCY
   debut: null
@@ -23,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-08'
 notes: null

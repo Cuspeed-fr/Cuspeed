@@ -5,23 +5,24 @@ secteur: universitaire
 type: ces
 disciplines:
 - proth
-format: null
-duree: null
+format: presentiel
+duree: 2 ans
 volume_horaire_h: null
 tarif:
-  texte: null
+  texte: 'Droit de formation : 1050 € ; droits universitaires (selon tarif ministériel) ≃ 500 €'
   euros: null
   annee: null
-prerequis: null
+prerequis: Être titulaire d'un diplôme de docteur en chirurgie dentaire ; justifier d'un niveau 4-C1 en
+  français
 precisions: null
 financement: []
-url_officielle: https://odonto.univ-lorraine.fr/?p=1818
+url_officielle: https://odonto.univ-lorraine.fr/formations-continues/formations-longues/odontologie-prothetique-mention-prothese-conjointe/
 sessions:
 - lieu: L-NANCY
-  debut: null
-  fin: null
-  inscriptions: a-renseigner
-  places: null
+  debut: '2027-01-20'
+  fin: '2028-05-17'
+  inscriptions: ouvertes
+  places: 20
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-08'
 notes: null

@@ -18,9 +18,14 @@ precisions: Diplôme universitaire délivré par l'Université de Gênes (Italie
   présentiel à Paris tous les 2 mois.
 financement: []
 url_officielle: https://www.endo-academie.fr/produit/advanced-class/
-sessions: []
-statut: a-verifier
-derniere_verification: '2026-11-05'
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Type « cursus » (organisme privé) bien que l''intitulé soit « Diplôme universitaire » ; à trancher
   par Chris. Tarif : seulement « Tarif spécifique pour cette formation. » (pas de prix) : null. Aucune
   date de session (promotion 2027-2028 annoncée, webinaire du 19/05/2026 passé). Logos ANDPC/FIFPL sans
@@ -29,4 +34,8 @@ notes: 'Type « cursus » (organisme privé) bien que l''intitulé soit « Dipl�
   » ; duree : « un cycle de formation avancé en endodontie sur deux années » ; volume_horaire_h : « 240h
   » ; prerequis : « Avoir suivi une formation d’endodontie au cours des 5 dernières années. » ; format
   : « Format Mixte » ; precisions : « 1 diplôme universitaire délivré par l’Université de Gênes, Italie.
-  »'
+  »
+
+  Complément du 8 nov. 2026 — volume_horaire_h : « 240 h (cycle de deux ans) » (https://www.endo-academie.fr/produit/advanced-class/)
+  | format : « Trois jours en présentiel tous les deux mois, et un webinaire ou une classe virtuelle en
+  ligne chaque mois ; format mixte » (https://www.endo-academie.fr/produit/advanced-class/)'

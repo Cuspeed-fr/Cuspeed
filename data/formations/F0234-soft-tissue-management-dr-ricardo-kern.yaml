@@ -22,9 +22,9 @@ sessions:
 - lieu: L-CANNES
   debut: '2027-03-18'
   fin: '2027-03-20'
-  inscriptions: a-renseigner
+  inscriptions: ouvertes
   places: 24
-statut: a-verifier
+statut: validee
 derniere_verification: '2026-11-05'
 notes: 'Page lue via un lecteur qui résume (accès direct bloqué) : citations à recontrôler. HT/TTC non
   précisé. Places : 24 maximum. Pas de piste. DPC/FIFPL : seule la mention générale du pied de page, aucun

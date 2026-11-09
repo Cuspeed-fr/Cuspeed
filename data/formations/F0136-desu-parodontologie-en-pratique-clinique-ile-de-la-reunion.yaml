@@ -1,18 +1,19 @@
 id: F0136
-intitule: Parodontologie en pratique clinique – La Réunion
+intitule: DESU Parodontologie en pratique clinique – Île de la Réunion
 organisme: O014
 secteur: universitaire
 type: du
 disciplines:
 - paro
 format: null
-duree: null
-volume_horaire_h: null
+duree: 120 h sur 1 an
+volume_horaire_h: 120
 tarif:
-  texte: 3 369 €
+  texte: 3 369 € net de taxe (formation continue)
   euros: 3369
   annee: null
-prerequis: null
+prerequis: Titulaire du diplôme d'État de docteur en chirurgie dentaire ou d'un diplôme équivalent permettant
+  d'exercer dans son pays ; sur dossier
 precisions: Enseignement délocalisé à La Réunion
 financement: []
 url_officielle: https://smpm.univ-amu.fr/en/training/continuing%20education/parodontology-practice-clinique-ile-de-la-reunion
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-08'
 notes: null

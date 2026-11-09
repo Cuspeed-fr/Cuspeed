@@ -5,23 +5,28 @@ secteur: universitaire
 type: auec
 disciplines:
 - implanto
-format: null
+format: presentiel
 duree: null
-volume_horaire_h: null
+volume_horaire_h: 162
 tarif:
-  texte: null
-  euros: null
+  texte: 'Tarif plein : 1 900 € ; tarif interne : 113 €'
+  euros: 1900
   annee: null
 prerequis: null
 precisions: null
 financement: []
-url_officielle: https://www.odontologie.univ-nantes.fr/
+url_officielle: https://odontologie.univ-nantes.fr/formation-continue/lauio
 sessions:
 - lieu: L-NANTES
   debut: null
   fin: null
-  inscriptions: a-renseigner
+  inscriptions: annoncee
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-02'
-notes: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Complément du 8 nov. 2026 — url_officielle : « Attestation Universitaire en Implantologie Orale
+  - AUIO » (https://odontologie.univ-nantes.fr/formation-continue/lauio) | format : « Tous les jeudis
+  après-midi, de fin septembre à fin mai (présentiel à l''UFR) » (https://odontologie.univ-nantes.fr/formation-continue/lauio)
+  | volume_horaire_h : « 162 heures réparties en 6 modules » (https://odontologie.univ-nantes.fr/formation-continue/lauio)
+  | tarif_texte : « Tarif plein 1 900 € ; Tarif interne 113 € » (https://odontologie.univ-nantes.fr/formation-continue/lauio)
+  | tarif_euros : « Tarif plein 1 900 € » (https://odontologie.univ-nantes.fr/formation-continue/lauio)'

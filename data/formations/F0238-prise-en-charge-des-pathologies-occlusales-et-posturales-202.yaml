@@ -9,7 +9,8 @@ format: presentiel
 duree: 7 jours répartis en 3 modules
 volume_horaire_h: null
 tarif:
-  texte: 'Dentiste, 3 modules / 7 jours : 5 200 € TTC'
+  texte: 'Dentiste, 3 modules / 7 jours : 5 200 € TTC ; 1 assistante au module 2 : 500 € TTC ; 2 assistantes
+    au module 2 : 800 € TTC'
   euros: 5200
   annee: null
 prerequis: Aucun
@@ -33,8 +34,8 @@ sessions:
   fin: '2027-05-28'
   inscriptions: a-renseigner
   places: 14
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Modules : 04-06 fév., 01-02 avril, 27-28 mai 2027 (la page catégorie Fonction donnait 03-04 juin,
   divergence : on retient la page de la formation). Tarif 5 200 € TTC : année non écrite (l''intitulé
   porte ''2027''). ''Cette formation est prise en charge par le FIF PL.'' Maximum 14 participants. Lieux
@@ -42,4 +43,8 @@ notes: 'Modules : 04-06 fév., 01-02 avril, 27-28 mai 2027 (la page catégorie F
   assez de places'' : inscriptions laissées à renseigner. | Citations de la source : intitule : « Prise
   en charge des PATHOLOGIES OCCLUSALES et POSTURALES 2027 » ; financement : « Cette formation est prise
   en charge par le FIF PL. » ; modules : « Module 1 : 04, 05 & 06 février 2027 » ; tarif : « Dentiste
-  3 modules 7 jours : 5200 € TTC ; 1 assistante au module 2 : 500 € TTC ; 2 assistantes : 800 € TTC »'
+  3 modules 7 jours : 5200 € TTC ; 1 assistante au module 2 : 500 € TTC ; 2 assistantes : 800 € TTC »
+
+  Complément du 8 nov. 2026 — tarif_texte : « « Dentiste 3 modules 7 jours » 5 200 € TTC ; « 1 Assistante
+  au Module 2 » 500 € TTC ; « 2 Assistantes au Module 2 » 800 € TTC (association déduite de la mise en
+  page) » (https://www.gad-center.com/formations-dentaires/fonction/formation-dentaire-occlusion-gad-center-leader-en-formation-dentaire/)'

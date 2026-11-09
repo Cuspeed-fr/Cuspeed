@@ -1,0 +1,30 @@
+id: F0315
+intitule: Attestation de formation à la prise en charge des traumatismes dentaires (ATD)
+organisme: O010
+secteur: universitaire
+type: auec
+disciplines:
+- chir
+format: presentiel
+duree: 3 jours
+volume_horaire_h: null
+tarif:
+  texte: 1 300 € tarif plein ; 113 € pour les personnes rattachées à l'UFR d'Odontologie de Nantes
+  euros: 1300
+  annee: null
+prerequis: Chirurgien-dentiste ; maîtrise du français ; sélection sur dossier (CV, lettre de motivation)
+precisions: null
+financement: []
+url_officielle: https://odontologie.univ-nantes.fr/formation-continue/atd
+sessions:
+- lieu: L-NANTES
+  debut: '2027-01-13'
+  fin: '2027-01-15'
+  inscriptions: ouvertes
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : duree : « Formation de 3 jours au mois de janvier 2027 »
+  (https://odontologie.univ-nantes.fr/formation-continue/atd) | sessions : « Prochaine session le 13-15
+  janvier 2027 ; avant le 27 novembre 2026 » (idem) | tarif : « 1 300 € - tarif plein ; 113 € - Tarif
+  pour les personnes rattachées à l''UFR d''Odontologie de Nantes » (idem)'

@@ -6,23 +6,26 @@ type: du
 disciplines:
 - implanto
 - paro
-format: null
-duree: null
+format: presentiel
+duree: 3 ans
 volume_horaire_h: null
 tarif:
-  texte: null
+  texte: 'Droit de formation : 4000 € / an ; internes DESMBD : 3000 € / an ; droits universitaires ≃ 250
+    € / an (selon tarif ministériel)'
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteur en chirurgie dentaire permettant l'exercice en France (ou inscrit en 3e année de DES
+  MBD) ; titulaire du CES de parodontologie ou d'un DU en implantologie ; 2 ans ou plus d'activité professionnelle
+  ; justificatif d'enregistrement à l'Ordre ; test de français niveau 4-C1 pour les étrangers
 precisions: null
 financement: []
-url_officielle: https://odonto.univ-lorraine.fr/?p=1818
+url_officielle: https://odonto.univ-lorraine.fr/formations-continues/formations-longues/du-de-parodontologie-et-implantologie-clinique/
 sessions:
 - lieu: L-NANCY
   debut: null
   fin: null
-  inscriptions: a-renseigner
-  places: null
+  inscriptions: ouvertes
+  places: 3
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-08'
 notes: null

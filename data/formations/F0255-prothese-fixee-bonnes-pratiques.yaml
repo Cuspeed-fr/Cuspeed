@@ -6,23 +6,30 @@ type: cursus
 disciplines:
 - proth
 format: presentiel
-duree: 35 heures / 5 jours
-volume_horaire_h: 35
+duree: 14 heures / 2 jours
+volume_horaire_h: 14
 tarif:
   texte: À partir de 1 800 €
   euros: 1800
   annee: null
-prerequis: null
+prerequis: Chirurgiens dentistes omnipraticiens
 precisions: null
-financement: []
+financement:
+- dpc
 url_officielle: https://www.icdp.paris/formation/prothese-fixee-bonnes-pratiques/
 sessions: []
 statut: a-verifier
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-08'
 notes: 'Niveau N1. Dates affichées nov-déc 2023 (passées). Le titre de page porte ''(DPC)'' mais le corps
   ne mentionne pas le DPC : financement laissé vide, à vérifier. Sessions : aucune session future datée
   sur la page (au 2026-11-05). Tarif « à partir de » repris tel qu''affiché : aucune mention HT/TTC ni
   année sur la page. La page affiche désormais 1 800 € (la reprise précédente avait noté 4 250 € sur la
   page et 1 800 € au catalogue) : contradiction entre deux lectures, valeur de la page actuelle retenue.
   | Citations de la source : duree : « 35 heures / 5 jours » ; dates : « Prochaines dates : à définir
-  » ; tarif : « À partir de 1 800€ »'
+  » ; tarif : « À partir de 1 800€ »
+
+  Complément du 8 nov. 2026 — prerequis : « Chirurgiens dentistes omnipraticiens » (https://www.icdp.paris/formation/prothese-fixee-bonnes-pratiques/)
+  | financement : « Eligible au DPC (titre de la page : « Prothèse fixée : Bonnes pratiques (DPC) ») »
+  (https://www.icdp.paris/formation/prothese-fixee-bonnes-pratiques/) | duree : « 14 heures / 2 jours
+  » (https://www.icdp.paris/formation/prothese-fixee-bonnes-pratiques/) | volume_horaire_h : « 14 heures
+  / 2 jours » (https://www.icdp.paris/formation/prothese-fixee-bonnes-pratiques/)'

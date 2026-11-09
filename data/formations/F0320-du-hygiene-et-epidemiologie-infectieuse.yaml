@@ -1,0 +1,30 @@
+id: F0320
+intitule: DU Hygiène et épidémiologie infectieuse
+organisme: O010
+secteur: universitaire
+type: du
+disciplines:
+- sp
+format: presentiel
+duree: null
+volume_horaire_h: 138.5
+tarif:
+  texte: 3 600 € (tarif 2026), frais d'inscription inclus
+  euros: 3600
+  annee: null
+prerequis: Docteur en médecine, pharmacie ou chirurgie dentaire, ou autre diplôme de santé bac+2 ; 2 ans
+  d'exercice
+precisions: null
+financement: []
+url_officielle: https://sante.univ-nantes.fr/loffre-de-formation/formation-continue/du-hygiene-et-epidemiologie-infectieuse
+sessions:
+- lieu: L-NANTES
+  debut: null
+  fin: null
+  inscriptions: annoncee
+  places: 26
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : volume : « Durée totale de la formation : 138,5 heures »
+  (idem) | tarif : « 3 600 € (tarif 2026) » (idem) | sessions : « Rentrée prévue octobre 2028, inscriptions
+  avril 2028 » (idem)'

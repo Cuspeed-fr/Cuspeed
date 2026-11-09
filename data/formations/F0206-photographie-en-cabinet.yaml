@@ -12,10 +12,12 @@ tarif:
   texte: 800 €
   euros: 800
   annee: null
-prerequis: Chirurgiens-dentistes, étudiant en chirurgie dentaire, assistants(es) dentaires titulaires
-  d’un diplôme reconnu ou en cours de formation
+prerequis: Chirurgiens-dentistes, étudiants en chirurgie dentaire, assistant(e)s titulaires d'un diplôme
+  reconnu ou en formation
 precisions: null
-financement: []
+financement:
+- fifpl
+- opco
 url_officielle: https://www.denttabulleformation.fr/formation/photographie-en-cabinet/
 sessions:
 - lieu: L-AMBARES
@@ -23,8 +25,8 @@ sessions:
   fin: '2027-02-18'
   inscriptions: ouvertes
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
   Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
   salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
@@ -35,4 +37,11 @@ notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.den
   source : intitule : « Photographie en cabinet » ; duree : « 1 jour » ; format : « Non, toutes nos formations
   se déroulent en présentiel dans notre centre. » ; tarif : « 800 € » ; sessions : « Le 18 février 2027
   ; Inscriptions ouvertes » ; prerequis : « Chirurgiens-dentistes, étudiant en chirurgie dentaire, assistants(es)
-  dentaires titulaires d’un diplôme reconnu ou en cours de formation »'
+  dentaires titulaires d’un diplôme reconnu ou en cours de formation »
+
+  Complément du 8 nov. 2026 — format : « formation en salle dédiée avec démonstration en direct et ateliers
+  pratiques (résumé de la page) » (https://www.denttabulleformation.fr/formation/photographie-en-cabinet/)
+  | prerequis : « résumé de la page ; à relire » (https://www.denttabulleformation.fr/formation/photographie-en-cabinet/)
+  | financement : « Votre formation peut être financée par votre employeur ou votre OPCO ; Votre formation
+  peut être éligible à une prise en charge individuelle par le FIF PL (mention générale de l''organisme,
+  page Certification & Financements ; DPC/CPF non mentionnés) » (https://www.denttabulleformation.fr/certification-qualiopi/)'

@@ -13,8 +13,8 @@ tarif:
   texte: null
   euros: null
   annee: null
-prerequis: Doctorat en chirurgie dentaire, ou praticiens en cours de doctorat ayant validé leur CSCT ou
-  équivalent européen
+prerequis: Doctorat en chirurgie dentaire (ou praticiens en cours de doctorat ayant validé leur CSCT ou
+  équivalent européen)
 precisions: null
 financement: []
 url_officielle: https://www.academiedeparo.fr/chirurgie-parodontale/
@@ -34,8 +34,8 @@ sessions:
   fin: '2027-09-10'
   inscriptions: a-renseigner
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Format non écrit explicitement par la page (TP sur postes de travail avec modèles pédagogiques,
   lieu Continuum à Aix-en-Provence) : format laissé vide, à trancher par Chris. Ville des sessions tirée
   de la méta-description de la page et de l''accueil (lieu de formation : Continuum, 9 av. Henri Malacrida,
@@ -43,4 +43,7 @@ notes: 'Format non écrit explicitement par la page (TP sur postes de travail av
   de la source : prerequis : « Doctorat en chirurgie dentaire (ou praticiens en cours de doctorat ayant
   validé leur CSCT ou équivalent européen) » ; tarif : « Veuillez prendre contact avec nous via le formulaire
   pour obtenir le tarif » ; sessions : « 19 et 20 novembre 2026 : Complet » ; intitule : « Programme Chirurgie
-  Parodontale (Traitement des poches et comblement) »'
+  Parodontale (Traitement des poches et comblement) »
+
+  Complément du 8 nov. 2026 — prerequis : « Doctorat en chirurgie dentaire (ou praticiens en cours de
+  doctorat ayant validé leur CSCT ou équivalent européen) » (https://www.academiedeparo.fr/chirurgie-parodontale/)'

@@ -23,8 +23,8 @@ sessions:
   fin: '2027-03-25'
   inscriptions: ouvertes
   places: 19
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'À TRANCHER PAR CHRIS : formation en binôme dentiste + assistante (hors périmètre « praticiens
   seuls » ?). Durée : seul « 7 heures » est écrit (volume), pas de durée en jours. Places : 20 pour chacune
   des deux formules. DPC : accréditation « en cours » : non retenu. Liste des formations affiche 1 500
@@ -35,4 +35,6 @@ notes: 'À TRANCHER PAR CHRIS : formation en binôme dentiste + assistante (hors
   à l''ergonomie et au travail à 4 mains » ; volume_horaire_h : « 7 heures » ; tarif : « Binôme Praticien
   + Assistante : 1 500 € » ; prerequis : « Inscriptions uniquement de binômes (Dentiste + assistante)
   » ; format : « Présentiel » ; sessions : « Binôme 1 Praticien + 1 Assistant(e) - (20 places disponibles)
-  »'
+  »
+
+  Complément du 8 nov. 2026 — volume_horaire_h : « 7 heures, en une journée » (https://www.endo-academie.fr/produit/formation-a-lergonomie-et-au-travail-a-4-mains/)'

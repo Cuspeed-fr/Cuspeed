@@ -6,17 +6,18 @@ type: du
 disciplines:
 - num
 - ortho
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 2 ans
+volume_horaire_h: 269
 tarif:
-  texte: null
+  texte: 7500 € / an de droit de formation ; droits universitaires ≃ 250 € / an (selon tarif ministériel)
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteur en chirurgie dentaire qualifié en orthopédie dento-faciale, ou ayant une activité exclusive
+  en orthodontie ; bon niveau de français
 precisions: null
 financement: []
-url_officielle: https://odonto.univ-lorraine.fr/?p=1818
+url_officielle: https://odonto.univ-lorraine.fr/formations-continues/formations-longues/orthodontie-numerique/
 sessions:
 - lieu: L-NANCY
   debut: null
@@ -24,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-08'
 notes: null

@@ -5,23 +5,26 @@ secteur: universitaire
 type: du
 disciplines:
 - implanto
-format: null
+format: presentiel
 duree: 1 an
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 'Droit de formation : 3500 € ; internes : 2000 € ; droits universitaires ≃ 250 € (selon tarif
+    ministériel)'
+  euros: 3500
   annee: null
-prerequis: null
-precisions: null
+prerequis: Être titulaire d'un diplôme de docteur en chirurgie dentaire ; justifier d'un niveau 4-C1 en
+  français
+precisions: Prochaine réouverture en 2027-2028 ; un séminaire par mois de septembre à juillet, cours le
+  matin et travaux pratiques sur modèles l'après-midi
 financement: []
-url_officielle: https://odonto.univ-lorraine.fr/app/uploads/2025/09/250709_programme_dufi_mep.pdf
+url_officielle: https://odonto.univ-lorraine.fr/formations-continues/formations-longues/du-fondamental-en-implantologie/
 sessions:
 - lieu: L-NANCY
   debut: null
   fin: null
-  inscriptions: a-renseigner
-  places: null
+  inscriptions: annoncee
+  places: 15
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-08'
 notes: null

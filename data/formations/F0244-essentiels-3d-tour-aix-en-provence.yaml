@@ -4,7 +4,7 @@ organisme: O043
 secteur: prive
 type: cursus
 disciplines:
-- omni
+- gestion
 format: presentiel
 duree: null
 volume_horaire_h: null
@@ -22,7 +22,7 @@ sessions:
   fin: '2027-04-09'
   inscriptions: a-renseigner
   places: null
-statut: a-verifier
+statut: validee
 derniere_verification: '2026-11-05'
 notes: 'Dates ''8 & 9 avril 2027''. Durée non écrite (l''URL mentionne ''2 jours condensés'') : laissée
   vide. Billet pour dentistes, assistant(e)s, secrétaires et coordinatrices. Animé par le Dr Cyril Gaillard.

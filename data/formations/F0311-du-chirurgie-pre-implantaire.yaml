@@ -1,0 +1,31 @@
+id: F0311
+intitule: DU Chirurgie pré-implantaire
+organisme: O010
+secteur: universitaire
+type: du
+disciplines:
+- chir
+- implanto
+format: presentiel
+duree: null
+volume_horaire_h: 100
+tarif:
+  texte: 6 000 € (droits annexes inclus)
+  euros: 6000
+  annee: null
+prerequis: Diplôme d'État de docteur en chirurgie dentaire (ou DES chirurgie maxillo-faciale) et diplôme
+  universitaire d'implantologie ou attestation équivalente
+precisions: null
+financement: []
+url_officielle: https://odontologie.univ-nantes.fr/du-chirurgie-pre-implantaire
+sessions:
+- lieu: L-NANTES
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: 5
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : volume : « 100 h dont 36 h de stage » (https://odontologie.univ-nantes.fr/du-chirurgie-pre-implantaire)
+  | tarif : « 6 000 € (Droits annexes inclus) » (idem) | sessions : « Prochaine rentrée : à déterminer
+  ; Ouverture inscriptions : à déterminer ; 5 places » (idem)'

@@ -1,0 +1,29 @@
+id: F0318
+intitule: DIU Prise en charge de la douleur
+organisme: O010
+secteur: universitaire
+type: diu
+disciplines:
+- mbd
+format: hybride
+duree: null
+volume_horaire_h: 120
+tarif:
+  texte: 1 800 € frais d'inscription inclus
+  euros: 1800
+  annee: null
+prerequis: Diplôme d'État (médecine, pharmacie, chirurgie dentaire, vétérinaire, infirmier, kiné) ou master
+  de psychologie clinique
+precisions: null
+financement: []
+url_officielle: https://sante.univ-nantes.fr/loffre-de-formation/formation-continue/diu-prise-en-charge-de-la-douleur
+sessions:
+- lieu: L-NANTES
+  debut: null
+  fin: null
+  inscriptions: annoncee
+  places: 30
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : volume : « Durée totale de la formation : 120 heures » (idem)
+  | sessions : « Prochaine rentrée : Octobre 2027, inscriptions à partir d''avril 2027 » (idem)'

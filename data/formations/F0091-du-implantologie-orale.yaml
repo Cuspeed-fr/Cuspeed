@@ -5,23 +5,31 @@ secteur: universitaire
 type: du
 disciplines:
 - implanto
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 2 ans
+volume_horaire_h: 752
 tarif:
-  texte: null
-  euros: null
+  texte: 6 000 € pour les 2 ans, frais d'inscription inclus ; abattement pour les internes et les étudiants
+    sur demande
+  euros: 6000
   annee: null
 prerequis: null
 precisions: null
 financement: []
-url_officielle: https://www.odontologie.univ-nantes.fr/
+url_officielle: https://odontologie.univ-nantes.fr/du-implantologie-orale
 sessions:
 - lieu: L-NANTES
   debut: null
   fin: null
-  inscriptions: a-renseigner
-  places: null
-statut: a-verifier
-derniere_verification: '2026-11-02'
-notes: null
+  inscriptions: annoncee
+  places: 14
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Complément du 8 nov. 2026 — url_officielle : « DU Implantologie orale (page dédiée, UFR d''Odontologie)
+  » (https://odontologie.univ-nantes.fr/du-implantologie-orale) | format : « Formation à distance : sans
+  objet ; 12 sessions d''enseignement théoriques en présentiel et stages cliniques » (https://odontologie.univ-nantes.fr/du-implantologie-orale)
+  | duree : « Durée totale de la formation : 752 heures sur 2 années universitaires » (https://odontologie.univ-nantes.fr/du-implantologie-orale)
+  | volume_horaire_h : « Durée totale de la formation : 752 heures (122 h de présentiel + 630 h de stage)
+  » (https://odontologie.univ-nantes.fr/du-implantologie-orale) | tarif_texte : « 6 000 € pour les 2 ans,
+  frais d''inscription inclus » (https://odontologie.univ-nantes.fr/du-implantologie-orale) | tarif_euros
+  : « 6 000 € pour les 2 ans, frais d''inscription inclus » (https://odontologie.univ-nantes.fr/du-implantologie-orale)'

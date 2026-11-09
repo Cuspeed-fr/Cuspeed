@@ -1,0 +1,36 @@
+id: F0093
+intitule: DU Restauration dentaire esthétique
+organisme: O010
+secteur: universitaire
+type: du
+disciplines:
+- resto
+format: presentiel
+duree: 2 ans
+volume_horaire_h: 129
+tarif:
+  texte: 4 200 € pour les 2 ans, frais d'inscription inclus ; abattement pour les internes sur demande
+  euros: 4200
+  annee: null
+prerequis: Diplôme d'État de docteur en chirurgie dentaire ou en médecine ; minimum 3 années consécutives
+  d'activité professionnelle (exercice en cabinet)
+precisions: null
+financement: []
+url_officielle: https://odontologie.univ-nantes.fr/du-restauration-dentaire-esthetique
+sessions:
+- lieu: L-NANTES
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: 12
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Complément du 8 nov. 2026 — intitule : « DU Restauration dentaire esthétique » (https://odontologie.univ-nantes.fr/du-restauration-dentaire-esthetique)
+  | url_officielle : « DU Restauration dentaire esthétique » (https://odontologie.univ-nantes.fr/du-restauration-dentaire-esthetique)
+  | format : « Présentiel, alternance de cours et de travaux pratiques en salle de simulation » (https://odontologie.univ-nantes.fr/du-restauration-dentaire-esthetique)
+  | duree : « Diplôme Universitaire sur 2 ans » (https://odontologie.univ-nantes.fr/du-restauration-dentaire-esthetique)
+  | volume_horaire_h : « Durée totale de la formation : 129 heures » (https://odontologie.univ-nantes.fr/du-restauration-dentaire-esthetique)
+  | tarif_texte : « 4 200 € (pour les 2 ans) » (https://odontologie.univ-nantes.fr/du-restauration-dentaire-esthetique)
+  | tarif_euros : « 4 200 € (pour les 2 ans) » (https://odontologie.univ-nantes.fr/du-restauration-dentaire-esthetique)
+  | prerequis : « Justifier de minimum 3 années consécutives d''activité professionnelle (exercice en
+  cabinet) » (https://odontologie.univ-nantes.fr/du-restauration-dentaire-esthetique)'

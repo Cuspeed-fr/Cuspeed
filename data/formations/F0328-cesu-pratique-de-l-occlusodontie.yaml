@@ -1,0 +1,30 @@
+id: F0328
+intitule: CESU Pratique de l'occlusodontie
+organisme: O014
+secteur: universitaire
+type: ces
+disciplines:
+- occlu
+format: en-ligne
+duree: 72 h sur 1 an
+volume_horaire_h: 72
+tarif:
+  texte: 2 069 € net de taxe par an
+  euros: 2069
+  annee: null
+prerequis: Diplôme d'État de docteur en chirurgie dentaire ou équivalent
+precisions: 6 séminaires de 2 jours, à distance (jeudi 13h-19h, vendredi 9h-16h30)
+financement: []
+url_officielle: https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-pratique-occlusodontie-2023.pdf
+sessions:
+- lieu: L-MARSEILLE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « « Pratique de l''occlusodontie » (CESU) » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-pratique-occlusodontie-2023.pdf)
+  | duree : « 72 heures sur 1 an, 6 séminaires de 2 jours » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-pratique-occlusodontie-2023.pdf)
+  | tarif : « 2 069 euros nets de taxe par an » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-pratique-occlusodontie-2023.pdf)
+  | format : « « Formation à distance » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-pratique-occlusodontie-2023.pdf)'

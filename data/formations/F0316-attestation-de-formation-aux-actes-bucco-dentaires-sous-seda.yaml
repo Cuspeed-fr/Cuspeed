@@ -1,0 +1,30 @@
+id: F0316
+intitule: Attestation de formation aux actes bucco-dentaires sous sédation consciente par inhalation de
+  MEOPA
+organisme: O010
+secteur: universitaire
+type: auec
+disciplines:
+- sedation
+format: presentiel
+duree: 2 jours
+volume_horaire_h: null
+tarif:
+  texte: 950 € tarif plein ; 113 € pour les internes affectés à Nantes et les personnes rattachées à l'UFR
+  euros: 950
+  annee: null
+prerequis: Chirurgien-dentiste ; AFGSU niveau 2 de moins de 5 ans ; maîtrise du français ; sur dossier
+precisions: null
+financement: []
+url_officielle: https://odontologie.univ-nantes.fr/formation-continue/les-formations-courtes
+sessions:
+- lieu: L-NANTES
+  debut: '2027-03-25'
+  fin: '2027-03-26'
+  inscriptions: ouvertes
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : tarif : « 950 € - tarif plein » (https://odontologie.univ-nantes.fr/formation-continue/les-formations-courtes)
+  | sessions : « 25 et 26 mars 2027 » (idem) | duree : « Formation de 2 jours ; 4 demi-journées de cours
+  magistraux » (idem)'

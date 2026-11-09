@@ -6,16 +6,17 @@ type: ces
 disciplines:
 - paro
 format: hybride
-duree: null
+duree: 1 an
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 'Droit de formation : 750 € ; droits universitaires (selon tarif ministériel) ≃ 500 €'
+  euros: 750
   annee: null
-prerequis: null
+prerequis: Être titulaire d'un diplôme de docteur en chirurgie dentaire ; justifier d'un niveau 4-C1 en
+  français
 precisions: null
 financement: []
-url_officielle: https://odonto.univ-lorraine.fr/?p=1818
+url_officielle: https://odonto.univ-lorraine.fr/formations-continues/formations-longues/ces-de-parodontologie/
 sessions:
 - lieu: L-NANCY
   debut: null
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-08'
 notes: null

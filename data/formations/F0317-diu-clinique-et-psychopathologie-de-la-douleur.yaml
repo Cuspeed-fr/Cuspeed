@@ -1,0 +1,28 @@
+id: F0317
+intitule: DIU Clinique et psychopathologie de la douleur
+organisme: O010
+secteur: universitaire
+type: diu
+disciplines:
+- mbd
+format: hybride
+duree: 2 ans
+volume_horaire_h: 204
+tarif:
+  texte: 2 900 € pour les 2 ans, frais d'inscription inclus
+  euros: 2900
+  annee: null
+prerequis: Doctorat en médecine ou chirurgie dentaire, ou Master 2 de psychologie
+precisions: null
+financement: []
+url_officielle: https://sante.univ-nantes.fr/loffre-de-formation/formation-continue/diu-clinique-et-psychopathologie-de-la-douleur
+sessions:
+- lieu: L-NANTES
+  debut: null
+  fin: null
+  inscriptions: annoncee
+  places: 20
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : tarif : « 2 900 € pour les deux années » (idem) | sessions
+  : « Rentrée septembre 2027, ouverture des candidatures avril 2027 » (idem)'

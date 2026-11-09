@@ -1,0 +1,32 @@
+id: F0325
+intitule: CESU Prothèse fixée, occlusion et pratiques pluridisciplinaires
+organisme: O014
+secteur: universitaire
+type: ces
+disciplines:
+- occlu
+- proth
+format: presentiel
+duree: 1 an
+volume_horaire_h: null
+tarif:
+  texte: 'Formation continue : 2 069 € ; formation initiale : 2 000 €'
+  euros: 2069
+  annee: null
+prerequis: Diplôme d'État de docteur en chirurgie dentaire ou équivalent ; sur dossier
+precisions: 6 séminaires
+financement: []
+url_officielle: https://smpm.univ-amu.fr/en/training/continuing%20education/prothese-fixee-occlusion
+sessions:
+- lieu: L-MARSEILLE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « Prothèse fixée, occlusion et pratiques pluridisciplinaires
+  (CESU) » (https://smpm.univ-amu.fr/en/training/continuing%20education/prothese-fixee-occlusion) | duree
+  : « Durée : 1 an » (https://smpm.univ-amu.fr/en/training/continuing%20education/prothese-fixee-occlusion)
+  | tarif : « 2 000 € en formation initiale, 2 069 € en formation continue » (https://smpm.univ-amu.fr/en/training/continuing%20education/prothese-fixee-occlusion)
+  | precisions : « Le programme comprend 6 séminaires » (https://smpm.univ-amu.fr/en/training/continuing%20education/prothese-fixee-occlusion)'

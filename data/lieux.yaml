@@ -64,6 +64,12 @@
   latitude: 48.63
   longitude: 2.44
   regroupement_carte: Paris / IDF
+- id: L-EYRAGUES
+  nom: Eyragues
+  adresse: null
+  latitude: 43.8386
+  longitude: 4.8403
+  regroupement_carte: Eyragues
 - id: L-LILLE
   nom: Lille
   adresse: null
@@ -154,3 +160,9 @@
   latitude: 43.6
   longitude: 1.44
   regroupement_carte: Toulouse
+- id: L-VILLENEUVE-D-ASCQ
+  nom: Villeneuve-d'Ascq
+  adresse: null
+  latitude: 50.6167
+  longitude: 3.1667
+  regroupement_carte: Lille

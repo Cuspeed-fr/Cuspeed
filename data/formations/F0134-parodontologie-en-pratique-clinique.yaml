@@ -5,23 +5,34 @@ secteur: universitaire
 type: desu
 disciplines:
 - paro
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 120 h sur 1 an
+volume_horaire_h: 120
 tarif:
-  texte: null
-  euros: null
+  texte: 3 369 € net de taxe par an (formation continue) ; 3 300 € en formation initiale
+  euros: 3369
   annee: null
-prerequis: null
-precisions: null
+prerequis: Titulaire du diplôme d'État de docteur en chirurgie dentaire ou d'un diplôme équivalent ; admission
+  sur dossier (lettre de motivation, CV, diplômes)
+precisions: 5 séminaires de 3 jours ; enseignement à l'École de médecine dentaire de Marseille
 financement: []
-url_officielle: https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-parodontologie-pratique-clinique-2023.pdf
+url_officielle: https://smpm.univ-amu.fr/en/training/continuing%20education/parodontology-clinical-practice
 sessions:
 - lieu: L-MARSEILLE
-  debut: null
+  debut: '2027-01-18'
   fin: null
   inscriptions: a-renseigner
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-02'
-notes: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Complément du 8 nov. 2026 — url_officielle : « Page dédiée « Periodontology in clinical practice
+  » (DESU), Marseille » (https://smpm.univ-amu.fr/en/training/continuing%20education/parodontology-clinical-practice)
+  | format : « Format : présentiel (page dédiée) » (https://smpm.univ-amu.fr/en/training/continuing%20education/parodontology-clinical-practice)
+  | duree : « « DUREE : 120 H sur 1 an » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-parodontologie-pratique-clinique-2023.pdf)
+  | volume_horaire_h : « « DUREE : 120 H sur 1 an » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-parodontologie-pratique-clinique-2023.pdf)
+  | tarif_texte : « « 3 369 euros Net de taxe » ; page dédiée : formation initiale 3 300 €, formation
+  continue 3 369 € » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-parodontologie-pratique-clinique-2023.pdf)
+  | tarif_euros : « « 3 369 euros Net de taxe » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-parodontologie-pratique-clinique-2023.pdf)
+  | prerequis : « « Titulaire du Diplôme d''Etat de Docteur en Chirurgie Dentaire » ; « Sur dossier (lettre
+  de motivation, CV et photocopies de diplômes) » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-parodontologie-pratique-clinique-2023.pdf)
+  | precisions : « « LIEU : Ecole de Médecine Dentaire » ; 5 séminaires de 3 jours » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-parodontologie-pratique-clinique-2023.pdf)'

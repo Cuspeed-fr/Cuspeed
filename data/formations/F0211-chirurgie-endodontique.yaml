@@ -23,10 +23,10 @@ sessions:
 - lieu: L-PARIS
   debut: '2027-06-21'
   fin: '2027-06-22'
-  inscriptions: ouvertes
+  inscriptions: a-renseigner
   places: 25
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Session du 13-14 octobre 2026 (Paris) écrite sur la page mais passée : ignorée. Lieu de la session
   : « À Paris - Boulogne ». DPC : prise en charge partielle, sous réserve des crédits ANDPC restants (n°
   action 86952325014). Prix sans mention HT/TTC. | Décision de Chris, 6 nov. 2026 : type journee. | Citations
@@ -34,4 +34,7 @@ notes: 'Session du 13-14 octobre 2026 (Paris) écrite sur la page mais passée :
   sur la chirurgie endodontique. » ; volume_horaire_h : « 16h » ; tarif : « 2495 € » ; prerequis : « Doctorat
   en chirurgie dentaire (ou praticien en cours de doctorat ayant validé leur CSCT ou équivalent européen)
   » ; format : « Format Présentiel » ; financement : « Prise en charge DPC partielle* » ; sessions : «
-  À Paris - Boulogne - 21 au 22 juin 2027 - (25 places disponibles) »'
+  À Paris - Boulogne - 21 au 22 juin 2027 - (25 places disponibles) »
+
+  Complément du 8 nov. 2026 — volume_horaire_h : « 2 jours consécutifs, 16 heures » (https://www.endo-academie.fr/produit/chirurgie-endodontique-2/)
+  | duree : « 2 jours consécutifs, 16 heures » (https://www.endo-academie.fr/produit/chirurgie-endodontique-2/)'

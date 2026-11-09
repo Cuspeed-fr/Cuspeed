@@ -1,0 +1,30 @@
+id: F0313
+intitule: CES Parodontologie
+organisme: O010
+secteur: universitaire
+type: ces
+disciplines:
+- paro
+format: presentiel
+duree: 1 an
+volume_horaire_h: 120
+tarif:
+  texte: 526 € pour le CES en 2026-2027 ; 167 € pour l'UE Master 1 Sciences Santé ; droits fixés chaque
+    année par arrêté ministériel
+  euros: 526
+  annee: 2026-27
+prerequis: Diplôme de docteur en chirurgie dentaire
+precisions: null
+financement: []
+url_officielle: https://odontologie.univ-nantes.fr/formation-continue/ces/ces-parodontologie
+sessions:
+- lieu: L-NANTES
+  debut: null
+  fin: null
+  inscriptions: complet
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : duree : « d''une durée de 1 an ; 120 heures dont 70 h de
+  cours magistraux » (https://odontologie.univ-nantes.fr/formation-continue/ces/ces-parodontologie) |
+  tarif : « 526 € pour le CES en 2026-2027 » (idem) | inscriptions : « Session 2026-2027 complète » (idem)'

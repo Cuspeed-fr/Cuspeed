@@ -15,13 +15,14 @@ tarif:
 prerequis: null
 precisions: null
 financement: []
-url_officielle: https://www.odontologie.univ-nantes.fr/
+url_officielle: https://odontologie.univ-nantes.fr/formation-continue/ces
 sessions:
 - lieu: L-NANTES
   debut: null
   fin: null
-  inscriptions: a-renseigner
+  inscriptions: fermees
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-02'
-notes: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Complément du 8 nov. 2026 — url_officielle : « CES d''Odontologie Prothétique (4 mentions) : prothèse
+  adjointe complète, partielle, conjointe, maxillo-faciale » (https://odontologie.univ-nantes.fr/formation-continue/ces)'

@@ -15,13 +15,13 @@ tarif:
 prerequis: null
 precisions: null
 financement: []
-url_officielle: https://s3.eu-west-1.amazonaws.com/abcdent/events/2879/attachments/16784/original.pdf?1576241980
+url_officielle: https://odonto.univ-rennes.fr/certificat-detudes-superieures-en-odontologie-prothetique
 sessions:
 - lieu: L-RENNES
   debut: null
   fin: null
   inscriptions: a-renseigner
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-02'
-notes: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Complément du 8 nov. 2026 — url_officielle : « page dédiée » (https://odonto.univ-rennes.fr/certificat-detudes-superieures-en-odontologie-prothetique)'

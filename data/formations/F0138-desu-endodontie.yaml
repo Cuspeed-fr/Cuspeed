@@ -6,16 +6,17 @@ type: desu
 disciplines:
 - endo
 format: null
-duree: null
+duree: 1 an
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 3 369 € en formation continue ; 3 300 € en formation initiale
+  euros: 3369
   annee: null
-prerequis: null
+prerequis: Titulaire du diplôme d'État de docteur en chirurgie dentaire ou d'un diplôme équivalent ; sur
+  dossier
 precisions: null
 financement: []
-url_officielle: https://smpm.univ-amu.fr/sites/default/files/ressources_docs/FLYER-DESU-ENDODONTIE-24-25.pdf
+url_officielle: https://smpm.univ-amu.fr/en/training/continuing%20education/endodontics
 sessions:
 - lieu: L-MARSEILLE
   debut: null
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-08'
 notes: null

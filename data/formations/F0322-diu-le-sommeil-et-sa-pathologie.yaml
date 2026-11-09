@@ -1,0 +1,23 @@
+id: F0322
+intitule: DIU Le sommeil et sa pathologie
+organisme: O010
+secteur: universitaire
+type: diu
+disciplines:
+- sommeil
+format: hybride
+duree: 2 ans
+volume_horaire_h: 239
+tarif:
+  texte: 1 400 € frais d'inscription inclus
+  euros: 1400
+  annee: null
+prerequis: Doctorat en médecine, pharmacie ou chirurgie dentaire, ou master en recherche biomédicale
+precisions: null
+financement: []
+url_officielle: https://sante.univ-nantes.fr/loffre-de-formation/formation-continue/diu-le-sommeil-et-sa-pathologie
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : volume : « Durée totale de la formation : 239 heures » (idem)
+  | sessions : « Inscriptions avril 2027, rentrée décembre 2027 ; 4 places à Nantes » (idem)'

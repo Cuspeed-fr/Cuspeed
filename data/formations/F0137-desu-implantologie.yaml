@@ -1,0 +1,32 @@
+id: F0137
+intitule: DESU Implantologie
+organisme: O014
+secteur: universitaire
+type: desu
+disciplines:
+- implanto
+format: null
+duree: 6 séminaires
+volume_horaire_h: 124
+tarif:
+  texte: 3 369 € net de taxe par an (formation continue) ; 3 300 € en formation initiale
+  euros: 3369
+  annee: null
+prerequis: Titulaire du diplôme d'État de docteur en chirurgie dentaire ; sur dossier
+precisions: null
+financement: []
+url_officielle: https://smpm.univ-amu.fr/en/training/continuing-education/implantology
+sessions:
+- lieu: L-MARSEILLE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Complément du 8 nov. 2026 — intitule : « « DESU «IMPLANTOLOGIE» » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-implantologie-2023.pdf)
+  | url_officielle : « Page dédiée implantology (DESU Implantologie) » (https://smpm.univ-amu.fr/en/training/continuing-education/implantology)
+  | volume_horaire_h : « « DUREE : 124 H sur 1 an » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-implantologie-2023.pdf)
+  | tarif_texte : « « COÛT/TARIF (PAR AN) : 3 369 euros Net de taxe » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-implantologie-2023.pdf)
+  | tarif_euros : « « COÛT/TARIF (PAR AN) : 3 369 euros Net de taxe » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-implantologie-2023.pdf)
+  | prerequis : « « Titulaire du Diplôme d''Etat de Docteur en Chirurgie Dentaire » » (https://smpm.univ-amu.fr/sites/default/files/ressources_docs/formation-continue-diplomante-presentation-implantologie-2023.pdf)'

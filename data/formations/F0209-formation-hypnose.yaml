@@ -14,7 +14,9 @@ tarif:
   annee: null
 prerequis: null
 precisions: null
-financement: []
+financement:
+- fifpl
+- opco
 url_officielle: https://www.denttabulleformation.fr/formation/hypnose-1jour/
 sessions:
 - lieu: L-AMBARES
@@ -22,8 +24,8 @@ sessions:
   fin: '2026-11-12'
   inscriptions: ouvertes
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
   Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
   salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
@@ -32,4 +34,8 @@ notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.den
   Texte alternatif d''image parle de « Formation Hypnose avancée » (incohérence). HT/TTC non précisé.
   | Citations de la source : intitule : « Formation Hypnose » ; duree : « 1 jour » ; format : « Non, toutes
   nos formations se déroulent en présentiel dans notre centre. » ; tarif : « 800 € » ; sessions : « Le
-  12 novembre 2026 ; Inscriptions ouvertes »'
+  12 novembre 2026 ; Inscriptions ouvertes »
+
+  Complément du 8 nov. 2026 — financement : « Votre formation peut être financée par votre employeur ou
+  votre OPCO ; Votre formation peut être éligible à une prise en charge individuelle par le FIF PL (mention
+  générale de l''organisme, page Certification & Financements ; DPC/CPF non mentionnés) » (https://www.denttabulleformation.fr/certification-qualiopi/)'

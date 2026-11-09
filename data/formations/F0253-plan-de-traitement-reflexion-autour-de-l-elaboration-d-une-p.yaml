@@ -13,13 +13,13 @@ tarif:
     module 1 : 2 000 € · module 2 : 400 €'
   euros: 2000
   annee: null
-prerequis: null
+prerequis: Chirurgiens dentistes omnipraticiens
 precisions: null
 financement: []
 url_officielle: https://www.icdp.paris/formation/plan-de-traitement-reflexion-autour-de-lelaboration-dune-proposition-therapeutique-globale/
 sessions: []
 statut: a-verifier
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-08'
 notes: 'Source : page détaillée ICDP. Niveau N1. Module 1 (30 h, présentiel, 9 sessions) ; un module 2
   optionnel ''Analyse de cas cliniques'' (6 h, 400 €, dates non définies) existe, non repris ici. Dates
   du module 1 : 7 février au 6 novembre 2024, toutes passées, donc aucune session. Financement : la page
@@ -28,4 +28,6 @@ notes: 'Source : page détaillée ICDP. Niveau N1. Module 1 (30 h, présentiel, 
   de » repris tel qu''affiché : aucune mention HT/TTC ni année sur la page. | Citations de la source :
   duree : « Module 1 : 30 heures, en présentiel » ; tarif : « À partir de 2 000€ (formation complète N1,
   30 heures) ; Ou 2 modules au choix : À partir de 2 400€ ; Module 1 : 2 000€ ; Module 2 : 400€ » ; financement
-  : « éligible à financement »'
+  : « éligible à financement »
+
+  Complément du 8 nov. 2026 — prerequis : « Chirurgiens dentistes omnipraticiens » (https://www.icdp.paris/formation/plan-de-traitement-reflexion-autour-de-lelaboration-dune-proposition-therapeutique-globale/)'

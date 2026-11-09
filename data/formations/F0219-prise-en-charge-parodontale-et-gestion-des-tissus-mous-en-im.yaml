@@ -18,11 +18,21 @@ prerequis: Pas de pré-requis.
 precisions: null
 financement:
 - fifpl
+- opco
 url_officielle: https://evolyou.dental/formations/prise-en-charge-parodontale-et-gestion-des-tissus-mous-en-implantologie-creer-des-conditions-de-succes-durable/
-sessions: []
-statut: a-verifier
-derniere_verification: '2026-11-05'
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Session ''À venir'' à Paris, ''date à la carte'', aucune date : sessions vide. DPC non cité. Type
   ''journee'' par défaut (formation de 2 jours, pas de type plus adapté). Tarif repris tel qu''affiché
   : aucune mention HT/TTC ni année sur la page. | Citations de la source : duree : « 2 jours » ; tarif
-  : « €1500 » ; financement : « FIF-PL et OPCO-EP »'
+  : « €1500 » ; financement : « FIF-PL et OPCO-EP »
+
+  Complément du 8 nov. 2026 — prerequis : « Pas de pré-requis. » (https://evolyou.dental/formations/prise-en-charge-parodontale-et-gestion-des-tissus-mous-en-implantologie-creer-des-conditions-de-succes-durable/)
+  | financement : « Cette formation est éligible au financement des OPCO ; mentions FIF-PL et OPCO-EP
+  (page de financement https://evolyou.dental/financer-votre-formation/ : FIFPL et OPCO EP) » (https://evolyou.dental/formations/prise-en-charge-parodontale-et-gestion-des-tissus-mous-en-implantologie-creer-des-conditions-de-succes-durable/)'

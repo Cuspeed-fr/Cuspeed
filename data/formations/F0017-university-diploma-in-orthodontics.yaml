@@ -5,23 +5,23 @@ secteur: universitaire
 type: du
 disciplines:
 - ortho
-format: null
-duree: null
+format: presentiel
+duree: 3 ans
 volume_horaire_h: null
 tarif:
-  texte: null
+  texte: 'Frais de formation : 33000 € / an ; droits universitaires ≃ 250 € / an'
   euros: null
   annee: null
-prerequis: null
+prerequis: Bon niveau de français (B2, ou B1 avec cours additionnels de français), attesté par un certificat
 precisions: null
 financement: []
-url_officielle: https://odonto.univ-lorraine.fr/?p=1818
+url_officielle: https://odonto.univ-lorraine.fr/formations-continues/formations-longues/orthodontics/
 sessions:
 - lieu: L-NANCY
   debut: null
   fin: null
   inscriptions: a-renseigner
-  places: null
+  places: 2
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-08'
 notes: null

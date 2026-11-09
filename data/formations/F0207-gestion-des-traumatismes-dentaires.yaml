@@ -13,12 +13,11 @@ tarif:
   texte: 800 €
   euros: 800
   annee: null
-prerequis: Être titulaire du diplôme de chirurgien-dentiste ou être étudiant en dernière année d’odontologie.
-  Disposer des connaissances fondamentales en odontologie conservatrice, endodontie, parodontologie et
-  radiologie dentaire. Comprendre les principes de base du diagnostic et de la prise en charge des urgences
-  dentaires.
+prerequis: Être titulaire du diplôme de chirurgien-dentiste ou être étudiant en dernière année d'odontologie
 precisions: null
-financement: []
+financement:
+- fifpl
+- opco
 url_officielle: https://www.denttabulleformation.fr/formation/gestion-des-traumatismes/
 sessions:
 - lieu: L-AMBARES
@@ -26,8 +25,8 @@ sessions:
   fin: '2027-03-04'
   inscriptions: ouvertes
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
   Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
   salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
@@ -41,4 +40,10 @@ notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.den
   dans notre centre. » ; tarif : « 800 € » ; sessions : « le 4 mars 2027 » ; prerequis : « Être titulaire
   du diplôme de chirurgien-dentiste ou être étudiant en dernière année d’odontologie. Disposer des connaissances
   fondamentales en odontologie conservatrice, endodontie, parodontologie et radiologie dentaire. Comprendre
-  les principes de base du diagnostic et de la prise en charge des urgences dentaires. »'
+  les principes de base du diagnostic et de la prise en charge des urgences dentaires. »
+
+  Complément du 8 nov. 2026 — prerequis : « Être titulaire du diplôme de chirurgien-dentiste ou être étudiant
+  en dernière année d''odontologie. » (https://www.denttabulleformation.fr/formation/gestion-des-traumatismes/)
+  | financement : « Votre formation peut être financée par votre employeur ou votre OPCO ; Votre formation
+  peut être éligible à une prise en charge individuelle par le FIF PL (mention générale de l''organisme,
+  page Certification & Financements ; DPC/CPF non mentionnés) » (https://www.denttabulleformation.fr/certification-qualiopi/)'

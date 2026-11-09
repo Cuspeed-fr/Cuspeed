@@ -6,7 +6,7 @@ type: cursus
 disciplines:
 - endo
 format: presentiel
-duree: null
+duree: 37 h
 volume_horaire_h: 37
 tarif:
   texte: 4695 €
@@ -21,21 +21,21 @@ url_officielle: https://www.endo-academie.fr/produit/le-cycle-endodontie-present
 sessions:
 - lieu: L-PARIS
   debut: '2027-03-22'
-  fin: '2027-03-24'
+  fin: '2027-05-11'
   inscriptions: complet
   places: null
 - lieu: L-PARIS
   debut: '2027-03-22'
-  fin: '2027-03-24'
+  fin: '2027-05-13'
   inscriptions: ouvertes
   places: 22
 - lieu: L-PARIS
   debut: '2027-10-11'
-  fin: '2027-10-13'
+  fin: '2027-12-07'
   inscriptions: ouvertes
   places: 26
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Dates de session = jours de cours. Travaux pratiques : 10-11 mai 2027 (session complète), 12-13
   mai 2027 (nouvelle session), 6-7 décembre 2027 (octobre). Durée écrite : « 37h » seulement (volume).
   Prix sans HT/TTC. DPC partiel, sous réserve des crédits ANDPC (action 86952325023). Témoignages de la
@@ -46,4 +46,8 @@ notes: 'Dates de session = jours de cours. Travaux pratiques : 10-11 mai 2027 (s
   dentaire (ou praticien en cours de doctorat ayant validé leur CSCT ou équivalent européen) » ; format
   : « Le Cycle Endodontie se déroule initialement en présentiel » ; financement : « Prise en charge DPC
   partielle » ; precisions : « jusqu’à 1 mois avant le début de la formation » ; sessions : « Paris -
-  22 au 24 mars 2027 (COMPLET) ; (22 places disponibles) ; (26 places disponibles) »'
+  22 au 24 mars 2027 (COMPLET) ; (22 places disponibles) ; (26 places disponibles) »
+
+  Complément du 8 nov. 2026 — volume_horaire_h : « 37 h » (https://www.endo-academie.fr/produit/le-cycle-endodontie-presentiel/)
+  | duree : « 37 h : deux jours et demi de cours théoriques, une demi-journée de cas cliniques et deux
+  jours de travaux pratiques (résumé de la page) » (https://www.endo-academie.fr/produit/le-cycle-endodontie-presentiel/)'

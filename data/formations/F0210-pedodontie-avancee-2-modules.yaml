@@ -14,7 +14,9 @@ tarif:
   annee: null
 prerequis: Chirurgiens dentistes Assistantes dentaires
 precisions: null
-financement: []
+financement:
+- fifpl
+- opco
 url_officielle: https://www.denttabulleformation.fr/formation/pedodontie-avancee-2-modules/
 sessions:
 - lieu: L-AMBARES
@@ -27,8 +29,8 @@ sessions:
   fin: '2027-11-05'
   inscriptions: a-renseigner
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
   Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
   salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
@@ -39,4 +41,8 @@ notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.den
   leurs praticiens. HT/TTC non précisé. | Citations de la source : intitule : « Pédodontie avancée - 2
   modules » ; duree : « 2 sessions de 2 jours » ; format : « Non, toutes nos formations se déroulent en
   présentiel dans notre centre. » ; tarif : « 2 700 € » ; sessions : « Du 7 au 8 octobre et du 4 au 5
-  novembre 2027 » ; prerequis : « Chirurgiens dentistes Assistantes dentaires »'
+  novembre 2027 » ; prerequis : « Chirurgiens dentistes Assistantes dentaires »
+
+  Complément du 8 nov. 2026 — financement : « Votre formation peut être financée par votre employeur ou
+  votre OPCO ; Votre formation peut être éligible à une prise en charge individuelle par le FIF PL (mention
+  générale de l''organisme, page Certification & Financements ; DPC/CPF non mentionnés) » (https://www.denttabulleformation.fr/certification-qualiopi/)'

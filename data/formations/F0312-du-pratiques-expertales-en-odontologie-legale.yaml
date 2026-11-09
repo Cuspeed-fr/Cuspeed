@@ -1,0 +1,31 @@
+id: F0312
+intitule: DU Pratiques expertales en odontologie légale
+organisme: O010
+secteur: universitaire
+type: du
+disciplines:
+- legal
+format: presentiel
+duree: 2 ans
+volume_horaire_h: 133.5
+tarif:
+  texte: 3 850 € pour les 2 ans, frais d'inscription inclus ; abattement pour les internes
+  euros: 3850
+  annee: null
+prerequis: DE de docteur en chirurgie dentaire ou en médecine (ou diplôme étranger reconnu) ; ou en cours
+  d'obtention, au moins 2 semestres validés
+precisions: null
+financement: []
+url_officielle: https://odontologie.univ-nantes.fr/du-pratiques-expertales-en-odontologie-legale
+sessions:
+- lieu: L-NANTES
+  debut: null
+  fin: null
+  inscriptions: annoncee
+  places: 60
+statut: validee
+derniere_verification: '2026-11-08'
+notes: 'Preuves (extraction du 8 nov. 2026) : duree : « Diplôme Universitaire sur 2 ans ; Durée totale
+  de la formation : 133,5 heures » (https://odontologie.univ-nantes.fr/du-pratiques-expertales-en-odontologie-legale)
+  | tarif : « 3 850 € (pour les 2 ans) » (idem) | sessions : « Prochaine rentrée : novembre 2028 ; Ouverture
+  candidatures : avril 2028 ; 60 places » (idem)'

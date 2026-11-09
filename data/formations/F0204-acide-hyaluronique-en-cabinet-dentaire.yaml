@@ -14,7 +14,9 @@ tarif:
   annee: null
 prerequis: Chirurgiens dentistes uniquement, assistantes dentaires avec leurs praticiens.
 precisions: null
-financement: []
+financement:
+- fifpl
+- opco
 url_officielle: https://www.denttabulleformation.fr/formation/acide-hyaluronique-en-cabinet-dentaire/
 sessions:
 - lieu: L-AMBARES
@@ -22,8 +24,8 @@ sessions:
   fin: '2027-01-28'
   inscriptions: ouvertes
   places: null
-statut: a-verifier
-derniere_verification: '2026-11-05'
+statut: validee
+derniere_verification: '2026-11-08'
 notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.denttabulleformation.fr/formations/).
   Pas de DPC/FIFPL écrit. Lieu des sessions = adresse de l''organisme (15 rue de Beauséjour, Ambarès-et-Lagrave),
   salle exacte non précisée. Offre Duo : une place offerte pour l''assistant(e) à toute inscription (non
@@ -31,4 +33,10 @@ notes: 'Format présentiel tiré de la FAQ de la page catalogue (https://www.den
   précisé. | Citations de la source : intitule : « Acide hyaluronique en cabinet dentaire » ; duree :
   « Durée 8h » ; format : « Non, toutes nos formations se déroulent en présentiel dans notre centre. »
   ; tarif : « Prix 800 € » ; prerequis : « Chirurgiens dentistes uniquement, assistantes dentaires avec
-  leurs praticiens. » ; sessions : « Le 28 janvier 2027 ; Inscriptions ouvertes »'
+  leurs praticiens. » ; sessions : « Le 28 janvier 2027 ; Inscriptions ouvertes »
+
+  Complément du 8 nov. 2026 — volume_horaire_h : « 8 h, matinée de théorie et après-midi de travaux pratiques
+  » (https://www.denttabulleformation.fr/formation/acide-hyaluronique-en-cabinet-dentaire/) | financement
+  : « Votre formation peut être financée par votre employeur ou votre OPCO ; Votre formation peut être
+  éligible à une prise en charge individuelle par le FIF PL (mention générale de l''organisme, page Certification
+  & Financements ; DPC/CPF non mentionnés) » (https://www.denttabulleformation.fr/certification-qualiopi/)'

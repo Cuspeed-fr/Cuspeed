@@ -19,6 +19,9 @@ const prochaine = prochaineSession(f, donnees);
 const aujourdhui = new Date().toISOString().slice(0, 10);
 const lieux = [...new Set(f.sessions.filter((s) => s.lieu && sessionActive(s, aujourdhui)).map((s) => s.lieu))];
 const aReperes = Boolean(prochaine || villes.length || f.duree || tarif);
+// Toutes les dates de début à venir (au jour de la construction) : le tri de l'accueil choisit la
+// première qui n'est pas encore passée le jour de la visite.
+const debuts = [...new Set(f.sessions.map((s) => (s.debut ? String(s.debut) : "")).filter((d) => d && d >= aujourdhui))].sort();
 ---
 <li
   class="fiche-resume"
@@ -31,7 +34,7 @@ const aReperes = Boolean(prochaine || villes.length || f.duree || tarif);
   data-villes={regroupementsDe(f, donnees).join("|")}
   data-aides={f.financement.length ? f.financement.join(" ") : undefined}
   data-precisions={f.precisions ?? undefined}
-  data-debut={prochaine?.debut}
+  data-debuts={debuts.length ? debuts.join(" ") : undefined}
   data-prix={f.tarif.euros ?? undefined}
 >
   <ul class="etiquettes" aria-label="Type et disciplines">

@@ -7,16 +7,17 @@ disciplines:
 - pedo
 - sedation
 format: null
-duree: null
-volume_horaire_h: null
+duree: 1 an
+volume_horaire_h: 77
 tarif:
   texte: null
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteur en chirurgie dentaire, étudiant de 3e cycle en chirurgie dentaire ou étudiant étranger
+  inscrit en DFMS/DFMSA ; maîtrise courante du français
 precisions: null
 financement: []
-url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/DIUOdoPediaSedation.pdf
 sessions:
 - lieu: L-BORDEAUX
   debut: null
@@ -24,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

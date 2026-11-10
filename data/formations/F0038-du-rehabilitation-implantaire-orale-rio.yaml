@@ -6,15 +6,20 @@ type: du
 disciplines:
 - implanto
 - proth
-format: null
+format: presentiel
 duree: 72 h/an · 2 ans
 volume_horaire_h: 72
 tarif:
-  texte: null
+  texte: 4 495 €/an (prise en charge totale ou partielle hors Pôle emploi, ou financement personnel) ;
+    2 250 €/an pour un étudiant, interne ou faisant fonction d'interne finançant seul sa formation ; frais
+    de dossier 300 €
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: Chirurgiens-dentistes et médecins à pratique orientée vers la médecine bucco-dentaire (diplôme
+  d'État de docteur en médecine ou en chirurgie dentaire) ; internes de spécialités ayant validé deux
+  années ; avis pédagogique
+precisions: Stage clinique obligatoire de 528 h (1 journée par semaine) dans les hôpitaux Pitié-Salpêtrière,
+  Charles-Foix, Henri Mondor. Enseignements sur les sites Garancière et Montrouge.
 financement: []
 url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-rehabilitation-implantaire-orale-rio-L5SG386G.html
 sessions:
@@ -24,5 +29,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

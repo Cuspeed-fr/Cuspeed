@@ -9,13 +9,13 @@ format: null
 duree: null
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 'Formation continue : 2 900 € ; formation initiale : 680 €'
+  euros: 2900
   annee: null
 prerequis: null
-precisions: Diplôme partagé avec Nice
+precisions: Diplôme partagé avec Nice (modules à Bordeaux et à Nice) ; suspendu en 2026-2027
 financement: []
-url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/DIU-Laser.pdf
 sessions:
 - lieu: L-BORDEAUX
   debut: null
@@ -23,5 +23,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

@@ -1,0 +1,34 @@
+id: F0355
+intitule: AEU Traumatologie dentaire
+organisme: O016
+secteur: universitaire
+type: aeu
+disciplines:
+- chir
+format: null
+duree: 1 an
+volume_horaire_h: null
+tarif:
+  texte: 'Praticien : 1 700 € ; interne : 700 €'
+  euros: 1700
+  annee: null
+prerequis: 'Chirurgiens-dentistes (français ou étrangers) et internes français. Dossier : CV, lettre de
+  motivation, copie des diplômes.'
+precisions: 'Responsables : Pr C. Villat, Pr B. Thivichon. N''ouvre pas en 2025-2026 ; ouverture 2026-2027
+  non annoncée.'
+financement: []
+url_officielle: https://offre-de-formations.univ-lyon1.fr/parcours-1486/traumatologie-dentaire.html
+sessions:
+- lieu: L-LYON
+  debut: null
+  fin: null
+  inscriptions: fermees
+  places: null
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « AEU Traumatologie dentaire » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | duree : « Durée en semestres : 2 semestres (page parcours) ; AEU 1 an (page odontologie) » (https://offre-de-formations.univ-lyon1.fr/parcours-1486/traumatologie-dentaire.html)
+  | tarif_texte : « AEU Traumatologie dentaire : praticien 1 700 €, interne 700 € » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | url_officielle : « Page de la formation sur le site officiel de Lyon 1 (liste détaillée sur https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  » (https://offre-de-formations.univ-lyon1.fr/parcours-1486/traumatologie-dentaire.html) | prerequis
+  : « dentistes, internes français ; CV, lettre, diplômes » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)'

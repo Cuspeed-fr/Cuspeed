@@ -1,0 +1,35 @@
+id: F0354
+intitule: AEU Parodontologie
+organisme: O016
+secteur: universitaire
+type: aeu
+disciplines:
+- paro
+format: null
+duree: 1 an
+volume_horaire_h: null
+tarif:
+  texte: 'Praticien : 2 500 € ; personnel Lyon 1 : 1 000 € ; interne : 700 €'
+  euros: 2500
+  annee: 2026-27
+prerequis: 'Chirurgiens-dentistes et médecins (français ou étrangers), internes ou anciens internes français.
+  Dossier : CV, lettre de motivation, copie des diplômes.'
+precisions: 'Responsables : Pr K. Gritsch, Dr K. Sy. Groupe complet pour 2026-2027.'
+financement: []
+url_officielle: https://offre-de-formations.univ-lyon1.fr/parcours-887/parodontologie.html
+sessions:
+- lieu: L-LYON
+  debut: '2027-01-04'
+  fin: '2027-06-01'
+  inscriptions: complet
+  places: 12
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « AEU Parodontologie » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | duree : « Durée en semestres : 2 semestres (page parcours) ; AEU 1 an (page odontologie) » (https://offre-de-formations.univ-lyon1.fr/parcours-887/parodontologie.html)
+  | tarif_texte : « AEU Parodontologie 2026-2027 : praticien 2 500 €, personnel Lyon 1 1 000 €, interne
+  700 € » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | url_officielle : « Page de la formation sur le site officiel de Lyon 1 (liste détaillée sur https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  » (https://offre-de-formations.univ-lyon1.fr/parcours-887/parodontologie.html) | prerequis : « dentistes,
+  médecins, internes ou anciens internes ; CV, lettre, diplômes » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | sessions : « 4-5 janv., 8-9 févr., 11-12 mars, 8-9 avr. 2027 ; examen 1er juin 2027 » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)'

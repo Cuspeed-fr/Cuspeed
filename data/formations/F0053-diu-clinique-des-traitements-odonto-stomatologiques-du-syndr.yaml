@@ -1,0 +1,29 @@
+id: F0053
+intitule: DIU Clinique des traitements odonto-stomatologiques du syndrome d'apnées obstructives du sommeil
+organisme: O005
+secteur: universitaire
+type: diu
+disciplines:
+- sommeil
+format: hybride
+duree: 100 h
+volume_horaire_h: 100
+tarif:
+  texte: 2 520 €/an (prise en charge totale ou partielle, ou financement personnel) ; 1 260 €/an en tarif
+    préférentiel (étudiants, internes, faisant fonction d'interne) ; frais de dossier 300 €
+  euros: 2520
+  annee: null
+prerequis: null
+precisions: 'Site Garancière. Jeudi et vendredi, 4 fois par an (février, avril, juin) ; examen le 9 septembre
+  2027. Universités partenaires : Sorbonne Université, CHU Angers.'
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/diu-clinique-des-traitements-odonto-stomatologiques-du-syndrome-d-apnees-obstructives-du-sommeil-KFGSKPK0.html
+sessions:
+- lieu: L-PARIS
+  debut: '2027-02-05'
+  fin: null
+  inscriptions: ouvertes
+  places: 45
+statut: validee
+derniere_verification: '2026-11-09'
+notes: null

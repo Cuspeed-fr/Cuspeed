@@ -6,17 +6,19 @@ type: du
 disciplines:
 - occlu
 - proth
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 2 ans
+volume_horaire_h: 100
 tarif:
-  texte: null
-  euros: null
-  annee: null
-prerequis: null
-precisions: null
+  texte: 3 000 € en tarif individuel (1 500 € par année) ; tarifs spécifiques, nous consulter
+  euros: 3000
+  annee: 2026-27
+prerequis: 'Titulaires du diplôme d''État de Docteur en Chirurgie Dentaire. Recrutement par la commission
+  pédagogique sur dossier de candidature (Ecandidat) : lettre de motivation, CV et copie des diplômes.'
+precisions: 'Cours tous les lundis de 17 h à 19 h. Stage clinique dans l''UF d''occlusodontie du service
+  d''odontologie du CHU. Responsable : Dr Mathilde Savignat.'
 financement: []
-url_officielle: https://ufr3s.univ-lille.fr/fileufr3s/user_upload/ufr3s-formation-continue/odontologie/du/du-occlusodontie-rehabilitation-orale-fonctionnelle.pdf
+url_officielle: https://ufr3s.univ-lille.fr/formation-continue/odontologie/du-occlusodontie-rehabilitation-orale-fonctionnelle
 sessions:
 - lieu: L-LILLE
   debut: null
@@ -24,5 +26,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

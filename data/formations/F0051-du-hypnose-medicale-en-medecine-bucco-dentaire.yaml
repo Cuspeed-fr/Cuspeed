@@ -5,17 +5,20 @@ secteur: universitaire
 type: du
 disciplines:
 - sedation
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 112 h
+volume_horaire_h: 112.5
 tarif:
-  texte: null
-  euros: null
+  texte: 2 250 € (prise en charge totale ou partielle, ou financement personnel) ; 1 910 € pour les diplômés
+    depuis moins de 2 ans (ou AHU, CCA, FFI) ; 1 690 € pour étudiants, internes et FFI ; frais de dossier
+    300 €
+  euros: 2250
   annee: null
-prerequis: null
-precisions: null
+prerequis: Titulaires d'un diplôme d'État de docteur en chirurgie dentaire ou de docteur en médecine (chirurgie
+  orale ou stomatologie) ; au moins 2 ans d'exercice professionnel ; avis pédagogique
+precisions: Site Garancière (Paris 6e). 8 modules de 2 jours, 1 module par mois.
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-hypnose-medicale-en-medecine-bucco-dentaire-KK6VX4F4.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -23,5 +26,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

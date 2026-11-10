@@ -6,17 +6,21 @@ type: du
 disciplines:
 - implanto
 - proth
-format: hybride
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 2 ans
+volume_horaire_h: 480
 tarif:
-  texte: null
+  texte: 5 060 €/an (prise en charge totale ou partielle, ou financement personnel) ; 2 530 €/an en tarif
+    préférentiel (étudiants, internes, faisant fonction d'interne) ; frais de dossier 300 €. Sous réserve
+    de modification par les instances de l'Université.
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteurs en chirurgie dentaire ou en médecine ; au moins un C.E.S. de 3e cycle en chirurgie
+  dentaire (ou équivalent), une qualification post-universitaire d'un an en implantologie et plusieurs
+  années d'expérience clinique ; avis pédagogique
 precisions: En présentiel ou en hybride
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-clinique-d-implantologie-chirurgicale-et-prothetique-KFGS3KNW.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -24,5 +28,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

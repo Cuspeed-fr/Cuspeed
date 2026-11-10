@@ -1,0 +1,31 @@
+id: F0043
+intitule: DU Certificat d'études supérieures universitaires théorique et clinique de prothèse maxillo-faciale
+  (CESU PMF)
+organisme: O005
+secteur: universitaire
+type: du
+disciplines:
+- proth
+format: presentiel
+duree: 203 h
+volume_horaire_h: 203
+tarif:
+  texte: 2 500 € (prise en charge totale ou partielle, ou financement personnel) ; 1 250 € pour étudiants,
+    internes ou faisant fonction d'interne (sur justificatif) ; frais de dossier 300 €
+  euros: 2500
+  annee: null
+prerequis: Chirurgiens-dentistes diplômés, ou étudiants inscrits en année de thèse (certificat de scolarité)
+  ; avis pédagogique
+precisions: Cours à Garancière ; stages hospitaliers (Lariboisière, Pitié-Salpêtrière, Foch, HEGP). Hebdomadaire,
+  le vendredi selon le programme.
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-certificat-d-etudes-superieures-universitaires-theorique-et-clinique-de-prothese-maxillo-faciale-cesu-pmf-FOR16.html
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-09'
+notes: null

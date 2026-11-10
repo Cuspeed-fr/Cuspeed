@@ -1,0 +1,35 @@
+id: F0361
+intitule: DU Identification odontologique et crânio-faciale (DUIOCF)
+organisme: O016
+secteur: universitaire
+type: du
+disciplines:
+- legal
+format: null
+duree: 2 ans
+volume_horaire_h: null
+tarif:
+  texte: '2 800 € par an (total 5 600 €) pour un praticien ; interne : 1 000 € par an'
+  euros: 5600
+  annee: null
+prerequis: 'Chirurgiens-dentistes français avec au moins 2 ans d''exercice, médecins avec au moins 3 ans,
+  internes. Dossier : CV, lettre de motivation, copie des diplômes, preuve d''inscription à l''Ordre.'
+precisions: 'Responsables : Dr B. Comte, Dr C. Desbois. Formation indiquée comme n''ouvrant pas en 2025-2026
+  ; ouverture 2026-2027 non annoncée.'
+financement: []
+url_officielle: https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes
+sessions:
+- lieu: L-LYON
+  debut: null
+  fin: null
+  inscriptions: fermees
+  places: 12
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « DU Identification odontologique et crânio-faciale
+  (DUIOCF) » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | duree : « DUIOCF, parmi les diplômes de 2 ans » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | tarif_texte : « DUIOCF : 2 800 € par an (total 5 600 €), interne 1 000 € par an » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | url_officielle : « Page de la formation sur le site officiel de Lyon 1 (liste détaillée sur https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | prerequis : « dentistes 2 ans d''exercice, médecins 3 ans, internes » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)'

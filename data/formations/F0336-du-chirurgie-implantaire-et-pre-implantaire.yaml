@@ -1,0 +1,45 @@
+id: F0336
+intitule: DU Chirurgie implantaire et pré-implantaire
+organisme: O005
+secteur: universitaire
+type: du
+disciplines:
+- chir
+- implanto
+format: presentiel
+duree: 2 ans
+volume_horaire_h: null
+tarif:
+  texte: 2 680 € (prise en charge totale ou partielle, ou financement personnel) ; 1 930 € en tarif préférentiel
+    (diplômés de moins de 2 ans, AHU, CCA, FFI hospitalier) ; 1 400 € pour étudiants, internes, faisant
+    fonction d'interne universitaires ; frais de dossier 300 €. Sous réserve de modification par les instances
+    de l'Université.
+  euros: null
+  annee: null
+prerequis: Chirurgiens-dentistes, praticiens spécialistes en chirurgie orale, chirurgiens maxillo-faciaux,
+  stomatologues ; aucun prérequis hormis les diplômes ; avis pédagogique
+precisions: null
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-chirurgie-implantaire-et-pre-implantaire-K02DPTBO.html
+sessions:
+- lieu: L-PARIS
+  debut: '2027-01-07'
+  fin: null
+  inscriptions: fermees
+  places: 15
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « DU Chirurgie implantaire et pré-implantaire
+  » (https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-chirurgie-implantaire-et-pre-implantaire-K02DPTBO.html)
+  | type : « Diplôme d''université (DU-DIU) » (https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-chirurgie-implantaire-et-pre-implantaire-K02DPTBO.html)
+  | duree : « Formation dispensée sur 2 années, de janvier à novembre » (https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-chirurgie-implantaire-et-pre-implantaire-K02DPTBO.html)
+  | tarif : « Prise en charge totale ou partielle, ou financement personnel : 2680 € ; 1930 € ; 1400 €
+  ; Frais de dossier : 300 € » (https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-chirurgie-implantaire-et-pre-implantaire-K02DPTBO.html)
+  | prerequis : « Chirurgiens-dentistes ; Praticiens spécialistes en chirurgie orale ; Aucun prérequis
+  nécessaire hormis les diplômes liés aux titres » (https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-chirurgie-implantaire-et-pre-implantaire-K02DPTBO.html)
+  | sessions : « Date de début : 7 janv. 2027 ; Candidatures du 21 septembre 2026 au 2 novembre 2026 ;
+  15 apprenants maximum » (https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-chirurgie-implantaire-et-pre-implantaire-K02DPTBO.html)
+  | precisions : « 49 heures de cours magistraux et 180 heures de formation pratique (les jeudis) ; Hôpital
+  Saint-Joseph » (https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-chirurgie-implantaire-et-pre-implantaire-K02DPTBO.html)
+  | page_liste : « formation listée sur la page Formation continue de l''UFR d''odontologie (absente du
+  catalogue odf de la composante) » (https://u-paris.fr/odontologie/formation-continue/)'

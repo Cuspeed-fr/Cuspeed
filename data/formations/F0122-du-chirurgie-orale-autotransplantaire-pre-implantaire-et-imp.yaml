@@ -1,10 +1,11 @@
-id: F0126
-intitule: DU Dentisterie minimalement invasive (DMI)
+id: F0122
+intitule: DU Chirurgie orale autotransplantaire, pré-implantaire et implantaire maxillo-zygomatique (DUCOAPIIMZ)
 organisme: O013
 secteur: universitaire
 type: du
 disciplines:
-- resto
+- chir
+- implanto
 format: null
 duree: null
 volume_horaire_h: null
@@ -13,7 +14,7 @@ tarif:
   euros: null
   annee: null
 prerequis: null
-precisions: Existe aussi en DIU avec Marseille
+precisions: null
 financement: []
 url_officielle: https://www.umontpellier.fr/wp-content/uploads/2025/12/Livret-ODONTOLOGIE-2026-2027.pdf
 sessions:
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

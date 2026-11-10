@@ -6,17 +6,20 @@ type: du
 disciplines:
 - ortho
 - resto
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 200 h sur 2 ans
+volume_horaire_h: 200
 tarif:
-  texte: null
+  texte: '1re année : 3 035 € ; 2e année : 3 940 € (prise en charge totale ou partielle, ou financement
+    personnel) ; frais de dossier 300 €/an. Sous réserve de modification par les instances de l''Université.'
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: 'Praticiens spécialistes en orthopédie dento-faciale (docteurs en chirurgie dentaire spécialistes
+  qualifiés en ODF : CECSMO, DES ODF ou équivalence) ; avis pédagogique'
+precisions: Hôpital Bretonneau (site Montrouge). Théorie un vendredi par mois (8h30-13h) et vacations
+  cliniques un vendredi par mois (14h-18h30). Seuls les reçus de 1re année accèdent à la 2e.
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-orthodontie-linguale-et-esthetique-DU03_141.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -24,5 +27,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

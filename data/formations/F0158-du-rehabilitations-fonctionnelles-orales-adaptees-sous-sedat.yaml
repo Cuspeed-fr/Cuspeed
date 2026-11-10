@@ -6,17 +6,21 @@ type: du
 disciplines:
 - geria
 - sedation
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 2 ans
+volume_horaire_h: 71
 tarif:
-  texte: null
+  texte: '2 700 € par année d''études (tarif plein) ; tarif réduit 1 100 € (chirurgiens-dentistes de l''unité
+    HANDICONSULT ARAOUEST, PH, personnel UCA) ; internes MBD du CHU : 550 € ; redoublement de 6 mois :
+    750 € (plein tarif)'
   euros: null
   annee: null
-prerequis: null
-precisions: Diplôme renouvelé en 2026
+prerequis: Attestation AFGSU de moins de 4 ans ; attestation de formation à la sédation par MEOPA figurant
+  sur la liste validée par le CNO ; au moins 2 ans d'expérience professionnelle pour les chirurgiens-dentistes.
+precisions: Diplôme renouvelé en 2026. Stage clinique au service d'odontologie du CHU de Clermont-Ferrand
+  ou au service de chirurgie ambulatoire du CH Guy Thomas à Riom.
 financement: []
-url_officielle: https://www.uca.fr/medias/fichier/delib-cfvu-20260324-24-du-rfoa-sedag-odonto_1782135743801-pdf
+url_officielle: https://odontologie.uca.fr/formation/diplome-duniversite-certificats-detudes-superieures/diplome-universitaire-rehabilitations-fonctionnelles-orales-adaptees-sous-sedation-et-anesthesie-generale
 sessions:
 - lieu: L-CLERMONT
   debut: null
@@ -24,5 +28,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

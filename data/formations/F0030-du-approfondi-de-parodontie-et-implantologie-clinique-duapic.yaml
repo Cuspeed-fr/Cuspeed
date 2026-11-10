@@ -10,10 +10,12 @@ format: null
 duree: 1 an, après le DUPC
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 15 750 €/an pour toute personne finançant seule sa formation ; 7 875 € en tarif préférentiel
+    pour étudiants et internes ; frais de dossier 300 €
+  euros: 15750
   annee: null
-prerequis: null
+prerequis: Titulaires d'un diplôme de Docteur en chirurgie-dentaire ; un an minimum d'expérience clinique
+  (sauf internes) ; validation du CES de parodontologie avant l'examen final du DUPC
 precisions: null
 financement: []
 url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-approfondi-de-parodontie-et-implantologie-clinique-duapic-KFGRVOWI.html
@@ -24,5 +26,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

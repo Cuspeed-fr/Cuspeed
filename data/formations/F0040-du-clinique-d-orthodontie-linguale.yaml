@@ -5,17 +5,20 @@ secteur: universitaire
 type: du
 disciplines:
 - ortho
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 200 h sur 2 ans
+volume_horaire_h: 200
 tarif:
-  texte: null
+  texte: '4 945 €/an (financement personnel) ; tarif préférentiel étudiants, internes, faisant fonction
+    d''interne : 2 475 € (« 2475 an » sur la page) ; frais de dossier 300 €. Sous réserve de modification
+    par les instances de l''Université.'
   euros: null
   annee: null
-prerequis: null
+prerequis: Spécialistes qualifiés en orthopédie dento-faciale (ou diplôme étranger équivalent) ; cours
+  de certification WIN requis pour les débutants ; avis pédagogique et entretien oral
 precisions: Enseignement sur le site Garancière
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-clinique-d-orthodontie-linguale-garanciere-KFGRNS1K.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -23,5 +26,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

@@ -6,16 +6,16 @@ type: du
 disciplines:
 - proth
 format: null
-duree: null
-volume_horaire_h: null
+duree: 1 an
+volume_horaire_h: 140
 tarif:
-  texte: null
-  euros: null
+  texte: 'Formation continue : 4 500 €'
+  euros: 4500
   annee: null
-prerequis: null
+prerequis: Docteur en chirurgie dentaire avec diplôme européen (2 ans minimum d'exercice post thèse)
 precisions: null
 financement: []
-url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/RehabProthetique.pdf
 sessions:
 - lieu: L-BORDEAUX
   debut: null
@@ -23,5 +23,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

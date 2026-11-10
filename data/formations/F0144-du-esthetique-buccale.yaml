@@ -6,11 +6,11 @@ type: du
 disciplines:
 - resto
 format: null
-duree: null
+duree: 9 séminaires de 2 jours
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 4900€ + 57€ (frais universitaire)
+  euros: 4900
   annee: null
 prerequis: null
 precisions: null
@@ -23,5 +23,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

@@ -6,14 +6,15 @@ type: du
 disciplines:
 - pedo
 format: null
-duree: null
-volume_horaire_h: null
+duree: 1 an
+volume_horaire_h: 80
 tarif:
   texte: 1 500 €
   euros: 1500
   annee: null
-prerequis: null
-precisions: null
+prerequis: Docteur en chirurgie dentaire (diplôme français ou équivalent européen) ; internes en odontologie
+  dès le 3e semestre
+precisions: Suspendu en 2026-2027 ; responsable Pr Elsa Garot
 financement: []
 url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/DU-OdontoPediaClinique.pdf
 sessions:
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

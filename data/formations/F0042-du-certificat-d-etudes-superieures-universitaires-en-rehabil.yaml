@@ -1,0 +1,30 @@
+id: F0042
+intitule: DU Certificat d'études supérieures universitaires en réhabilitation orale prothétique (CESU
+  ROP)
+organisme: O005
+secteur: universitaire
+type: du
+disciplines:
+- proth
+format: hybride
+duree: 2 ans · 208 h
+volume_horaire_h: 208
+tarif:
+  texte: 3 225 €/an pour toute personne bénéficiant ou non d'une prise en charge totale ou partielle ;
+    frais de dossier 300 €
+  euros: null
+  annee: null
+prerequis: Praticiens titulaires du diplôme d'État de docteur en chirurgie dentaire, internes et DES en
+  médecine bucco-dentaire ; ordinateur et bonne connexion internet ; avis pédagogique
+precisions: null
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-certificat-d-etudes-superieures-universitaires-en-rehabilitation-orale-prothetique-cesu-rop-FOR17.html
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-09'
+notes: null

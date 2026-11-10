@@ -1,0 +1,38 @@
+id: F0344
+intitule: DU Dermatologie buccale (100 % e-learning)
+organisme: O015
+secteur: universitaire
+type: du
+disciplines:
+- mbd
+format: en-ligne
+duree: null
+volume_horaire_h: 38
+tarif:
+  texte: '2200 € + 57 € (frais universitaires) ; internes : 800 € + 57 € ; + 500 € à régler à la plateforme
+    de e-learning partenaire FrenchTooth'
+  euros: 2200
+  annee: null
+prerequis: Niveau 3e cycle (>bac+5) ; docteur en chirurgie-dentaire, après autorisation des enseignants
+  responsables (docteurs en médecine également admis)
+precisions: Enseignements de janvier à décembre 2027 ; sélection sur dossier
+financement: []
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/d-u-dermatologie-buccale
+sessions:
+- lieu: L-NICE
+  debut: null
+  fin: null
+  inscriptions: annoncee
+  places: 40
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « Diplôme Universitaire en Dermatologie Buccale
+  pour Dentistes et Orthodontistes » (https://univ-cotedazur.fr/formation/offre-de-formation/d-u-dermatologie-buccale)
+  | format : « 100% e-learning » (https://univ-cotedazur.fr/formation/offre-de-formation/d-u-dermatologie-buccale)
+  | volume_horaire_h : « Enseignements théoriques (38h CM) » (https://univ-cotedazur.fr/formation/offre-de-formation/d-u-dermatologie-buccale)
+  | tarif : « 2200 € + 57 € (frais universitaires) ; Internes : 800€ + 57 € ; + 500€ à régler à la plate-forme
+  de e-learning partenaire FrenchTooth » (https://univ-cotedazur.fr/formation/offre-de-formation/d-u-dermatologie-buccale)
+  | prerequis : « Formation requise : Docteur en chirurgie-dentaire ; Sont admis à s''inscrire, après
+  autorisation des enseignants responsables » (https://univ-cotedazur.fr/formation/offre-de-formation/d-u-dermatologie-buccale)
+  | sessions : « De janvier à décembre 2027. Les inscriptions se dérouleront de janvier au 3 mai 2027.
+  40 participants » (https://univ-cotedazur.fr/formation/offre-de-formation/d-u-dermatologie-buccale)'

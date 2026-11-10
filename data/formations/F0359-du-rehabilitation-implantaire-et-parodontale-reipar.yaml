@@ -1,0 +1,36 @@
+id: F0359
+intitule: DU Réhabilitation implantaire et parodontale (REIPAR)
+organisme: O016
+secteur: universitaire
+type: du
+disciplines:
+- implanto
+- paro
+format: null
+duree: 1 an
+volume_horaire_h: null
+tarif:
+  texte: 'Praticien : 3 800 € ; personnel Lyon 1 : 2 400 € ; interne : 1 000 €'
+  euros: 3800
+  annee: null
+prerequis: 'DUIP ou équivalent ; priorité aux attachés en chirurgie orale ou parodontologie. Dossier :
+  CV, lettre de motivation, copie des diplômes, preuve d''inscription à l''Ordre.'
+precisions: 'Responsables : Pr A. Lafon, Dr D. Chacun, Dr E. Pelletier. Un mercredi par semaine de janvier
+  à décembre 2027, plus quelques vendredis, Centre de soins.'
+financement: []
+url_officielle: http://offre-de-formations.univ-lyon1.fr/parcours-1450/rehabilitation-implantaire-et-parodontale-(reipar).html
+sessions:
+- lieu: L-LYON
+  debut: null
+  fin: null
+  inscriptions: fermees
+  places: null
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « DU Réhabilitation implantaire et parodontale
+  (REIPAR) » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | duree : « DU REIPAR, parmi les diplômes d''1 an » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | tarif_texte : « REIPAR : praticien 3 800 €, personnel Lyon 1 2 400 €, interne 1 000 € » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | url_officielle : « Page de la formation sur le site officiel de Lyon 1 (liste détaillée sur https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  » (http://offre-de-formations.univ-lyon1.fr/parcours-1450/rehabilitation-implantaire-et-parodontale-(reipar).html)
+  | prerequis : « DUIP ou équivalent » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)'

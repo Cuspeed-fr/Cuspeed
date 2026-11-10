@@ -5,17 +5,21 @@ secteur: universitaire
 type: du
 disciplines:
 - endo
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 2 ans · 1 215 h
+volume_horaire_h: 1215
 tarif:
-  texte: null
+  texte: 4 500 €/année (prise en charge totale ou partielle, ou financement personnel) ; 2 250 € en tarif
+    préférentiel (étudiants, internes, faisant fonction d'interne) ; frais de dossier 300 €/an
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: Titulaires d'un diplôme français de docteur en chirurgie dentaire ou de l'attestation de réussite
+  de fin de 6e année (TCE01) ; expérience régulière de travail sous microscope ; formation théorique ou
+  AFOHU en endodontie ; avis pédagogique
+precisions: Site Montrouge ; stage pratique de 900 h sur 6 sites hospitaliers. Seuls les reçus à l'examen
+  de 1re année peuvent s'inscrire en 2e année.
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-endodontie-DU11_41.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -23,5 +27,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

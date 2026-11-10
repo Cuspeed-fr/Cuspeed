@@ -5,17 +5,19 @@ secteur: universitaire
 type: du
 disciplines:
 - proth
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 2 ans · 656 h
+volume_horaire_h: 656
 tarif:
-  texte: null
+  texte: 1 070 €/an (prise en charge totale ou partielle, ou financement personnel) ; 535 €/an en tarif
+    préférentiel (étudiants, internes, faisant fonction d'interne) ; frais de dossier 300 €
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteurs en chirurgie dentaire et médecins stomatologistes munis d'un diplôme français ; C.E.S.
+  d'odontologie prothétique mention prothèse maxillo-faciale exigé ; avis pédagogique
 precisions: null
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-clinique-de-prothese-maxillo-faciale-KFGRHH27.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -23,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

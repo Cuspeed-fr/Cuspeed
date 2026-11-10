@@ -7,16 +7,20 @@ disciplines:
 - implanto
 - proth
 format: null
-duree: 2 ans · 640 h de stage
-volume_horaire_h: 640
+duree: 2 ans · 780 h
+volume_horaire_h: 780
 tarif:
-  texte: null
-  euros: null
+  texte: 3 265 € (prise en charge totale ou partielle, ou financement personnel) ; 1 635 € en tarif préférentiel
+    (étudiants, internes, faisant fonction d'interne en formation initiale) ; frais de dossier 300 €.
+    Tarifs sous réserve de modification.
+  euros: 3265
   annee: null
-prerequis: null
-precisions: null
+prerequis: Docteurs en chirurgie dentaire français, chirurgiens-dentistes de l'UE, internes en odontologie
+  ; chirurgiens-dentistes étrangers titulaires d'un C.E.S. ou de l'UE Biomatériaux du M1 ; avis pédagogique
+precisions: Stage obligatoire de 640 h sur 2 ans, à l'hôpital Rothschild. Enseignement le jeudi, plus
+  une matinée par mois le vendredi. Reconnu par l'Ordre à partir de 2026-2027.
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-clinique-de-protheses-implanto-portees-KFGSE59X.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -24,5 +28,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

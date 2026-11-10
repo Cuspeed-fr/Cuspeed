@@ -6,23 +6,24 @@ type: du
 disciplines:
 - chir
 - ortho
-format: null
-duree: null
+format: presentiel
+duree: 1 an
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 2 800 €
+  euros: 2800
   annee: null
-prerequis: null
+prerequis: Spécialistes qualifiés en ODF et en chirurgie orale, ou internes en formation dans ces deux
+  spécialités (DES-ODF, DESCO)
 precisions: null
 financement: []
-url_officielle: https://www.umontpellier.fr/wp-content/uploads/2025/12/Livret-ODONTOLOGIE-2026-2027.pdf
+url_officielle: https://formations.umontpellier.fr/fr/formations/diplome-universite-niv-form-bac-5-UF/diplome-universitaire-de-chirurgie-orthodontique-et-de-chirurgie-orale-avancee-ducocoa-LR6GQRVI.html
 sessions:
 - lieu: L-MONTPELLIER
-  debut: null
+  debut: '2027-01-11'
   fin: null
-  inscriptions: a-renseigner
-  places: null
+  inscriptions: complet
+  places: 18
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

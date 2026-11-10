@@ -9,13 +9,15 @@ format: null
 duree: 2 ans
 volume_horaire_h: null
 tarif:
-  texte: null
+  texte: 16 850 €/an (prise en charge totale ou partielle, ou financement personnel) ; 8 425 €/an en tarif
+    préférentiel pour étudiants et internes ; frais de dossier 300 €/an
   euros: null
   annee: null
-prerequis: null
+prerequis: Titulaires d'un diplôme de Docteur en chirurgie-dentaire ou équivalent ; un an minimum d'expérience
+  clinique après le diplôme (sauf internes) ; validation du CES de parodontologie avant l'examen final
 precisions: Programme accrédité par l'EFP (Fédération européenne de parodontologie)
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-parodontologie-dupc-KFGRBM1T.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-clinique-de-parodontie-KFGRBM1T.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -23,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

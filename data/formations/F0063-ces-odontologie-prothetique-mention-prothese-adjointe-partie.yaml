@@ -1,0 +1,29 @@
+id: F0063
+intitule: CES Odontologie prothétique mention prothèse adjointe - Partielle -
+organisme: O005
+secteur: universitaire
+type: ces
+disciplines:
+- proth
+format: presentiel
+duree: 1 an
+volume_horaire_h: 120
+tarif:
+  texte: 'Frais de formation continue : tarif plein 750 € par CES, tarif réduit AHU 375 € par CES ; droits
+    d''inscription universitaires : tarif plein 502 €, tarif réduit 335 € à partir d''une deuxième inscription
+    (avec ou sans prise en charge)'
+  euros: null
+  annee: null
+prerequis: Titulaires d'un diplôme de praticien de l'art dentaire ; être thésé
+precisions: null
+financement: []
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/certificat-d-etudes-superieures-CES/sciences-technologies-sante-STS/ces-odontologie-prothetique-mention-prothese-adjointe-partielle-KAP4A1OK.html
+sessions:
+- lieu: L-PARIS
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-09'
+notes: null

@@ -18,7 +18,7 @@ tarif:
 prerequis: null
 precisions: '4 certificats : parodontologie, chirurgie-implantologie, endodontie-restauratrice, clinique'
 financement: []
-url_officielle: https://www.umontpellier.fr/wp-content/uploads/2025/12/Livret-ODONTOLOGIE-2026-2027.pdf
+url_officielle: https://formations.umontpellier.fr/fr/formations/diplome-universite-niv-form-bac-5-UF/diplome-universitaire-clinique-laser-en-odontologie-et-stomatologie-duclos-LR69HMN5.html
 sessions:
 - lieu: L-MONTPELLIER
   debut: null
@@ -26,5 +26,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

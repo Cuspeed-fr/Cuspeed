@@ -6,13 +6,14 @@ type: du
 disciplines:
 - omni
 format: null
-duree: null
+duree: 10 séminaires sur une année
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 5500€ + 57€ (frais universitaire)
+  euros: 5500
   annee: null
-prerequis: null
+prerequis: Niveau 3e cycle (>bac+5) ; titulaires d'un diplôme autorisant l'exercice de la profession de
+  dentiste, après avis de la commission de sélection
 precisions: null
 financement: []
 url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/d-u-omni
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

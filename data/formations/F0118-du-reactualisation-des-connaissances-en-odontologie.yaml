@@ -12,7 +12,8 @@ tarif:
   texte: null
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteurs en chirurgie dentaire titulaires d'un diplôme français ou de l'Union européenne, ayant
+  exercé, ayant été inscrits à l'Ordre et souhaitant se réinscrire après plusieurs années sans activité.
 precisions: null
 financement: []
 url_officielle: https://www.univ-tlse3.fr/decouvrir-nos-diplomes/reactualisation-des-connaissances-en-odontologie
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

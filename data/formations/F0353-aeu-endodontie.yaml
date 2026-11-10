@@ -1,0 +1,32 @@
+id: F0353
+intitule: AEU Endodontie
+organisme: O016
+secteur: universitaire
+type: aeu
+disciplines:
+- endo
+format: hybride
+duree: 1 an
+volume_horaire_h: null
+tarif:
+  texte: 'Praticien : 2 300 € (dont 254 € de droits) ; personnel Lyon 1 : 1 000 € ; interne : 700 €'
+  euros: 2300
+  annee: 2026-27
+prerequis: 'Chirurgiens-dentistes et internes français ; dentistes étrangers : niveau C1 TCF. Dossier
+  : CV, lettre de motivation, copie des diplômes, dossier de titres et travaux.'
+precisions: null
+financement: []
+url_officielle: https://offre-de-formations.univ-lyon1.fr/parcours-1866/endodontie.html
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « AEU Endodontie » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | duree : « Durée en semestres : 2 semestres (page parcours) ; AEU 1 an (page odontologie) » (https://offre-de-formations.univ-lyon1.fr/parcours-1866/endodontie.html)
+  | tarif_texte : « AEU d''Endodontie 2026-2027 : praticien 2 300 € (dont 254 € de droits), personnel
+  Lyon 1 1 000 €, interne 700 € » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | url_officielle : « Page de la formation sur le site officiel de Lyon 1 (liste détaillée sur https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  » (https://offre-de-formations.univ-lyon1.fr/parcours-1866/endodontie.html) | prerequis : « Dentistes
+  et internes français ; dentistes étrangers C1 TCF ; CV, lettre de motivation, diplômes, dossier de titres
+  et travaux » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | format : « partie théorique en ligne, travaux dirigés/pratiques sur simulateurs » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | sessions : « en ligne à partir du 11 janvier 2027 ; TD/TP 24-28 mai 2027 » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)'

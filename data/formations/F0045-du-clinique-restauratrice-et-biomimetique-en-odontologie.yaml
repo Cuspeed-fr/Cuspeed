@@ -5,23 +5,25 @@ secteur: universitaire
 type: du
 disciplines:
 - resto
-format: null
-duree: null
+format: presentiel
+duree: 2 ans
 volume_horaire_h: null
 tarif:
-  texte: null
+  texte: 3 500 €/année (prise en charge totale ou partielle, ou financement personnel) ; 1 750 €/année
+    en tarif réduit (étudiants, internes, faisant fonction d'interne) ; frais de dossier 300 €/an
   euros: null
   annee: null
-prerequis: null
+prerequis: Praticiens titulaires du diplôme d'État de docteur en chirurgie dentaire, internes et DES en
+  médecine bucco-dentaire ; avis pédagogique ; aucun prérequis hormis les diplômes
 precisions: null
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-clinique-restauratrice-et-biomimetique-en-odontologie-JI38SRQA.html
 sessions:
 - lieu: L-PARIS
-  debut: null
+  debut: '2027-01-04'
   fin: null
-  inscriptions: a-renseigner
+  inscriptions: ouvertes
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

@@ -7,12 +7,13 @@ disciplines:
 - implanto
 format: null
 duree: 6 mois · nov. à mai
-volume_horaire_h: null
+volume_horaire_h: 80
 tarif:
   texte: 2 000 €
   euros: 2000
   annee: null
-prerequis: null
+prerequis: Diplôme d'État en chirurgie dentaire ou en médecine (France), internat en odontologie ou en
+  médecine, ou diplôme étranger équivalent ; maîtrise du français
 precisions: null
 financement: []
 url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/AUI-ImplanOrale.pdf
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

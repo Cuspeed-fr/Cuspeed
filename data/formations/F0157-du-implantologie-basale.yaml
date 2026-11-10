@@ -5,23 +5,27 @@ secteur: universitaire
 type: du
 disciplines:
 - implanto
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 2 ans
+volume_horaire_h: 136
 tarif:
-  texte: null
+  texte: 5 000 € par année d'étude (tarif plein) ; tarif réduit de 3 500 € par année d'étude réservé aux
+    praticiens du service d'odontologie du CHU de Clermont-Ferrand
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: 'Compétence en implantologie : pose minimum de 50 implants par an, et compétences de base en
+  chirurgie. Public : chirurgiens-dentistes, chirurgiens maxillo-faciaux, stomatologues et chirurgiens
+  oraux inscrits à l''ordre. Sélection sur dossier, entretien si nécessaire.'
+precisions: Enseignement à l'UFR d'Odontologie, 2 rue de Braga, Clermont-Ferrand. Dossier à envoyer à
+  formation-continue.odontologie@uca.fr.
 financement: []
-url_officielle: https://www.uca.fr/medias/fichier/delib-cfvu-20250527-05-du-implantologie-basale-odonto_1748938600306-pdf
+url_officielle: https://odontologie.uca.fr/formation/diplome-duniversite-certificats-detudes-superieures/diplome-universitaire-implantologie-basale
 sessions:
 - lieu: L-CLERMONT
   debut: null
   fin: null
-  inscriptions: a-renseigner
+  inscriptions: annoncee
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

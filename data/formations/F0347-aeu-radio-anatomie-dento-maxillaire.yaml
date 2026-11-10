@@ -1,0 +1,33 @@
+id: F0347
+intitule: AEU Radio-anatomie dento-maxillaire
+organisme: O015
+secteur: universitaire
+type: aeu
+disciplines:
+- num
+format: null
+duree: 8 h
+volume_horaire_h: 8
+tarif:
+  texte: 'Tarif plein : 390 euros + 57€ (frais universitaires) ; tarif réduit : 150 euros + 57€ (frais
+    universitaires)'
+  euros: 390
+  annee: null
+prerequis: null
+precisions: null
+financement:
+- fifpl
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/formation-courte-radio-anatomie-dento-maxillaire
+sessions:
+- lieu: L-NICE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « A.E.U - Radio-Anatomie Dento-Maxillaire » (https://univ-cotedazur.fr/formation/offre-de-formation/formation-courte-radio-anatomie-dento-maxillaire)
+  | duree : « 8h » (https://univ-cotedazur.fr/formation/offre-de-formation/formation-courte-radio-anatomie-dento-maxillaire)
+  | tarif : « Tarif plein : 390 euros + 57€ (frais universitaires) ; Tarif réduit : 150 euros + 57€ »
+  (https://univ-cotedazur.fr/formation/offre-de-formation/formation-courte-radio-anatomie-dento-maxillaire)
+  | financement : « susceptible d''être pris en charge par le FIF-PL » (https://univ-cotedazur.fr/formation/offre-de-formation/formation-courte-radio-anatomie-dento-maxillaire)'

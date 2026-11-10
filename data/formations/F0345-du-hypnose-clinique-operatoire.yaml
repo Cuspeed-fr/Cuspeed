@@ -1,0 +1,28 @@
+id: F0345
+intitule: DU Hypnose clinique opératoire
+organisme: O015
+secteur: universitaire
+type: du
+disciplines:
+- sedation
+format: null
+duree: 10 journées
+volume_horaire_h: null
+tarif:
+  texte: 'Tarif plein : 2000 € + 57 € (frais universitaires) ; tarif réduit : 500 € + 57 € (frais universitaires)'
+  euros: 2000
+  annee: null
+prerequis: null
+precisions: Séances du lundi (8h-17h30) et du mardi (8h-15h) ; examen final le 9 février 2027
+financement: []
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/d-u-hypnose-clinique-operatoire
+sessions: []
+statut: a-verifier
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « D.U Hypnose Clinique Opératoire (Diplôme Universitaire
+  en Hypnose Dentaire pour Dentistes et Orthodontistes) » (https://univ-cotedazur.fr/formation/offre-de-formation/d-u-hypnose-clinique-operatoire)
+  | duree : « 10 journées de formation » (https://univ-cotedazur.fr/formation/offre-de-formation/d-u-hypnose-clinique-operatoire)
+  | volume_horaire_h : « Présentiel 10 journées de formation (70h) (page de l''édition 2023 ; la page
+  actuelle : 50h CM et 20h TP) » (https://univ-cotedazur.fr/formation/offre-de-formation/test-qualiopi-d-u-hypnose-dentaire-operatoire)
+  | tarif : « Tarif plein : 2000 € + 57€ (frais universitaires) ; Tarif réduit : 500 € + 57€ (frais universitaires)
+  » (https://univ-cotedazur.fr/formation/offre-de-formation/d-u-hypnose-clinique-operatoire)'

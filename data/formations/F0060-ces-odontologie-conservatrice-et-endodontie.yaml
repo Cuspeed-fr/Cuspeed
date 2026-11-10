@@ -6,17 +6,19 @@ type: ces
 disciplines:
 - endo
 - resto
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 1 an
+volume_horaire_h: 120
 tarif:
-  texte: null
+  texte: 'Frais de formation continue : tarif plein 750 € par CES, tarif réduit AHU 375 € par CES ; droits
+    d''inscription universitaires : tarif plein 502 €, tarif réduit 335 € à partir d''une deuxième inscription
+    (avec ou sans prise en charge)'
   euros: null
   annee: null
-prerequis: null
+prerequis: Être thésé (docteur en chirurgie dentaire)
 precisions: null
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/certificat-d-etudes-superieures-CES/sciences-technologies-sante-STS/ces-odontologie-conservatrice-et-endodontie-KAP4LH1H.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -24,5 +26,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

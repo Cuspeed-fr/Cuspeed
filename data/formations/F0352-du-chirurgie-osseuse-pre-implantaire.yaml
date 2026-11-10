@@ -1,0 +1,36 @@
+id: F0352
+intitule: DU Chirurgie osseuse pré-implantaire
+organisme: O015
+secteur: universitaire
+type: du
+disciplines:
+- chir
+- implanto
+format: null
+duree: 1 an
+volume_horaire_h: null
+tarif:
+  texte: 'Formation continue individuelle (FCI) : 4000€ de frais de formation + droits de scolarité (57
+    €) ; formation continue employeur (FCE) : 4000€ + droits de scolarité'
+  euros: 4000
+  annee: null
+prerequis: null
+precisions: Séminaires de 3 jours en décembre, mars et juin ; TP au laboratoire d'anatomie de la faculté
+  de médecine, chirurgies en direct à l'Institut Universitaire de la Face et du Cou
+financement: []
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/du-chirurgie-osseuse-pre-implantaire
+sessions:
+- lieu: L-NICE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: 20
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « Diplôme Universitaire, Chirurgie osseuse pré-implantaire
+  » (https://univ-cotedazur.fr/formation/offre-de-formation/du-chirurgie-osseuse-pre-implantaire) | duree
+  : « 1 an » (https://univ-cotedazur.fr/formation/offre-de-formation/du-chirurgie-osseuse-pre-implantaire)
+  | tarif : « Formation Continue Individuelle (FCI): 4000€ de frais de formation + droits de scolarité
+  » (https://univ-cotedazur.fr/formation/offre-de-formation/du-chirurgie-osseuse-pre-implantaire) | prerequis
+  : « docteurs en chirurgie dentaire, internes de chirurgie orale, docteurs en médecine, stomatologues,
+  chirurgiens maxillo-faciaux » (https://univ-cotedazur.fr/formation/offre-de-formation/du-chirurgie-osseuse-pre-implantaire)'

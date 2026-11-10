@@ -5,17 +5,19 @@ secteur: universitaire
 type: diu
 disciplines:
 - mbd
-format: null
-duree: null
-volume_horaire_h: null
+format: en-ligne
+duree: 1 an
+volume_horaire_h: 85
 tarif:
   texte: null
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: Docteur en médecine ou en chirurgie dentaire (français ou étranger permettant d'exercer), ou
+  interne en spécialité médicale ou odontologique
+precisions: Cours en ligne (6 modules) et 5 séances d'enseignements dirigés « les jeudis de la pathologie
+  de la muqueuse orale » ; de janvier à novembre
 financement: []
-url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/DIU-PathoOrale.pdf
 sessions:
 - lieu: L-BORDEAUX
   debut: null
@@ -23,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

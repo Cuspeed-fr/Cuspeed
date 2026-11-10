@@ -9,13 +9,13 @@ format: null
 duree: null
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 'Formation continue : 2 500 €'
+  euros: 2500
   annee: null
 prerequis: null
 precisions: null
 financement: []
-url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/DU-dentificationOdonto.pdf
 sessions:
 - lieu: L-BORDEAUX
   debut: null
@@ -23,5 +23,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

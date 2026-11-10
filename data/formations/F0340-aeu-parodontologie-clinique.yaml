@@ -1,0 +1,34 @@
+id: F0340
+intitule: AEU Parodontologie clinique
+organisme: O011
+secteur: universitaire
+type: aeu
+disciplines:
+- paro
+format: presentiel
+duree: 1 an
+volume_horaire_h: 91
+tarif:
+  texte: 'Formation continue : 2 700 €/an ; formation initiale : 500 €/an ; les droits d''inscription
+    de Licence s''ajoutent'
+  euros: 2700
+  annee: null
+prerequis: 'Chirurgiens-dentistes diplômés (France ou équivalent étranger) et internes en odontologie
+  ; maîtrise du français ; dossier : CV, lettre de motivation, diplôme'
+precisions: null
+financement: []
+url_officielle: https://sante.u-bordeaux.fr/download_file/view/efafa814-c3d1-437c-b20b-48404f09db2f/464
+sessions:
+- lieu: L-BORDEAUX
+  debut: '2027-01-14'
+  fin: '2027-07-08'
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « Attestation d''Études Universitaires de Parodontologie
+  clinique, créée à compter de l''année universitaire 2026-2027 » (https://sante.u-bordeaux.fr/download_file/view/efafa814-c3d1-437c-b20b-48404f09db2f/464)
+  | duree : « La formation dure 1 an et a lieu tous les ans. » (https://sante.u-bordeaux.fr/download_file/view/efafa814-c3d1-437c-b20b-48404f09db2f/464)
+  | volume : « Le volume global horaire est de 91 h en présentiel. » (https://sante.u-bordeaux.fr/download_file/view/efafa814-c3d1-437c-b20b-48404f09db2f/464)
+  | tarif : « En formation initiale : 500€ /an ; En formation continue : 2700€ /an » (https://sante.u-bordeaux.fr/download_file/view/efafa814-c3d1-437c-b20b-48404f09db2f/464)
+  | effectif : « minimum 10 et maximum 25 » (https://sante.u-bordeaux.fr/download_file/view/efafa814-c3d1-437c-b20b-48404f09db2f/464)'

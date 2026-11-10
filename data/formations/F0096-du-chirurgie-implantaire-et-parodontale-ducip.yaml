@@ -7,17 +7,20 @@ disciplines:
 - chir
 - implanto
 - paro
-format: null
-duree: null
-volume_horaire_h: null
+format: hybride
+duree: 1 année universitaire
+volume_horaire_h: 144
 tarif:
-  texte: 2 900 €/an
+  texte: 'En formation continue : 2 900 €/an, auquel s''ajoutent les droits d''inscription correspondant
+    à la base du droit d''inscription de Licence'
   euros: 2900
   annee: null
-prerequis: null
+prerequis: 'Docteur en chirurgie dentaire (ou docteur en médecine ayant une formation en anatomie crânio-faciale
+  et cervicale ou en implantologie) ; réussite à l''examen écrit du probatoire ; dossier : CV, lettre
+  de motivation, diplôme'
 precisions: Séminaires à Bordeaux et à Tanger
 financement: []
-url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+url_officielle: https://sante.u-bordeaux.fr/application/files/6217/4013/4108/DU_CHIRURGIE_IMPLANTAIRE_ET_PARODONTALE.pdf
 sessions:
 - lieu: L-BORDEAUX
   debut: null
@@ -25,5 +28,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

@@ -1,0 +1,36 @@
+id: F0337
+intitule: AE Endodontie (attestation d'études universitaires d'endodontie)
+organisme: O011
+secteur: universitaire
+type: aeu
+disciplines:
+- endo
+format: en-ligne
+duree: 1 an
+volume_horaire_h: 20
+tarif:
+  texte: 'Formation continue : 3 000 €/an ; formation initiale : 150 €/an ; auxquels s''ajoutent les droits
+    d''inscription de base (Licence)'
+  euros: 3000
+  annee: null
+prerequis: 'Docteur en chirurgie dentaire ou en médecine dentaire (UE et hors UE), docteur en médecine,
+  interne en chirurgie orale ou en médecine buccodentaire ; dossier : CV, lettre de motivation, diplôme'
+precisions: null
+financement: []
+url_officielle: https://sante.u-bordeaux.fr/download_file/view/f1f58bd3-7590-4e73-98d7-2575e9c49682/464
+sessions:
+- lieu: L-BORDEAUX
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: null
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « Attestation d''études endodontie, créée à l''université
+  de Bordeaux pour l''année universitaire 2026/2027 » (https://sante.u-bordeaux.fr/download_file/view/f1f58bd3-7590-4e73-98d7-2575e9c49682/464)
+  | duree : « La formation dure un an et a lieu tous les ans. » (https://sante.u-bordeaux.fr/download_file/view/f1f58bd3-7590-4e73-98d7-2575e9c49682/464)
+  | volume : « 20 h d''enseignement théorique en distanciel asynchrone, avec une estimation de 40 h de
+  travail personnel » (https://sante.u-bordeaux.fr/download_file/view/f1f58bd3-7590-4e73-98d7-2575e9c49682/464)
+  | tarif : « Formation initiale : 150 €/an ; Formation continue : 3 000 €/an » (https://sante.u-bordeaux.fr/download_file/view/f1f58bd3-7590-4e73-98d7-2575e9c49682/464)
+  | format : « enseignement en distanciel asynchrone » (https://sante.u-bordeaux.fr/download_file/view/f1f58bd3-7590-4e73-98d7-2575e9c49682/464)
+  | liste : « Endodontie (AE) ; candidatures via le responsable de formation » (https://sante.u-bordeaux.fr/formations/listes-des-dudiu/odontologie)'

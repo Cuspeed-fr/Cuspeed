@@ -12,7 +12,9 @@ tarif:
   texte: null
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteurs en chirurgie dentaire titulaires d'un diplôme français ou de l'UE, inscrits au Conseil
+  de l'Ordre (ou PADHUE ayant satisfait aux EVC) ; 2 ans minimum d'activité professionnelle après le diplôme
+  ; AEU Domaine médico-chirurgical validée.
 precisions: null
 financement: []
 url_officielle: https://www.univ-tlse3.fr/du-parodontologie
@@ -23,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

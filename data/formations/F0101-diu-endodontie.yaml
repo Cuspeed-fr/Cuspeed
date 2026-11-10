@@ -5,17 +5,19 @@ secteur: universitaire
 type: diu
 disciplines:
 - endo
-format: null
-duree: null
-volume_horaire_h: null
+format: hybride
+duree: 2 ans
+volume_horaire_h: 340
 tarif:
-  texte: null
+  texte: 'Formation continue : 4 000 € ; internes : 150 €'
   euros: null
   annee: null
-prerequis: null
+prerequis: Diplôme de chirurgien-dentiste (ou DES de stomatologie / chirurgie maxillo-faciale, ou équivalent
+  étranger) et 3 années successives d'activité professionnelle après le diplôme ; internes en médecine
+  bucco-dentaire dès le 3e semestre
 precisions: null
 financement: []
-url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/DIU-Endo.pdf
 sessions:
 - lieu: L-BORDEAUX
   debut: null
@@ -23,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

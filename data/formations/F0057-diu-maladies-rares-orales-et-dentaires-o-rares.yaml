@@ -5,23 +5,26 @@ secteur: universitaire
 type: diu
 disciplines:
 - mbd
-format: null
-duree: null
-volume_horaire_h: null
+format: hybride
+duree: 181,5 h
+volume_horaire_h: 181.5
 tarif:
-  texte: null
-  euros: null
+  texte: 4 200 € pour toute personne bénéficiant ou non d'une prise en charge totale ou partielle ; frais
+    de dossier 300 €
+  euros: 4200
   annee: null
-prerequis: null
-precisions: null
+prerequis: Chirurgiens-dentistes, médecins et pharmaciens diplômés (module 5 clinique réservé aux praticiens
+  pouvant exercer en France) ; aucun prérequis hormis les diplômes ; avis pédagogique
+precisions: En partenariat avec l'Université de Strasbourg (faculté de chirurgie dentaire Robert-Frank).
+  Sites Garancière et Montrouge, visioconférence et Moodle.
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/diu-maladies-rares-orales-et-dentaires-o-rares-FOR14.html
 sessions:
 - lieu: L-PARIS
   debut: null
   fin: null
   inscriptions: a-renseigner
-  places: null
+  places: 16
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

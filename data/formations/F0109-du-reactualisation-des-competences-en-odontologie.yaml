@@ -7,13 +7,15 @@ disciplines:
 - omni
 format: null
 duree: 10 modules de 2 jours
-volume_horaire_h: null
+volume_horaire_h: 120
 tarif:
   texte: 4 500 €
   euros: 4500
   annee: null
-prerequis: null
-precisions: null
+prerequis: Bilan de compétence préalable (droits 100 €) pour évaluer besoins et attentes et s'assurer
+  de la maîtrise de la langue française ; praticiens n'ayant pas exercé depuis un certain temps
+precisions: Remise à niveau, pas une équivalence du diplôme de chirurgien-dentiste ; inscription possible
+  par module
 financement: []
 url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/DU-ReactualisationOdonto.pdf
 sessions:
@@ -23,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

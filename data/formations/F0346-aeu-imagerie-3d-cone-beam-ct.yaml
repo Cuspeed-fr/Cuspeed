@@ -1,0 +1,35 @@
+id: F0346
+intitule: AEU Imagerie 3D (Cone Beam CT)
+organisme: O015
+secteur: universitaire
+type: aeu
+disciplines:
+- num
+format: null
+duree: 8 h
+volume_horaire_h: 8
+tarif:
+  texte: 'Tarif plein : 390 euros + 57€ de frais universitaires'
+  euros: 390
+  annee: null
+prerequis: null
+precisions: Sélection sur dossier
+financement:
+- dpc
+- fifpl
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-imagerie-3d-cbct
+sessions:
+- lieu: L-NICE
+  debut: null
+  fin: null
+  inscriptions: a-renseigner
+  places: 10
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « A.E.U Imagerie 3D » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-imagerie-3d-cbct)
+  | duree : « 8h CM » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-imagerie-3d-cbct)
+  | tarif : « Tarif plein : 390 euros + 57€ de frais universitaires » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-imagerie-3d-cbct)
+  | financement : « Cette formation est susceptible d''être prise en charge par l''ANDPC. ; Elle peut
+  aussi être prise en charge par le FIF-PL » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-imagerie-3d-cbct)
+  | prerequis : « Docteur en chirurgie dentaire ; Sont admis à s''inscrire, après autorisation des enseignants
+  responsables » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-imagerie-3d-cbct)'

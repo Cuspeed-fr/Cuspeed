@@ -5,23 +5,26 @@ secteur: universitaire
 type: du
 disciplines:
 - omni
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 126 h sur 2 ans
+volume_horaire_h: 126
 tarif:
-  texte: null
+  texte: 2 730 € en 1re année et 2 730 € en 2e année (prise en charge totale ou partielle) ; 2 730 €/an
+    (financement personnel) ; frais de dossier 300 €/an. Sous réserve de modification.
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: 'Titulaires d''un diplôme d''État de docteur en chirurgie dentaire ayant au moins 2 ans d''expérience
+  professionnelle ; stagiaires étrangers : DALF ou TCF niveau C1 ; avis pédagogique'
+precisions: UFR Odontologie de Montrouge ; 10 jours par an, de janvier à novembre sur 2 ans ; inscriptions
+  en 1re année tous les ans.
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-formation-continue-en-odontologie-JI38UENA.html
 sessions:
 - lieu: L-PARIS
-  debut: null
+  debut: '2027-01-21'
   fin: null
-  inscriptions: a-renseigner
+  inscriptions: ouvertes
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

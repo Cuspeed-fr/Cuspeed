@@ -5,23 +5,26 @@ secteur: universitaire
 type: du
 disciplines:
 - geria
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 570 h sur 2 ans
+volume_horaire_h: 570
 tarif:
-  texte: null
+  texte: 1 470 €/année (prise en charge totale ou partielle, ou financement personnel) ; 730 €/année en
+    tarif préférentiel (étudiants, internes, faisant fonction d'interne) ; frais de dossier 300 €/an
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: Titulaires du diplôme d'État de docteur en chirurgie dentaire ou de chirurgien-dentiste ; connaissance
+  de la langue française ; avis pédagogique
+precisions: Formation suspendue selon la page officielle. 2 jours par semaine dont un mardi ; stage clinique
+  à Ivry-sur-Seine (site Charles Foix).
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-odontologie-clinique-et-vieillissement-DU01_971.html
 sessions:
 - lieu: L-PARIS
   debut: null
   fin: null
-  inscriptions: a-renseigner
+  inscriptions: fermees
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

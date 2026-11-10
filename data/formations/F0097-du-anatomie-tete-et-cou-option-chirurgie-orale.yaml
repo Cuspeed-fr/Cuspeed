@@ -6,16 +6,19 @@ type: du
 disciplines:
 - chir
 format: null
-duree: null
-volume_horaire_h: null
+duree: 1 an
+volume_horaire_h: 60
 tarif:
   texte: null
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: Internes, attachés et assistants en tête et cou, spécialistes en stomatologie et chirurgie
+  orale, chirurgiens-dentistes ; autres docteurs en médecine ou chirurgie dentaire après évaluation du
+  dossier
+precisions: Programme de février à juin ; travaux pratiques sur pièces anatomiques à l'École de Chirurgie
+  de Bordeaux
 financement: []
-url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/anat_tete_cou.pdf
 sessions:
 - lieu: L-BORDEAUX
   debut: null
@@ -23,5 +26,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

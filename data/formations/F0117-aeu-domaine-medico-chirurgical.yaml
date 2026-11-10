@@ -12,7 +12,8 @@ tarif:
   texte: null
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteurs en chirurgie dentaire, ou docteurs en médecine spécialisés en chirurgie maxillo-faciale
+  ou ORL, titulaires d'un diplôme français ou de l'Union européenne et inscrits à l'Ordre en France.
 precisions: Prérequis des DU cliniques
 financement: []
 url_officielle: https://www.univ-tlse3.fr/decouvrir-nos-diplomes/aeu-domaine-medico-chirurgical
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

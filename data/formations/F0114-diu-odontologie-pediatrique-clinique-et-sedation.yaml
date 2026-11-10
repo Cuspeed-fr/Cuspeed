@@ -13,7 +13,8 @@ tarif:
   texte: null
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteurs en chirurgie dentaire titulaires d'un diplôme français, de l'Union européenne ou hors
+  Union européenne.
 precisions: null
 financement: []
 url_officielle: https://www.univ-tlse3.fr/decouvrir-nos-diplomes/diu-odontologie-pediatrique-clinique-et-sedation
@@ -24,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

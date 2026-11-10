@@ -5,17 +5,19 @@ secteur: universitaire
 type: diu
 disciplines:
 - mbd
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 90 h
+volume_horaire_h: 90
 tarif:
-  texte: null
-  euros: null
+  texte: 1 140 €/an (prise en charge totale ou partielle, ou financement personnel) ; 850 €/an pour étudiants,
+    internes ou FFI ; frais de dossier 300 €
+  euros: 1140
   annee: null
-prerequis: null
+prerequis: Docteurs en chirurgie dentaire et en médecine ; étudiants en DES d'odontologie ou de médecine
+  ; étudiants ayant validé la 1re année du 3e cycle de chirurgie dentaire ; avis pédagogique puis entretien
 precisions: null
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/diu-carcinologie-buccale-KFGSHBY0.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -23,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

@@ -14,9 +14,10 @@ tarif:
   annee: 2026-27
 prerequis: 'Chirurgiens-dentistes omnipraticiens. Candidature sur dossier : lettre de motivation, CV et
   copie des diplômes.'
-precisions: null
+precisions: Sessions au Lilliad Learning Center Innovation, Campus Cité Scientifique. Validation par la
+  présence aux sessions et la présentation d'un cas clinique devant un jury.
 financement: []
-url_officielle: https://ufr3s.univ-lille.fr/fileufr3s/user_upload/ufr3s-formation-continue/odontologie/auec/auec-parodontie-clinique_2026-02-02.pdf
+url_officielle: https://ufr3s.univ-lille.fr/formation-continue/odontologie/auec-parodontie-clinique
 sessions:
 - lieu: L-LILLE
   debut: null
@@ -24,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

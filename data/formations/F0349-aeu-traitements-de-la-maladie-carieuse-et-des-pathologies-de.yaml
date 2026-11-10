@@ -1,0 +1,35 @@
+id: F0349
+intitule: AEU Traitements de la maladie carieuse et des pathologies dentaires acquises non carieuses chez
+  l'enfant
+organisme: O015
+secteur: universitaire
+type: aeu
+disciplines:
+- pedo
+format: en-ligne
+duree: null
+volume_horaire_h: 14
+tarif:
+  texte: 1000€ + 57€ de frais universitaire
+  euros: 1000
+  annee: null
+prerequis: Niveau 3e cycle (>bac+5) ; docteur en chirurgie dentaire ou interne en odontologie ; étudiants
+  ayant validé leur 6e année et inscrits en thèse
+precisions: null
+financement: []
+url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-cariologie-enfants
+sessions:
+- lieu: L-NICE
+  debut: '2027-05-03'
+  fin: '2027-06-07'
+  inscriptions: annoncee
+  places: 40
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « AEU Traitements de la maladie carieuse et des
+  pathologies dentaires acquises non carieuses chez l''enfant » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-cariologie-enfants)
+  | volume_horaire_h : « 14h CM » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-cariologie-enfants)
+  | tarif : « 1000€ + 57€ de frais universitaire » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-cariologie-enfants)
+  | format : « 100% e-learning / distanciel » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-cariologie-enfants)
+  | sessions : « Disponible en e-learning du 3 mai au 4 juin 2027 ; Date limite d''inscription : 19 avril
+  2027 ; Examen : 7 juin 2027 » (https://univ-cotedazur.fr/formation/offre-de-formation/a-e-u-cariologie-enfants)'

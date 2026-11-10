@@ -7,12 +7,14 @@ disciplines:
 - resto
 format: en-ligne
 duree: null
-volume_horaire_h: null
+volume_horaire_h: 36
 tarif:
-  texte: null
-  euros: null
+  texte: 2300€ + 57€ (frais universitaire) ; + 300€ à régler à la plateforme de e-learning partenaire
+    FrenchTooth
+  euros: 2300
   annee: null
-prerequis: null
+prerequis: Niveau 3e cycle (>bac+5) ; docteurs en chirurgie dentaire diplômés UE/hors UE, après autorisation
+  des enseignants responsables ; sélection sur dossier
 precisions: null
 financement: []
 url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/d-u-preservation-tissus-dentaires-esthetique-buccale
@@ -23,5 +25,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

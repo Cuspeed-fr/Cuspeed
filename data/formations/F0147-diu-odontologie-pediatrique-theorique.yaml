@@ -5,15 +5,18 @@ secteur: universitaire
 type: diu
 disciplines:
 - pedo
-format: null
-duree: null
+format: en-ligne
+duree: 2 ans
 volume_horaire_h: null
 tarif:
-  texte: null
+  texte: 2500€/année + 57€ (frais universitaires), inscription unique à la faculté de chirurgie dentaire
+    de Nice
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: Niveau 3e cycle (>bac+5) ; docteur en chirurgie dentaire ou interne en odontologie (France,
+  UE, hors UE)
+precisions: Diplôme co-organisé par les universités Côte d'Azur, de Lyon et d'Aix-Marseille ; 9 modules
+  ; inscription via l'e-candidat d'Aix-Marseille
 financement: []
 url_officielle: https://univ-cotedazur.fr/formation/offre-de-formation/odontologie-pediatrique-theorique
 sessions:
@@ -23,5 +26,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

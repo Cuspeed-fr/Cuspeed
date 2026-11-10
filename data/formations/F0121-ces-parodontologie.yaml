@@ -6,16 +6,16 @@ type: ces
 disciplines:
 - paro
 format: null
-duree: null
+duree: 1 an
 volume_horaire_h: null
 tarif:
-  texte: null
-  euros: null
+  texte: 526 € ; 351 € pour un second CES
+  euros: 526
   annee: null
-prerequis: null
+prerequis: Docteur en chirurgie dentaire habilitant à exercer dans le pays d'obtention ou d'origine
 precisions: null
 financement: []
-url_officielle: https://www.umontpellier.fr/wp-content/uploads/2025/12/Livret-ODONTOLOGIE-2026-2027.pdf
+url_officielle: https://formations.umontpellier.fr/fr/formations/ces-chir-dent-a-GF/ces-parodontologie-hnesbn2r.html
 sessions:
 - lieu: L-MONTPELLIER
   debut: null
@@ -23,5 +23,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

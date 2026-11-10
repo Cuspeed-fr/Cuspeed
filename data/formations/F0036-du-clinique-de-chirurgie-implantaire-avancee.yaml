@@ -6,17 +6,21 @@ type: du
 disciplines:
 - chir
 - implanto
-format: null
-duree: null
+format: presentiel
+duree: 2 ans
 volume_horaire_h: null
 tarif:
-  texte: null
+  texte: 5 615 €/an (prise en charge totale ou partielle, ou financement personnel) ; 2 810 €/an en tarif
+    préférentiel (étudiants, internes, faisant fonction d'interne, sous conditions) ; frais de dossier
+    300 €
   euros: null
   annee: null
-prerequis: null
+prerequis: Docteurs en chirurgie dentaire ou en médecine ; plusieurs années d'expérience en chirurgie
+  orale et traitements implantaires (justification d'exercice en implantologie de plus de 3 ans) ; avis
+  pédagogique et examen probatoire
 precisions: null
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-clinique-de-chirurgie-implantaire-avancee-KFGSBF8H.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -24,5 +28,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

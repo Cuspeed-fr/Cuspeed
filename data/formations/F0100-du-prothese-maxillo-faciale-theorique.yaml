@@ -5,17 +5,18 @@ secteur: universitaire
 type: du
 disciplines:
 - proth
-format: null
-duree: null
-volume_horaire_h: null
+format: en-ligne
+duree: 1 an
+volume_horaire_h: 80
 tarif:
   texte: null
   euros: null
   annee: null
-prerequis: null
-precisions: null
+prerequis: Docteur en chirurgie dentaire ; interne avec T1 validé en attente de thèse ; chirurgien-dentiste
+  étranger francophone titulaire d'un diplôme l'autorisant à exercer
+precisions: 15 modules en ligne et 5 sessions de discussion en visioconférence
 financement: []
-url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/plaquette_2026.pdf
+url_officielle: https://umfcs.u-bordeaux.fr/documents/formations/formations-courtes/odontologie/DU-TheoriquePMF.pdf
 sessions:
 - lieu: L-BORDEAUX
   debut: null
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

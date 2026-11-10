@@ -6,15 +6,18 @@ type: du
 disciplines:
 - chir
 - implanto
-format: null
+format: presentiel
 duree: 2 ans
-volume_horaire_h: null
+volume_horaire_h: 702
 tarif:
-  texte: null
-  euros: null
+  texte: 2 875 € (prise en charge totale ou partielle, ou financement personnel) ; tarif préférentiel
+    1 438 € (diplômés de moins de 2 ans, AHU, CCA, FFI) ou 823 € (étudiants, internes, faisant fonction
+    d'interne) ; frais de dossier 300 €
+  euros: 2875
   annee: null
 prerequis: null
-precisions: null
+precisions: Hôpital Fondation Adolphe de Rothschild (Paris 19e). Cours le jeudi, présence clinique le
+  lundi et le vendredi. Stage obligatoire de 432 h sur 2 ans.
 financement: []
 url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-techniques-chirurgicales-reparatrices-et-reconstructrices-osseuses-implantologie-orale-DUMCRRO_115.html
 sessions:
@@ -24,5 +27,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

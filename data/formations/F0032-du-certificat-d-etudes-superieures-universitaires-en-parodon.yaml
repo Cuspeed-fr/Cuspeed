@@ -5,17 +5,21 @@ secteur: universitaire
 type: du
 disciplines:
 - paro
-format: null
-duree: null
-volume_horaire_h: null
+format: hybride
+duree: '123 h (option Mise en Pratique : 144 h)'
+volume_horaire_h: 123
 tarif:
-  texte: null
-  euros: null
+  texte: 'DU CESUP : 1 650 € (prise en charge totale ou partielle, ou financement personnel), tarif préférentiel
+    1 450 € sous conditions ; option Mise en Pratique : 2 950 € (préférentiel 2 750 €) ; frais de dossier
+    300 €. Sous réserve de modification par les instances de l''Université.'
+  euros: 1650
   annee: null
-prerequis: null
-precisions: null
+prerequis: Chirurgiens-dentistes diplômés et étudiants inscrits en année de thèse ; avis pédagogique ;
+  maîtrise de la langue française (écrit, parlé)
+precisions: Conférences le mardi à Montrouge (présence obligatoire) ; option Mise en Pratique le mercredi
+  à Garancière. Remplace le CES de parodontologie.
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/du-certificat-d-etudes-superieures-universitaires-en-parodontologie-cesup-LX3F184B.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -23,5 +27,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

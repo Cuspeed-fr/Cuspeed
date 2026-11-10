@@ -1,0 +1,27 @@
+id: F0125
+intitule: DU Odontologie restauratrice et esthétique clinique – Montpellier (DUORE)
+organisme: O013
+secteur: universitaire
+type: du
+disciplines:
+- resto
+format: null
+duree: 2 ans
+volume_horaire_h: null
+tarif:
+  texte: null
+  euros: null
+  annee: null
+prerequis: Docteur en chirurgie dentaire ; DFTCC validé
+precisions: Enseignement à Montpellier et aux Caraïbes
+financement: []
+url_officielle: https://formations.umontpellier.fr/fr/formations/diplome-universite-niv-form-bac-5-UF/diplome-universitaire-d-odontologie-restauratrice-et-esthetique-clinique-montpellier-duore-complet-LR7WKSQU.html
+sessions:
+- lieu: L-MONTPELLIER
+  debut: null
+  fin: null
+  inscriptions: complet
+  places: 28
+statut: validee
+derniere_verification: '2026-11-09'
+notes: null

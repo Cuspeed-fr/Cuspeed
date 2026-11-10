@@ -1,0 +1,37 @@
+id: F0356
+intitule: DU Réhabilitation orale numérique (DURON)
+organisme: O016
+secteur: universitaire
+type: du
+disciplines:
+- num
+- proth
+format: null
+duree: 1 an
+volume_horaire_h: null
+tarif:
+  texte: 'Praticien : 4 400 € ; personnel Lyon 1 : 1 000 € ; interne : 1 000 €'
+  euros: 4400
+  annee: 2026-27
+prerequis: 'Chirurgiens-dentistes (français ou étrangers) et internes français. Dossier : CV, lettre de
+  motivation, copie des diplômes.'
+precisions: 'Responsables : Pr M. Ducret, Dr B. Évieux. Inscriptions ouvertes depuis le 1er juin 2026.'
+financement: []
+url_officielle: https://offre-de-formations.univ-lyon1.fr/parcours-1751/rehabilitation-orale-numerique.html
+sessions:
+- lieu: L-LYON
+  debut: '2026-11-11'
+  fin: '2027-06-18'
+  inscriptions: ouvertes
+  places: null
+statut: validee
+derniere_verification: '2026-11-09'
+notes: 'Preuves (extraction du 8 nov. 2026) : intitule : « DU Réhabilitation orale numérique (DURON) »
+  (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | duree : « Durée en semestres : 2 semestres (page parcours) ; DU 1 an (page odontologie) » (https://offre-de-formations.univ-lyon1.fr/parcours-1751/rehabilitation-orale-numerique.html)
+  | tarif_texte : « DURON 2026-2027 : praticien 4 400 €, personnel Lyon 1 1 000 €, interne 1 000 € » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | url_officielle : « Page de la formation sur le site officiel de Lyon 1 (liste détaillée sur https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  » (https://offre-de-formations.univ-lyon1.fr/parcours-1751/rehabilitation-orale-numerique.html) | prerequis
+  : « dentistes, internes français ; CV, lettre, diplômes » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)
+  | sessions : « 11-12 nov., 11-12 déc. 2026 ; 21-22 janv., 11-12 mars, 25-26 mars, 27-28 mai, 17-18 juin
+  2027 » (https://odontologie.univ-lyon1.fr/formation/formation-continue-du-%E2%80%93-aeu-et-formations-courtes)'

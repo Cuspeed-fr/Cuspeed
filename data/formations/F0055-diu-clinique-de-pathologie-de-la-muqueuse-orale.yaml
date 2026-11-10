@@ -5,17 +5,18 @@ secteur: universitaire
 type: diu
 disciplines:
 - mbd
-format: null
-duree: null
-volume_horaire_h: null
+format: presentiel
+duree: 190 h
+volume_horaire_h: 190
 tarif:
-  texte: null
-  euros: null
+  texte: 3 800 € de frais de formation, avec ou sans prise en charge ; frais de dossier 300 €
+  euros: 3800
   annee: null
-prerequis: null
+prerequis: Praticiens hospitaliers, chirurgiens-dentistes, pharmaciens ou médecins ; titulaires du DIU
+  Pathologies de la muqueuse orale (ou DU/DIU ou formation équivalente) ; avis pédagogique sur dossier
 precisions: null
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/diu-clinique-de-pathologie-de-la-muqueuse-orale-LBNUU37Y.html
 sessions:
 - lieu: L-PARIS
   debut: null
@@ -23,5 +24,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

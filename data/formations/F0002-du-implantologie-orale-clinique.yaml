@@ -15,7 +15,7 @@ tarif:
 prerequis: null
 precisions: null
 financement: []
-url_officielle: https://ufr3s.univ-lille.fr/fileufr3s/user_upload/ufr3s-formation-continue/odontologie/du/du-implantologie-orale.pdf
+url_officielle: https://ufr3s.univ-lille.fr/formation-continue/odontologie/du-implantologie-orale
 sessions:
 - lieu: L-LILLE
   debut: null
@@ -23,5 +23,5 @@ sessions:
   inscriptions: a-renseigner
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

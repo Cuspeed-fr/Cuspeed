@@ -5,23 +5,26 @@ secteur: universitaire
 type: diu
 disciplines:
 - mbd
-format: null
-duree: null
-volume_horaire_h: null
+format: hybride
+duree: 70 h
+volume_horaire_h: 70
 tarif:
-  texte: null
-  euros: null
+  texte: 1 300 € (prise en charge totale ou partielle hors Pôle emploi, ou financement personnel) ; 650
+    € pour un étudiant, interne ou faisant fonction d'interne finançant seul sa formation ; frais de dossier
+    300 €
+  euros: 1300
   annee: null
-prerequis: null
+prerequis: Titulaires du diplôme français de docteur en chirurgie dentaire, d'un diplôme étranger permettant
+  d'exercer la médecine ou l'odontologie, internes de spécialités (DES) ; avis pédagogique
 precisions: null
 financement: []
-url_officielle: https://odf.u-paris.fr/fr/offre-de-formation-par-composante/offre-de-formation-ufr-d-odontologie.html
+url_officielle: https://odf.u-paris.fr/fr/offre-de-formation/diplome-d-universite-du-diu-1/sciences-technologies-sante-STS/diu-pathologies-de-la-muqueuse-orale-du-diagnostic-au-traitement-KPO6AUVG.html
 sessions:
 - lieu: L-PARIS
-  debut: null
+  debut: '2027-01-01'
   fin: null
-  inscriptions: a-renseigner
-  places: null
+  inscriptions: ouvertes
+  places: 200
 statut: validee
-derniere_verification: '2026-11-02'
+derniere_verification: '2026-11-09'
 notes: null

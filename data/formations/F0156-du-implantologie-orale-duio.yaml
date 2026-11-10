@@ -5,23 +5,27 @@ secteur: universitaire
 type: du
 disciplines:
 - implanto
-format: null
+format: presentiel
 duree: 2 ans
 volume_horaire_h: null
 tarif:
-  texte: 5 000 €/an
+  texte: '5 000 € par année d''études (tarif plein) ; 2 800 € par année d''études pour les internes et
+    personnels UCA de l''UFR ; redoublement (6 mois) : 3 090 € (tarif plein) ou 1 850 €'
   euros: 5000
   annee: null
-prerequis: null
-precisions: Diplôme renouvelé en 2026
+prerequis: Titulaire du diplôme d'État de Docteur en Chirurgie Dentaire ou Docteur en Médecine permettant
+  d'exercer en France, sans interdiction d'exercice en France. Sélection sur dossier, avec entretien si
+  nécessaire.
+precisions: Diplôme renouvelé en 2026. Stage clinique au CHU de Clermont-Ferrand, une journée par semaine
+  (lundi, mardi ou jeudi).
 financement: []
-url_officielle: https://www.uca.fr/medias/fichier/delib-cfvu-20260324-23-du-implantologie-orale-odonto_1782135726444-pdf
+url_officielle: https://odontologie.uca.fr/formation/diplome-duniversite-certificats-detudes-superieures/du-implantologie-orale
 sessions:
 - lieu: L-CLERMONT
   debut: null
   fin: null
-  inscriptions: a-renseigner
+  inscriptions: annoncee
   places: null
 statut: validee
-derniere_verification: '2026-11-05'
+derniere_verification: '2026-11-09'
 notes: null

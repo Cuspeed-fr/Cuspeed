@@ -5,6 +5,17 @@
   site_web: https://exemple.invalid/
   page_catalogue: null
   fiche_revendiquee: false
+  presentation: Faculté d'essai qui forme les chirurgiens-dentistes depuis longtemps, en parodontologie et en implantologie.
+  histoire: Fondée pour les besoins des tests, elle a ouvert son premier diplôme d'université d'essai il y a quelques années, puis a élargi son offre.
+  annee_creation: 1970
+  adresse: 1 place d'Essai, 59000 Lille
+  equipe:
+  - nom: Pr Jeanne Essai
+    role: Responsable pédagogique
+  - nom: Dr Paul Test
+  presentation_source: https://exemple.invalid/a-propos
+  presentation_verifiee_le: '2026-11-14'
+  presentation_par: cuspeed
 - id: O002
   nom: Organisme Sans Fiche Publiée
   type: organisme-prive

@@ -133,6 +133,25 @@ for nom, sql in [
 ]:
     essai(nom, None, sql, "erreur")
 
+print("Présentation des organismes (migration 20261114000100)")
+OID = "(select id from organismes order by id limit 1)"
+for nom, sql in [
+    ("présentation sans source refusée", f"update organismes set presentation = repeat('a', 60) where id = {OID}"),
+    ("présentation trop courte refusée", f"update organismes set presentation = 'court', presentation_source = 'https://exemple.fr', presentation_verifiee_le = current_date where id = {OID}"),
+    ("année de création impossible refusée", f"update organismes set annee_creation = 1500, presentation_source = 'https://exemple.fr', presentation_verifiee_le = current_date where id = {OID}"),
+    ("membre d'équipe avec une donnée en plus refusé", f"update organismes set equipe = '[{{\"nom\": \"Dr X\", \"telephone\": \"06\"}}]', presentation_source = 'https://exemple.fr', presentation_verifiee_le = current_date where id = {OID}"),
+    ("équipe qui n'est pas une liste refusée", f"update organismes set equipe = '{{\"nom\": \"Dr X\"}}', presentation_source = 'https://exemple.fr', presentation_verifiee_le = current_date where id = {OID}"),
+    ("source de présentation non web refusée", f"update organismes set presentation_source = 'ftp://x' where id = {OID}"),
+    ("auteur de présentation inconnu refusé", f"update organismes set presentation_par = 'ia' where id = {OID}"),
+]:
+    essai(nom, None, sql, "erreur")
+essai("présentation complète et sourcée acceptée", None,
+      f"update organismes set presentation = repeat('a', 60), annee_creation = 1990, "
+      f"equipe = '[{{\"nom\": \"Dr X\", \"role\": \"Fondateur\"}}]', presentation_source = 'https://exemple.fr', "
+      f"presentation_verifiee_le = current_date where id = {OID}", 1)
+essai("l'extracteur ne modifie pas une présentation", "agent_extracteur",
+      f"update organismes set presentation = repeat('a', 60) where id = {OID}", "erreur")
+
 print("Proposition et journal (propriétaire)")
 with conn.cursor() as cur:
     cur.execute("insert into propositions (formation_id, champ, nouvelle_valeur, source_url) "

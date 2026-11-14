@@ -84,6 +84,33 @@ def verifier_url(ou, url):
         erreur(ou, f"URL invalide : {url!r}")
 
 
+def verifier_presentation(o):
+    """Présentation d'un organisme (mêmes règles que la base, migration 20261114000100)."""
+    ou = f"organismes.yaml {o['id']}"
+    for champ, mini, maxi in (("presentation", 40, 700), ("histoire", 40, 2000)):
+        t = o.get(champ)
+        if t is not None and (not isinstance(t, str) or not mini <= len(t) <= maxi):
+            erreur(ou, f"{champ} : texte de {mini} à {maxi} caractères attendu")
+    a = o.get("annee_creation")
+    if a is not None and (not isinstance(a, int) or not 1800 <= a <= 2100):
+        erreur(ou, f"année de création invalide : {a!r}")
+    equipe = o.get("equipe")
+    if equipe is not None:
+        if not isinstance(equipe, list) or len(equipe) > 40:
+            erreur(ou, "équipe : liste de 40 personnes au plus attendue")
+        else:
+            for m in equipe:
+                if (not isinstance(m, dict) or set(m) - {"nom", "role"} or not isinstance(m.get("nom"), str)
+                        or not 2 <= len(m["nom"]) <= 120 or not isinstance(m.get("role", ""), str)):
+                    erreur(ou, f"équipe : membre invalide {m!r} (seulement nom et rôle)")
+    a_du_contenu = any(o.get(c) not in (None, [], "") for c in ("presentation", "histoire", "equipe", "annee_creation"))
+    if a_du_contenu and o.get("presentation_par", "cuspeed") == "cuspeed" and not (
+            o.get("presentation_source") and o.get("presentation_verifiee_le")):
+        erreur(ou, "présentation sans source officielle ni date de vérification")
+    if o.get("presentation_par", "cuspeed") not in ("cuspeed", "organisme"):
+        erreur(ou, f"presentation_par inconnu : {o.get('presentation_par')!r}")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--reference", help="branche git de comparaison (ex. origin/main)")
@@ -101,9 +128,10 @@ def main():
         ids_org.add(o["id"])
         if o.get("type") not in ref["types_organisme"]:
             erreur("organismes.yaml", f"{o['id']} : type inconnu {o.get('type')!r}")
-        for champ in ("site_web", "page_catalogue"):
+        for champ in ("site_web", "page_catalogue", "presentation_source"):
             if o.get(champ):
                 verifier_url(f"organismes.yaml {o['id']}", o[champ])
+        verifier_presentation(o)
 
     ids_lieux = set()
     for l in lieux:

@@ -111,7 +111,24 @@ function organismePublic(o, registre) {
     ville: o.ville ?? null,
     site_web: lienSur(o.site_web),
     page_catalogue: lienSur(o.page_catalogue),
+    // Présentation (migration 20261114000100) : textes publiés tels qu'en base, équipe réduite à nom et rôle.
+    presentation: texteOuNull(o.presentation),
+    histoire: texteOuNull(o.histoire),
+    annee_creation: Number.isInteger(o.annee_creation) ? o.annee_creation : null,
+    adresse: texteOuNull(o.adresse),
+    equipe: Array.isArray(o.equipe)
+      ? o.equipe
+          .filter((m) => m && typeof m.nom === "string" && m.nom.trim())
+          .map((m) => ({ nom: m.nom.trim(), role: typeof m.role === "string" && m.role.trim() ? m.role.trim() : null }))
+      : [],
+    presentation_source: lienSur(o.presentation_source),
+    presentation_verifiee_le: o.presentation_verifiee_le ? String(o.presentation_verifiee_le).slice(0, 10) : null,
+    presentation_par: o.presentation_par === "organisme" ? "organisme" : "cuspeed",
   };
+}
+
+function texteOuNull(t) {
+  return typeof t === "string" && t.trim() ? t.trim() : null;
 }
 
 function lieuPublic(l) {

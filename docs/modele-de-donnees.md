@@ -70,6 +70,23 @@ Une fiche publiée ne se modifie que par une proposition (`propositions`), que C
 
 Une proposition invalide (code inconnu, lieu inexistant, session qui finit avant de commencer) échoue sans rien modifier.
 
+## Présentation d'un organisme (`organismes`, décision de Chris du 14 novembre 2026)
+
+La page d'un organisme montre, au-dessus de ses formations, une présentation structurée : logo (fichier `site/public/logos/Oxxx.ext`), court paragraphe, chiffres clés, équipe, histoire et source.
+
+| Champ | Contenu | Exemple |
+| --- | --- | --- |
+| `presentation` | Court paragraphe descriptif, 40 à 700 caractères, **rédigé** d'après le site officiel (jamais copié d'un site tiers) | « Institut lyonnais de formation continue… » |
+| `histoire` | Histoire de l'organisme, 40 à 2000 caractères, d'après le site officiel | |
+| `annee_creation` | Année de création écrite par l'organisme | `1998` |
+| `adresse` | Adresse du siège, telle que publiée | `66 quai Charles de Gaulle, 69006 Lyon` |
+| `equipe` | Équipe publiée par l'organisme : liste de `{"nom", "role"}` (rôle facultatif), 40 personnes au plus. Ni photo, ni coordonnées ; retrait sur simple demande | `[{"nom": "Dr A. Martin", "role": "Fondateur"}]` |
+| `presentation_source` | Page officielle d'où vient la présentation (obligatoire dès qu'un champ est rempli) | `https://…/a-propos` |
+| `presentation_verifiee_le` | Date de la dernière vérification (obligatoire avec la source) | `2026-11-14` |
+| `presentation_par` | `cuspeed` (rédigée par Cuspeed, source affichée) ou `organisme` (V2 : tenue par l'organisme depuis son compte) | `cuspeed` |
+
+La base refuse une présentation sans source ni date, un texte hors des longueurs, une année hors de 1800-2100 et un membre d'équipe avec un autre champ que `nom` et `role`. Les agents n'écrivent jamais ces champs directement : ils les proposent, Chris les valide.
+
 ## Sessions (`sessions`)
 
 `formation_id`, `lieu_id`, `debut`, `fin`, `inscriptions` (`a-renseigner`, `ouvertes`, `complet`, `fermees`, `annoncee`), `places`. Une session ne peut pas finir avant de commencer.

@@ -598,6 +598,38 @@ test("site construit : aucune note interne ni fiche non validée dans le HTML", 
   assert.ok(!readdirSync(join(sortie, "formations")).some((n) => n.startsWith("f9003")), "la fiche archivée n'est pas publiée");
 });
 
+
+test("page d'un organisme : présentation, chiffres clés, équipe, histoire et source", () => {
+  const { lire, sortie } = siteConstruit();
+  const d = chargerDonnees(JEU);
+  const o = d.organismes.find((x) => x.id === "O001");
+  assert.equal(o.annee_creation, 1970);
+  assert.deepEqual(o.equipe, [{ nom: "Pr Jeanne Essai", role: "Responsable pédagogique" }, { nom: "Dr Paul Test", role: null }]);
+  // L'adresse de la page dépend du registre utilisé à la construction : on la retrouve par l'identifiant.
+  const dossier = readdirSync(join(sortie, "organismes")).find((n) => n.startsWith("o001-"));
+  const html = lire(`organismes/${dossier}/index.html`);
+  assert.match(html, /<p class="org-chapo"[^>]*>Faculté d(&#39;|')essai qui forme/);
+  assert.match(html, /Créé en <strong class="chiffres"[^>]*>1970<\/strong>/);
+  assert.match(html, /<h2 id="equipe-titre"[^>]*>Équipe<\/h2>/);
+  assert.match(html, /Pr Jeanne Essai/);
+  assert.match(html, /<h2 id="histoire-titre"[^>]*>Histoire<\/h2>/);
+  assert.match(html, /Présentation rédigée par Cuspeed d(&#39;|')après/);
+  assert.match(html, /href="https:\/\/exemple\.invalid\/a-propos"/);
+  assert.match(html, /"foundingDate":"1970"/);
+});
+
+test("page d'un organisme sans présentation : « Présentation à venir », pas de bloc vide", () => {
+  const d = chargerDonnees(JEU);
+  const sans = d.organismes.find((x) => !x.presentation && !x.equipe.length);
+  if (!sans) return; // le jeu d'essai n'expose que des organismes ayant au moins une fiche publiée
+  const { lire, sortie } = siteConstruit();
+  const dossier = readdirSync(join(sortie, "organismes")).find((n) => n.startsWith(sans.id.toLowerCase() + "-"));
+  const html = lire(`organismes/${dossier}/index.html`);
+  assert.match(html, /Présentation à venir/);
+  assert.doesNotMatch(html, /id="equipe-titre"/);
+  assert.doesNotMatch(html, /id="histoire-titre"/);
+});
+
 test("nettoyage du site construit pour les tests", () => {
   if (!construit) return;
   rmSync(construit.sortie, { recursive: true, force: true });

@@ -49,5 +49,36 @@ class TypeEtSecteur(unittest.TestCase):
         self.assertFalse(verifier_donnees.type_et_secteur_coherents("catalogue", "universitaire", self.UNIV))
 
 
+class PresentationOrganisme(unittest.TestCase):
+    BASE = {"id": "O001", "presentation_source": "https://exemple.fr", "presentation_verifiee_le": "2026-11-14"}
+
+    def erreurs(self, **champs):
+        avant = len(verifier_donnees.erreurs)
+        verifier_donnees.verifier_presentation({**self.BASE, **champs})
+        nouvelles = verifier_donnees.erreurs[avant:]
+        del verifier_donnees.erreurs[avant:]
+        return nouvelles
+
+    def test_presentation_complete_acceptee(self):
+        self.assertEqual(self.erreurs(presentation="a" * 60, annee_creation=1990, histoire="b" * 80,
+                                      equipe=[{"nom": "Dr X", "role": "Fondateur"}, {"nom": "Dr Y"}]), [])
+
+    def test_sans_source_refusee(self):
+        self.assertTrue(self.erreurs(presentation="a" * 60, presentation_source=None))
+
+    def test_tenue_par_l_organisme_sans_source_acceptee(self):
+        self.assertEqual(self.erreurs(presentation="a" * 60, presentation_source=None, presentation_par="organisme"), [])
+
+    def test_texte_trop_court_ou_trop_long_refuse(self):
+        self.assertTrue(self.erreurs(presentation="court"))
+        self.assertTrue(self.erreurs(histoire="x" * 2001))
+
+    def test_annee_impossible_refusee(self):
+        self.assertTrue(self.erreurs(annee_creation=1500))
+
+    def test_membre_avec_donnee_en_plus_refuse(self):
+        self.assertTrue(self.erreurs(equipe=[{"nom": "Dr X", "telephone": "06"}]))
+
+
 if __name__ == "__main__":
     unittest.main()

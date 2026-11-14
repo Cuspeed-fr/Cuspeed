@@ -464,11 +464,26 @@ function siteConstruit() {
     if (i === 2) fiche = fiche.replace("organisme: O001", "organisme: O002");
     writeFileSync(join(donnees, "formations", `${id}.yaml`), fiche);
   }
+  // Médias d'essai pour O001 : une bannière, deux photos valides et trois entrées invalides à ignorer.
+  const medias = join(donnees, "medias");
+  mkdirSync(join(medias, "O001"), { recursive: true });
+  for (const f of ["banniere.jpg", "tp-1.jpg", "tp-2.webp", "script.svg"]) writeFileSync(join(medias, "O001", f), "x");
+  writeFileSync(join(medias, "O001", "medias.json"), JSON.stringify({
+    banniere: { fichier: "banniere.jpg", alt: "Salle de travaux pratiques", credit: "© Université d'Essai" },
+    photos: [
+      { fichier: "tp-1.jpg", alt: "Atelier de chirurgie", credit: "© Université d'Essai" },
+      { fichier: "tp-2.webp", alt: "Amphithéâtre" },
+      { fichier: "absente.jpg", alt: "Fichier absent" },
+      { fichier: "script.svg", alt: "Format refusé" },
+      { fichier: "../../secret.jpg", alt: "Chemin interdit" },
+      { fichier: "tp-1.jpg" },
+    ],
+  }));
   const sortie = mkdtempSync(join(tmpdir(), "cuspeed-construit-"));
   const astro = join(ICI, "..", "node_modules", ".bin", "astro");
   const r = spawnSync(astro, ["build", "--outDir", sortie], {
     cwd: join(ICI, ".."),
-    env: { ...process.env, CUSPEED_DATA: donnees, CUSPEED_REGISTRE: join(donnees, "registre-absent.json"), ASTRO_TELEMETRY_DISABLED: "1" },
+    env: { ...process.env, CUSPEED_DATA: donnees, CUSPEED_MEDIAS: medias, CUSPEED_REGISTRE: join(donnees, "registre-absent.json"), ASTRO_TELEMETRY_DISABLED: "1" },
     encoding: "utf8",
   });
   assert.equal(r.status, 0, `la construction du jeu d'essai a échoué :\n${r.stderr}\n${r.stdout.slice(-2000)}`);
@@ -653,6 +668,17 @@ test("équipe : seuls le nom et le rôle sortent du chargeur ; présentation non
   assert.equal(o.histoire, null);
   assert.deepEqual(o.equipe, []);
   rmSync(dossier, { recursive: true, force: true });
+});
+
+test("page d'un organisme : bannière et photos fournies, entrées invalides ignorées ; rien sans médias", () => {
+  const { lire, sortie } = siteConstruit();
+  const avec = lire(`organismes/${readdirSync(join(sortie, "organismes")).find((n) => n.startsWith("o001-"))}/index.html`);
+  assert.match(avec, /<figure class="org-banniere"[^>]*>\s*<img src="\/medias\/O001\/banniere\.jpg" alt="Salle de travaux pratiques"/);
+  assert.match(avec, /id="photos-titre"[^>]*>Photos/);
+  assert.equal((avec.match(/<li[^>]*><figure[^>]*><a href="\/medias\/O001\//g) || []).length, 2);
+  for (const interdit of ["absente.jpg", "script.svg", "secret.jpg", "Format refusé"]) assert.ok(!avec.includes(interdit), interdit);
+  const sans = lire(`organismes/${readdirSync(join(sortie, "organismes")).find((n) => n.startsWith("o002-"))}/index.html`);
+  assert.doesNotMatch(sans, /org-banniere"|id="photos-titre"/);
 });
 
 test("nettoyage du site construit pour les tests", () => {

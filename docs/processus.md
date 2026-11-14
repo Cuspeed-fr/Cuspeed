@@ -105,3 +105,12 @@ Le fichier `site/public/geo/departements.geojson` est dérivé du jeu « Contour
 
 La présentation d'un organisme (paragraphe, histoire, année de création, adresse, équipe) est relevée sur son site officiel par l'extracteur, contrôlée par le vérificateur, puis proposée à Chris dans la page de revue. Elle n'est publiée que lorsque Chris passe `presentation_validee` à vrai. La copie nocturne (`data/`, dépôt public) n'écrit que les présentations validées, et jamais les noms de l'équipe : ainsi une personne qui demande son retrait disparaît vraiment. Conséquence : reconstruire la base depuis `data/` ferait perdre les équipes et les brouillons ; ils restent dans la base Supabase et ses sauvegardes.
 
+## Médias des organismes : bannière et photos (14 novembre 2026)
+
+Une page organisme peut afficher une bannière en haut et une section « Photos ». Rien ne s'affiche sans médias. Les médias sont **fournis par l'organisme lui-même, avec son autorisation écrite** ; jamais récupérés sur son site ou ailleurs (droits d'auteur, droit à l'image des personnes photographiées). Aujourd'hui, Chris les dépose par pull request dans `site/public/medias/Oxxx/` :
+
+- les images (`.jpg`, `.png`, `.webp`, `.avif`), de préférence 1600 × 500 pour la bannière et 1200 × 900 pour les photos, allégées avant dépôt ;
+- un fichier `medias.json` : `{"banniere": {"fichier", "alt", "credit"}, "photos": [{"fichier", "alt", "credit"}]}`. Le texte alternatif (`alt`) est obligatoire ; le crédit est conseillé. Douze photos au plus.
+
+Une entrée sans texte alternatif, d'un autre format ou dont le fichier manque est ignorée. Plus tard (V2), l'organisme les déposera depuis son compte.
+

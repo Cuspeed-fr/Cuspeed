@@ -7,6 +7,7 @@ import ResumeFormation from "../../components/ResumeFormation.astro";
 import LogoOrganisme from "../../components/LogoOrganisme.astro";
 import SpriteVisuels from "../../components/SpriteVisuels.astro";
 import { chargerDonnees, dateLisible, couper } from "../../lib/donnees.js";
+import { mediasDe } from "../../lib/medias.js";
 
 export function getStaticPaths() {
   const donnees = chargerDonnees();
@@ -28,6 +29,8 @@ const nb = formations.length;
 const pluriel = nb > 1 ? "s" : "";
 const aPresentation = Boolean(o.presentation || o.histoire || o.equipe.length || o.annee_creation);
 // Histoire longue : repliée, pour garder la page lisible.
+// Bannière et photos fournies par l'organisme : rien ne s'affiche sans médias.
+const { banniere, photos } = mediasDe(o.id);
 const histoireLongue = (o.histoire ?? "").length > 420;
 const domaine = o.site_web ? new URL(o.site_web).hostname.replace(/^www\./, "") : null;
 
@@ -56,6 +59,13 @@ const organisation = {
     </ol>
   </nav>
 
+  {banniere && (
+    <figure class="org-banniere">
+      <img src={banniere.src} alt={banniere.alt} width="1600" height="500" decoding="async" fetchpriority="high" />
+      {banniere.credit && <figcaption>{banniere.credit}</figcaption>}
+    </figure>
+  )}
+
   <header class="org-entete">
     <LogoOrganisme organisme={o} taille={72} classe="org-logo" />
     <div class="org-titre">
@@ -80,6 +90,25 @@ const organisation = {
       <ul class="liste">
         {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
       </ul>
+
+      {photos.length > 0 && (
+        <section class="org-photos" aria-labelledby="photos-titre">
+          <h2 id="photos-titre">Photos <span class="discret chiffres">({photos.length})</span></h2>
+          <ul class="galerie">
+            {photos.map((ph) => (
+              <li>
+                <figure>
+                  <a href={ph.src} aria-label={`Agrandir : ${ph.alt}`}>
+                    <img src={ph.src} alt={ph.alt} width="600" height="450" loading="lazy" decoding="async" />
+                  </a>
+                  {ph.credit && <figcaption>{ph.credit}</figcaption>}
+                </figure>
+              </li>
+            ))}
+          </ul>
+          <p class="discret petit">Photos fournies par l'organisme.</p>
+        </section>
+      )}
     </section>
 
     <aside class="org-cote" id="a-propos" aria-label={`À propos de ${o.nom}`}>
@@ -148,6 +177,69 @@ const organisation = {
 </Base>
 
 <style>
+  .org-banniere {
+    position: relative;
+    margin: 0 0 20px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--accent-doux);
+  }
+  .org-banniere img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 5;
+    object-fit: cover;
+  }
+  @media (max-width: 600px) {
+    .org-banniere img {
+      aspect-ratio: 16 / 7;
+    }
+  }
+  .org-banniere figcaption {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: #fff;
+    background: rgb(0 0 0 / 0.55);
+  }
+  .org-photos {
+    margin-top: 32px;
+  }
+  .galerie {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+    gap: 12px;
+    margin: 0 0 8px;
+    padding: 0;
+    list-style: none;
+  }
+  .galerie figure {
+    margin: 0;
+  }
+  .galerie img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--trait);
+  }
+  .galerie a:focus-visible img {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .galerie figcaption {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: var(--discret);
+  }
   .org-entete {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);

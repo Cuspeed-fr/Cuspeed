@@ -1,9 +1,13 @@
 ---
-// Page d'un organisme : ses formations publiées.
+// Page d'un organisme : sa présentation (paragraphe, logo, chiffres clés, équipe, histoire) et ses formations.
+// La présentation est rédigée par Cuspeed d'après le site officiel (source et date affichées) ;
+// plus tard, l'organisme pourra la tenir lui-même depuis son compte (presentation_par = "organisme").
 import Base from "../../layouts/Base.astro";
 import ResumeFormation from "../../components/ResumeFormation.astro";
 import LogoOrganisme from "../../components/LogoOrganisme.astro";
-import { chargerDonnees } from "../../lib/donnees.js";
+import SpriteVisuels from "../../components/SpriteVisuels.astro";
+import { chargerDonnees, dateLisible, couper } from "../../lib/donnees.js";
+import { mediasDe } from "../../lib/medias.js";
 
 export function getStaticPaths() {
   const donnees = chargerDonnees();
@@ -21,10 +25,19 @@ const formations = donnees.formations
   .sort((a, b) => a.intitule.localeCompare(b.intitule, "fr"));
 const typeNom = ref.types_organisme[o.type] ?? o.type;
 const lienOfficiel = o.site_web ?? o.page_catalogue;
+const nb = formations.length;
+const pluriel = nb > 1 ? "s" : "";
+const aPresentation = Boolean(o.presentation || o.histoire || o.equipe.length || o.annee_creation);
+// Histoire longue : repliée, pour garder la page lisible.
+// Bannière et photos fournies par l'organisme : rien ne s'affiche sans médias.
+const { banniere, photos } = mediasDe(o.id);
+const histoireLongue = (o.histoire ?? "").length > 420;
+const domaine = o.site_web ? new URL(o.site_web).hostname.replace(/^www\./, "") : null;
 
-const description =
-  `${formations.length} formation${formations.length > 1 ? "s" : ""} pour chirurgiens-dentistes proposée${formations.length > 1 ? "s" : ""} par ${o.nom}` +
-  (o.ville ? ` (${o.ville})` : "") + " : intitulés, durées, tarifs et liens vers les pages officielles.";
+const description = o.presentation
+  ? couper(o.presentation, 155)
+  : `${nb} formation${pluriel} pour chirurgiens-dentistes proposée${pluriel} par ${o.nom}` +
+    (o.ville ? ` (${o.ville})` : "") + " : intitulés, durées, tarifs et liens vers les pages officielles.";
 
 const organisation = {
   "@context": "https://schema.org",
@@ -32,11 +45,12 @@ const organisation = {
   name: o.nom,
   url: new URL(`/organismes/${o.slug}/`, Astro.site).href,
   sameAs: lienOfficiel ?? undefined,
+  description: o.presentation ?? undefined,
+  foundingDate: o.annee_creation ? String(o.annee_creation) : undefined,
   address: o.ville ? { "@type": "PostalAddress", addressLocality: o.ville, addressCountry: "FR" } : undefined,
 };
-import SpriteVisuels from "../../components/SpriteVisuels.astro";
 ---
-<Base titre={`Formations dentaires – ${o.nom}`} description={description} donneesStructurees={[organisation]}>
+<Base titre={`${o.nom} – formations dentaires`} description={description} donneesStructurees={[organisation]}>
   <SpriteVisuels />
   <nav class="fil" aria-label="Fil d'Ariane">
     <ol>
@@ -44,29 +58,319 @@ import SpriteVisuels from "../../components/SpriteVisuels.astro";
       <li aria-current="page">{o.nom}</li>
     </ol>
   </nav>
-  <header class="entete-organisme">
-    <ul class="etiquettes"><li class="etiquette forte">{typeNom}</li>{o.ville && <li class="etiquette">{o.ville}</li>}</ul>
-    <LogoOrganisme organisme={o} taille={64} classe="logo-entete" />
-    <h1>{o.nom}</h1>
-    <p class="discret">
-      {formations.length} formation{formations.length > 1 ? "s" : ""} publiée{formations.length > 1 ? "s" : ""} sur Cuspeed.
-      {lienOfficiel && <> <a href={lienOfficiel} rel="noopener external">Site officiel ↗</a></>}
-    </p>
+
+  {banniere && (
+    <figure class="org-banniere">
+      <img src={banniere.src} alt={banniere.alt} width="1600" height="500" decoding="async" fetchpriority="high" />
+      {banniere.credit && <figcaption>{banniere.credit}</figcaption>}
+    </figure>
+  )}
+
+  <header class="org-entete">
+    <LogoOrganisme organisme={o} taille={72} classe="org-logo" />
+    <div class="org-titre">
+      <ul class="etiquettes" aria-label="Type et ville">
+        <li class="etiquette forte">{typeNom}</li>
+        {o.ville && <li class="etiquette">{o.ville}</li>}
+      </ul>
+      <h1>{o.nom}</h1>
+      {o.presentation && <p class="org-chapo">{o.presentation}</p>}
+      <ul class="chiffres-cles" aria-label="En chiffres">
+        <li><strong class="chiffres">{nb}</strong> formation{pluriel} publiée{pluriel}</li>
+        {o.annee_creation && <li>Créé en <strong class="chiffres">{o.annee_creation}</strong></li>}
+        {o.equipe.length > 0 && <li><strong class="chiffres">{o.equipe.length}</strong> membre{o.equipe.length > 1 ? "s" : ""} dans l'équipe</li>}
+      </ul>
+      {aPresentation && <p class="vers-apropos"><a href="#a-propos">À propos de l'organisme ↓</a></p>}
+    </div>
   </header>
-  <h2 class="invisible">Formations de cet organisme</h2>
-  <ul class="liste">
-    {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
-  </ul>
+
+  <div class="org-corps">
+    <section class="org-formations" aria-labelledby="formations-titre">
+      <h2 id="formations-titre">Formations <span class="discret chiffres">({nb})</span></h2>
+      <ul class="liste">
+        {formations.map((f) => <ResumeFormation formation={f} donnees={donnees} />)}
+      </ul>
+
+      {photos.length > 0 && (
+        <section class="org-photos" aria-labelledby="photos-titre">
+          <h2 id="photos-titre">Photos <span class="discret chiffres">({photos.length})</span></h2>
+          <ul class="galerie">
+            {photos.map((ph) => (
+              <li>
+                <figure>
+                  <a href={ph.src} aria-label={`Agrandir : ${ph.alt}`}>
+                    <img src={ph.src} alt={ph.alt} width="600" height="450" loading="lazy" decoding="async" />
+                  </a>
+                  {ph.credit && <figcaption>{ph.credit}</figcaption>}
+                </figure>
+              </li>
+            ))}
+          </ul>
+          <p class="discret petit">Photos fournies par l'organisme.</p>
+        </section>
+      )}
+    </section>
+
+    <aside class="org-cote" id="a-propos" aria-label={`À propos de ${o.nom}`}>
+      <section class="carte-bloc" aria-labelledby="bref-titre">
+        <h2 id="bref-titre">En bref</h2>
+        <dl class="infos">
+          <dt>Type</dt><dd>{typeNom}</dd>
+          {(o.adresse || o.ville) && <><dt>Adresse</dt><dd>{o.adresse ?? o.ville}</dd></>}
+          {o.annee_creation && <><dt>Création</dt><dd class="chiffres">{o.annee_creation}</dd></>}
+          {o.site_web && <><dt>Site officiel</dt><dd><a href={o.site_web} rel="noopener external">{domaine} ↗</a></dd></>}
+          {o.page_catalogue && o.page_catalogue !== o.site_web && <><dt>Catalogue</dt><dd><a href={o.page_catalogue} rel="noopener external">Toutes ses formations ↗</a></dd></>}
+        </dl>
+      </section>
+
+      {o.equipe.length > 0 && (
+        <section class="carte-bloc" aria-labelledby="equipe-titre">
+          <h2 id="equipe-titre">Équipe</h2>
+          <ul class="equipe">
+            {o.equipe.map((m) => (
+              <li>
+                <span class="initiales" aria-hidden="true">{m.nom.replace(/^(Dr|Pr|Docteur|Professeur)\.?\s+/i, "").split(/\s+/).slice(0, 2).map((x) => x[0]).join("").toUpperCase()}</span>
+                <span class="membre"><strong>{m.nom}</strong>{m.role && <span class="discret">{m.role}</span>}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {o.histoire && (
+        <section class="carte-bloc" aria-labelledby="histoire-titre">
+          <h2 id="histoire-titre">Histoire</h2>
+          {histoireLongue ? (
+            <details class="histoire">
+              <summary><span class="extrait" aria-hidden="true">{couper(o.histoire, 260)}</span> <span class="lire">Lire toute l'histoire</span></summary>
+              <p>{o.histoire}</p>
+            </details>
+          ) : (
+            <p class="histoire-texte">{o.histoire}</p>
+          )}
+        </section>
+      )}
+
+      <section class="carte-bloc source" aria-labelledby="source-org-titre">
+        <h2 id="source-org-titre">Source</h2>
+        {aPresentation ? (
+          o.presentation_par === "organisme" ? (
+            <p>Présentation fournie par l'organisme.</p>
+          ) : (
+            <p>
+              Présentation rédigée par Cuspeed d'après{" "}
+              {o.presentation_source ? <a href={o.presentation_source} rel="noopener external">le site officiel de l'organisme ↗</a> : "le site officiel de l'organisme"}.
+              {o.presentation_verifiee_le && <> Dernière vérification : <strong>{dateLisible(o.presentation_verifiee_le)}</strong>.</>}
+            </p>
+          )
+        ) : (
+          <p class="discret">Présentation à venir.</p>
+        )}
+        <p class="discret petit">
+          Vous représentez {o.nom} ? Pour compléter ou corriger cette page, écrivez à{" "}
+          <span class="adresse">contact@cuspeed.fr</span> en indiquant la référence <span class="chiffres">{o.id}</span>.
+          {o.equipe.length > 0 && <> Une personne citée dans l'équipe peut demander son retrait à la même adresse.</>}
+        </p>
+      </section>
+    </aside>
+  </div>
 </Base>
 
 <style>
-  .entete-organisme {
-    display: grid;
-    gap: 8px;
-    margin-bottom: 20px;
+  .org-banniere {
+    position: relative;
+    margin: 0 0 20px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--accent-doux);
   }
-  .entete-organisme h1,
-  .entete-organisme p {
+  .org-banniere img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 5;
+    object-fit: cover;
+  }
+  @media (max-width: 600px) {
+    .org-banniere img {
+      aspect-ratio: 16 / 7;
+    }
+  }
+  .org-banniere figcaption {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    color: #fff;
+    background: rgb(0 0 0 / 0.55);
+  }
+  .org-photos {
+    margin-top: 32px;
+  }
+  .galerie {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+    gap: 12px;
+    margin: 0 0 8px;
+    padding: 0;
+    list-style: none;
+  }
+  .galerie figure {
     margin: 0;
+  }
+  .galerie img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid var(--trait);
+  }
+  .galerie a:focus-visible img {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .galerie figcaption {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: var(--discret);
+  }
+  .org-entete {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 16px 20px;
+    align-items: start;
+    margin-bottom: 24px;
+  }
+  /* Sans logo, le titre prend toute la largeur. */
+  .org-entete:not(:has(:global(.org-logo))) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .org-entete :global(.org-logo) {
+    margin-top: 4px;
+  }
+  .org-titre {
+    display: grid;
+    gap: 10px;
+    min-width: 0;
+  }
+  .org-titre h1 {
+    margin: 0;
+  }
+  .org-chapo {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.55;
+    max-width: 68ch;
+  }
+  .chiffres-cles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--discret);
+  }
+  .chiffres-cles strong {
+    color: var(--encre);
+  }
+  .org-corps {
+    display: grid;
+    gap: 24px;
+  }
+  .org-cote {
+    display: grid;
+    gap: 16px;
+    align-content: start;
+  }
+  /* Mobile : le chapô et les chiffres clés en tête, puis les formations, puis la présentation détaillée. */
+  @media (min-width: 920px) {
+    .org-corps {
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+  .org-formations h2 {
+    margin-top: 0;
+  }
+  .carte-bloc h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+  }
+  .equipe {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .equipe li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+  }
+  .initiales {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent-doux);
+    color: var(--accent-fort);
+    border: 1px solid var(--trait);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+  .membre {
+    display: grid;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .histoire summary {
+    cursor: pointer;
+    list-style: none;
+  }
+  .histoire summary::-webkit-details-marker {
+    display: none;
+  }
+  .histoire[open] .extrait {
+    display: none;
+  }
+  .histoire .lire {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .histoire summary:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .vers-apropos {
+    margin: 0;
+  }
+  @media (min-width: 920px) {
+    .vers-apropos {
+      display: none;
+    }
+  }
+  .histoire[open] .lire {
+    display: none;
+  }
+  .histoire p,
+  .histoire-texte {
+    margin: 0;
+    white-space: pre-line;
+    line-height: 1.6;
+  }
+  .source p {
+    margin: 0 0 8px;
   }
 </style>

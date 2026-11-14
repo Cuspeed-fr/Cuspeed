@@ -460,13 +460,30 @@ function siteConstruit() {
       .replace(/^notes:.*$/m, `notes: NOTE-INTERNE-SECRETE-${id} ne doit jamais sortir`);
     // Une fiche avec une session qui commence plus tard : « Prochaine session » sur sa carte.
     if (i === 1) fiche = fiche.replace("debut: '2026-09-01'", "debut: '2099-01-14'").replace("fin: '2027-06-30'", "fin: '2099-06-30'");
+    // Une fiche publiée chez O002, organisme sans présentation : sa page existe et reste sobre.
+    if (i === 2) fiche = fiche.replace("organisme: O001", "organisme: O002");
     writeFileSync(join(donnees, "formations", `${id}.yaml`), fiche);
   }
+  // Médias d'essai pour O001 : une bannière, deux photos valides et trois entrées invalides à ignorer.
+  const medias = join(donnees, "medias");
+  mkdirSync(join(medias, "O001"), { recursive: true });
+  for (const f of ["banniere.jpg", "tp-1.jpg", "tp-2.webp", "script.svg"]) writeFileSync(join(medias, "O001", f), "x");
+  writeFileSync(join(medias, "O001", "medias.json"), JSON.stringify({
+    banniere: { fichier: "banniere.jpg", alt: "Salle de travaux pratiques", credit: "© Université d'Essai" },
+    photos: [
+      { fichier: "tp-1.jpg", alt: "Atelier de chirurgie", credit: "© Université d'Essai" },
+      { fichier: "tp-2.webp", alt: "Amphithéâtre" },
+      { fichier: "absente.jpg", alt: "Fichier absent" },
+      { fichier: "script.svg", alt: "Format refusé" },
+      { fichier: "../../secret.jpg", alt: "Chemin interdit" },
+      { fichier: "tp-1.jpg" },
+    ],
+  }));
   const sortie = mkdtempSync(join(tmpdir(), "cuspeed-construit-"));
   const astro = join(ICI, "..", "node_modules", ".bin", "astro");
   const r = spawnSync(astro, ["build", "--outDir", sortie], {
     cwd: join(ICI, ".."),
-    env: { ...process.env, CUSPEED_DATA: donnees, CUSPEED_REGISTRE: join(donnees, "registre-absent.json"), ASTRO_TELEMETRY_DISABLED: "1" },
+    env: { ...process.env, CUSPEED_DATA: donnees, CUSPEED_MEDIAS: medias, CUSPEED_REGISTRE: join(donnees, "registre-absent.json"), ASTRO_TELEMETRY_DISABLED: "1" },
     encoding: "utf8",
   });
   assert.equal(r.status, 0, `la construction du jeu d'essai a échoué :\n${r.stderr}\n${r.stdout.slice(-2000)}`);
@@ -596,6 +613,72 @@ test("site construit : aucune note interne ni fiche non validée dans le HTML", 
     assert.doesNotMatch(contenu, /F9002|f9002|Cursus implantologie à vérifier/, `fiche non validée dans ${p}`);
   }
   assert.ok(!readdirSync(join(sortie, "formations")).some((n) => n.startsWith("f9003")), "la fiche archivée n'est pas publiée");
+});
+
+
+test("page d'un organisme : présentation, chiffres clés, équipe, histoire et source", () => {
+  const { lire, sortie } = siteConstruit();
+  const d = chargerDonnees(JEU);
+  const o = d.organismes.find((x) => x.id === "O001");
+  assert.equal(o.annee_creation, 1970);
+  assert.deepEqual(o.equipe, [{ nom: "Pr Jeanne Essai", role: "Responsable pédagogique" }, { nom: "Dr Paul Test", role: null }]);
+  // L'adresse de la page dépend du registre utilisé à la construction : on la retrouve par l'identifiant.
+  const dossier = readdirSync(join(sortie, "organismes")).find((n) => n.startsWith("o001-"));
+  const html = lire(`organismes/${dossier}/index.html`);
+  assert.match(html, /<p class="org-chapo"[^>]*>Faculté d(&#39;|')essai qui forme/);
+  assert.match(html, /Créé en <strong class="chiffres"[^>]*>1970<\/strong>/);
+  assert.match(html, /<h2 id="equipe-titre"[^>]*>Équipe<\/h2>/);
+  assert.match(html, /Pr Jeanne Essai/);
+  assert.match(html, /<h2 id="histoire-titre"[^>]*>Histoire<\/h2>/);
+  assert.match(html, /Présentation rédigée par Cuspeed d(&#39;|')après/);
+  assert.match(html, /href="https:\/\/exemple\.invalid\/a-propos"/);
+  assert.match(html, /"foundingDate":"1970"/);
+});
+
+test("page d'un organisme sans présentation : « Présentation à venir », pas de bloc vide", () => {
+  const { donnees } = siteConstruit();
+  const sans = chargerDonnees(donnees).organismes.find((x) => x.id === "O002");
+  assert.ok(sans && !sans.presentation && sans.equipe.length === 0);
+  const { lire, sortie } = siteConstruit();
+  const dossier = readdirSync(join(sortie, "organismes")).find((n) => n.startsWith(sans.id.toLowerCase() + "-"));
+  const html = lire(`organismes/${dossier}/index.html`);
+  assert.match(html, /Présentation à venir/);
+  assert.doesNotMatch(html, /id="equipe-titre"/);
+  assert.doesNotMatch(html, /id="histoire-titre"/);
+});
+
+test("équipe : seuls le nom et le rôle sortent du chargeur ; présentation non validée jamais publiée", () => {
+  const dossier = copieDuJeu();
+  const chemin = join(dossier, "organismes.yaml");
+  const texte = readFileSync(chemin, "utf8").replace(
+    "  - nom: Dr Paul Test\n",
+    "  - nom: Dr Paul Test\n    telephone: 06 00 00 00 00\n    email: paul@exemple.invalid\n    photo: https://exemple.invalid/p.jpg\n",
+  );
+  writeFileSync(chemin, texte);
+  let o = chargerDonnees(dossier).organismes.find((x) => x.id === "O001");
+  assert.deepEqual(o.equipe.map((m) => Object.keys(m).sort()), [["nom", "role"], ["nom", "role"]]);
+  assert.ok(!JSON.stringify(o).includes("paul@exemple"));
+  assert.ok(!JSON.stringify(o).includes("06 00 00"));
+  // Seconde copie : le chargeur garde en mémoire les données déjà lues dans un dossier.
+  const dossier2 = copieDuJeu();
+  writeFileSync(join(dossier2, "organismes.yaml"), texte.replace("  presentation_validee: true\n", "  presentation_validee: false\n"));
+  o = chargerDonnees(dossier2).organismes.find((x) => x.id === "O001");
+  rmSync(dossier2, { recursive: true, force: true });
+  assert.equal(o.presentation, null);
+  assert.equal(o.histoire, null);
+  assert.deepEqual(o.equipe, []);
+  rmSync(dossier, { recursive: true, force: true });
+});
+
+test("page d'un organisme : bannière et photos fournies, entrées invalides ignorées ; rien sans médias", () => {
+  const { lire, sortie } = siteConstruit();
+  const avec = lire(`organismes/${readdirSync(join(sortie, "organismes")).find((n) => n.startsWith("o001-"))}/index.html`);
+  assert.match(avec, /<figure class="org-banniere"[^>]*>\s*<img src="\/medias\/O001\/banniere\.jpg" alt="Salle de travaux pratiques"/);
+  assert.match(avec, /id="photos-titre"[^>]*>Photos/);
+  assert.equal((avec.match(/<li[^>]*><figure[^>]*><a href="\/medias\/O001\//g) || []).length, 2);
+  for (const interdit of ["absente.jpg", "script.svg", "secret.jpg", "Format refusé"]) assert.ok(!avec.includes(interdit), interdit);
+  const sans = lire(`organismes/${readdirSync(join(sortie, "organismes")).find((n) => n.startsWith("o002-"))}/index.html`);
+  assert.doesNotMatch(sans, /org-banniere"|id="photos-titre"/);
 });
 
 test("nettoyage du site construit pour les tests", () => {

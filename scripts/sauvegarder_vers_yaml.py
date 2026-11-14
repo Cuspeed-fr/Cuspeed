@@ -30,6 +30,10 @@ RACINE = Path(__file__).resolve().parent.parent
 FINANCEMENTS = {"dpc": "DPC", "fifpl": "FIFPL", "opco": "OPCO", "cpf": "CPF"}
 
 
+# Champs de présentation d'un organisme, dans l'ordre d'écriture du fichier.
+PRESENTATION = ("presentation", "histoire", "annee_creation", "adresse", "equipe",
+                "presentation_source", "presentation_verifiee_le", "presentation_par")
+
 def slug(texte, longueur=60):
     t = unicodedata.normalize("NFD", texte).encode("ascii", "ignore").decode().lower()
     t = re.sub(r"[^a-z0-9]+", "-", t).strip("-")
@@ -99,8 +103,21 @@ def main():
         ecrire_yaml(sortie / "referentiels.yaml", ref)
 
         cur.execute("select * from organismes order by id")
-        organismes = [{k: r[k] for k in ("id", "nom", "type", "ville", "site_web", "page_catalogue", "fiche_revendiquee")}
-                      for r in cur.fetchall()]
+        organismes = []
+        for r in cur.fetchall():
+            o = {k: r[k] for k in ("id", "nom", "type", "ville", "site_web", "page_catalogue", "fiche_revendiquee")}
+            # Présentation de l'organisme (migration 20261114000100), écrite seulement si Chris l'a validée :
+            # - copie nocturne (dépôt public, historique git) : jamais les noms de l'équipe, pour qu'un retrait
+            #   demandé par une personne soit effectif ; ils restent dans la base.
+            # - brouillons non validés : jamais écrits, ni dans l'un ni dans l'autre (ils restent dans la base).
+            if r.get("presentation_validee"):
+                for k in PRESENTATION:
+                    if k == "equipe" and not args.seulement_validees:
+                        continue
+                    if r.get(k) not in (None, [], ""):
+                        o[k] = r[k].isoformat() if hasattr(r[k], "isoformat") else r[k]
+                o["presentation_validee"] = True
+            organismes.append(o)
         ecrire_yaml(sortie / "organismes.yaml", organismes)
 
         cur.execute("select * from lieux order by id")

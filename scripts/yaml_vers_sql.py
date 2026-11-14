@@ -3,9 +3,11 @@
 
     python3 scripts/yaml_vers_sql.py
 
-Le fichier produit ne contient aucune donnée personnelle ni aucun secret.
+Le fichier produit ne contient aucun secret. Seule donnée personnelle possible : les noms et rôles
+d'équipe publiés par les organismes eux-mêmes (absents de la copie nocturne, donc en pratique du seed).
 """
 import csv
+import json
 import sys
 from pathlib import Path
 
@@ -60,9 +62,17 @@ def main():
 
     orgs = charger("organismes.yaml")
     parties.append(inserts("organismes",
-                           ["id", "nom", "type", "ville", "site_web", "page_catalogue", "fiche_revendiquee"],
+                           ["id", "nom", "type", "ville", "site_web", "page_catalogue", "fiche_revendiquee",
+                            "presentation", "histoire", "annee_creation", "adresse", "equipe",
+                            "presentation_source", "presentation_verifiee_le", "presentation_par", "presentation_validee"],
                            [[lit(o["id"]), lit(o["nom"]), lit(o["type"]), lit(o.get("ville")), lit(o.get("site_web")),
-                             lit(o.get("page_catalogue")), lit(bool(o.get("fiche_revendiquee")))] for o in orgs]))
+                             lit(o.get("page_catalogue")), lit(bool(o.get("fiche_revendiquee"))),
+                             lit(o.get("presentation")), lit(o.get("histoire")), lit(o.get("annee_creation")),
+                             lit(o.get("adresse")),
+                             (lit(json.dumps(o["equipe"], ensure_ascii=False)) + "::jsonb") if o.get("equipe") else "null",
+                             lit(o.get("presentation_source")), lit(o.get("presentation_verifiee_le")),
+                             lit(o.get("presentation_par") or "cuspeed"), lit(bool(o.get("presentation_validee")))]
+                            for o in orgs]))
 
     lieux = charger("lieux.yaml")
     parties.append(inserts("lieux", ["id", "nom", "adresse", "latitude", "longitude", "regroupement_carte"],

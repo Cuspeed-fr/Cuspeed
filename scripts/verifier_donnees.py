@@ -84,6 +84,48 @@ def verifier_url(ou, url):
         erreur(ou, f"URL invalide : {url!r}")
 
 
+# Une adresse e-mail ou un numéro de téléphone n'a rien à faire dans le nom ou le rôle d'un membre d'équipe.
+COORDONNEES = re.compile(r"@|(?:\d[\s.-]?){6,}")
+
+
+def verifier_presentation(o):
+    """Présentation d'un organisme (mêmes règles que la base, migration 20261114000100)."""
+    ou = f"organismes.yaml {o['id']}"
+    for champ, mini, maxi in (("presentation", 40, 700), ("histoire", 40, 2000)):
+        t = o.get(champ)
+        if t is not None and (not isinstance(t, str) or not mini <= len(t) <= maxi):
+            erreur(ou, f"{champ} : texte de {mini} à {maxi} caractères attendu")
+    a = o.get("annee_creation")
+    if a is not None and (isinstance(a, bool) or not isinstance(a, int) or not 1800 <= a <= 2100):
+        erreur(ou, f"année de création invalide : {a!r}")
+    adresse = o.get("adresse")
+    if adresse is not None and (not isinstance(adresse, str) or len(adresse) > 200):
+        erreur(ou, "adresse : 200 caractères au plus")
+    date = o.get("presentation_verifiee_le")
+    if date is not None and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(date)):
+        erreur(ou, f"date de vérification de la présentation invalide : {date!r}")
+    if not isinstance(o.get("presentation_validee", False), bool):
+        erreur(ou, "presentation_validee : vrai ou faux attendu")
+    equipe = o.get("equipe")
+    if equipe is not None:
+        if not isinstance(equipe, list) or len(equipe) > 40:
+            erreur(ou, "équipe : liste de 40 personnes au plus attendue")
+        else:
+            for m in equipe:
+                if (not isinstance(m, dict) or set(m) - {"nom", "role"} or not isinstance(m.get("nom"), str)
+                        or not 2 <= len(m["nom"].strip()) <= 120
+                        or ("role" in m and (not isinstance(m["role"], str) or len(m["role"]) > 160))):
+                    erreur(ou, f"équipe : membre invalide {m!r} (seulement nom et rôle)")
+                elif COORDONNEES.search(m["nom"] + " " + m.get("role", "")):
+                    erreur(ou, f"équipe : coordonnées personnelles interdites ({m['nom']!r})")
+    a_du_contenu = any(o.get(c) not in (None, [], "") for c in ("presentation", "histoire", "equipe", "annee_creation"))
+    if a_du_contenu and o.get("presentation_par", "cuspeed") == "cuspeed" and not (
+            o.get("presentation_source") and o.get("presentation_verifiee_le")):
+        erreur(ou, "présentation sans source officielle ni date de vérification")
+    if o.get("presentation_par", "cuspeed") not in ("cuspeed", "organisme"):
+        erreur(ou, f"presentation_par inconnu : {o.get('presentation_par')!r}")
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--reference", help="branche git de comparaison (ex. origin/main)")
@@ -101,9 +143,10 @@ def main():
         ids_org.add(o["id"])
         if o.get("type") not in ref["types_organisme"]:
             erreur("organismes.yaml", f"{o['id']} : type inconnu {o.get('type')!r}")
-        for champ in ("site_web", "page_catalogue"):
+        for champ in ("site_web", "page_catalogue", "presentation_source"):
             if o.get(champ):
                 verifier_url(f"organismes.yaml {o['id']}", o[champ])
+        verifier_presentation(o)
 
     ids_lieux = set()
     for l in lieux:

@@ -99,10 +99,17 @@ function formationPublique(f, registre) {
 
 /** Garde un lien seulement s'il est en http(s) (jamais « javascript: » ou autre). */
 function lienSur(url) {
-  return typeof url === "string" && /^https?:\/\//i.test(url.trim()) ? url.trim() : null;
+  if (typeof url !== "string" || !/^https?:\/\//i.test(url.trim())) return null;
+  try {
+    return new URL(url.trim()).hostname ? url.trim() : null;
+  } catch {
+    return null;
+  }
 }
 
 function organismePublic(o, registre) {
+  // Une présentation n'est publiée que si Chris l'a validée (règle 1) ; sans le champ, rien n'est publié.
+  const p = o.presentation_validee === true ? o : {};
   return {
     id: o.id,
     slug: registre.organismes[o.id] ?? adresseCalculee(o.id, o.nom),
@@ -111,7 +118,26 @@ function organismePublic(o, registre) {
     ville: o.ville ?? null,
     site_web: lienSur(o.site_web),
     page_catalogue: lienSur(o.page_catalogue),
+    // Présentation (migration 20261114000100) : textes publiés tels qu'en base, équipe réduite à nom et rôle.
+    presentation: texteOuNull(p.presentation, 700),
+    histoire: texteOuNull(p.histoire, 2000),
+    annee_creation: Number.isInteger(p.annee_creation) ? p.annee_creation : null,
+    adresse: texteOuNull(p.adresse, 200),
+    // Seuls le nom et le rôle d'un membre sortent du chargeur, quoi que contienne la donnée.
+    equipe: Array.isArray(p.equipe)
+      ? p.equipe
+          .filter((m) => m && typeof m.nom === "string" && m.nom.trim())
+          .slice(0, 40)
+          .map((m) => ({ nom: m.nom.trim().slice(0, 120), role: texteOuNull(m.role, 160) }))
+      : [],
+    presentation_source: lienSur(p.presentation_source),
+    presentation_verifiee_le: /^\d{4}-\d{2}-\d{2}/.test(String(p.presentation_verifiee_le ?? "")) ? String(p.presentation_verifiee_le).slice(0, 10) : null,
+    presentation_par: p.presentation_par === "organisme" ? "organisme" : "cuspeed",
   };
+}
+
+function texteOuNull(t, max = Infinity) {
+  return typeof t === "string" && t.trim() ? t.trim().slice(0, max) : null;
 }
 
 function lieuPublic(l) {

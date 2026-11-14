@@ -6,6 +6,14 @@
 -- les tenir lui-même : `presentation_par` indique qui a écrit la présentation.
 -- Données publiques : uniquement ce que l'organisme publie lui-même. L'équipe se limite au nom et au rôle
 -- affichés par l'organisme (pas de photo, pas de coordonnées personnelles) ; retrait sur simple demande.
+--
+-- Droits (règle 1 : rien n'est publié sans Chris) :
+-- - `presentation_validee` : la présentation n'est publiée sur le site que lorsque Chris la passe à vrai.
+-- - L'extracteur garde le droit d'AJOUTER un organisme, mais seulement ses colonnes d'identité : il ne peut
+--   écrire aucun champ de présentation (droit d'INSERT par colonnes). Il les propose, Chris les applique.
+-- - L'API publique (anon, authenticated) ne lit plus que les colonnes d'identité des organismes : la
+--   présentation, l'adresse et l'équipe ne sont pas exposées par l'API (le site les reçoit par l'export
+--   de publication, qui ne garde que les présentations validées).
 
 alter table public.organismes
   add column presentation              text check (presentation is null or char_length(presentation) between 40 and 700),
@@ -15,17 +23,18 @@ alter table public.organismes
   add column equipe                    jsonb check (equipe is null or (jsonb_typeof(equipe) = 'array' and jsonb_array_length(equipe) <= 40)),
   add column presentation_source       text check (presentation_source is null or presentation_source ~ '^https?://'),
   add column presentation_verifiee_le  date,
-  add column presentation_par          text not null default 'cuspeed' check (presentation_par in ('cuspeed', 'organisme'));
+  add column presentation_par          text not null default 'cuspeed' check (presentation_par in ('cuspeed', 'organisme')),
+  add column presentation_validee      boolean not null default false;
 
 -- Chaque membre de l'équipe : {"nom": "...", "role": "..."} (rôle facultatif), rien d'autre.
 create or replace function public.equipe_valide(e jsonb) returns boolean
-language sql immutable as $$
+language sql immutable set search_path = pg_catalog as $$
   select e is null or not exists (
     select 1 from jsonb_array_elements(e) m
     where jsonb_typeof(m) <> 'object'
-       or not (m ? 'nom') or jsonb_typeof(m -> 'nom') <> 'string' or char_length(m ->> 'nom') not between 2 and 120
+       or not (m ? 'nom') or jsonb_typeof(m -> 'nom') <> 'string' or char_length(btrim(m ->> 'nom')) not between 2 and 120
        or (m ? 'role' and (jsonb_typeof(m -> 'role') <> 'string' or char_length(m ->> 'role') > 160))
-       or exists (select 1 from jsonb_object_keys(m) k where k not in ('nom', 'role'))
+       or (jsonb_typeof(m) = 'object' and exists (select 1 from jsonb_object_keys(m) k where k not in ('nom', 'role')))
   )
 $$;
 alter table public.organismes add constraint organismes_equipe_valide check (public.equipe_valide(equipe));
@@ -41,3 +50,14 @@ comment on column public.organismes.presentation is 'Court paragraphe descriptif
 comment on column public.organismes.histoire is 'Histoire de l''organisme (40 à 2000 caractères), d''après le site officiel.';
 comment on column public.organismes.equipe is 'Équipe publiée par l''organisme : [{"nom": "...", "role": "..."}], sans photo ni coordonnées.';
 comment on column public.organismes.presentation_par is 'cuspeed (rédigée par Cuspeed, source citée) ou organisme (tenue par l''organisme lui-même, V2).';
+
+-- Une présentation ne peut être validée que si elle existe.
+alter table public.organismes add constraint organismes_presentation_validee_non_vide check (
+  not presentation_validee or presentation is not null or histoire is not null or equipe is not null or annee_creation is not null
+);
+
+-- Droits par colonnes.
+revoke insert on public.organismes from agent_extracteur;
+grant insert (id, nom, type, ville, site_web, page_catalogue) on public.organismes to agent_extracteur;
+revoke select on public.organismes from anon, authenticated;
+grant select (id, nom, type, ville, site_web, page_catalogue, fiche_revendiquee) on public.organismes to anon, authenticated;

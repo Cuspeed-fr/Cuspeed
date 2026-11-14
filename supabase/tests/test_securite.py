@@ -151,6 +151,17 @@ essai("présentation complète et sourcée acceptée", None,
       f"presentation_verifiee_le = current_date where id = {OID}", 1)
 essai("l'extracteur ne modifie pas une présentation", "agent_extracteur",
       f"update organismes set presentation = repeat('a', 60) where id = {OID}", "erreur")
+essai("l'extracteur ne crée pas un organisme avec une présentation", "agent_extracteur",
+      "insert into organismes (id, nom, type, presentation, presentation_source, presentation_verifiee_le) "
+      "values ('O998', 'Essai', 'organisme-prive', repeat('a', 60), 'https://exemple.fr', current_date)", "erreur")
+essai("l'extracteur crée toujours un organisme (colonnes d'identité)", "agent_extracteur",
+      "insert into organismes (id, nom, type, ville, site_web, page_catalogue) "
+      "values ('O998', 'Essai', 'organisme-prive', 'Lyon', 'https://exemple.fr', null)", 1)
+essai("l'API publique ne lit pas l'équipe d'un organisme", "anon", "select equipe from organismes", "erreur")
+essai("l'API publique ne lit pas l'adresse d'un organisme", "anon", "select adresse from organismes", "erreur")
+essai("l'API publique lit toujours le nom des organismes", "anon", "select id, nom, type, ville from organismes limit 1", 1)
+essai("présentation validée sans contenu refusée", None,
+      f"update organismes set presentation_validee = true where id = {OID}", "erreur")
 
 print("Proposition et journal (propriétaire)")
 with conn.cursor() as cur:

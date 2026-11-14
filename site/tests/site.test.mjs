@@ -460,6 +460,8 @@ function siteConstruit() {
       .replace(/^notes:.*$/m, `notes: NOTE-INTERNE-SECRETE-${id} ne doit jamais sortir`);
     // Une fiche avec une session qui commence plus tard : « Prochaine session » sur sa carte.
     if (i === 1) fiche = fiche.replace("debut: '2026-09-01'", "debut: '2099-01-14'").replace("fin: '2027-06-30'", "fin: '2099-06-30'");
+    // Une fiche publiée chez O002, organisme sans présentation : sa page existe et reste sobre.
+    if (i === 2) fiche = fiche.replace("organisme: O001", "organisme: O002");
     writeFileSync(join(donnees, "formations", `${id}.yaml`), fiche);
   }
   const sortie = mkdtempSync(join(tmpdir(), "cuspeed-construit-"));
@@ -619,15 +621,38 @@ test("page d'un organisme : présentation, chiffres clés, équipe, histoire et 
 });
 
 test("page d'un organisme sans présentation : « Présentation à venir », pas de bloc vide", () => {
-  const d = chargerDonnees(JEU);
-  const sans = d.organismes.find((x) => !x.presentation && !x.equipe.length);
-  if (!sans) return; // le jeu d'essai n'expose que des organismes ayant au moins une fiche publiée
+  const { donnees } = siteConstruit();
+  const sans = chargerDonnees(donnees).organismes.find((x) => x.id === "O002");
+  assert.ok(sans && !sans.presentation && sans.equipe.length === 0);
   const { lire, sortie } = siteConstruit();
   const dossier = readdirSync(join(sortie, "organismes")).find((n) => n.startsWith(sans.id.toLowerCase() + "-"));
   const html = lire(`organismes/${dossier}/index.html`);
   assert.match(html, /Présentation à venir/);
   assert.doesNotMatch(html, /id="equipe-titre"/);
   assert.doesNotMatch(html, /id="histoire-titre"/);
+});
+
+test("équipe : seuls le nom et le rôle sortent du chargeur ; présentation non validée jamais publiée", () => {
+  const dossier = copieDuJeu();
+  const chemin = join(dossier, "organismes.yaml");
+  const texte = readFileSync(chemin, "utf8").replace(
+    "  - nom: Dr Paul Test\n",
+    "  - nom: Dr Paul Test\n    telephone: 06 00 00 00 00\n    email: paul@exemple.invalid\n    photo: https://exemple.invalid/p.jpg\n",
+  );
+  writeFileSync(chemin, texte);
+  let o = chargerDonnees(dossier).organismes.find((x) => x.id === "O001");
+  assert.deepEqual(o.equipe.map((m) => Object.keys(m).sort()), [["nom", "role"], ["nom", "role"]]);
+  assert.ok(!JSON.stringify(o).includes("paul@exemple"));
+  assert.ok(!JSON.stringify(o).includes("06 00 00"));
+  // Seconde copie : le chargeur garde en mémoire les données déjà lues dans un dossier.
+  const dossier2 = copieDuJeu();
+  writeFileSync(join(dossier2, "organismes.yaml"), texte.replace("  presentation_par: cuspeed\n", "  presentation_par: cuspeed\n  presentation_validee: false\n"));
+  o = chargerDonnees(dossier2).organismes.find((x) => x.id === "O001");
+  rmSync(dossier2, { recursive: true, force: true });
+  assert.equal(o.presentation, null);
+  assert.equal(o.histoire, null);
+  assert.deepEqual(o.equipe, []);
+  rmSync(dossier, { recursive: true, force: true });
 });
 
 test("nettoyage du site construit pour les tests", () => {

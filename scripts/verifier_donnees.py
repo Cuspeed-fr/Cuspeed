@@ -84,6 +84,10 @@ def verifier_url(ou, url):
         erreur(ou, f"URL invalide : {url!r}")
 
 
+# Une adresse e-mail ou un numéro de téléphone n'a rien à faire dans le nom ou le rôle d'un membre d'équipe.
+COORDONNEES = re.compile(r"@|(?:\d[\s.-]?){6,}")
+
+
 def verifier_presentation(o):
     """Présentation d'un organisme (mêmes règles que la base, migration 20261114000100)."""
     ou = f"organismes.yaml {o['id']}"
@@ -92,8 +96,16 @@ def verifier_presentation(o):
         if t is not None and (not isinstance(t, str) or not mini <= len(t) <= maxi):
             erreur(ou, f"{champ} : texte de {mini} à {maxi} caractères attendu")
     a = o.get("annee_creation")
-    if a is not None and (not isinstance(a, int) or not 1800 <= a <= 2100):
+    if a is not None and (isinstance(a, bool) or not isinstance(a, int) or not 1800 <= a <= 2100):
         erreur(ou, f"année de création invalide : {a!r}")
+    adresse = o.get("adresse")
+    if adresse is not None and (not isinstance(adresse, str) or len(adresse) > 200):
+        erreur(ou, "adresse : 200 caractères au plus")
+    date = o.get("presentation_verifiee_le")
+    if date is not None and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(date)):
+        erreur(ou, f"date de vérification de la présentation invalide : {date!r}")
+    if not isinstance(o.get("presentation_validee", False), bool):
+        erreur(ou, "presentation_validee : vrai ou faux attendu")
     equipe = o.get("equipe")
     if equipe is not None:
         if not isinstance(equipe, list) or len(equipe) > 40:
@@ -101,8 +113,11 @@ def verifier_presentation(o):
         else:
             for m in equipe:
                 if (not isinstance(m, dict) or set(m) - {"nom", "role"} or not isinstance(m.get("nom"), str)
-                        or not 2 <= len(m["nom"]) <= 120 or not isinstance(m.get("role", ""), str)):
+                        or not 2 <= len(m["nom"].strip()) <= 120
+                        or ("role" in m and (not isinstance(m["role"], str) or len(m["role"]) > 160))):
                     erreur(ou, f"équipe : membre invalide {m!r} (seulement nom et rôle)")
+                elif COORDONNEES.search(m["nom"] + " " + m.get("role", "")):
+                    erreur(ou, f"équipe : coordonnées personnelles interdites ({m['nom']!r})")
     a_du_contenu = any(o.get(c) not in (None, [], "") for c in ("presentation", "histoire", "equipe", "annee_creation"))
     if a_du_contenu and o.get("presentation_par", "cuspeed") == "cuspeed" and not (
             o.get("presentation_source") and o.get("presentation_verifiee_le")):

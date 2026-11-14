@@ -29,6 +29,7 @@ const pluriel = nb > 1 ? "s" : "";
 const aPresentation = Boolean(o.presentation || o.histoire || o.equipe.length || o.annee_creation);
 // Histoire longue : repliée, pour garder la page lisible.
 const histoireLongue = (o.histoire ?? "").length > 420;
+const domaine = o.site_web ? new URL(o.site_web).hostname.replace(/^www\./, "") : null;
 
 const description = o.presentation
   ? couper(o.presentation, 155)
@@ -69,6 +70,7 @@ const organisation = {
         {o.annee_creation && <li>Créé en <strong class="chiffres">{o.annee_creation}</strong></li>}
         {o.equipe.length > 0 && <li><strong class="chiffres">{o.equipe.length}</strong> membre{o.equipe.length > 1 ? "s" : ""} dans l'équipe</li>}
       </ul>
+      {aPresentation && <p class="vers-apropos"><a href="#a-propos">À propos de l'organisme ↓</a></p>}
     </div>
   </header>
 
@@ -80,14 +82,14 @@ const organisation = {
       </ul>
     </section>
 
-    <aside class="org-cote" aria-label={`À propos de ${o.nom}`}>
+    <aside class="org-cote" id="a-propos" aria-label={`À propos de ${o.nom}`}>
       <section class="carte-bloc" aria-labelledby="bref-titre">
         <h2 id="bref-titre">En bref</h2>
         <dl class="infos">
           <dt>Type</dt><dd>{typeNom}</dd>
           {(o.adresse || o.ville) && <><dt>Adresse</dt><dd>{o.adresse ?? o.ville}</dd></>}
           {o.annee_creation && <><dt>Création</dt><dd class="chiffres">{o.annee_creation}</dd></>}
-          {o.site_web && <><dt>Site officiel</dt><dd><a href={o.site_web} rel="noopener external">{new URL(o.site_web).hostname.replace(/^www\./, "")} ↗</a></dd></>}
+          {o.site_web && <><dt>Site officiel</dt><dd><a href={o.site_web} rel="noopener external">{domaine} ↗</a></dd></>}
           {o.page_catalogue && o.page_catalogue !== o.site_web && <><dt>Catalogue</dt><dd><a href={o.page_catalogue} rel="noopener external">Toutes ses formations ↗</a></dd></>}
         </dl>
       </section>
@@ -111,7 +113,7 @@ const organisation = {
           <h2 id="histoire-titre">Histoire</h2>
           {histoireLongue ? (
             <details class="histoire">
-              <summary><span class="extrait">{couper(o.histoire, 260)}</span> <span class="lire">Lire la suite</span></summary>
+              <summary><span class="extrait" aria-hidden="true">{couper(o.histoire, 260)}</span> <span class="lire">Lire toute l'histoire</span></summary>
               <p>{o.histoire}</p>
             </details>
           ) : (
@@ -138,6 +140,7 @@ const organisation = {
         <p class="discret petit">
           Vous représentez {o.nom} ? Pour compléter ou corriger cette page, écrivez à{" "}
           <span class="adresse">contact@cuspeed.fr</span> en indiquant la référence <span class="chiffres">{o.id}</span>.
+          {o.equipe.length > 0 && <> Une personne citée dans l'équipe peut demander son retrait à la même adresse.</>}
         </p>
       </section>
     </aside>
@@ -252,6 +255,19 @@ const organisation = {
   .histoire .lire {
     font-weight: 600;
     text-decoration: underline;
+  }
+  .histoire summary:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .vers-apropos {
+    margin: 0;
+  }
+  @media (min-width: 920px) {
+    .vers-apropos {
+      display: none;
+    }
   }
   .histoire[open] .lire {
     display: none;

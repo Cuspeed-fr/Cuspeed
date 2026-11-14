@@ -30,7 +30,6 @@ RACINE = Path(__file__).resolve().parent.parent
 FINANCEMENTS = {"dpc": "DPC", "fifpl": "FIFPL", "opco": "OPCO", "cpf": "CPF"}
 
 
-
 # Champs de présentation d'un organisme, dans l'ordre d'écriture du fichier.
 PRESENTATION = ("presentation", "histoire", "annee_creation", "adresse", "equipe",
                 "presentation_source", "presentation_verifiee_le", "presentation_par")
@@ -107,10 +106,20 @@ def main():
         organismes = []
         for r in cur.fetchall():
             o = {k: r[k] for k in ("id", "nom", "type", "ville", "site_web", "page_catalogue", "fiche_revendiquee")}
-            # Présentation de l'organisme (migration 20261114000100) : publique, écrite seulement si renseignée.
-            for k in PRESENTATION:
-                if r.get(k) not in (None, [], ""):
-                    o[k] = r[k].isoformat() if hasattr(r[k], "isoformat") else r[k]
+            # Présentation de l'organisme (migration 20261114000100), écrite seulement si renseignée :
+            # - export de publication : seulement si Chris l'a validée (presentation_validee) ;
+            # - copie nocturne (dépôt public, historique git) : jamais les noms de l'équipe, pour qu'un retrait
+            #   demandé par une personne soit effectif ; ils restent dans la base.
+            if args.seulement_validees and not r.get("presentation_validee"):
+                pass
+            else:
+                for k in PRESENTATION:
+                    if k == "equipe" and not args.seulement_validees:
+                        continue
+                    if r.get(k) not in (None, [], ""):
+                        o[k] = r[k].isoformat() if hasattr(r[k], "isoformat") else r[k]
+                if not args.seulement_validees:
+                    o["presentation_validee"] = bool(r.get("presentation_validee"))
             organismes.append(o)
         ecrire_yaml(sortie / "organismes.yaml", organismes)
 

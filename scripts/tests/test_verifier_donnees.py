@@ -79,6 +79,18 @@ class PresentationOrganisme(unittest.TestCase):
     def test_membre_avec_donnee_en_plus_refuse(self):
         self.assertTrue(self.erreurs(equipe=[{"nom": "Dr X", "telephone": "06"}]))
 
+    def test_coordonnees_dans_le_nom_ou_le_role_refusees(self):
+        self.assertTrue(self.erreurs(equipe=[{"nom": "Dr X", "role": "contact : x@exemple.fr"}]))
+        self.assertTrue(self.erreurs(equipe=[{"nom": "Dr X 06 12 34 56 78"}]))
+
+    def test_role_nul_ou_trop_long_refuse(self):
+        self.assertTrue(self.erreurs(equipe=[{"nom": "Dr X", "role": None}]))
+        self.assertTrue(self.erreurs(equipe=[{"nom": "Dr X", "role": "r" * 161}]))
+
+    def test_annee_booleenne_et_adresse_trop_longue_refusees(self):
+        self.assertTrue(self.erreurs(annee_creation=True))
+        self.assertTrue(self.erreurs(adresse="a" * 201))
+
 
 if __name__ == "__main__":
     unittest.main()

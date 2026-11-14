@@ -646,7 +646,7 @@ test("équipe : seuls le nom et le rôle sortent du chargeur ; présentation non
   assert.ok(!JSON.stringify(o).includes("06 00 00"));
   // Seconde copie : le chargeur garde en mémoire les données déjà lues dans un dossier.
   const dossier2 = copieDuJeu();
-  writeFileSync(join(dossier2, "organismes.yaml"), texte.replace("  presentation_par: cuspeed\n", "  presentation_par: cuspeed\n  presentation_validee: false\n"));
+  writeFileSync(join(dossier2, "organismes.yaml"), texte.replace("  presentation_validee: true\n", "  presentation_validee: false\n"));
   o = chargerDonnees(dossier2).organismes.find((x) => x.id === "O001");
   rmSync(dossier2, { recursive: true, force: true });
   assert.equal(o.presentation, null);

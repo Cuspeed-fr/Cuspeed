@@ -16,6 +16,7 @@
   presentation_source: https://exemple.invalid/a-propos
   presentation_verifiee_le: '2026-11-14'
   presentation_par: cuspeed
+  presentation_validee: true
 - id: O002
   nom: Organisme Sans Fiche Publiée
   type: organisme-prive

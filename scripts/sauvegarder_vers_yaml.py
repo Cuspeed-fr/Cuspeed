@@ -106,20 +106,17 @@ def main():
         organismes = []
         for r in cur.fetchall():
             o = {k: r[k] for k in ("id", "nom", "type", "ville", "site_web", "page_catalogue", "fiche_revendiquee")}
-            # Présentation de l'organisme (migration 20261114000100), écrite seulement si renseignée :
-            # - export de publication : seulement si Chris l'a validée (presentation_validee) ;
+            # Présentation de l'organisme (migration 20261114000100), écrite seulement si Chris l'a validée :
             # - copie nocturne (dépôt public, historique git) : jamais les noms de l'équipe, pour qu'un retrait
             #   demandé par une personne soit effectif ; ils restent dans la base.
-            if args.seulement_validees and not r.get("presentation_validee"):
-                pass
-            else:
+            # - brouillons non validés : jamais écrits, ni dans l'un ni dans l'autre (ils restent dans la base).
+            if r.get("presentation_validee"):
                 for k in PRESENTATION:
                     if k == "equipe" and not args.seulement_validees:
                         continue
                     if r.get(k) not in (None, [], ""):
                         o[k] = r[k].isoformat() if hasattr(r[k], "isoformat") else r[k]
-                if not args.seulement_validees:
-                    o["presentation_validee"] = bool(r.get("presentation_validee"))
+                o["presentation_validee"] = True
             organismes.append(o)
         ecrire_yaml(sortie / "organismes.yaml", organismes)
 

@@ -108,8 +108,8 @@ function lienSur(url) {
 }
 
 function organismePublic(o, registre) {
-  // Une présentation explicitement non validée par Chris n'est jamais publiée (règle 1).
-  const p = o.presentation_validee === false ? {} : o;
+  // Une présentation n'est publiée que si Chris l'a validée (règle 1) ; sans le champ, rien n'est publié.
+  const p = o.presentation_validee === true ? o : {};
   return {
     id: o.id,
     slug: registre.organismes[o.id] ?? adresseCalculee(o.id, o.nom),

@@ -100,3 +100,8 @@ Le fichier `site/public/geo/departements.geojson` est dérivé du jeu « Contour
 
 - **Logos** : fournis par Chris, avec l'accord de chaque organisme (un logo est une marque protégée ; on ne le copie pas depuis un site). Un fichier par organisme dans `site/public/logos/`, nommé par son identifiant : `O001.svg`, `O021.png`… Formats : svg de préférence, sinon webp, png ou jpg, fond transparent, au moins 96 pixels de haut. L'ajout passe par une pull request comme tout fichier du site, et un logo SVG est relu avant la fusion : ni `<script>`, ni attribut `on…=`, ni lien externe (il est affiché comme une image, mais reste ouvrable à son adresse). Sans fichier, aucun logo n'est affiché. Le dossier est lu au moment de la construction, lancée depuis `site/` (`npm run build`).
 - **Dessins des fiches** : chaque formation montre le dessin de sa première discipline (`site/src/lib/visuels.js`), dessiné pour Cuspeed, sans photo ni image d'un site tiers (décision de Chris du 9 novembre 2026). Des photos fournies par les organismes pourront venir plus tard, seulement avec leur autorisation écrite.
+
+## Présentation des organismes (14 novembre 2026)
+
+La présentation d'un organisme (paragraphe, histoire, année de création, adresse, équipe) est relevée sur son site officiel par l'extracteur, contrôlée par le vérificateur, puis proposée à Chris dans la page de revue. Elle n'est publiée que lorsque Chris passe `presentation_validee` à vrai. La copie nocturne (`data/`, dépôt public) n'écrit que les présentations validées, et jamais les noms de l'équipe : ainsi une personne qui demande son retrait disparaît vraiment. Conséquence : reconstruire la base depuis `data/` ferait perdre les équipes et les brouillons ; ils restent dans la base Supabase et ses sauvegardes.
+
